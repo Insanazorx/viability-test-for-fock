@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-01T19:11:29.161227+00:00",
+  "updated_utc": "2026-10-01T19:28:33.441562+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -419,14 +419,104 @@
       "read": [],
       "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
       "command": ".venv/bin/python scripts/ctl.py start G0D-T03 --machine MACM6"
+    },
+    "G4A-T01": {
+      "title": "Chosen-order dark/metric operator basis",
+      "status": "RUNNING",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T01",
+        "G0A-T02",
+        "G0A-T03"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [
+        "docs/G4A_OPERATOR_BASIS.md",
+        "config/benchmark/publication.source.yaml",
+        "config/gate4/g4a_t01_macm6.json.yaml"
+      ],
+      "next_action": "Enumerate and validate the d<=4 analytic dark/metric bulk basis and record higher-order source exceptions plus unspecified-matter interface.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t01_macm6.json.yaml",
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0A-T01"
+          },
+          {
+            "task": "G0A-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0A-T03"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "AGENTS.md #g4 permits an early parallel MACM6 theory track. User requested continued MACM6 work while deferring RTX5070. This analytic inventory needs the passed CPU foundations, not an executed CUDA mirror; every original prerequisite remains represented."
+    },
+    "G4A-T02": {
+      "title": "Absent-operator and redundancy classification",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G4A-T01"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [
+        "docs/G4A_OPERATOR_BASIS.md",
+        "config/benchmark/publication.source.yaml"
+      ],
+      "next_action": "Classify absent allowed operators, IBP/EOM redundancies and symmetry-forbidden terms using the passed operator catalog; preserve the baseline action.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/ctl.py start G4A-T02 --machine MACM6"
+    },
+    "G4A-T03": {
+      "title": "Switching and Xi functional symmetry audit",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G4A-T02"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [
+        "docs/G4A_OPERATOR_BASIS.md",
+        "config/benchmark/publication.source.yaml"
+      ],
+      "next_action": "Audit lower-order lambda^n C2^2 and which Xi properties follow from chi parity; provide explicit matching inputs for G4B.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/ctl.py start G4A-T03 --machine MACM6"
     }
   },
-  "active_task": null,
+  "active_task": "G4A-T01",
   "action_selection": {
-    "task": "G0B-T02",
+    "task": "G4A-T01",
     "machine": "MACM6",
-    "reason": "User requested immediate continuation of the CPU Hopf substep; RTX5070 remains explicitly deferred.",
-    "selected_utc": "2026-10-01T18:49:05.354532+00:00"
+    "reason": "User requested MACM6 continuation; AGENTS allows independent early Gate 4-A theory audit.",
+    "selected_utc": "2026-10-01T19:28:33.379083+00:00"
   },
   "machine_scheduling": {
     "RTX5070": {

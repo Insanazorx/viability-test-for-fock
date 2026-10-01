@@ -14,3 +14,6 @@ Generated from state/state.yaml.
 - [ ] MACM6 — G0D-T01: Optional MACM6 self-hosted runner (TODO, disabled)
 - N/A MACM6 — G0D-T02: Optional RTX5070 self-hosted runner (TODO, disabled)
 - [ ] MACM6 — G0D-T03: Optional phone workflow dispatch (TODO, disabled)
+- [ ] MACM6 — G4A-T01: Chosen-order dark/metric operator basis (RUNNING)
+- [ ] MACM6 — G4A-T02: Absent-operator and redundancy classification (TODO)
+- [ ] MACM6 — G4A-T03: Switching and Xi functional symmetry audit (TODO)

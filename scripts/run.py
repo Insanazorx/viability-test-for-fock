@@ -52,7 +52,7 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
-    if config["task"] in {"G0A-T02","G0B-T01","G0B-T02"}:
+    if config["task"] in {"G0A-T02","G0B-T01","G0B-T02","G4A-T01"}:
         manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
         manifest = read_data(manifest_path)
         publication = inside(ROOT, manifest["path"])
@@ -66,10 +66,12 @@ def main() -> int:
             inputs['docs/G0B_SPECTRAL.md']=sha256(ROOT/'docs/G0B_SPECTRAL.md')
         if config['task']=='G0B-T02':
             inputs['docs/G0B_HOPF.md']=sha256(ROOT/'docs/G0B_HOPF.md')
+        if config['task']=='G4A-T01':
+            inputs['docs/G4A_OPERATOR_BASIS.md']=sha256(ROOT/'docs/G4A_OPERATOR_BASIS.md')
     if config["parameters"].get("environment_freeze"):
         path = inside(ROOT, config["parameters"]["environment_freeze"], "requirements")
         # The historical G0A-T02 NumPy-only freeze remains an immutable input, not the new full environment lock.
-        if config["task"] == "G0A-T03" or (config['task'] in {'G0B-T01','G0B-T02'} and config['machine']=='MACM6'):
+        if config["task"] == "G0A-T03" or (config['task'] in {'G0B-T01','G0B-T02','G4A-T01'} and config['machine']=='MACM6'):
             check_environment_freeze(path)
         inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     recovery = task.get("recovery")
@@ -155,12 +157,17 @@ def main() -> int:
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_hopf import validate_hopf
             metrics['hopf']=validate_hopf(config,checkpoint_path,run_id,digest)
+        if config['task']=='G4A-T01':
+            sys.path.insert(0,str(ROOT/'src'))
+            from analysis.validate_operators import validate_operators
+            metrics['operator_basis']=validate_operators(config)
         status = "PASS" if (not missing and returncode == 0 and state["cloud"]["paused"]
                             and metrics["tests_run"] >= metrics["minimum_tests"]
                             and metrics.get("math_core", {"passed": True})["passed"]
                             and metrics.get("run_discipline", {"passed": True})["passed"]
                             and metrics.get('spectral',{'passed':True})['passed']
-                            and metrics.get('hopf',{'passed':True})['passed']) else "FAIL"
+                            and metrics.get('hopf',{'passed':True})['passed']
+                            and metrics.get('operator_basis',{'passed':True})['passed']) else "FAIL"
         anomaly = None
     except Exception as error:
         status, anomaly = "FAIL", f"{type(error).__name__}: {error}"

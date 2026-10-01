@@ -14,3 +14,6 @@ Generated from state/state.yaml.
 - N/A RTX5070 — G0D-T01: Optional MACM6 self-hosted runner (TODO, disabled)
 - [ ] RTX5070 — G0D-T02: Optional RTX5070 self-hosted runner (TODO, disabled)
 - [ ] RTX5070 — G0D-T03: Optional phone workflow dispatch (TODO, disabled)
+- N/A RTX5070 — G4A-T01: Chosen-order dark/metric operator basis (RUNNING)
+- N/A RTX5070 — G4A-T02: Absent-operator and redundancy classification (TODO)
+- N/A RTX5070 — G4A-T03: Switching and Xi functional symmetry audit (TODO)

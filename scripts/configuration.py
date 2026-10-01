@@ -16,6 +16,7 @@ CONFIGS = {
     ("G0B-T01", "RTX5070"): ("config/benchmark/g0b_t01_rtx5070.json.yaml", "validate_spectral_cuda"),
     ("G0B-T02", "MACM6"): ("config/benchmark/g0b_t02_macm6.json.yaml", "validate_hopf_cpu"),
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
+    ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -100,6 +101,17 @@ def validate_config(config, root=ROOT):
         steps=p.get('gradient_steps',[])
         if len(steps)<3 or any(type(v) not in (int,float) or v<=0 for v in steps) or sorted(set(steps),reverse=True)!=steps:
             raise ValueError('Three decreasing charge-gradient difference steps required')
+    elif config['task']=='G4A-T01':
+        if config['kind']!='numerical' or config['precision']!='float64':
+            raise ValueError('Operator witnesses require float64 numerics with exact rational enumeration')
+        if any(config[k] is not None for k in ('grid','box','time_step','optimizer','integrator')):
+            raise ValueError('This analytic operator audit has no lattice or evolution')
+        if config['parameters'].get('max_canonical_dimension')!=4 or config['parameters'].get('quotient')!='IBP only':
+            raise ValueError('G4A-T01 acceptance scope is d<=4 modulo IBP only')
+        if type(config['parameters'].get('samples_per_seed')) is not int or config['parameters']['samples_per_seed']<20:
+            raise ValueError('At least twenty operator witnesses per seed required')
+        if set(config['tolerances'])!={'so4_normalized','chi_parity'}:
+            raise ValueError('Frozen SO4/parity tolerances required')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

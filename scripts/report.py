@@ -17,7 +17,7 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02'}:
+    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01'}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
@@ -158,7 +158,29 @@ def main() -> int:
             'next_action':'Preserve the verified initial field and CPU report. G0B-T03 stationary minimization is assigned to RTX5070 first, which remains deferred at the user request; resume first at G0A-T02 CUDA only when requested.' if result['status']=='PASS' else 'Classify the failed diagnostic and perform the smallest discriminating refinement/implementation check before repeating this fixture; do not loosen the unit-charge threshold or claim a physical failure prematurely.',
             'handoff':'MACHINE_HANDOFF.md, NEXT.md, AGENTS.md#g0b, docs/G0B_HOPF.md, exact G0B-T02 config and the reported HDF5 path/hash. Original-paper stationary reproduction remains G0B-T03.',
         })
-    report = ROOT / "reports/G0" / f"{metadata['task']}__{args.run_id}__REPORT.md"
+    if metadata['task']=='G4A-T01':
+        config=read_data(run/'config.yaml');operators=metrics.get('operator_basis',{})
+        table='| ID | Bulk operator | Dimension | Sector |\n|---|---|---:|---|\n'+''.join(
+            f"| {row['id']} | `{row['expression']}` | {row['dimension']} | {row['sector']} |\n"
+            for row in operators.get('catalog',[]))
+        summary={key:value for key,value in operators.items() if key!='catalog'}
+        values.update({
+            'objective':'Complete G4A-T01 on MACM6: a chosen-order d<=4 analytic dark/metric bulk operator basis, with source higher-order exceptions and an explicit interface for unspecified matter.',
+            'inputs':'AGENTS.md#g4a; supplied PDF pp. 2-5 and 13, Eqs. (4)-(8),(20)-(24),(30) and Radiative status. Exact inputs:\n'+
+                     '\n'.join(f'- `{path}` — SHA256 `{digest}`' for path,digest in metadata['input_sha256'].items()),
+            'method':'Analytic SO(4) invariant-ring and Lorentz/diffeomorphism index counting, modulo integration by parts only. Scalar monomials generated with weights (1,1,2,2) for (lambda,chi,C1,C2), even chi powers. Independent Hilbert-series coefficients and exact rational evaluation rank on physical canonical M12/M34 states check the twenty potential monomials. Seeded NumPy float64 proper rotations check potential and both M kinetic channels; improper internal reflections witness the extra symmetry that must not be assumed. No lattice, optimizer, loop integral or added model term is used.',
+            'tolerances':'Frozen numeric witness tolerances:\n```json\n'+json.dumps(config['tolerances'],indent=2)+'\n```\nCounts, dimensions and exact rational rank require exact equality; all 32 bulk IDs must be unique. Relative rotation error divides by max(1, abs(expected)). Scope is fixed before acceptance, not widened after a failure.',
+            'metrics':table+'\n```json\n'+json.dumps(summary,indent=2)+'\n```\nFull machine-readable catalog and all checks are sealed in result.json. Unit tests: '+str(metrics.get('tests_run',0))+'.',
+            'convergence':'No continuum or runtime scan applies to an exact operator enumeration. The generating-series coefficients [1,1,4,4,10] independently match the potential count. Exact rank is twenty using '+str(operators.get('exact_integer_samples',0))+' canonical integer field samples. Three independent seeds probe continuous proper rotations and chi parity; the tests exercise omitted Pfaffian, tadpole, curvature and kinetic channels.',
+            'evaluation':result['status']+' for this declared operator-enumeration substep only. G4A-T02/T03 classification and functional audits, G4B loops/matching and G4C naturalness decision remain unfinished. G0A-T02/G0B CUDA prerequisites stay RUNNING/deferred. This is not a radiative naturalness, vacuum lifetime or full viability pass.',
+            'anomalies':f"- Dirty Git tree at run start: {metadata['uncommitted_diff']}.\n- The invariant ring and d<=4 scope are independently derived, not a quoted complete basis from the source.\n- L_m is not specified in the paper: only formal scalar-singlet matter decorations are supplied; a concrete visible-sector and indexed matter operator basis awaits a matter definition.\n- Higher-order L4, mu, Xi and portal entries are source exceptions; no complete d=6/8/10 basis is claimed.\n- Topological/boundary terms are recorded separately; their global effects are not set to zero for G4D instantons.\n- No loop coefficient, cutoff choice or tuning estimate has been computed.\n- RTX5070 remains deferred; CLOUD paused and budget zero.\n"+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
+            'artifacts':'\n'.join(artifacts)+'\nThe small operator catalog is part of the sealed result.json. No numerical field/checkpoint or new EFT coefficient was produced. The source PDF is an external ignored input with the hash above.',
+            'reproduction':f"```sh\npython3.12 -m venv .venv\n.venv/bin/python -m pip install -r requirements/macm6.freeze.txt\n.venv/bin/python scripts/configuration.py check\n.venv/bin/python scripts/run.py --config {metadata['config_path']}\n.venv/bin/python scripts/report.py --run-id EXACT_NEW_RUN_ID\n```\nUse an isolated checkout of `{metadata['git_commit']}` where G4A-T01 is RUNNING/unfinished, with the matching source PDF. Reproduction does not resume a deferred GPU or reopen a completed task silently.",
+            'changes':'First G4A-T01 report. Opens the AGENTS-authorized parallel MACM6 theory track after CPU foundations, while retaining all unfinished CUDA gates. Adds an exact chosen-order basis and machine-readable audit inputs without changing the baseline action.',
+            'next_action':'G4A-T02 on MACM6: classify absent allowed terms, IBP/EOM redundancies and genuinely symmetry-forbidden terms. Then G4A-T03 audits lower-order lambda^n C2^2 and the Xi functional coefficients before G4B loop matching.' if result['status']=='PASS' else 'Classify the failed exact count/rank or invariant witness; correct the smallest implementation/analytic issue before repeating.',
+            'handoff':'NEXT.md, MACHINE_HANDOFF.md, AGENTS.md#g4a, docs/G4A_OPERATOR_BASIS.md and this sealed catalog; GPU queue is unchanged.',
+        })
+    report = ROOT / f"reports/{metadata['task'][:2]}" / f"{metadata['task']}__{args.run_id}__REPORT.md"
     output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)
     if seal_hash:
         output=output.replace(f"precision: {metadata['precision']}\n",f"precision: {metadata['precision']}\nevidence_sha256: {seal_hash}\n",1)

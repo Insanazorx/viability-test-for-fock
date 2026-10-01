@@ -40,6 +40,11 @@
       "path": "config/benchmark/g0b_t02_rtx5070.json.yaml",
       "handler": "validate_hopf_cuda",
       "sha256": "23ad6ac8108c8611a5025eb14e1a670a6a01ce4b3e1a306b8020db74a58d5060"
+    },
+    "G4A-T01/MACM6": {
+      "path": "config/gate4/g4a_t01_macm6.json.yaml",
+      "handler": "validate_operator_basis",
+      "sha256": "f5f125f4312a49dd43354b1a5fd348659e4be1fcf8a14c763db03b0aa8c1c0f9"
     }
   },
   "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"
