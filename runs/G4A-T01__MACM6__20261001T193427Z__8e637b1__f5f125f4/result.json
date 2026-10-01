@@ -1,0 +1,515 @@
+{
+  "run_id": "G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4",
+  "status": "PASS",
+  "finished_utc": "2026-10-01T19:34:28.172877+00:00",
+  "wall_time_seconds": 0.5577100000009523,
+  "peak_ram_gb": 0.145014784,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 40,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 90,
+    "minimum_tests": 90,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "operator_basis": {
+      "passed": true,
+      "checks": {
+        "hilbert_count": true,
+        "exact_potential_rank": true,
+        "basis_counts": true,
+        "unique_ids": true,
+        "so4_invariance": true,
+        "chi_parity": true,
+        "internal_reflection_is_extra_symmetry": true,
+        "lower_switch_terms_included": true,
+        "source_dimensions": true
+      },
+      "catalog": [
+        {
+          "id": "V-01",
+          "expression": "1",
+          "dimension": 0,
+          "coefficient_dimension": 4,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-02",
+          "expression": "lambda",
+          "dimension": 1,
+          "coefficient_dimension": 3,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-03",
+          "expression": "C2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "V-04",
+          "expression": "C1",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "V-05",
+          "expression": "chi^2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-06",
+          "expression": "lambda^2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-07",
+          "expression": "lambda*C2",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "V-08",
+          "expression": "lambda*C1",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "V-09",
+          "expression": "lambda*chi^2",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-10",
+          "expression": "lambda^3",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-11",
+          "expression": "C2^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "id": "V-12",
+          "expression": "C1*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "V-13",
+          "expression": "C1^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "V-14",
+          "expression": "chi^2*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "V-15",
+          "expression": "chi^2*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "V-16",
+          "expression": "chi^4",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-17",
+          "expression": "lambda^2*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "V-18",
+          "expression": "lambda^2*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "V-19",
+          "expression": "lambda^2*chi^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "V-20",
+          "expression": "lambda^4",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "R-01",
+          "expression": "R",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "R-02",
+          "expression": "R*lambda",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "linear_curvature",
+          "powers": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "R-03",
+          "expression": "R*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R-04",
+          "expression": "R*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "R-05",
+          "expression": "R*chi^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "R-06",
+          "expression": "R*lambda^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "K-01",
+          "expression": "(nabla lambda)^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic"
+        },
+        {
+          "id": "K-02",
+          "expression": "(nabla chi)^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic"
+        },
+        {
+          "id": "K-03",
+          "expression": "1/2 nabla M_ab nabla M_ab",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic"
+        },
+        {
+          "id": "K-04",
+          "expression": "1/2 nabla M_ab nabla (*M)_ab",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic"
+        },
+        {
+          "id": "G-01",
+          "expression": "R^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "curvature_squared"
+        },
+        {
+          "id": "G-02",
+          "expression": "R_munu R^munu",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "curvature_squared"
+        }
+      ],
+      "boundary_and_topological_terms": [
+        {
+          "expression": "E4 = Riemann^2 - 4 Ricci^2 + R^2",
+          "status": "constant-coefficient Euler density; topological in four dimensions"
+        },
+        {
+          "expression": "Riemann dual(Riemann)",
+          "status": "constant-coefficient Pontryagin density; topological in four dimensions"
+        },
+        {
+          "expression": "Box R",
+          "status": "total divergence"
+        },
+        {
+          "expression": "Box lambda",
+          "status": "total divergence"
+        },
+        {
+          "expression": "Box lambda^2",
+          "status": "total divergence"
+        },
+        {
+          "expression": "Box chi^2",
+          "status": "total divergence"
+        },
+        {
+          "expression": "Box C1",
+          "status": "total divergence"
+        },
+        {
+          "expression": "Box C2",
+          "status": "total divergence"
+        }
+      ],
+      "source_extensions": [
+        {
+          "expression": "L4[M]",
+          "source": "Eq. (30), PDF p. 5",
+          "numerator_dimension": 8,
+          "coefficient_dimension": -4,
+          "scope": "displayed first-derivative quartic only; not the entire d=8 basis"
+        },
+        {
+          "expression": "lambda^4 C2^2",
+          "source": "Eq. (22), Taylor onset",
+          "numerator_dimension": 8,
+          "coefficient_dimension": -4,
+          "scope": "mu_v/(f^4 x_mu^4) times this monomial"
+        },
+        {
+          "expression": "lambda^8 C2^2",
+          "source": "Eq. (22), second Taylor term",
+          "numerator_dimension": 12,
+          "coefficient_dimension": -8,
+          "scope": "-mu_v/(2 f^8 x_mu^8) times this monomial; full exponential retained in baseline"
+        },
+        {
+          "expression": "chi^4 lambda^2",
+          "source": "Eqs. (21)-(22), Xi expansion",
+          "numerator_dimension": 6,
+          "coefficient_dimension": -2,
+          "scope": "+kappa/(2 chi_s^2) times this monomial; expansion requires |chi|<chi_s"
+        },
+        {
+          "expression": "chi^2 S:T_m",
+          "source": "Eq. (20), defined Hilbert STF composite",
+          "numerator_dimension": 10,
+          "coefficient_dimension": -6,
+          "scope": "S includes coefficients; expanding its L4 part gives bare d=14 divided by sigma0^4 Lambda^6"
+        }
+      ],
+      "potential_count_by_dimension": [
+        1,
+        1,
+        4,
+        4,
+        10
+      ],
+      "exact_potential_rank": 20,
+      "exact_integer_samples": 96,
+      "sector_counts": {
+        "potential": 20,
+        "linear_curvature": 6,
+        "kinetic": 4,
+        "curvature_squared": 2
+      },
+      "worst_so4_normalized": 3.978589008947694e-15,
+      "worst_chi_parity": 0.0,
+      "internal_reflection_witness": 10.711849335091637,
+      "internal_kinetic_reflection_witness": 48.98289574786787,
+      "scope": "d<=4 dark/metric bulk analytic basis modulo IBP; no EOM quotient; source exceptions separately catalogued",
+      "matter_status": "L_m unspecified: formal scalar-singlet decorations documented; no concrete matter basis or portal matching computed",
+      "scientific_naturalness_decision": false,
+      "loop_coefficients_computed": false
+    }
+  },
+  "anomaly": null
+}

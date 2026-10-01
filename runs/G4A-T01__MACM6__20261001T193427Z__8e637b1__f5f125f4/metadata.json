@@ -1,0 +1,95 @@
+{
+  "run_id": "G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4",
+  "task": "G4A-T01",
+  "machine": "MACM6",
+  "git_commit": "8e637b10e7789fbed7483c4b31ac36a0c7017584",
+  "uncommitted_diff": false,
+  "config_sha256": "f5f125f4312a49dd43354b1a5fd348659e4be1fcf8a14c763db03b0aa8c1c0f9",
+  "config_path": "config/gate4/g4a_t01_macm6.json.yaml",
+  "started_utc": "2026-10-01T19:34:27.615112+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "de47fae801db55d568658a3cd660bfcc43d0796b2c003b25240ba092ee6f1a54",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "config/benchmark/publication.source.yaml": "143da835837a98f64ba0246e983e02205e63b56bb2cfc6b092bf5c80db2194aa",
+    "docs/MATH_CORE.md": "b6953b026f2a14be2376f4ed7b2143108fcdfcdbf11d24fa8b2e3e24c20c459e",
+    "docs/G4A_OPERATOR_BASIS.md": "1375d773285988956a7b9593abe76b270febfdf7083ae5ed634e0b2309ce986c",
+    "requirements/macm6.freeze.txt": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323",
+    "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md": "4a1f98cc75d2f25641a89ba0ec9e0a4937cf3b5c1c84860a71257fdd02dc7e61",
+    "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md": "e6c3693e6030acc7209a39e474ac54ef94440c48ebb6b59a670eb5345842f93f",
+    "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md": "6413c7392d9de84777549570c65217e48b552e61777bc782b2b9cc197456ee1e",
+    "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md": "798c69fdabba0c27c217c8b4dee273fe48c3b006c12f482bf0178186ef2c4e8a",
+    "environment.json": "e4b271229fa5b07cf392ea84ee98f3bfc1b6f612fae9ec9961dcde19a5df3fad"
+  },
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "so4_normalized": 5e-12,
+    "chi_parity": 5e-14
+  },
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6",
+  "hardware": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpu_count": 12,
+    "ram_capacity_gb": 17.179869184,
+    "ram_capacity_note": null,
+    "role": "MACM6",
+    "hardware_model": "role label; exact model not attested"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": false,
+    "cross_device_bitwise_identity_required": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": {
+    "previous_failure_report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md",
+    "previous_environment_freeze": "requirements/macm6.freeze.txt",
+    "cause": "Two config-integrity unit tests failed because the temporary fixture created only config/benchmark, not the newly used config/gate4 directory.",
+    "change": "Create the parent directory for each frozen config before copying it in the temporary test fixture. Environment and mathematical operator code are unchanged.",
+    "decision": "Repeat the unchanged frozen acceptance config after the smallest implementation repair; 18 discipline tests now pass. No scientific gate or tolerance changed.",
+    "decided_utc": "2026-10-01T19:33:42.261812+00:00"
+  },
+  "prerequisite_scope": [
+    {
+      "task": "G0A-T01"
+    },
+    {
+      "task": "G0A-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0A-T03"
+    }
+  ],
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": true,
+      "reason": "User requested RTX5070 later and continued MACM6 next-gate preparation on 2026-10-01.",
+      "updated_utc": "2026-10-01T18:34:33.954452+00:00"
+    }
+  },
+  "checkpoint_output": null,
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}

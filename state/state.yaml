@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-01T19:33:42.326496+00:00",
+  "updated_utc": "2026-10-01T19:36:00.593691+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -422,7 +422,7 @@
     },
     "G4A-T01": {
       "title": "Chosen-order dark/metric operator basis",
-      "status": "RUNNING",
+      "status": "PASS",
       "enabled": true,
       "prerequisites": [
         "G0A-T01",
@@ -433,11 +433,13 @@
         "MACM6"
       ],
       "machine_done": {
-        "MACM6": false,
+        "MACM6": true,
         "RTX5070": false,
         "CLOUD": false
       },
-      "machine_reports": {},
+      "machine_reports": {
+        "MACM6": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md"
+      },
       "read": [
         "docs/G4A_OPERATOR_BASIS.md",
         "config/benchmark/publication.source.yaml",
@@ -495,6 +497,7 @@
       },
       "machine_reports": {},
       "read": [
+        "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md",
         "docs/G4A_OPERATOR_BASIS.md",
         "config/benchmark/publication.source.yaml"
       ],
@@ -527,7 +530,7 @@
       "command": ".venv/bin/python scripts/ctl.py start G4A-T03 --machine MACM6"
     }
   },
-  "active_task": "G4A-T01",
+  "active_task": null,
   "action_selection": {
     "task": "G4A-T01",
     "machine": "MACM6",

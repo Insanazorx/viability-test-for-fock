@@ -2,23 +2,23 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G4A-T01
+task: G4A-T02
 machine: MACM6
-status: RUNNING
+status: TODO
 
 ## Action
-Enumerate and validate the d<=4 analytic dark/metric bulk basis and record higher-order source exceptions plus unspecified-matter interface.
+Classify absent allowed operators, IBP/EOM redundancies and symmetry-forbidden terms using the passed operator catalog; preserve the baseline action.
 
 ## Read
 
 - AGENTS.md#g4a
 - MACHINE_HANDOFF.md
+- reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md
 - docs/G4A_OPERATOR_BASIS.md
 - config/benchmark/publication.source.yaml
-- config/gate4/g4a_t01_macm6.json.yaml
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/run.py --config config/gate4/g4a_t01_macm6.json.yaml
+.venv/bin/python scripts/ctl.py start G4A-T02 --machine MACM6
 ```
