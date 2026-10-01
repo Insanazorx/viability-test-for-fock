@@ -10,7 +10,9 @@
 
 Use Python 3.12; `.venv` is machine-specific and ignored by Git. Recreate it
 with `python3.12 -m venv .venv` on another machine. The current MACM6 environment
-uses the bundled Python 3.12.14 runtime. Numerical libraries are not installed.
+uses the bundled Python 3.12.14 runtime. NumPy 2.2.6 is installed for G0A-T02;
+the NumPy-only environment is frozen in `requirements/macm6-core.freeze.txt`.
+The full CPU dependency environment remains G0A-T03.
 
 State, schema and setup config are JSON-formatted YAML 1.2. This documented
 subset allows the control plane to run without third-party libraries.
@@ -44,11 +46,13 @@ Optional G0D tasks are disabled until G0B passes and remote setup is requested.
 .venv/bin/python scripts/report.py --run-id EXACT_RUN_ID
 ```
 
-The only installed handler is the G0A-T01 infrastructure validator. It runs
-control-plane tests and checks the required layout; it does not implement a
-physics solver. Metadata/config snapshots are created exclusively and made
-read-only; a reused run ID is rejected. A numerical launcher, CUDA/seed policy,
-runtime profiling and resolved dependency freezes still belong to G0A-T03.
+Installed handlers are the G0A-T01 infrastructure validator and G0A-T02 MACM6
+math/CUDA mirror checks, each selected by an explicit config registry. They do
+not implement a lattice physics solver. Numerical validation checks the source
+hash and snapshots all resolved installed package versions. Metadata/config
+snapshots are created exclusively and made read-only; a reused run ID is rejected.
+General numerical config validation, precision/seed policy, detailed profiling
+and the complete multi-device dependency freeze still belong to G0A-T03.
 
 After any completed or failed run: create its report, record the machine
 completion with `ctl.py`, update the short handoff, and commit code/config,

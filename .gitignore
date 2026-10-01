@@ -25,3 +25,4 @@ runs/**/tmp/
 runs/**/arrays/
 # Preserve the publication as an external, hashed input.
 /yayınlanan.pdf
+/tmp/

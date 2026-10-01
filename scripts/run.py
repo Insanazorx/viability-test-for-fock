@@ -1,4 +1,4 @@
-"""Identified infrastructure validation run; physics handlers are not installed."""
+"""Identified predeclared setup/math-core validation; no lattice solver is installed."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,7 @@ import subprocess
 import sys
 import time
 
-from common import ROOT, git_info, inside, read_data
+from common import ROOT, git_info, inside, read_data, sha256
 from ctl import ensure_machine_ready, validate
 
 DIRECTORIES = ["state", "config/benchmark", *(f"config/gate{i}" for i in range(1, 7)),
@@ -23,6 +23,11 @@ DIRECTORIES = ["state", "config/benchmark", *(f"config/gate{i}" for i in range(1
 FILES = ["AGENTS.md", "STATUS.md", "NEXT.md", "MACHINE_HANDOFF.md", ".gitignore",
          "pyproject.toml", "config/schema.yaml", "state/state.yaml", "reports/SUBSTEP_REPORT_TEMPLATE.md",
          "docs/RUNBOOK.md", *(f"docs/{m}_CHECKLIST.md" for m in ("MACM6", "RTX5070", "CLOUD"))]
+CONFIGS = {
+    ("G0A-T01", "MACM6"): "config/benchmark/g0a_t01.json.yaml",
+    ("G0A-T02", "MACM6"): "config/benchmark/g0a_t02_macm6.json.yaml",
+    ("G0A-T02", "RTX5070"): "config/benchmark/g0a_t02_rtx5070.json.yaml",
+}
 
 
 def freeze(path, value) -> None:
@@ -48,16 +53,31 @@ def main() -> int:
     raw = config_path.read_bytes()
     config = json.loads(raw)
     schema = read_data(ROOT / "config/schema.yaml")
-    # G0A-T01 has one frozen, predeclared configuration. Full numerical parsing is G0A-T03.
-    if set(config) != set(schema["required"]) or config != read_data(ROOT / "config/benchmark/g0a_t01.json.yaml"):
-        raise ValueError("Only the predeclared G0A-T01 control configuration is supported")
-    if (config["task"], config["machine"], config["kind"]) != ("G0A-T01", "MACM6", "control"):
+    # A small explicit handler registry; arbitrary modules/commands are never config inputs.
+    expected_config = CONFIGS.get((config.get("task"), config.get("machine")))
+    if not expected_config:
         raise ValueError("No handler is installed for this task/machine")
+    if set(config) != set(schema["required"]) or config != read_data(ROOT / expected_config):
+        raise ValueError("Only a predeclared setup/core configuration is supported")
     state = read_data(ROOT / "state/state.yaml")
     validate(state)
     task = ensure_machine_ready(state, config["task"], config["machine"])
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
+    inputs = {}
+    if config["task"] == "G0A-T02":
+        manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
+        manifest = read_data(manifest_path)
+        publication = inside(ROOT, manifest["path"])
+        expected_hash = config["parameters"]["source_sha256"]
+        if not manifest["bibliographic_identity_verified"] or sha256(publication) != manifest["sha256"] or manifest["sha256"] != expected_hash:
+            raise ValueError("Publication identity/hash changed; resolve before running")
+        inputs = {manifest["path"]: expected_hash,
+                  manifest_path.relative_to(ROOT).as_posix(): sha256(manifest_path),
+                  "docs/MATH_CORE.md": sha256(ROOT / "docs/MATH_CORE.md")}
+        if config["parameters"].get("environment_freeze"):
+            path = inside(ROOT, config["parameters"]["environment_freeze"], "requirements")
+            inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     started = datetime.now(timezone.utc)
     start = time.perf_counter()
     digest = hashlib.sha256(raw).hexdigest()
@@ -67,16 +87,20 @@ def main() -> int:
     run.mkdir()  # Exclusive creation: never overwrite an existing run.
     (run / "config.yaml").write_bytes(raw)
     (run / "config.yaml").chmod(0o444)
+    packages = {package.metadata["Name"]: package.version for package in importlib.metadata.distributions()}
+    freeze(run / "environment.json", {"python": platform.python_version(), "packages": packages})
+    inputs["environment.json"] = sha256(run / "environment.json")
     metadata = {"run_id": run_id, "task": config["task"], "machine": config["machine"],
                 **git, "config_sha256": digest, "config_path": args.config,
                 "started_utc": started.isoformat(), "os": platform.platform(),
                 "architecture": platform.machine(), "python": platform.python_version(),
                 "python_executable": sys.executable,
                 "pytorch": version("torch"), "cuda": None,
-                "cuda_note": "Not queried: MACM6 control validation; no CUDA execution",
+                "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+                "numpy": version("numpy"), "input_sha256": inputs,
                 "precision": config["precision"], "seeds": config["seeds"],
                 **{k: config[k] for k in ("grid", "box", "time_step", "optimizer", "integrator", "tolerances")},
-                "checkpoint_sha256": None, "hardware_role": "MACM6 control",
+                "checkpoint_sha256": None, "hardware_role": config["machine"],
                 "hardware_model": "not measured; role name is not a hardware attestation"}
     freeze(run / "metadata.json", metadata)
     metrics = {}
@@ -96,8 +120,17 @@ def main() -> int:
         metrics["cloud_paused"] = state["cloud"]["paused"]
         metrics["cloud_budget_usd"] = state["cloud"]["max_usd_per_run"]
         metrics["publication_present"] = (ROOT / "yayınlanan.pdf").is_file()
+        if config["task"] == "G0A-T02":
+            sys.path.insert(0, str(ROOT / "src"))
+            if config["machine"] == "MACM6":
+                from analysis.validate_core import validate_core
+                metrics["math_core"] = validate_core(config)
+            else:
+                from analysis.validate_cuda import validate_cuda
+                metrics["math_core"] = validate_cuda(config)
         status = "PASS" if (not missing and tests.returncode == 0 and state["cloud"]["paused"]
-                            and metrics["tests_run"] >= metrics["minimum_tests"]) else "FAIL"
+                            and metrics["tests_run"] >= metrics["minimum_tests"]
+                            and metrics.get("math_core", {"passed": True})["passed"]) else "FAIL"
         anomaly = None
     except Exception as error:
         status, anomaly = "FAIL", f"{type(error).__name__}: {error}"
@@ -107,7 +140,7 @@ def main() -> int:
     result = {"run_id": run_id, "status": status, "finished_utc": datetime.now(timezone.utc).isoformat(),
               "wall_time_seconds": time.perf_counter() - start, "peak_ram_gb": ram,
               "peak_ram_method": "maximum process RSS (parent or child), not concurrent aggregate RAM",
-              "peak_vram_gb": None, "checkpoint_sha256": None,
+              "peak_vram_gb": metrics.get("math_core", {}).get("peak_vram_gb"), "checkpoint_sha256": None,
               "metrics": metrics, "anomaly": anomaly}
     freeze(run / "result.json", result)
     print(json.dumps({"run_id": run_id, "status": status, "metrics": metrics}, ensure_ascii=False))

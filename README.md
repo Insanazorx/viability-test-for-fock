@@ -5,8 +5,9 @@ Operational contract: [AGENTS.md](AGENTS.md). Start each session with
 the referenced source/config/report. [STATUS.md](STATUS.md) is generated from
 the canonical [state/state.yaml](state/state.yaml).
 
-The repository begins at G0A-T01 on MACM6. Creating the repository establishes
-engineering infrastructure; it is not evidence that any physics gate passes.
+G0A-T01 established the repository infrastructure. G0A-T02 adds the paper's
+mathematical definitions and MACM6 float64 reference; its CUDA comparison is
+assigned to RTX5070. Follow the current NEXT.md for the active responsibility.
 
 ## Control commands
 
@@ -20,10 +21,10 @@ python3.12 -m venv .venv
 .venv/bin/python scripts/ctl.py refresh
 ```
 
-The publication `yayınlanan.pdf` is a required input for G0A-T02. Place the
-exact published paper in the repository root and record its SHA256 before
-deriving equations or numerical benchmarks. It is not bundled or fetched by
-the setup task.
+The supplied publication `yayınlanan.pdf` is verified and its SHA256 is recorded
+in `config/benchmark/publication.source.yaml`. It remains an external ignored
+input; copy that exact file to the next machine. Mathematical conventions are
+documented in `docs/MATH_CORE.md`; RTX5070 steps are in `docs/RTX5070_CORE_HANDOFF.md`.
 
 Run metadata and small logs are tracked. Large arrays/checkpoints and the
 external publication are ignored. Their paths and SHA256 belong in reports.

@@ -3,7 +3,7 @@
 Generated from state/state.yaml.
 
 - N/A CLOUD — G0A-T01: Repository/control-plane foundation (PASS)
-- N/A CLOUD — G0A-T02: Mathematical core API and invariants (TODO)
+- N/A CLOUD — G0A-T02: Mathematical core API and invariants (RUNNING)
 - N/A CLOUD — G0A-T03: Full numerical run/config and environment discipline (TODO)
 - N/A CLOUD — G0B-T01: Reduced energy and spectral derivatives (TODO)
 - N/A CLOUD — G0B-T02: Hopf invariant and sign convention (TODO)

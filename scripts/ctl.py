@@ -113,10 +113,10 @@ def render(state: dict, root: Path = ROOT) -> None:
         machine = next((m for m in task["machine_order"] if not task["machine_done"][m]),
                        task["machine_order"][-1])
         lines.extend([f"task: {key}", f"machine: {machine}", f"status: {task['status']}", "",
-                      "## Action", task["next_action"], "", "## Read", "",
+                      "## Action", task.get("machine_actions", {}).get(machine, task["next_action"]), "", "## Read", "",
                       f"- AGENTS.md#{key[:3].lower()}", "- MACHINE_HANDOFF.md"])
         lines.extend(f"- {p}" for p in task["read"])
-        lines.extend(["", "## One command", "", "```sh", task["command"], "```", ""])
+        lines.extend(["", "## One command", "", "```sh", task.get("machine_commands", {}).get(machine, task["command"]), "```", ""])
         if task["status"] in {"FAIL", "BLOCKED"}:
             lines.extend(["Resolve the recorded outcome before launching any new run.", ""])
     else:
