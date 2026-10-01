@@ -14,6 +14,8 @@ CONFIGS = {
     ("G0A-T03", "MACM6"): ("config/benchmark/g0a_t03_macm6.json.yaml", "validate_run_discipline"),
     ("G0B-T01", "MACM6"): ("config/benchmark/g0b_t01_macm6.json.yaml", "validate_spectral_cpu"),
     ("G0B-T01", "RTX5070"): ("config/benchmark/g0b_t01_rtx5070.json.yaml", "validate_spectral_cuda"),
+    ("G0B-T02", "MACM6"): ("config/benchmark/g0b_t02_macm6.json.yaml", "validate_hopf_cpu"),
+    ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -68,6 +70,36 @@ def validate_config(config, root=ROOT):
             raise ValueError('Decreasing gradient difference steps required')
         if type(parameters.get('minimum_spectral_improvement')) not in (int,float) or parameters['minimum_spectral_improvement']<1:
             raise ValueError('Spectral convergence improvement must be explicit')
+    elif config['task']=='G0B-T02':
+        if config['kind']!='numerical' or config['precision']!='float64' or config['grid'] is None or config['box'] is None:
+            raise ValueError('Hopf acceptance requires an explicit float64 grid/box')
+        required={'unit_error','boundary_error','gauge_relative','fourier_difference','analytic_density_identity',
+                  'helical_inverse','reflection_sign','antipodal_invariance','trivial_charge','gradient_directional',
+                  'continuum_degree_error','unit_charge','charge_refinement','analytic_charge','smooth_deformation',
+                  'deformation_drift','curl_relative','divergence_relative','harmonic_fraction'}
+        if config['machine']=='RTX5070':
+            required |= {'backend','autograd'}
+        if set(config['tolerances'])!=required:
+            raise ValueError('Hopf acceptance tolerances missing')
+        p=config['parameters'];sequence=p.get('resolution_sequence',[])
+        if len(sequence)<3 or any(type(n) is not int or n<9 or n%2!=1 or n>49 for n in sequence) or sorted(set(sequence))!=sequence:
+            raise ValueError('Increasing small odd Hopf grids <=49 required')
+        for key in ('half_box','profile_scale','profile_radius','deformation_amplitude','minimum_charge_improvement'):
+            if type(p.get(key)) not in (int,float) or p[key]<=0:
+                raise ValueError('Explicit positive Hopf profile/validation parameters required')
+        if p['profile_radius']>=p['half_box']:
+            raise ValueError('Compact map support must be inside every boundary')
+        if config['grid']!=[sequence[-1]]*3:
+            raise ValueError('Nominal Hopf grid must equal the final reference grid')
+        period=sequence[-1]*2*p['half_box']/(sequence[-1]-1)
+        if any(abs(length-period)>1e-12 for length in config['box']):
+            raise ValueError('Paper endpoint grid needs FFT period N h, not 2L')
+        amplitudes=p.get('coordinate_deformation',[])
+        if len(amplitudes)!=3 or any(type(a) not in (int,float) or abs(a)*3.141592653589793/p['half_box']>=1 for a in amplitudes):
+            raise ValueError('Coordinate deformation must preserve orientation')
+        steps=p.get('gradient_steps',[])
+        if len(steps)<3 or any(type(v) not in (int,float) or v<=0 for v in steps) or sorted(set(steps),reverse=True)!=steps:
+            raise ValueError('Three decreasing charge-gradient difference steps required')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

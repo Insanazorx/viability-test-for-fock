@@ -6,7 +6,7 @@ Generated from state/state.yaml.
 - [ ] RTX5070 — G0A-T02: Mathematical core API and invariants (RUNNING)
 - N/A RTX5070 — G0A-T03: Full numerical run/config and environment discipline (PASS)
 - [ ] RTX5070 — G0B-T01: Reduced energy and spectral derivatives (RUNNING)
-- [ ] RTX5070 — G0B-T02: Hopf invariant and sign convention (TODO)
+- [ ] RTX5070 — G0B-T02: Hopf invariant and sign convention (RUNNING)
 - [ ] RTX5070 — G0B-T03: Published reduced stationary sequence (TODO)
 - [ ] RTX5070 — G0B-T04: Published reduced physical Hessian (TODO)
 - [ ] RTX5070 — G0C-T01: Independent CPU/CUDA reference comparison (TODO)

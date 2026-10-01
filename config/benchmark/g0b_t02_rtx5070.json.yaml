@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "task": "G0B-T02",
+  "machine": "RTX5070",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": [
+    49,
+    49,
+    49
+  ],
+  "box": [
+    8.166666666666666,
+    8.166666666666666,
+    8.166666666666666
+  ],
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "unit_error": 3e-15,
+    "boundary_error": 1e-14,
+    "gauge_relative": 5e-12,
+    "fourier_difference": 5e-12,
+    "analytic_density_identity": 5e-12,
+    "helical_inverse": 5e-12,
+    "reflection_sign": 5e-12,
+    "antipodal_invariance": 5e-12,
+    "trivial_charge": 5e-12,
+    "gradient_directional": 1e-08,
+    "continuum_degree_error": 1e-11,
+    "unit_charge": 0.0005,
+    "charge_refinement": 0.0005,
+    "analytic_charge": 0.0005,
+    "smooth_deformation": 0.0005,
+    "deformation_drift": 0.0005,
+    "curl_relative": 0.005,
+    "divergence_relative": 0.05,
+    "harmonic_fraction": 0.0001,
+    "backend": 5e-11,
+    "autograd": 5e-11
+  },
+  "parameters": {
+    "minimum_tests": 79,
+    "allow_cloud": false,
+    "resolution_sequence": [
+      17,
+      25,
+      33,
+      49
+    ],
+    "half_box": 4.0,
+    "profile_scale": 1.2,
+    "profile_radius": 3.4,
+    "deformation_amplitude": 0.035,
+    "coordinate_deformation": [
+      0.2,
+      -0.1,
+      0.05
+    ],
+    "gradient_steps": [
+      0.001,
+      0.0001,
+      1e-05
+    ],
+    "minimum_charge_improvement": 10.0,
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "handler": "validate_hopf_cuda"
+  }
+}

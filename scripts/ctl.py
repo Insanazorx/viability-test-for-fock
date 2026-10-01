@@ -203,6 +203,10 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
         raise ValueError("Frozen config hash does not match report")
     if metadata["git_commit"] != fields["git_commit"]:
         raise ValueError("Report commit does not match run")
+    if result.get('checkpoint_sha256'):
+        checkpoint=inside(root,result['checkpoint_path'],'checkpoints')
+        if sha256(checkpoint)!=result['checkpoint_sha256']:
+            raise ValueError('Referenced checkpoint hash changed')
     task["machine_done"][machine] = True
     task["machine_reports"][machine] = path.relative_to(root.resolve()).as_posix()
     if fields["status"] != "PASS":

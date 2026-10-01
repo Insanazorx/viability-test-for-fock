@@ -17,7 +17,7 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01'}:
+    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02'}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
@@ -30,6 +30,11 @@ def main() -> int:
         path = run / name
         if path.is_file():
             artifacts.append(f"- `{path.relative_to(ROOT).as_posix()}` — SHA256 `{sha256(path)}`")
+    if result.get('checkpoint_sha256'):
+        path=inside(ROOT,result['checkpoint_path'],'checkpoints')
+        if sha256(path)!=result['checkpoint_sha256']:
+            raise ValueError('Checkpoint hash does not match sealed result')
+        artifacts.append(f"- `{result['checkpoint_path']}` — SHA256 `{result['checkpoint_sha256']}` (ignored HDF5 initial field; not a stationary solution)")
     anomalies = [f"Dirty Git tree at run start: {metadata['uncommitted_diff']}.",
                  "Python 3.12.14 control environment exists; numerical dependencies are not yet installed/frozen.",
                  "No Git remote or remote runner is configured. CLOUD remains paused.",
@@ -132,6 +137,26 @@ def main() -> int:
             'changes':'First G0B-T01 report. Extends the pointwise mathematical core to an explicit periodic spatial discretization, Eq. (65) integrated energy, its analytic node gradient and independent CPU reference checks. Records machine-scoped prerequisites and the explicit RTX5070 deferral; earlier core/source definitions and reports remain unchanged.',
             'next_action':'G0B-T02 on MACM6: implement/validate Coulomb-gauge Fourier inversion, the source initial map and Hopf sign. RTX5070 remains deferred until the user requests continuation, starting with G0A-T02 CUDA.' if result['status']=='PASS' and not cuda else ('Continue the prerequisite-defined registry after both G0B-T01 reports pass.' if result['status']=='PASS' else 'Classify the recorded failure and run the smallest discriminating check before repeating or widening this substep.'),
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, AGENTS.md#g0b, docs/G0B_SPECTRAL.md and the exact machine-specific G0B-T01 config. The source PDF must be copied separately with its recorded SHA256.',
+        })
+    if metadata['task']=='G0B-T02':
+        config=read_data(run/'config.yaml');cuda=metadata['machine']=='RTX5070'
+        values.update({
+            'objective':f"Complete {metadata['machine']} G0B-T02: Coulomb Fourier inversion, the paper's Q_H=-1 convention and small-grid unit/trivial/deformed-map topology validation.",
+            'inputs':'Supplied publication, PDF pp. 8-9, Eqs. (67)-(68) and section 7.1; docs/G0B_HOPF.md derives the independent compact initializer and sign. Every exact input:\n'+
+                     '\n'.join(f'- `{path}` — SHA256 `{digest}`' for path,digest in metadata['input_sha256'].items())+
+                     '\n\nPrerequisite scope:\n```json\n'+json.dumps(metadata['prerequisite_scope'],indent=2)+'\n```',
+            'method':'Paper endpoint-included grid with h=2L/(N-1), FFT period N h and fixed south-pole boundary. Full-grid odd FFT derivatives generate F and B. Ahat=i(k x Bhat)/k^2 for nonzero k, harmonic Ahat=0. Physical and Fourier helicities are compared; divergence, gauge, curl reconstruction and harmonic flux are diagnosed using the original B. An independent compact quaternion Hopf map with analytically known radial degree -1, analytic Berry potential and exact profile derivatives fixes orientation/normalization. Seeded tangent and positive-Jacobian coordinate homotopies, spatial/target reflections, trivial/vacuum maps and analytic discrete charge-gradient finite differences provide independent checks. '+
+                     ('Actual CUDA FFT/autograd and CPU comparisons are performed.' if cuda else 'NumPy/SciPy float64 on MACM6; CUDA operations are implemented but unexecuted here.'),
+            'tolerances':'Frozen before this run:\n```json\n'+json.dumps(config['tolerances'],indent=2)+'\n```\nFinal unit/deformed charge errors and the last-two-grid charge difference must each be <=5e-4; charge-error improvement must be >=10. Closure uses relative discrete L2 norms with k_box=2pi/min(periods) for divergence normalization. Other algebraic/sign/gradient checks use their declared absolute or max(1, expected magnitude) normalization. Coarse-grid closure is recorded but does not certify coarse topology. No charge is normalized to its target.',
+            'convergence':'17^3,25^3,33^3,49^3 at physical half-box L=4; spacing and effective FFT period are recorded per row. Analytic Berry helicity and quaternion winding quadratures form independent continuum references. Three seeded tangent deformations and one orientation-preserving coordinate deformation are evaluated on the finest grid. Off-S2 central differences use steps 1e-3,1e-4,1e-5. This concerns a known analytic map, not a stationary solution or published minimizer table.',
+            'evaluation':f"{result['status']} for the {metadata['machine']} responsibility only. Primary metrics include all threshold decisions, charge convergence and independent references. "+
+                         ('Whole G0B-T02 additionally requires its passing MACM6 report.' if cuda else 'Whole G0B-T02 remains RUNNING until RTX5070 passes. G0A-T02/G0B-T01 CUDA also remain deferred; no stationary energy, physical stability or viability claim follows.'),
+            'anomalies':f"- Dirty Git tree at run start: {metadata['uncommitted_diff']}.\n- The PDF specifies a unit compactified map but omits its explicit profile/scale; no accompanying archive is present in this workspace. The independently derived fixture reproduces the sector/sign, not an archived initializer or stationary checkpoint.\n- The source endpoint-included convention is added explicitly; earlier G0B-T01 manufactured fixtures/configs remain unchanged.\n- Finite-grid F/B can alias and fail closure; the raw diagnostics and refinement are mandatory.\n- The 49^3 MACM6 calculation is a small reference evaluation of a known map, not a production minimization campaign.\n- RTX5070 remains explicitly deferred; CLOUD is paused with zero budget.\n"+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
+            'artifacts':'\n'.join(artifacts)+'\nThe HDF5 artifact is the independently generated initial field, stationary=false. It is ignored by Git and must be separately copied with its hash or regenerated from the exact config/code. Large arrays are not added to Git.',
+            'reproduction':f"```sh\npython3.12 -m venv .venv\n.venv/bin/python -m pip install -r requirements/{'macm6.txt' if cuda else 'macm6.freeze.txt'}\n.venv/bin/python scripts/configuration.py check\n.venv/bin/python scripts/run.py --config {metadata['config_path']}\n.venv/bin/python scripts/report.py --run-id EXACT_NEW_RUN_ID\n```\nUse an isolated checkout of `{metadata['git_commit']}` where this responsibility is RUNNING/unfinished, with the source PDF matching its SHA256. CUDA execution additionally requires a frozen driver-compatible PyTorch build and completed preceding GPU reports.',
+            'changes':'First G0B-T02 report. Adds paper-grid origin/period support, raw Coulomb inversion and closure/flux diagnostics, independent compact Hopf/sign references, a checked analytic discrete charge gradient and a hashed initial-field HDF5 artifact. Earlier source/core acceptance configs and scientific gate flags remain intact.',
+            'next_action':'Preserve the verified initial field and CPU report. G0B-T03 stationary minimization is assigned to RTX5070 first, which remains deferred at the user request; resume first at G0A-T02 CUDA only when requested.' if result['status']=='PASS' else 'Classify the failed diagnostic and perform the smallest discriminating refinement/implementation check before repeating this fixture; do not loosen the unit-charge threshold or claim a physical failure prematurely.',
+            'handoff':'MACHINE_HANDOFF.md, NEXT.md, AGENTS.md#g0b, docs/G0B_HOPF.md, exact G0B-T02 config and the reported HDF5 path/hash. Original-paper stationary reproduction remains G0B-T03.',
         })
     report = ROOT / "reports/G0" / f"{metadata['task']}__{args.run_id}__REPORT.md"
     output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)

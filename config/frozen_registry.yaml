@@ -30,6 +30,16 @@
       "path": "config/benchmark/g0b_t01_rtx5070.json.yaml",
       "handler": "validate_spectral_cuda",
       "sha256": "9e664616393afe3efee4497375e43ffa05817c75a3e288de4c54cfe41544d749"
+    },
+    "G0B-T02/MACM6": {
+      "path": "config/benchmark/g0b_t02_macm6.json.yaml",
+      "handler": "validate_hopf_cpu",
+      "sha256": "73b620d23a4c82aa9ce26fb1ab047468307bc90a7b3c9b0c1866f8a1773fe90c"
+    },
+    "G0B-T02/RTX5070": {
+      "path": "config/benchmark/g0b_t02_rtx5070.json.yaml",
+      "handler": "validate_hopf_cuda",
+      "sha256": "23ad6ac8108c8611a5025eb14e1a670a6a01ce4b3e1a306b8020db74a58d5060"
     }
   },
   "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"

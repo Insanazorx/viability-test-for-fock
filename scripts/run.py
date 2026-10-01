@@ -52,7 +52,7 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
-    if config["task"] in {"G0A-T02","G0B-T01"}:
+    if config["task"] in {"G0A-T02","G0B-T01","G0B-T02"}:
         manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
         manifest = read_data(manifest_path)
         publication = inside(ROOT, manifest["path"])
@@ -62,12 +62,14 @@ def main() -> int:
         inputs.update({manifest["path"]: expected_hash,
                   manifest_path.relative_to(ROOT).as_posix(): sha256(manifest_path),
                   "docs/MATH_CORE.md": sha256(ROOT / "docs/MATH_CORE.md")})
-        if config['task']=='G0B-T01':
+        if config['task'] in {'G0B-T01','G0B-T02'}:
             inputs['docs/G0B_SPECTRAL.md']=sha256(ROOT/'docs/G0B_SPECTRAL.md')
+        if config['task']=='G0B-T02':
+            inputs['docs/G0B_HOPF.md']=sha256(ROOT/'docs/G0B_HOPF.md')
     if config["parameters"].get("environment_freeze"):
         path = inside(ROOT, config["parameters"]["environment_freeze"], "requirements")
         # The historical G0A-T02 NumPy-only freeze remains an immutable input, not the new full environment lock.
-        if config["task"] == "G0A-T03" or (config['task']=='G0B-T01' and config['machine']=='MACM6'):
+        if config["task"] == "G0A-T03" or (config['task'] in {'G0B-T01','G0B-T02'} and config['machine']=='MACM6'):
             check_environment_freeze(path)
         inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     recovery = task.get("recovery")
@@ -86,6 +88,7 @@ def main() -> int:
     start = time.perf_counter()
     git = git_info(ROOT)
     run_id = run_identity(config["task"],config["machine"],started,git["git_commit"],digest)
+    checkpoint_path=ROOT/'checkpoints'/f'{run_id}__initial.h5' if config['task']=='G0B-T02' else None
     run = ROOT / "runs" / run_id
     run.mkdir()  # Exclusive creation: never overwrite an existing run.
     with (run / "config.yaml").open("xb") as stream:
@@ -109,6 +112,7 @@ def main() -> int:
                 "recovery":recovery,
                 "prerequisite_scope":prerequisites,
                 "machine_scheduling":state.get('machine_scheduling',{}),
+                "checkpoint_output":checkpoint_path.relative_to(ROOT).as_posix() if checkpoint_path else None,
                 "precision_policy":"explicit declared dtype; no MPS acceptance or implicit mixed precision"}
     freeze(run / "metadata.json", metadata)
     metrics = {}
@@ -147,17 +151,24 @@ def main() -> int:
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_spectral import validate_spectral
             metrics['spectral']=validate_spectral(config)
+        if config['task']=='G0B-T02':
+            sys.path.insert(0,str(ROOT/'src'))
+            from analysis.validate_hopf import validate_hopf
+            metrics['hopf']=validate_hopf(config,checkpoint_path,run_id,digest)
         status = "PASS" if (not missing and returncode == 0 and state["cloud"]["paused"]
                             and metrics["tests_run"] >= metrics["minimum_tests"]
                             and metrics.get("math_core", {"passed": True})["passed"]
                             and metrics.get("run_discipline", {"passed": True})["passed"]
-                            and metrics.get('spectral',{'passed':True})['passed']) else "FAIL"
+                            and metrics.get('spectral',{'passed':True})['passed']
+                            and metrics.get('hopf',{'passed':True})['passed']) else "FAIL"
         anomaly = None
     except Exception as error:
         status, anomaly = "FAIL", f"{type(error).__name__}: {error}"
     result = {"run_id": run_id, "status": status, "finished_utc": datetime.now(timezone.utc).isoformat(),
               "wall_time_seconds": time.perf_counter() - start, **ram_monitor.finish(),
-              "peak_vram_gb": metrics.get("spectral",metrics.get("math_core", {})).get("peak_vram_gb"), "checkpoint_sha256": None,
+              "peak_vram_gb": metrics.get('hopf',metrics.get("spectral",metrics.get("math_core", {}))).get("peak_vram_gb"),
+              "checkpoint_sha256":sha256(checkpoint_path) if checkpoint_path and checkpoint_path.is_file() else None,
+              "checkpoint_path":checkpoint_path.relative_to(ROOT).as_posix() if checkpoint_path and checkpoint_path.is_file() else None,
               "metrics": metrics, "anomaly": anomaly}
     freeze(run / "result.json", result)
     seal_run(run)

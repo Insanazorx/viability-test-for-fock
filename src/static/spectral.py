@@ -16,6 +16,7 @@ from core.math_core import MathCore, SPATIAL_PAIRS
 class PeriodicGrid:
     shape: tuple[int, int, int]
     box: tuple[float, float, float]
+    origin: tuple[float, float, float] | None = None
 
     def __post_init__(self):
         if len(self.shape) != 3 or any(type(n) is not int or n < 3 for n in self.shape):
@@ -25,6 +26,18 @@ class PeriodicGrid:
             raise ValueError("Three finite positive box lengths are required")
         object.__setattr__(self, "shape", tuple(self.shape))
         object.__setattr__(self, "box", tuple(float(v) for v in self.box))
+        origin=self.origin if self.origin is not None else tuple(-v/2 for v in self.box)
+        if len(origin)!=3 or any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) for v in origin):
+            raise ValueError('Three finite coordinate origins are required')
+        object.__setattr__(self,'origin',tuple(float(v) for v in origin))
+
+    @classmethod
+    def paper(cls, size: int, half_box: float):
+        """Paper §7.1: N points including ±L, h=2L/(N-1), FFT period N h."""
+        if type(size) is not int or size<3 or not math.isfinite(half_box) or half_box<=0:
+            raise ValueError('Paper grid requires N>=3 and positive L')
+        spacing=2*half_box/(size-1)
+        return cls((size,)*3,(size*spacing,)*3,(-half_box,)*3)
 
     @property
     def spacing(self):
@@ -40,8 +53,8 @@ class PeriodicGrid:
 
     def numpy_coordinates(self):
         import numpy as np
-        return np.meshgrid(*(np.arange(n, dtype=np.float64)*h-length/2
-                             for n, h, length in zip(self.shape, self.spacing, self.box)),
+        return np.meshgrid(*(np.arange(n, dtype=np.float64)*h+origin
+                             for n, h, origin in zip(self.shape, self.spacing, self.origin)),
                            indexing="ij")
 
 

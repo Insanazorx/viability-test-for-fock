@@ -13,7 +13,7 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | G0A-T02 | RUNNING | [X] | [ ] | N/A |
 | G0A-T03 | PASS | [X] | N/A | N/A |
 | G0B-T01 | RUNNING | [X] | [ ] | N/A |
-| G0B-T02 | TODO | [ ] | [ ] | N/A |
+| G0B-T02 | RUNNING | [ ] | [ ] | N/A |
 | G0B-T03 | TODO | [ ] | [ ] | N/A |
 | G0B-T04 | TODO | [ ] | [ ] | N/A |
 | G0C-T01 | TODO | [ ] | [ ] | N/A |

@@ -37,6 +37,12 @@ for physical-gradient inference; they must not be used as proof of a stable
 configuration. The production sequence in this contract uses odd grids.
 The independent centered finite-difference reference uses periodic rolls.
 
+G0B-T02 adds an explicit `PeriodicGrid.paper(N,L)` constructor after checking
+PDF p. 9, §7.1: the paper includes both physical endpoints ±L and uses
+`h=2L/(N-1)`. Its FFT period is therefore `N h`, and coordinates start at `-L`.
+This constructor preserves that convention without changing G0B-T01's
+endpoint-excluded manufactured fixtures or their archived reports/configs.
+
 ## Energy and analytic discrete gradient
 
 The physical energy entry rejects nonunit n. The off-S2 polynomial extension
