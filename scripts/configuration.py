@@ -12,6 +12,8 @@ CONFIGS = {
     ("G0A-T02", "MACM6"): ("config/benchmark/g0a_t02_macm6.json.yaml", "validate_math_core"),
     ("G0A-T02", "RTX5070"): ("config/benchmark/g0a_t02_rtx5070.json.yaml", "validate_math_core_cuda"),
     ("G0A-T03", "MACM6"): ("config/benchmark/g0a_t03_macm6.json.yaml", "validate_run_discipline"),
+    ("G0B-T01", "MACM6"): ("config/benchmark/g0b_t01_macm6.json.yaml", "validate_spectral_cpu"),
+    ("G0B-T01", "RTX5070"): ("config/benchmark/g0b_t01_rtx5070.json.yaml", "validate_spectral_cuda"),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -42,6 +44,30 @@ def validate_config(config, root=ROOT):
         for key in ("samples_per_seed", "rotations_per_seed"):
             if key in config["parameters"] and (type(config["parameters"][key]) is not int or config["parameters"][key] <= 0):
                 raise ValueError("Sample/rotation counts must be positive integers")
+    elif config['task']=='G0B-T01':
+        if config['kind']!='numerical' or config['precision']!='float64' or config['grid'] is None or config['box'] is None:
+            raise ValueError('Spectral acceptance requires a float64 grid/box')
+        required={'bandlimited_derivative','analytic_energy','parseval','skew_adjoint','vacuum_energy',
+                  'unit_error','directional_gradient','symmetry_energy','smooth_derivative_final',
+                  'centered_fd_final','vacuum_face','vacuum_face_gradient','nyquist_derivative'}
+        if config['machine']=='RTX5070':
+            required |= {'backend','autograd'}
+        if set(config['tolerances']) != required:
+            raise ValueError('Spectral acceptance tolerances missing')
+        parameters=config['parameters']
+        sequence=parameters.get('resolution_sequence',[])
+        if len(sequence)<3 or any(type(n) is not int or n<9 for n in sequence) or sorted(set(sequence))!=sequence:
+            raise ValueError('Increasing spectral resolution sequence required')
+        if config['machine']=='MACM6' and (max(sequence)>33 or max(config['grid'])>33):
+            raise ValueError('MACM6 acceptance is restricted to small grids <=33')
+        even=parameters.get('even_grid',[])
+        if len(even)!=3 or any(type(n) is not int or n<4 or n%2 or n>33 for n in even):
+            raise ValueError('Small even grid required for the Nyquist audit')
+        steps=parameters.get('gradient_steps',[])
+        if len(steps)<3 or any(type(v) not in (int,float) or v<=0 for v in steps) or sorted(set(steps),reverse=True)!=steps:
+            raise ValueError('Decreasing gradient difference steps required')
+        if type(parameters.get('minimum_spectral_improvement')) not in (int,float) or parameters['minimum_spectral_improvement']<1:
+            raise ValueError('Spectral convergence improvement must be explicit')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

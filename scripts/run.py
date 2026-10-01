@@ -52,7 +52,7 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
-    if config["task"] == "G0A-T02":
+    if config["task"] in {"G0A-T02","G0B-T01"}:
         manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
         manifest = read_data(manifest_path)
         publication = inside(ROOT, manifest["path"])
@@ -62,10 +62,12 @@ def main() -> int:
         inputs.update({manifest["path"]: expected_hash,
                   manifest_path.relative_to(ROOT).as_posix(): sha256(manifest_path),
                   "docs/MATH_CORE.md": sha256(ROOT / "docs/MATH_CORE.md")})
+        if config['task']=='G0B-T01':
+            inputs['docs/G0B_SPECTRAL.md']=sha256(ROOT/'docs/G0B_SPECTRAL.md')
     if config["parameters"].get("environment_freeze"):
         path = inside(ROOT, config["parameters"]["environment_freeze"], "requirements")
         # The historical G0A-T02 NumPy-only freeze remains an immutable input, not the new full environment lock.
-        if config["task"] == "G0A-T03":
+        if config["task"] == "G0A-T03" or (config['task']=='G0B-T01' and config['machine']=='MACM6'):
             check_environment_freeze(path)
         inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     recovery = task.get("recovery")
@@ -73,6 +75,13 @@ def main() -> int:
         for name in ("previous_failure_report", "previous_environment_freeze"):
             path = inside(ROOT, recovery[name])
             inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
+    prerequisites=task.get('machine_prerequisites',{}).get(config['machine'],[{'task':dep} for dep in task['prerequisites']])
+    for requirement in prerequisites:
+        dependency=state['tasks'][requirement['task']]
+        machines=[requirement['machine']] if 'machine' in requirement else dependency['machine_order']
+        for machine in machines:
+            path=inside(ROOT,dependency['machine_reports'][machine],'reports')
+            inputs[path.relative_to(ROOT).as_posix()]=sha256(path)
     started = datetime.now(timezone.utc)
     start = time.perf_counter()
     git = git_info(ROOT)
@@ -98,6 +107,8 @@ def main() -> int:
                 "hardware":observed_hardware,"seed_policy":seed_policy(config),
                 "integrity_schema_version":1,
                 "recovery":recovery,
+                "prerequisite_scope":prerequisites,
+                "machine_scheduling":state.get('machine_scheduling',{}),
                 "precision_policy":"explicit declared dtype; no MPS acceptance or implicit mixed precision"}
     freeze(run / "metadata.json", metadata)
     metrics = {}
@@ -132,16 +143,21 @@ def main() -> int:
         if config["task"] == "G0A-T03":
             from validate_discipline import validate_discipline
             metrics["run_discipline"] = validate_discipline(config)
+        if config['task']=='G0B-T01':
+            sys.path.insert(0,str(ROOT/'src'))
+            from analysis.validate_spectral import validate_spectral
+            metrics['spectral']=validate_spectral(config)
         status = "PASS" if (not missing and returncode == 0 and state["cloud"]["paused"]
                             and metrics["tests_run"] >= metrics["minimum_tests"]
                             and metrics.get("math_core", {"passed": True})["passed"]
-                            and metrics.get("run_discipline", {"passed": True})["passed"]) else "FAIL"
+                            and metrics.get("run_discipline", {"passed": True})["passed"]
+                            and metrics.get('spectral',{'passed':True})['passed']) else "FAIL"
         anomaly = None
     except Exception as error:
         status, anomaly = "FAIL", f"{type(error).__name__}: {error}"
     result = {"run_id": run_id, "status": status, "finished_utc": datetime.now(timezone.utc).isoformat(),
               "wall_time_seconds": time.perf_counter() - start, **ram_monitor.finish(),
-              "peak_vram_gb": metrics.get("math_core", {}).get("peak_vram_gb"), "checkpoint_sha256": None,
+              "peak_vram_gb": metrics.get("spectral",metrics.get("math_core", {})).get("peak_vram_gb"), "checkpoint_sha256": None,
               "metrics": metrics, "anomaly": anomaly}
     freeze(run / "result.json", result)
     seal_run(run)

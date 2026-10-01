@@ -97,3 +97,25 @@ small metadata and reports. Push only when a remote has been configured.
 Cloud starts paused, with no approved gate and zero budget. This skeleton has
 no cloud provisioner or remote executor. Cloud/remote execution requires the
 explicit prerequisites and approval packet specified in AGENTS.md.
+# CPU preparation while a machine is deferred
+
+When the user explicitly defers a machine, record that scheduling decision:
+
+```sh
+.venv/bin/python scripts/ctl.py defer-machine --machine RTX5070 --reason 'User requested RTX5070 later'
+```
+
+The machine completion flags remain unchanged. Ready MACM6 preparation may
+use explicitly recorded `machine_prerequisites` only when every parent
+prerequisite is covered and the completed responsibility has a report.
+G0B-T01 MACM6 uses G0A-T02 MACM6 and whole G0A-T03; its RTX5070 responsibility
+still requires the whole parent tasks. See `docs/G0B_SPECTRAL.md`.
+
+Resume a deferred machine only on a later user instruction:
+
+```sh
+.venv/bin/python scripts/ctl.py resume-machine --machine RTX5070 --reason 'User requested RTX5070 continuation'
+```
+
+This returns RTX5070 to its earliest unfinished work, G0A-T02 CUDA. It does
+not imply cloud approval or install a remote runner.

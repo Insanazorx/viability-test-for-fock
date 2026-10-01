@@ -34,6 +34,18 @@ def validate(state: dict) -> None:
             raise ValueError(f"N/A machine marked done: {key}")
         if any(dep not in tasks or dep == key for dep in task["prerequisites"]):
             raise ValueError(f"Unknown/self prerequisite: {key}")
+        overrides=task.get("machine_prerequisites", {})
+        if overrides and not task.get("machine_prerequisite_reason", "").strip():
+            raise ValueError(f"Machine prerequisites need a recorded reason: {key}")
+        for machine, requirements in overrides.items():
+            if machine not in order or not isinstance(requirements,list):
+                raise ValueError(f"Invalid machine prerequisites: {key}")
+            if len(requirements) != len(task['prerequisites']) or {r.get('task') for r in requirements} != set(task['prerequisites']):
+                raise ValueError(f"Every task prerequisite must remain covered: {key}")
+            for requirement in requirements:
+                dependency=tasks[requirement['task']]
+                if set(requirement)-{'task','machine'} or ('machine' in requirement and requirement['machine'] not in dependency['machine_order']):
+                    raise ValueError(f"Invalid prerequisite responsibility: {key}")
         if any(done[m] and not done[previous] for i, m in enumerate(order)
                for previous in order[:i]):
             raise ValueError(f"Completion violates machine order: {key}")
@@ -61,24 +73,47 @@ def validate(state: dict) -> None:
         raise ValueError("Invalid cloud guard")
     if not cloud["paused"] and (not cloud["approved_gate"] or cloud["max_usd_per_run"] <= 0):
         raise ValueError("Unpaused cloud requires gate and positive explicit budget")
+    for machine, scheduling in state.get('machine_scheduling',{}).items():
+        if machine not in MACHINES or type(scheduling.get('deferred')) is not bool or not scheduling.get('reason','').strip():
+            raise ValueError('Invalid machine scheduling decision')
 
 
-def ready(state: dict, task: dict) -> bool:
-    return task["enabled"] and all(state["tasks"][d]["status"] == "PASS"
-                                   for d in task["prerequisites"])
+def ready(state: dict, task: dict, machine: str | None = None) -> bool:
+    if not task['enabled'] or (machine and state.get('machine_scheduling',{}).get(machine,{}).get('deferred')):
+        return False
+    requirements=task.get('machine_prerequisites',{}).get(machine)
+    if requirements is None:
+        return all(state['tasks'][d]['status']=='PASS' for d in task['prerequisites'])
+    for requirement in requirements:
+        dependency=state['tasks'][requirement['task']]
+        if 'machine' in requirement:
+            responsibility=requirement['machine']
+            if (dependency['status'] in {'FAIL','BLOCKED','ARCHIVED'} or not dependency['machine_done'][responsibility]
+                    or not dependency['machine_reports'].get(responsibility)):
+                return False
+        elif dependency['status'] != 'PASS':
+            return False
+    return True
+
+
+def pending_machine(task: dict) -> str | None:
+    return next((m for m in task['machine_order'] if not task['machine_done'][m]),None)
 
 
 def next_task(state: dict) -> tuple[str, dict] | None:
     focused = state.get("active_task")
     if focused:
         task = state["tasks"][focused]
-        if task["enabled"] and task["status"] not in {"PASS", "ARCHIVED"}:
+        machine=pending_machine(task)
+        if task["enabled"] and task["status"] not in {"PASS", "ARCHIVED"} and not state.get('machine_scheduling',{}).get(machine,{}).get('deferred'):
             return focused, task
     for key, task in state["tasks"].items():
-        if task["enabled"] and task["status"] in {"CLAIMED", "RUNNING", "FAIL", "BLOCKED"}:
+        machine=pending_machine(task)
+        if (task["enabled"] and task["status"] in {"CLAIMED", "RUNNING", "FAIL", "BLOCKED"}
+                and not state.get('machine_scheduling',{}).get(machine,{}).get('deferred')):
             return key, task
     for key, task in state["tasks"].items():
-        if task["status"] == "TODO" and ready(state, task):
+        if task["status"] == "TODO" and ready(state, task, pending_machine(task)):
             return key, task
     return None
 
@@ -107,6 +142,9 @@ def render(state: dict, root: Path = ROOT) -> None:
                     "- Required publication: yayınlanan.pdf; availability is checked before G0A-T02.",
                     "- Python target: 3.12. MACM6 dependency freeze: " + ("complete." if cpu_freeze else "pending G0A-T03."),
                     "- Remote runner setup: disabled; no Git remote configured by bootstrap.", ""])
+    for machine,scheduling in state.get('machine_scheduling',{}).items():
+        if scheduling['deferred']:
+            summary.append(f"- {machine}: DEFERRED — {scheduling['reason']}")
     atomic_write(root / "STATUS.md", "\n".join(summary))
     for machine in MACHINES:
         lines = [f"# {machine} CHECKLIST", "", "Generated from state/state.yaml.", ""]
@@ -134,8 +172,8 @@ def render(state: dict, root: Path = ROOT) -> None:
 
 def ensure_machine_ready(state: dict, key: str, machine: str) -> dict:
     task = state["tasks"][key]
-    if not ready(state, task):
-        raise ValueError("Task is disabled or prerequisites have not passed")
+    if not ready(state, task, machine):
+        raise ValueError("Task disabled, machine deferred, or assigned prerequisites have not passed")
     if machine not in task["machine_order"]:
         raise ValueError("Machine is N/A for this task")
     if task["machine_done"][machine]:
@@ -173,7 +211,8 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
         task["status"] = "PASS"
     else:
         task["status"] = "RUNNING"
-    if task["status"] == "PASS" and state.get("active_task") == key:
+    if state.get("active_task") == key and (task["status"] == "PASS" or
+            (fields['status']=='PASS' and state.get('action_selection',{}).get('machine')==machine)):
         state["active_task"] = None
 
 
@@ -200,6 +239,10 @@ def main() -> int:
     selection.add_argument("task")
     selection.add_argument("--machine", choices=MACHINES, required=True)
     selection.add_argument("--reason", required=True)
+    for name in ('defer-machine','resume-machine'):
+        scheduling=commands.add_parser(name)
+        scheduling.add_argument('--machine',choices=MACHINES,required=True)
+        scheduling.add_argument('--reason',required=True)
     for name in ("start", "machine-done"):
         command = commands.add_parser(name)
         command.add_argument("task")
@@ -209,7 +252,7 @@ def main() -> int:
     args = parser.parse_args()
     state = read_data(ROOT / "state/state.yaml")
     validate(state)
-    if args.command in {"start", "machine-done", "pause-cloud", "refresh", "focus"}:
+    if args.command in {"start", "machine-done", "pause-cloud", "refresh", "focus",'defer-machine','resume-machine'}:
         if args.command == "start":
             task = ensure_machine_ready(state, args.task, args.machine)
             if task["status"] not in {"TODO", "CLAIMED", "RUNNING"}:
@@ -228,6 +271,12 @@ def main() -> int:
             state["cloud"]["paused"] = True
         elif args.command == "focus":
             focus(state, args.task, args.machine, args.reason)
+        elif args.command in {'defer-machine','resume-machine'}:
+            if not args.reason.strip():
+                raise ValueError('Scheduling requires an explicit reason')
+            state.setdefault('machine_scheduling',{})[args.machine]={
+                'deferred':args.command=='defer-machine','reason':args.reason,
+                'updated_utc':datetime.now(timezone.utc).isoformat()}
         state["updated_utc"] = datetime.now(timezone.utc).isoformat()
         validate(state)
         write_data(ROOT / "state/state.yaml", state)

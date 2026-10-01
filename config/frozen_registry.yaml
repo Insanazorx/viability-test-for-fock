@@ -20,6 +20,16 @@
       "path": "config/benchmark/g0a_t03_macm6.json.yaml",
       "handler": "validate_run_discipline",
       "sha256": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6"
+    },
+    "G0B-T01/MACM6": {
+      "path": "config/benchmark/g0b_t01_macm6.json.yaml",
+      "handler": "validate_spectral_cpu",
+      "sha256": "8baddf31f98801810e2de6d91f41e91ba0c48abc23d4df35674364f64dd895f4"
+    },
+    "G0B-T01/RTX5070": {
+      "path": "config/benchmark/g0b_t01_rtx5070.json.yaml",
+      "handler": "validate_spectral_cuda",
+      "sha256": "9e664616393afe3efee4497375e43ffa05817c75a3e288de4c54cfe41544d749"
     }
   },
   "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"

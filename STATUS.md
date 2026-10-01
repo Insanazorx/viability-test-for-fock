@@ -2,7 +2,7 @@
 
 Generated from state/state.yaml; do not edit by hand.
 
-Active action: G0A-T02
+Active action: G0B-T01
 Cloud: PAUSED; budget USD 0 per run.
 
 Only G0 tasks are registered initially. Later gates remain untested.
@@ -12,7 +12,7 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | G0A-T01 | PASS | [X] | N/A | N/A |
 | G0A-T02 | RUNNING | [X] | [ ] | N/A |
 | G0A-T03 | PASS | [X] | N/A | N/A |
-| G0B-T01 | TODO | [ ] | [ ] | N/A |
+| G0B-T01 | RUNNING | [ ] | [ ] | N/A |
 | G0B-T02 | TODO | [ ] | [ ] | N/A |
 | G0B-T03 | TODO | [ ] | [ ] | N/A |
 | G0B-T04 | TODO | [ ] | [ ] | N/A |
@@ -27,3 +27,5 @@ Only G0 tasks are registered initially. Later gates remain untested.
 - Required publication: yayınlanan.pdf; availability is checked before G0A-T02.
 - Python target: 3.12. MACM6 dependency freeze: complete.
 - Remote runner setup: disabled; no Git remote configured by bootstrap.
+
+- RTX5070: DEFERRED — User requested RTX5070 later and continued MACM6 next-gate preparation on 2026-10-01.
