@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task": "G0A-T02",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [0, 17, 104729],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {"identity_normalized": 5e-12, "rotation_normalized": 5e-12, "gradient_normalized": 1e-8, "reduction_normalized": 5e-12},
+  "parameters": {
+    "handler": "validate_math_core", "samples_per_seed": 512, "rotations_per_seed": 32,
+    "gradient_step_sizes": [0.001, 0.0001, 0.00001], "minimum_tests": 31,
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6-core.freeze.txt",
+    "allow_cloud": false
+  }
+}

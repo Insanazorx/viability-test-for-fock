@@ -1,0 +1,117 @@
+{
+  "run_id": "G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06",
+  "status": "PASS",
+  "finished_utc": "2026-10-01T06:02:59.830423+00:00",
+  "wall_time_seconds": 0.19436700000005658,
+  "peak_ram_gb": 0.04571136,
+  "peak_ram_method": "maximum process RSS (parent or child), not concurrent aggregate RAM",
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 31,
+    "minimum_tests": 31,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "math_core": {
+      "passed": true,
+      "worst_errors": {
+        "identity_normalized": 1.6214807274650411e-13,
+        "rotation_normalized": 2.312111293540593e-15,
+        "gradient_normalized": 5.937802249875271e-10,
+        "reduction_normalized": 2.0350139076465755e-15
+      },
+      "by_seed": {
+        "0": {
+          "identity_normalized": 1.6214807274650411e-13,
+          "rotation_normalized": 1.6967072131441081e-15,
+          "reduction_normalized": 1.840208729932706e-15,
+          "gradient_normalized": 2.266836354087434e-10,
+          "gradient_steps": [
+            {
+              "step": 0.001,
+              "maximum_normalized_error": 2.3900613906054817e-06,
+              "reduced_energy_error": 2.3900613906054817e-06,
+              "physical_energy_error": 5.0789267495865265e-09
+            },
+            {
+              "step": 0.0001,
+              "maximum_normalized_error": 2.390199020311097e-08,
+              "reduced_energy_error": 2.390199020311097e-08,
+              "physical_energy_error": 5.3224268277102416e-11
+            },
+            {
+              "step": 1e-05,
+              "maximum_normalized_error": 2.266836354087434e-10,
+              "reduced_energy_error": 2.266836354087434e-10,
+              "physical_energy_error": 3.6409390683642355e-11
+            }
+          ]
+        },
+        "17": {
+          "identity_normalized": 6.36254201711804e-15,
+          "rotation_normalized": 1.5689174413804424e-15,
+          "reduction_normalized": 1.809423283043941e-15,
+          "gradient_normalized": 1.3880531082014917e-10,
+          "gradient_steps": [
+            {
+              "step": 0.001,
+              "maximum_normalized_error": 1.9879773612979657e-06,
+              "reduced_energy_error": 3.892399274919496e-07,
+              "physical_energy_error": 1.9879773612979657e-06
+            },
+            {
+              "step": 0.0001,
+              "maximum_normalized_error": 1.988234100969155e-08,
+              "reduced_energy_error": 3.915640437518971e-09,
+              "physical_energy_error": 1.988234100969155e-08
+            },
+            {
+              "step": 1e-05,
+              "maximum_normalized_error": 1.3880531082014917e-10,
+              "reduced_energy_error": 1.3880531082014917e-10,
+              "physical_energy_error": 1.203711574859767e-10
+            }
+          ]
+        },
+        "104729": {
+          "identity_normalized": 3.219956787042275e-14,
+          "rotation_normalized": 2.312111293540593e-15,
+          "reduction_normalized": 2.0350139076465755e-15,
+          "gradient_normalized": 5.937802249875271e-10,
+          "gradient_steps": [
+            {
+              "step": 0.001,
+              "maximum_normalized_error": 6.065325148680817e-06,
+              "reduced_energy_error": 6.065325148680817e-06,
+              "physical_energy_error": 4.095036495972529e-07
+            },
+            {
+              "step": 0.0001,
+              "maximum_normalized_error": 6.065189923690459e-08,
+              "reduced_energy_error": 6.065189923690459e-08,
+              "physical_energy_error": 4.093335634228107e-09
+            },
+            {
+              "step": 1e-05,
+              "maximum_normalized_error": 5.937802249875271e-10,
+              "reduced_energy_error": 5.937802249875271e-10,
+              "physical_energy_error": 4.847438460026994e-11
+            }
+          ]
+        }
+      },
+      "samples_checked": 1536,
+      "so4_rotations_checked": 96,
+      "dtype": "float64",
+      "numpy_version": "2.2.6",
+      "hopf_unit_charge_reproduced": false,
+      "cuda_verified": false
+    }
+  },
+  "anomaly": null
+}

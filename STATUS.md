@@ -10,7 +10,7 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | Task | Status | MACM6 | RTX5070 | CLOUD |
 |---|---|---|---|---|
 | G0A-T01 | PASS | [X] | N/A | N/A |
-| G0A-T02 | RUNNING | [ ] | [ ] | N/A |
+| G0A-T02 | RUNNING | [X] | [ ] | N/A |
 | G0A-T03 | TODO | [ ] | N/A | N/A |
 | G0B-T01 | TODO | [ ] | [ ] | N/A |
 | G0B-T02 | TODO | [ ] | [ ] | N/A |

@@ -1,22 +1,28 @@
 # MACHINE HANDOFF
 
 from: MACM6
-to: MACM6
-task: G0A-T01
-status: PASS
+to: RTX5070
+task: G0A-T02
+status: PASS (MACM6 responsibility); RUNNING (whole task)
 read:
   - AGENTS.md#g0a
-  - reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md
-  - config/benchmark/g0a_t01.json.yaml
+  - reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
+  - docs/MATH_CORE.md
+  - docs/RTX5070_CORE_HANDOFF.md
+  - config/benchmark/g0a_t02_rtx5070.json.yaml
+  - config/benchmark/publication.source.yaml
 latest_checkpoint: N/A
 checkpoint_sha256: N/A
 do_next:
-  - follow NEXT.md: G0A-T02 publication input and mathematical core
-  - place/hash the exact yayınlanan.pdf before starting G0A-T02
+  - copy exact source PDF and prepare Python 3.12 plus CUDA-enabled PyTorch on RTX5070
+  - run the single frozen CUDA mirror command in NEXT.md
+  - create report and record only RTX5070 completion
 do_not_repeat:
-  - G0A-T01 repository setup and 18 control-plane tests already passed
-  - Python 3.12.14 control environment is prepared
+  - MACM6 source/math reference is committed and its 31 tests passed
+  - float64 invariants: 1536 samples; SO(4): 96 rotations; gradients: 3 step sizes
 known_issue:
-  - yayınlanan.pdf is absent
-  - numerical dependencies and full run/seed discipline remain G0A-T03
-  - no Git remote configured; RTX5070 not yet verified; CLOUD paused
+  - CUDA implementation is present but unexecuted; RTX5070 verification is required
+  - G0A-T03 full environment/run discipline remains TODO
+  - no unit Hopf charge, lattice solution, or Hessian is yet reproduced
+  - source PDF is ignored by Git; required SHA256 is in source manifest
+  - no Git remote configured; CLOUD paused
