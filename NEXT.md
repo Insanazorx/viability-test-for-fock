@@ -2,25 +2,27 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G0B-T02
-machine: MACM6
+task: G0A-T02
+machine: RTX5070
 status: RUNNING
+scheduling: DEFERRED
 
 ## Action
-Validate the CPU Coulomb-gauge Hopf invariant, compact unit-map sign, closure and smooth deformations; record MACM6 only.
+Preserve the completed MACM6 references and review the waiting handoff. RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.
 
 ## Read
 
-- AGENTS.md#g0b
+- AGENTS.md#g0a
 - MACHINE_HANDOFF.md
-- reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md
-- docs/G0B_HOPF.md
-- docs/G0B_SPECTRAL.md
-- config/benchmark/g0b_t02_macm6.json.yaml
+- reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
+- reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md
+- docs/MATH_CORE.md
+- docs/RTX5070_CORE_HANDOFF.md
+- config/benchmark/g0a_t02_rtx5070.json.yaml
 - config/benchmark/publication.source.yaml
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/run.py --config config/benchmark/g0b_t02_macm6.json.yaml
+.venv/bin/python scripts/ctl.py status
 ```

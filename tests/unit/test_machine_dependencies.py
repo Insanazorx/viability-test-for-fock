@@ -1,9 +1,12 @@
 """CPU preparation cannot falsely complete a deferred GPU prerequisite."""
 import copy
 import unittest
+import tempfile
+from pathlib import Path
 
 from test_control import state, task
-from ctl import ensure_machine_ready, next_task, validate
+from ctl import ensure_machine_ready, next_task, validate,render
+from common import ROOT
 
 
 class MachineDependencyTests(unittest.TestCase):
@@ -61,6 +64,22 @@ class MachineDependencyTests(unittest.TestCase):
             ensure_machine_ready(value,'G0A-T02','RTX5070')
         value['machine_scheduling']['RTX5070']['deferred']=False
         self.assertEqual(next_task(value)[0],'G0A-T02')
+
+    def test_deferred_only_registry_preserves_one_waiting_action(self):
+        value=self.fixture();value['tasks']['G0B-T01']['enabled']=False
+        value['machine_scheduling']={'RTX5070':{'deferred':True,'reason':'User requested later'}}
+        self.assertIsNone(next_task(value))
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);render(value,root)
+            text=(root/'NEXT.md').read_text()
+            self.assertEqual(text.count('task: '),1)
+            self.assertIn('scheduling: DEFERRED',text)
+            self.assertIn('scripts/ctl.py status',text)
+
+    def test_cli_sources_are_syntactically_valid(self):
+        for path in (ROOT/'scripts').glob('*.py'):
+            with self.subTest(path=path.name):
+                compile(path.read_text(),str(path),'exec')
 
 
 if __name__=='__main__':

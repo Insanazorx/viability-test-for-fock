@@ -100,6 +100,16 @@ def pending_machine(task: dict) -> str | None:
     return next((m for m in task['machine_order'] if not task['machine_done'][m]),None)
 
 
+def deferred_task(state: dict) -> tuple[str,dict] | None:
+    """Expose the first ready deferred responsibility without scheduling it."""
+    for key,task in state['tasks'].items():
+        machine=pending_machine(task)
+        if (task['status'] in {'TODO','CLAIMED','RUNNING'} and ready(state,task)
+                and state.get('machine_scheduling',{}).get(machine,{}).get('deferred')):
+            return key,task
+    return None
+
+
 def next_task(state: dict) -> tuple[str, dict] | None:
     focused = state.get("active_task")
     if focused:
@@ -127,8 +137,10 @@ def flag(task: dict, machine: str) -> str:
 def render(state: dict, root: Path = ROOT) -> None:
     validate(state)
     current = next_task(state)
+    waiting=deferred_task(state) if current is None else None
+    action_label=current[0] if current else (f"none — {pending_machine(waiting[1])} deferred; next is {waiting[0]}" if waiting else 'none — review the task registry')
     summary = ["# STATUS", "", "Generated from state/state.yaml; do not edit by hand.", "",
-               f"Active action: {current[0] if current else 'none — review the task registry'}",
+               f"Active action: {action_label}",
                f"Cloud: {'PAUSED' if state['cloud']['paused'] else 'APPROVED'}; "
                f"budget USD {state['cloud']['max_usd_per_run']} per run.", "",
                "Only G0 tasks are registered initially. Later gates remain untested.", "",
@@ -165,6 +177,14 @@ def render(state: dict, root: Path = ROOT) -> None:
         lines.extend(["", "## One command", "", "```sh", task.get("machine_commands", {}).get(machine, task["command"]), "```", ""])
         if task["status"] in {"FAIL", "BLOCKED"}:
             lines.extend(["Resolve the recorded outcome before launching any new run.", ""])
+    elif waiting:
+        key,task=waiting;machine=pending_machine(task)
+        lines.extend([f'task: {key}',f'machine: {machine}',f"status: {task['status']}",'scheduling: DEFERRED','',
+                      '## Action','Preserve the completed MACM6 references and review the waiting handoff. '
+                      'RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.','',
+                      '## Read','',f'- AGENTS.md#{key[:3].lower()}','- MACHINE_HANDOFF.md'])
+        lines.extend(f'- {path}' for path in task['read'])
+        lines.extend(['','## One command','','```sh','.venv/bin/python scripts/ctl.py status','```',''])
     else:
         lines.extend(["Review the task registry and add the next contract-defined task.", ""])
     atomic_write(root / "NEXT.md", "\n".join(lines))
