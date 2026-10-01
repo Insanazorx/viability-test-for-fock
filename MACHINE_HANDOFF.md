@@ -1,29 +1,32 @@
 # MACHINE HANDOFF
 
 from: MACM6
-to: MACM6
-task: G0A-T03
-status: RUNNING
+to: RTX5070
+task: G0A-T02
+status: PASS (MACM6 foundation); RUNNING (CUDA mirror pending)
 read:
   - AGENTS.md#g0a
-  - reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md
-  - docs/RUNBOOK.md
-  - config/benchmark/g0a_t03_macm6.json.yaml
-  - config/frozen_registry.yaml
-  - requirements/macm6.freeze.txt
+  - reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
+  - reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md
+  - docs/MATH_CORE.md
+  - docs/RTX5070_CORE_HANDOFF.md
+  - config/benchmark/g0a_t02_rtx5070.json.yaml
+  - config/benchmark/publication.source.yaml
 latest_checkpoint: N/A
 checkpoint_sha256: N/A
 do_next:
-  - commit the MACM6 infrastructure and execute the identified acceptance command in NEXT.md
-  - create the mandatory G0A-T03 report and record only MACM6 completion
-  - return NEXT to the pending G0A-T02 CUDA responsibility on RTX5070
+  - open/copy this committed checkout on RTX5070 with the exact supplied source PDF
+  - prepare Python 3.12 and CUDA-enabled PyTorch for the measured driver/hardware
+  - execute the single frozen CUDA mirror command in NEXT.md
+  - create report and record only RTX5070 completion
 do_not_repeat:
-  - MACM6 source/math reference is committed and its 31 tests passed
-  - float64 invariants: 1536 samples; SO(4): 96 rotations; gradients: 3 step sizes
+  - G0A-T01 MACM6 repository foundation passed
+  - G0A-T02 MACM6 source/math reference passed; 1536 invariant samples and 96 rotations
+  - G0A-T03 MACM6 infrastructure passed; 49 tests, 25 frozen packages, 4 frozen configs
 known_issue:
-  - first G0A-T03 run failed on a SciPy 1.15.3 native import; recovery pins 1.16.3 and preserves failed evidence
-  - CUDA implementation is present but unexecuted; RTX5070 verification is required
-  - G0A-T03 is the single active action at the user's request; CUDA completion is not waived
-  - no unit Hopf charge, lattice solution, or Hessian is yet reproduced
-  - source PDF is ignored by Git; required SHA256 is in source manifest
-  - no Git remote configured; CLOUD paused
+  - RTX5070 is not connected to this session; CUDA remains unexecuted
+  - source PDF is ignored by Git; copy it with SHA256 from the source manifest
+  - the first G0A-T03 attempt failed on SciPy 1.15.3; its evidence is preserved and 1.16.3 passed
+  - a non-fatal Fontconfig cache warning occurred; the PNG smoke check passed
+  - no unit Hopf charge, lattice solution, or Hessian is reproduced yet
+  - no Git remote configured; remote runners disabled; CLOUD paused and budget zero

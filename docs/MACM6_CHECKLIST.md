@@ -4,7 +4,7 @@ Generated from state/state.yaml.
 
 - [X] MACM6 — G0A-T01: Repository/control-plane foundation (PASS)
 - [X] MACM6 — G0A-T02: Mathematical core API and invariants (RUNNING)
-- [ ] MACM6 — G0A-T03: Full numerical run/config and environment discipline (RUNNING)
+- [X] MACM6 — G0A-T03: Full numerical run/config and environment discipline (PASS)
 - [ ] MACM6 — G0B-T01: Reduced energy and spectral derivatives (TODO)
 - [ ] MACM6 — G0B-T02: Hopf invariant and sign convention (TODO)
 - [ ] MACM6 — G0B-T03: Published reduced stationary sequence (TODO)

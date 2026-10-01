@@ -1,0 +1,66 @@
+{
+  "run_id": "G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a",
+  "task": "G0A-T03",
+  "machine": "MACM6",
+  "git_commit": "9336699db6cf79b471f72cbeb7506a711003e0e3",
+  "uncommitted_diff": false,
+  "config_sha256": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6",
+  "config_path": "config/benchmark/g0a_t03_macm6.json.yaml",
+  "started_utc": "2026-10-01T17:43:23.986689+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "f460e10f6e182b0f391a7778f594018355c8bcc7d4d81e45c0d1c90281f8a034",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "requirements/macm6.freeze.txt": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323",
+    "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md": "ae611004b47b4a74644f15155c9541e7a5bed0e686282a7c7e4f1fd7558407ef",
+    "requirements/macm6.scipy-1.15.3.failed.freeze.txt": "f7154f9bc28f5c7b7b97027306a1a379b953dd5e3dda88e9eb03c97d21b84b2e",
+    "environment.json": "e4b271229fa5b07cf392ea84ee98f3bfc1b6f612fae9ec9961dcde19a5df3fad"
+  },
+  "precision": "N/A",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {},
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6",
+  "hardware": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpu_count": 12,
+    "ram_capacity_gb": 17.179869184,
+    "ram_capacity_note": null,
+    "role": "MACM6",
+    "hardware_model": "role label; exact model not attested"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": false,
+    "cross_device_bitwise_identity_required": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": {
+    "previous_failure_report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md",
+    "previous_environment_freeze": "requirements/macm6.scipy-1.15.3.failed.freeze.txt",
+    "cause": "SciPy 1.15.3 PROPACK binary rejected by macOS loader (__thread_bss nonzero zero-fill offset).",
+    "change": "Only SciPy upgraded from 1.15.3 to 1.16.3; compatible native imports verified. Full environment re-frozen.",
+    "decision": "Repeat infrastructure acceptance after resolving an implementation/package compatibility failure; no scientific gate or tolerance changed.",
+    "decided_utc": "2026-10-01T17:42:46.798002+00:00"
+  },
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}
