@@ -1,0 +1,27 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+!.env.example
+# Large numerical data stay outside Git; reports contain paths and SHA256.
+checkpoints/*
+!checkpoints/.gitkeep
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+# Keep run provenance and small logs, ignore temporary execution files.
+runs/**/tmp/
+runs/**/arrays/
+# Preserve the publication as an external, hashed input.
+/yayınlanan.pdf

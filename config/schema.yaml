@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fock viability run configuration v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task", "machine", "kind", "precision", "seeds", "grid", "box", "time_step", "optimizer", "integrator", "tolerances", "parameters"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task": {"type": "string", "pattern": "^G[0-6][A-G]-T[0-9]{2}$"},
+    "machine": {"enum": ["MACM6", "RTX5070", "CLOUD"]},
+    "kind": {"enum": ["control", "numerical"]},
+    "precision": {"enum": ["float32", "float64", "mixed", "N/A"]},
+    "seeds": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 0}},
+    "grid": {"type": ["array", "null"], "minItems": 3, "maxItems": 3, "items": {"type": "integer", "minimum": 2}},
+    "box": {"type": ["array", "null"], "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+    "time_step": {"type": ["number", "null"], "exclusiveMinimum": 0},
+    "optimizer": {"type": ["string", "null"]},
+    "integrator": {"type": ["string", "null"]},
+    "tolerances": {"type": "object"},
+    "parameters": {"type": "object"}
+  }
+}
