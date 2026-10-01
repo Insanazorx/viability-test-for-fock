@@ -1,0 +1,56 @@
+{
+  "run_id": "G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a",
+  "task": "G0A-T03",
+  "machine": "MACM6",
+  "git_commit": "cfdc4e288ccdf9b9cfb16016a69ef5cf60a61c8c",
+  "uncommitted_diff": false,
+  "config_sha256": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6",
+  "config_path": "config/benchmark/g0a_t03_macm6.json.yaml",
+  "started_utc": "2026-10-01T17:39:33.529300+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "f460e10f6e182b0f391a7778f594018355c8bcc7d4d81e45c0d1c90281f8a034",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "requirements/macm6.freeze.txt": "f7154f9bc28f5c7b7b97027306a1a379b953dd5e3dda88e9eb03c97d21b84b2e",
+    "environment.json": "e03d22ff4b58f88b7d20e341d5ecd7575cb5d68a80830e04d82d14c2d208a361"
+  },
+  "precision": "N/A",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {},
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6",
+  "hardware": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpu_count": 12,
+    "ram_capacity_gb": 17.179869184,
+    "ram_capacity_note": null,
+    "role": "MACM6",
+    "hardware_model": "role label; exact model not attested"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": false,
+    "cross_device_bitwise_identity_required": false
+  },
+  "integrity_schema_version": 1,
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}

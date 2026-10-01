@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-01T17:23:42.349100+00:00",
+  "updated_utc": "2026-10-01T17:42:46.798292+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -55,7 +55,7 @@
       "numpy_observed": "2.2.6",
       "core_environment_freeze": "requirements/macm6-core.freeze.txt",
       "full_environment_freeze": "requirements/macm6.freeze.txt",
-      "full_environment_sha256": "f7154f9bc28f5c7b7b97027306a1a379b953dd5e3dda88e9eb03c97d21b84b2e"
+      "full_environment_sha256": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323"
     },
     "RTX5070": {
       "verified": false
@@ -148,7 +148,23 @@
         "requirements/macm6.freeze.txt"
       ],
       "next_action": "Validate the frozen MACM6 CPU environment and identified run/config/seed discipline. Preserve the unfinished RTX5070 responsibility.",
-      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t03_macm6.json.yaml"
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t03_macm6.json.yaml",
+      "attempt_history": [
+        {
+          "status": "FAIL",
+          "machine": "MACM6",
+          "report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md",
+          "recorded_utc": "2026-10-01T17:41:04.890864+00:00"
+        }
+      ],
+      "recovery": {
+        "previous_failure_report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.scipy-1.15.3.failed.freeze.txt",
+        "cause": "SciPy 1.15.3 PROPACK binary rejected by macOS loader (__thread_bss nonzero zero-fill offset).",
+        "change": "Only SciPy upgraded from 1.15.3 to 1.16.3; compatible native imports verified. Full environment re-frozen.",
+        "decision": "Repeat infrastructure acceptance after resolving an implementation/package compatibility failure; no scientific gate or tolerance changed.",
+        "decided_utc": "2026-10-01T17:42:46.798002+00:00"
+      }
     },
     "G0B-T01": {
       "title": "Reduced energy and spectral derivatives",

@@ -107,6 +107,11 @@ def main() -> int:
             "next_action":"Return the single NEXT action to G0A-T02 on RTX5070: connect/open the matching checkout and execute the CUDA mirror with the exact supplied source PDF. Do not mark RTX5070 done without its own passing report.",
             "handoff":"MACHINE_HANDOFF.md, NEXT.md, docs/RUNBOOK.md, docs/RTX5070_CORE_HANDOFF.md, config/frozen_registry.yaml and config/benchmark/g0a_t02_rtx5070.json.yaml.",
         })
+        if metadata.get("recovery"):
+            values["changes"] += "\n\nExplicit recovery from the prior infrastructure failure:\n```json\n" + json.dumps(metadata["recovery"],indent=2) + "\n```"
+            values["anomalies"] += "\n- The initial SciPy 1.15.3 PROPACK import failed on this macOS. Its report/evidence and old freeze are preserved; the corrected freeze uses SciPy 1.16.3. The observed loader error matches [SciPy issue #25635](https://github.com/scipy/scipy/issues/25635). No physics operator or tolerance was changed."
+        if result["status"] != "PASS":
+            values["next_action"] = "Resolve the recorded infrastructure anomaly, preserve this report/run, record an explicit recovery decision, then repeat G0A-T03 on MACM6. Do not record the environment as validated or advance to RTX5070 until acceptance passes."
     report = ROOT / "reports/G0" / f"{metadata['task']}__{args.run_id}__REPORT.md"
     output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)
     if seal_hash:

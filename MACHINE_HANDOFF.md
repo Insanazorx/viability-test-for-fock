@@ -6,6 +6,7 @@ task: G0A-T03
 status: RUNNING
 read:
   - AGENTS.md#g0a
+  - reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md
   - docs/RUNBOOK.md
   - config/benchmark/g0a_t03_macm6.json.yaml
   - config/frozen_registry.yaml
@@ -20,6 +21,7 @@ do_not_repeat:
   - MACM6 source/math reference is committed and its 31 tests passed
   - float64 invariants: 1536 samples; SO(4): 96 rotations; gradients: 3 step sizes
 known_issue:
+  - first G0A-T03 run failed on a SciPy 1.15.3 native import; recovery pins 1.16.3 and preserves failed evidence
   - CUDA implementation is present but unexecuted; RTX5070 verification is required
   - G0A-T03 is the single active action at the user's request; CUDA completion is not waived
   - no unit Hopf charge, lattice solution, or Hessian is yet reproduced

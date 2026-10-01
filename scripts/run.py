@@ -68,6 +68,11 @@ def main() -> int:
         if config["task"] == "G0A-T03":
             check_environment_freeze(path)
         inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
+    recovery = task.get("recovery")
+    if recovery:
+        for name in ("previous_failure_report", "previous_environment_freeze"):
+            path = inside(ROOT, recovery[name])
+            inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     started = datetime.now(timezone.utc)
     start = time.perf_counter()
     git = git_info(ROOT)
@@ -92,6 +97,7 @@ def main() -> int:
                 "checkpoint_sha256": None, "hardware_role": config["machine"],
                 "hardware":observed_hardware,"seed_policy":seed_policy(config),
                 "integrity_schema_version":1,
+                "recovery":recovery,
                 "precision_policy":"explicit declared dtype; no MPS acceptance or implicit mixed precision"}
     freeze(run / "metadata.json", metadata)
     metrics = {}
