@@ -1,0 +1,30 @@
+{
+  "run_id": "G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754",
+  "task": "G0A-T01",
+  "machine": "MACM6",
+  "git_commit": "c1312185ffd62da3d0e77730f2e884b329ab2c70",
+  "uncommitted_diff": false,
+  "config_sha256": "3e5f375411f1ef9dadd3cc0be767e244548a5a957f1e8c93ca27f72fb32bdc78",
+  "config_path": "config/benchmark/g0a_t01.json.yaml",
+  "started_utc": "2026-10-01T04:21:08.582527+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "Not queried: MACM6 control validation; no CUDA execution",
+  "precision": "N/A",
+  "seeds": [
+    0
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {},
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6 control",
+  "hardware_model": "not measured; role name is not a hardware attestation"
+}
