@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-01T19:28:33.441562+00:00",
+  "updated_utc": "2026-10-01T19:33:42.326496+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -460,7 +460,23 @@
           }
         ]
       },
-      "machine_prerequisite_reason": "AGENTS.md #g4 permits an early parallel MACM6 theory track. User requested continued MACM6 work while deferring RTX5070. This analytic inventory needs the passed CPU foundations, not an executed CUDA mirror; every original prerequisite remains represented."
+      "machine_prerequisite_reason": "AGENTS.md #g4 permits an early parallel MACM6 theory track. User requested continued MACM6 work while deferring RTX5070. This analytic inventory needs the passed CPU foundations, not an executed CUDA mirror; every original prerequisite remains represented.",
+      "attempt_history": [
+        {
+          "status": "FAIL",
+          "machine": "MACM6",
+          "report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md",
+          "recorded_utc": "2026-10-01T19:33:42.261812+00:00"
+        }
+      ],
+      "recovery": {
+        "previous_failure_report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.freeze.txt",
+        "cause": "Two config-integrity unit tests failed because the temporary fixture created only config/benchmark, not the newly used config/gate4 directory.",
+        "change": "Create the parent directory for each frozen config before copying it in the temporary test fixture. Environment and mathematical operator code are unchanged.",
+        "decision": "Repeat the unchanged frozen acceptance config after the smallest implementation repair; 18 discipline tests now pass. No scientific gate or tolerance changed.",
+        "decided_utc": "2026-10-01T19:33:42.261812+00:00"
+      }
     },
     "G4A-T02": {
       "title": "Absent-operator and redundancy classification",

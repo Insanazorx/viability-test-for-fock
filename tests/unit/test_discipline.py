@@ -71,6 +71,7 @@ class DisciplineTests(unittest.TestCase):
         (root/"config/benchmark").mkdir(parents=True)
         shutil.copyfile(ROOT/"config/schema.yaml",root/"config/schema.yaml")
         for relative,_ in CONFIGS.values():
+            (root/relative).parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(ROOT/relative,root/relative)
         freeze_configs(root)
         return root

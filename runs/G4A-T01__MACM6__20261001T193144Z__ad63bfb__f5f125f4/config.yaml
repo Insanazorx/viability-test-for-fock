@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "task": "G4A-T01",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [0, 17, 104729],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {"so4_normalized": 5e-12, "chi_parity": 5e-14},
+  "parameters": {
+    "handler": "validate_operator_basis",
+    "minimum_tests": 90,
+    "allow_cloud": false,
+    "max_canonical_dimension": 4,
+    "quotient": "IBP only",
+    "samples_per_seed": 32,
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt"
+  }
+}
