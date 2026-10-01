@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "G0A-T01/MACM6": {
+      "path": "config/benchmark/g0a_t01.json.yaml",
+      "handler": "validate_repository",
+      "sha256": "3e5f375411f1ef9dadd3cc0be767e244548a5a957f1e8c93ca27f72fb32bdc78"
+    },
+    "G0A-T02/MACM6": {
+      "path": "config/benchmark/g0a_t02_macm6.json.yaml",
+      "handler": "validate_math_core",
+      "sha256": "1f458c06a45f066aad803f3aca6d3c548573c36f9557d4c60e2842026502fe7c"
+    },
+    "G0A-T02/RTX5070": {
+      "path": "config/benchmark/g0a_t02_rtx5070.json.yaml",
+      "handler": "validate_math_core_cuda",
+      "sha256": "af3d0bec7850c375e18547d6426fdcf986956956f33762585db3518cb8f42a16"
+    },
+    "G0A-T03/MACM6": {
+      "path": "config/benchmark/g0a_t03_macm6.json.yaml",
+      "handler": "validate_run_discipline",
+      "sha256": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6"
+    }
+  },
+  "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"
+}

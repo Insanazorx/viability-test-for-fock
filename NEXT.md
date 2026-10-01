@@ -2,25 +2,24 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G0A-T02
-machine: RTX5070
+task: G0A-T03
+machine: MACM6
 status: RUNNING
 
 ## Action
-Follow docs/RTX5070_CORE_HANDOFF.md, prepare the real CUDA environment and run the frozen float64 mirror comparison. Record only RTX5070 completion; no cloud or lattice solve.
+Validate the frozen MACM6 CPU environment and identified run/config/seed discipline. Preserve the unfinished RTX5070 responsibility.
 
 ## Read
 
 - AGENTS.md#g0a
 - MACHINE_HANDOFF.md
-- reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
-- docs/MATH_CORE.md
-- docs/RTX5070_CORE_HANDOFF.md
-- config/benchmark/g0a_t02_rtx5070.json.yaml
-- config/benchmark/publication.source.yaml
+- docs/RUNBOOK.md
+- config/benchmark/g0a_t03_macm6.json.yaml
+- config/frozen_registry.yaml
+- requirements/macm6.freeze.txt
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/run.py --config config/benchmark/g0a_t02_rtx5070.json.yaml
+.venv/bin/python scripts/run.py --config config/benchmark/g0a_t03_macm6.json.yaml
 ```

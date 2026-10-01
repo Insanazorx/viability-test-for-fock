@@ -10,13 +10,13 @@
     "machine": {"enum": ["MACM6", "RTX5070", "CLOUD"]},
     "kind": {"enum": ["control", "numerical"]},
     "precision": {"enum": ["float32", "float64", "mixed", "N/A"]},
-    "seeds": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 0}},
+    "seeds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer", "minimum": 0, "maximum": 4294967295}},
     "grid": {"type": ["array", "null"], "minItems": 3, "maxItems": 3, "items": {"type": "integer", "minimum": 2}},
     "box": {"type": ["array", "null"], "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
     "time_step": {"type": ["number", "null"], "exclusiveMinimum": 0},
     "optimizer": {"type": ["string", "null"]},
     "integrator": {"type": ["string", "null"]},
-    "tolerances": {"type": "object"},
+    "tolerances": {"type": "object", "additionalProperties": {"type": "number", "exclusiveMinimum": 0}},
     "parameters": {"type": "object"}
   }
 }

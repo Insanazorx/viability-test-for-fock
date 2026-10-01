@@ -10,14 +10,24 @@
 
 Use Python 3.12; `.venv` is machine-specific and ignored by Git. Recreate it
 with `python3.12 -m venv .venv` on another machine. The current MACM6 environment
-uses the bundled Python 3.12.14 runtime. NumPy 2.2.6 is installed for G0A-T02;
-the NumPy-only environment is frozen in `requirements/macm6-core.freeze.txt`.
-The full CPU dependency environment remains G0A-T03.
+uses Python 3.12.14. The full CPU environment is frozen in
+`requirements/macm6.freeze.txt`; the earlier NumPy-only math reference remains
+in `requirements/macm6-core.freeze.txt`. Install the full freeze on another
+MACM6 checkout; CUDA/other operating systems require their own environment.
 
-State, schema and setup config are JSON-formatted YAML 1.2. This documented
-subset allows the control plane to run without third-party libraries.
-Preserve this format when editing them. The numerical config parser may gain
-full safe YAML support under G0A-T03; that task remains uncompleted here.
+State/schema files are JSON-formatted YAML 1.2. Run configs also support safe
+YAML, with duplicate keys, non-finite values and unsafe constructors rejected.
+Schema validation uses Draft 2020-12 and a predeclared handler registry. Any
+byte change in a registered config, including whitespace, requires an explicit
+review/freeze and commit before acceptance runs:
+
+```sh
+.venv/bin/python scripts/configuration.py freeze
+.venv/bin/python scripts/configuration.py check
+```
+
+Freeze does not launch a job or change a machine completion flag. The config
+hash registry is tracked; historical run snapshots/reports are preserved.
 
 ## Task lifecycle
 
@@ -39,6 +49,16 @@ require an explicit diagnostic/recovery action; no automatic scan expansion.
 STATUS.md or device checklist files by hand. N/A means a machine is not required.
 Optional G0D tasks are disabled until G0B passes and remote setup is requested.
 
+When a device is unavailable, a dependency-ready independent task can become
+the single active NEXT action with an explicit recorded reason:
+
+```sh
+.venv/bin/python scripts/ctl.py focus G0A-T03 --machine MACM6 --reason 'RTX5070 unavailable; user requests independent MACM6 infrastructure'
+```
+
+This changes only action selection, never a prerequisite outcome or another
+machine's flag. Completing that task returns NEXT to the waiting device task.
+
 ## Setup validation and report
 
 ```sh
@@ -46,13 +66,27 @@ Optional G0D tasks are disabled until G0B passes and remote setup is requested.
 .venv/bin/python scripts/report.py --run-id EXACT_RUN_ID
 ```
 
-Installed handlers are the G0A-T01 infrastructure validator and G0A-T02 MACM6
-math/CUDA mirror checks, each selected by an explicit config registry. They do
-not implement a lattice physics solver. Numerical validation checks the source
-hash and snapshots all resolved installed package versions. Metadata/config
-snapshots are created exclusively and made read-only; a reused run ID is rejected.
-General numerical config validation, precision/seed policy, detailed profiling
-and the complete multi-device dependency freeze still belong to G0A-T03.
+Installed handlers cover G0A-T01, G0A-T02 MACM6/CUDA and G0A-T03 discipline
+checks. They do not implement a lattice physics solver. Runs capture source/
+config hashes, full installed versions, dirty Git state, UTC identity, explicit
+seeds/precision and measured hardware. Numerical handlers use their declared
+per-seed generators; Python/NumPy global seeds are also initialized explicitly.
+CUDA acceptance uses explicit FP64, seeded Torch, deterministic algorithms and
+disabled TF32, with actual runtime/device/driver information where available.
+These CUDA policies are implemented but remain unverified until RTX5070 runs.
+
+Run snapshots are exclusive/read-only; an integrity manifest hashes config,
+metadata, environment, result and validation log. The report binds that seal's
+hash and completion verifies it. Same-second identity collisions reject an
+overwrite. Parent/registered-child RAM is sampled at 10 ms; this is an observed
+peak, not a guarantee that brief transients are captured. Windows portability
+has been implemented but not executed. No host-wide process enumeration occurs.
+
+A read-only config/device preflight creates no run or result:
+
+```sh
+.venv/bin/python scripts/run.py --check --config config/benchmark/g0a_t02_rtx5070.json.yaml
+```
 
 After any completed or failed run: create its report, record the machine
 completion with `ctl.py`, update the short handoff, and commit code/config,

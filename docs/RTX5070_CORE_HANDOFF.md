@@ -10,7 +10,8 @@ Use the committed mathematical core on Python 3.12. Copy the external ignored
 `09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312`.
 The launcher rejects any different source identity.
 
-Create this machine's `.venv`, install NumPy 2.2.6, then select a CUDA-enabled
+Create this machine's `.venv`, install the direct CPU/tool dependencies from
+`requirements/macm6.txt` and select a CUDA-enabled
 PyTorch build compatible with the actual RTX5070 driver/device. Do not guess
 or substitute MPS/CPU. Record the selected build and driver in its report;
 the launcher also saves installed package versions, actual CUDA runtime/device,
@@ -36,5 +37,6 @@ After the run, generate exactly one report and record only RTX5070 completion:
 ```
 
 Verify PASS/FAIL before committing the report and the generated state files.
-A negative/uncertain result does not become PASS. Return to MACM6 for G0A-T03
-only after both required machine responsibilities pass. Cloud stays paused.
+A negative/uncertain result does not become PASS. G0A-T03 is independent of
+the CUDA mirror and can pass on MACM6 while this device is unavailable. Follow
+NEXT.md after both G0A-T02 responsibilities pass. Cloud stays paused.

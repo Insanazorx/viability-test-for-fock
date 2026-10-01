@@ -17,6 +17,8 @@ def validate(state: dict) -> None:
     if state.get("schema_version") != 1 or not state.get("tasks"):
         raise ValueError("Missing state schema/tasks")
     tasks = state["tasks"]
+    if state.get("active_task") is not None and state["active_task"] not in tasks:
+        raise ValueError("Unknown focused task")
     for key, task in tasks.items():
         if not re.fullmatch(r"G[0-6][A-G]-T\d{2}", key):
             raise ValueError(f"Invalid task ID: {key}")
@@ -67,6 +69,11 @@ def ready(state: dict, task: dict) -> bool:
 
 
 def next_task(state: dict) -> tuple[str, dict] | None:
+    focused = state.get("active_task")
+    if focused:
+        task = state["tasks"][focused]
+        if task["enabled"] and task["status"] not in {"PASS", "ARCHIVED"}:
+            return focused, task
     for key, task in state["tasks"].items():
         if task["enabled"] and task["status"] in {"CLAIMED", "RUNNING", "FAIL", "BLOCKED"}:
             return key, task
@@ -95,9 +102,10 @@ def render(state: dict, root: Path = ROOT) -> None:
     for key, task in state["tasks"].items():
         summary.append(f"| {key} | {task['status']}{' (disabled)' if not task['enabled'] else ''} | "
                        + " | ".join(flag(task, m) for m in MACHINES) + " |")
+    cpu_freeze = state["environments"]["MACM6"].get("numerical_dependencies_frozen", False) if state.get("environments") else False
     summary.extend(["", "## Input/environment readiness", "",
                     "- Required publication: yayınlanan.pdf; availability is checked before G0A-T02.",
-                    "- Python target: 3.12. Numerical dependency freeze: pending G0A-T03.",
+                    "- Python target: 3.12. MACM6 dependency freeze: " + ("complete." if cpu_freeze else "pending G0A-T03."),
                     "- Remote runner setup: disabled; no Git remote configured by bootstrap.", ""])
     atomic_write(root / "STATUS.md", "\n".join(summary))
     for machine in MACHINES:
@@ -147,6 +155,10 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
     run_id = fields["run_ids"]
     run = inside(root, f"runs/{run_id}", "runs")
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
+    if metadata.get("integrity_schema_version") or fields.get("evidence_sha256") or (run / "integrity.json").exists():
+        from provenance import verify_run
+        if fields.get("evidence_sha256") != verify_run(run):
+            raise ValueError("Report does not match sealed run evidence")
     if (metadata["task"], metadata["machine"], result["status"]) != (key, machine, fields["status"]):
         raise ValueError("Run evidence does not match report")
     if metadata["config_sha256"] != fields["config_sha256"] or sha256(run / "config.yaml") != fields["config_sha256"]:
@@ -161,6 +173,20 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
         task["status"] = "PASS"
     else:
         task["status"] = "RUNNING"
+    if task["status"] == "PASS" and state.get("active_task") == key:
+        state["active_task"] = None
+
+
+def focus(state: dict, key: str, machine: str, reason: str) -> None:
+    """Select one independent next action without completing a waiting device."""
+    ensure_machine_ready(state, key, machine)
+    if state["tasks"][key]["status"] in {"PASS", "FAIL", "BLOCKED", "ARCHIVED"}:
+        raise ValueError("Focused task requires an explicit recovery decision")
+    if not reason.strip():
+        raise ValueError("An action-selection reason is required")
+    state["active_task"] = key
+    state["action_selection"] = {"task": key, "machine": machine, "reason": reason,
+                                 "selected_utc": datetime.now(timezone.utc).isoformat()}
 
 
 def main() -> int:
@@ -170,6 +196,10 @@ def main() -> int:
         commands.add_parser(name)
     queue = commands.add_parser("queue")
     queue.add_argument("--machine", choices=MACHINES, required=True)
+    selection = commands.add_parser("focus")
+    selection.add_argument("task")
+    selection.add_argument("--machine", choices=MACHINES, required=True)
+    selection.add_argument("--reason", required=True)
     for name in ("start", "machine-done"):
         command = commands.add_parser(name)
         command.add_argument("task")
@@ -179,7 +209,7 @@ def main() -> int:
     args = parser.parse_args()
     state = read_data(ROOT / "state/state.yaml")
     validate(state)
-    if args.command in {"start", "machine-done", "pause-cloud", "refresh"}:
+    if args.command in {"start", "machine-done", "pause-cloud", "refresh", "focus"}:
         if args.command == "start":
             task = ensure_machine_ready(state, args.task, args.machine)
             if task["status"] not in {"TODO", "CLAIMED", "RUNNING"}:
@@ -196,6 +226,8 @@ def main() -> int:
             machine_done(state, args.task, args.machine, args.report)
         elif args.command == "pause-cloud":
             state["cloud"]["paused"] = True
+        elif args.command == "focus":
+            focus(state, args.task, args.machine, args.reason)
         state["updated_utc"] = datetime.now(timezone.utc).isoformat()
         validate(state)
         write_data(ROOT / "state/state.yaml", state)

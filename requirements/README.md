@@ -1,12 +1,18 @@
 # Environment policy
 
-The control plane uses Python 3.12 and the standard library only. The initial
-MACM6 environment is `.venv`; it does not yet contain numerical dependencies.
+MACM6 uses Python 3.12 in its ignored `.venv`. JSON state/status commands use
+the standard library; the acceptance launcher additionally uses the installed
+config, memory and numerical dependencies below.
 
-`macm6.txt` pins the direct CPU dependencies. Before a numerical run, G0A-T03
-must install them in a dedicated environment, capture all resolved versions
-in a platform-specific freeze file, and attach that file's SHA256 to the report.
-Do not claim a fully resolved lock from this direct-dependency list.
+`macm6.txt` pins direct CPU dependencies. G0A-T03 resolves them in `.venv` and
+freezes all distributions (including transitive dependencies and pip) in
+`macm6.freeze.txt`, with its SHA256 in the report. That full freeze targets
+MACM6 macOS arm64 on Python 3.12. `macm6-core.freeze.txt` preserves the earlier
+NumPy-only math-core environment and must not be overwritten.
+
+The control commands that only read JSON state remain standard-library based.
+Full safe YAML, schema validation and memory profiling require PyYAML,
+jsonschema and psutil; install the full freeze before acceptance runs.
 
 RTX5070's CUDA/PyTorch build will be selected and frozen after checking its
 actual driver and hardware. MPS is not an acceptance reference. No CUDA build,

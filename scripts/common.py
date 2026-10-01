@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -23,11 +24,54 @@ REPORT_SECTIONS = (
 )
 
 
-def read_data(path: Path) -> dict:
-    value = json.loads(path.read_text(encoding="utf-8"))
+def decode_data(raw: bytes | str) -> dict:
+    """JSON or safe YAML, rejecting duplicate keys and non-finite values."""
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"Duplicate key: {key}")
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError(f"Non-finite value: {value}")
+
+    try:
+        value = json.loads(raw, object_pairs_hook=unique_pairs, parse_constant=reject_constant)
+    except json.JSONDecodeError:
+        import yaml
+
+        class UniqueSafeLoader(yaml.SafeLoader):
+            pass
+
+        def mapping(loader, node):
+            return unique_pairs((loader.construct_object(key, deep=True),
+                                 loader.construct_object(item, deep=True)) for key, item in node.value)
+
+        UniqueSafeLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, mapping)
+        try:
+            value = yaml.load(raw, Loader=UniqueSafeLoader)
+        except yaml.YAMLError as error:
+            raise ValueError(f"Invalid safe YAML: {error}") from error
+    def finite(item, seen):
+        if isinstance(item, float) and not math.isfinite(item):
+            raise ValueError("Non-finite value")
+        if isinstance(item, (dict, list)):
+            if id(item) in seen:
+                raise ValueError("Cyclic YAML alias")
+            seen.add(id(item))
+            for child in (item.values() if isinstance(item, dict) else item):
+                finite(child, seen)
+            seen.remove(id(item))
+    finite(value, set())
     if not isinstance(value, dict):
-        raise ValueError(f"Expected an object: {path}")
+        raise ValueError("Expected an object")
     return value
+
+
+def read_data(path: Path) -> dict:
+    return decode_data(path.read_bytes())
 
 
 def atomic_write(path: Path, text: str) -> None:
@@ -44,7 +88,7 @@ def atomic_write(path: Path, text: str) -> None:
 
 
 def write_data(path: Path, value: dict) -> None:
-    atomic_write(path, json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+    atomic_write(path, json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
 
 
 def sha256(path: Path) -> str:

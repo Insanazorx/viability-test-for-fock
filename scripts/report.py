@@ -6,6 +6,7 @@ import json
 import sys
 
 from common import ROOT, inside, read_data, sha256
+from provenance import verify_run
 
 
 def main() -> int:
@@ -16,15 +17,16 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in {"G0A-T01", "G0A-T02"}:
+    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03"}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
     if result["status"] not in {"PASS", "FAIL", "BLOCKED"}:
         raise ValueError("Unsupported result status")
     metrics = result["metrics"]
+    seal_hash = verify_run(run) if metadata.get("integrity_schema_version") or (run/"integrity.json").exists() else None
     artifacts = []
-    for name in ("config.yaml", "metadata.json", "result.json", "validation.log", "environment.json"):
+    for name in ("config.yaml", "metadata.json", "result.json", "validation.log", "environment.json", "integrity.json"):
         path = run / name
         if path.is_file():
             artifacts.append(f"- `{path.relative_to(ROOT).as_posix()}` — SHA256 `{sha256(path)}`")
@@ -89,9 +91,28 @@ def main() -> int:
             "next_action": followup,
             "handoff": "NEXT.md, MACHINE_HANDOFF.md, docs/MATH_CORE.md, docs/RTX5070_CORE_HANDOFF.md, config/benchmark/publication.source.yaml, and the exact machine-specific G0A-T02 config.",
         })
+    if metadata["task"] == "G0A-T03":
+        values.update({
+            "objective":"Complete G0A-T03 on MACM6: typed config loading, exact frozen config hashes, immutable identified run evidence, environment versions and seed discipline.",
+            "inputs":"AGENTS.md G0A-T03 and reproducibility §§4-7, user instruction to finish MACM6 infrastructure first. G0A-T01 is the passed prerequisite. G0A-T02 CUDA verification remains pending and is not waived.\n\n"
+                     +"\n".join(f"- `{path}` — SHA256 `{digest}`" for path,digest in metadata['input_sha256'].items()),
+            "method":"Safe YAML/JSON parsing rejects duplicate/non-finite values; Draft 2020-12 schema and a predeclared handler registry validate configs. Exact byte hashes are frozen before launch. Runs use UTC/commit/config-hash identities, exclusively created read-only snapshots, complete installed package capture and an integrity manifest. Python/NumPy seeds are explicit; CUDA policy is implemented but unexecuted on MACM6. Small SciPy ODE, HDF5 float64 roundtrip, Matplotlib Agg rendering and pip dependency checks validate the CPU environment. RAM is sampled from the parent and explicitly registered children. No model-physics calculation or remote execution is performed.",
+            "tolerances":"All workflow checks must be true; every test must pass; every config/environment/artifact hash must match. Repeated same-seed fingerprints must match exactly; distinct declared seeds must differ. The elementary CPU-library ODE smoke error must be <1e-8; HDF5 values must round-trip exactly; PNG rendering/pip check must succeed. GPU completion flags must remain unchanged. Numeric model-physics tolerances are not modified.",
+            "convergence":"Exact bookkeeping checks and deterministic seed repetitions, not grid/volume convergence. RAM is an observed sampled peak (10 ms cadence), not a guaranteed instantaneous aggregate maximum. Cross-device/Windows execution and CUDA reproducibility await their actual machines.",
+            "evaluation":f"{result['status']} for the MACM6 G0A-T03 infrastructure responsibility. The CPU environment, config/run discipline and regression checks are evaluated in Primary metrics. This does not complete G0A-T02 or any G0B physics gate.",
+            "anomalies":f"- Dirty Git tree at run start: {metadata['uncommitted_diff']}.\n- RTX5070 has no connected execution path from this session; CUDA remains unverified.\n- G0A-T03 was selected independently with a recorded reason and completed G0A-T01 prerequisite, at the user's request.\n- CLOUD remains paused and remote runners remain disabled.\n- Full MACM6 environment is frozen; PyTorch/CUDA build selection is still machine-specific.\n- Development checks exposed recursive-YAML exception handling and restricted host-process enumeration; both were corrected before the identified acceptance run. Profiling now queries only the current process and registered child PIDs.\n"+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
+            "artifacts":"\n".join(artifacts)+"\nNo physics checkpoint or large array was produced. Temporary integrity/seed fixtures are deleted after validation.",
+            "reproduction":f"```sh\npython3.12 -m venv .venv\n.venv/bin/python -m pip install -r requirements/macm6.freeze.txt\n.venv/bin/python scripts/configuration.py check\n.venv/bin/python scripts/run.py --config {metadata['config_path']}\n```\nUse an isolated checkout of `{metadata['git_commit']}` where this task is RUNNING. The environment lock targets MACM6 macOS arm64; other machines require their own resolved environment. Completed responsibilities are not silently reopened.",
+            "changes":"Completes the workflow foundation left pending by the math-core report. Adds safe/typed config validation, explicit frozen hashes, complete MACM6 package freeze, integrity checks, portable RAM measurement and single-action focus for independent work while a device is unavailable. Earlier physics definitions/acceptance tolerances and reports remain unchanged.",
+            "next_action":"Return the single NEXT action to G0A-T02 on RTX5070: connect/open the matching checkout and execute the CUDA mirror with the exact supplied source PDF. Do not mark RTX5070 done without its own passing report.",
+            "handoff":"MACHINE_HANDOFF.md, NEXT.md, docs/RUNBOOK.md, docs/RTX5070_CORE_HANDOFF.md, config/frozen_registry.yaml and config/benchmark/g0a_t02_rtx5070.json.yaml.",
+        })
     report = ROOT / "reports/G0" / f"{metadata['task']}__{args.run_id}__REPORT.md"
+    output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)
+    if seal_hash:
+        output=output.replace(f"precision: {metadata['precision']}\n",f"precision: {metadata['precision']}\nevidence_sha256: {seal_hash}\n",1)
     with report.open("x", encoding="utf-8") as stream:
-        stream.write((ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values))
+        stream.write(output)
     print(report.relative_to(ROOT).as_posix())
     return 0
 

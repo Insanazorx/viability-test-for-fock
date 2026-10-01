@@ -6,3 +6,5 @@ matplotlib==3.10.3
 h5py==3.13.0
 PyYAML==6.0.2
 pytest==8.3.5
+jsonschema==4.23.0
+psutil==6.1.1
