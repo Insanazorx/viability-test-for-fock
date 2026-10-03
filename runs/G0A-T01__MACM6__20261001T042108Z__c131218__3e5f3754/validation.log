@@ -1,0 +1,23 @@
+test_cannot_pass_missing_machine (test_control.ControlTests.test_cannot_pass_missing_machine) ... ok
+test_cannot_skip_dependencies (test_control.ControlTests.test_cannot_skip_dependencies) ... ok
+test_cannot_skip_machine_order (test_control.ControlTests.test_cannot_skip_machine_order) ... ok
+test_canonical_state_is_valid (test_control.ControlTests.test_canonical_state_is_valid) ... ok
+test_changed_config_cannot_mark_done (test_control.ControlTests.test_changed_config_cannot_mark_done) ... ok
+test_cloud_requires_approval_and_budget (test_control.ControlTests.test_cloud_requires_approval_and_budget) ... ok
+test_dependency_cycles_rejected (test_control.ControlTests.test_dependency_cycles_rejected) ... ok
+test_disabled_tasks_not_selected (test_control.ControlTests.test_disabled_tasks_not_selected) ... ok
+test_external_and_symlink_paths_rejected (test_control.ControlTests.test_external_and_symlink_paths_rejected) ... ok
+test_failure_evidence_cannot_be_declared_pass (test_control.ControlTests.test_failure_evidence_cannot_be_declared_pass) ... ok
+test_failure_precedes_new_work (test_control.ControlTests.test_failure_precedes_new_work) ... ok
+test_generated_views_show_one_action_and_na (test_control.ControlTests.test_generated_views_show_one_action_and_na) ... ok
+test_git_dirty_provenance (test_control.ControlTests.test_git_dirty_provenance) ... ok
+test_machine_done_only_changes_its_flag_and_advances_next (test_control.ControlTests.test_machine_done_only_changes_its_flag_and_advances_next) ... ok
+test_metadata_snapshot_cannot_be_overwritten (test_control.ControlTests.test_metadata_snapshot_cannot_be_overwritten) ... ok
+test_missing_report_does_not_change_state (test_control.ControlTests.test_missing_report_does_not_change_state) ... ok
+test_na_is_never_completed (test_control.ControlTests.test_na_is_never_completed) ... ok
+test_wrong_task_and_empty_report_rejected (test_control.ControlTests.test_wrong_task_and_empty_report_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.067s
+
+OK

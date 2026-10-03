@@ -1,0 +1,22 @@
+{
+  "run_id": "G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754",
+  "status": "PASS",
+  "finished_utc": "2026-10-01T04:21:08.715405+00:00",
+  "wall_time_seconds": 0.13282216700008576,
+  "peak_ram_gb": 0.032669696,
+  "peak_ram_method": "maximum process RSS (parent or child), not concurrent aggregate RAM",
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 18,
+    "minimum_tests": 18,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": false
+  },
+  "anomaly": null
+}
