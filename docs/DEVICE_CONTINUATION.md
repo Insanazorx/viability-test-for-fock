@@ -1,7 +1,14 @@
 # Cihaz değiştirerek aynı proje noktasından devam
 
-Gate 0'ın kayıtlı MACM6 referans/hazırlık işleri tamamlandı. GPU çıktısı olmadan
-ek olarak kolektif modların analitik kataloğu, küçük örneklerde özdeğer çözücüsü
+Gate 0'ın kayıtlı MACM6 referans/hazırlık işleri tamamlandı. Gate 0'ın genel
+hedefinde yer alan iki yayın benchmark'ının tamamlanmış kaydı henüz yok:
+makalenin bölüm 9'undaki homojen tetikleme ODE sistemi ve bölüm 11.4'ündeki
+indirgenmiş pertürbasyon/büyüme sistemi. Bunlar yayınlanan örnek parametrelerle
+RTX5070 sonucu beklemeden MACM6'da yeniden üretilebilir. Henüz ayrı görev/ayar/
+rapor olarak kaydedilmediler. Kapalı üretim kozmolojisi veya tam Boltzmann kabulü
+yerine geçmezler. Ayrıntı: `docs/G0_MACM6_REMAINING.md`.
+
+GPU çıktısı olmadan ek olarak kolektif modların analitik kataloğu, küçük örneklerde özdeğer çözücüsü
 doğrulaması ve üretim hesaplarını kaydedip sürdürme desteği hazırlanabilir.
 Bu ek işler henüz yapılmadı; özgün durağan dizi/fiziksel spektrum gate'lerini
 kapatmaz. RTX5070 için acil bir çalıştırma zorunluluğu yok. Gate 0 kapanışı için

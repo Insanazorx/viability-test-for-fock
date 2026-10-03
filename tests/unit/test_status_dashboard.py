@@ -77,6 +77,23 @@ class StatusDashboardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Registered task omitted"):
             validate_roadmap(value)
 
+    def test_g0_general_benchmarks_prevent_premature_main_gate_pass(self):
+        value = copy.deepcopy(self.state)
+        for key, task in value['tasks'].items():
+            if key.startswith(('G0A', 'G0B', 'G0C')):
+                task['status'] = 'PASS'
+                for machine in task['machine_order']:
+                    task['machine_done'][machine] = True
+                    task['machine_reports'][machine] = 'reports/fixture.md'
+        text = build_status(value, None, None, ROOT)
+        row = next(line for line in text.splitlines() if line.startswith('| [G0](#g0)'))
+        self.assertIn('**PARTIAL**', row)
+        self.assertIn('Homojen tetikleme benchmark', text)
+        value['dashboard']['g0_cpu_remaining'] = []
+        text = build_status(value, None, None, ROOT)
+        row = next(line for line in text.splitlines() if line.startswith('| [G0](#g0)'))
+        self.assertIn('**PASS**', row)
+
 
 if __name__ == "__main__":
     unittest.main()

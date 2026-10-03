@@ -1,5 +1,12 @@
 # MACM6 available-input completion — 2026-10-03
 
+**Later scope clarification (2026-10-03):** this completion covers the registered
+reference/preparation program. A full G0 scope audit identified two unregistered,
+RTX-independent source reproduction benchmarks still pending: the Section9
+homogeneous trigger and Section11.4 reduced growth system. See
+`docs/G0_MACM6_REMAINING.md`; neither has an executed acceptance run/report.
+The 14 recorded device completions and their historical evidence remain valid.
+
 The user-directed MACM6-before-RTX5070 preparation is complete for the available inputs. This is not a full viability declaration. Overall scientific label: **PARTIAL / UNRESOLVED**. Current baseline assessment: **RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED**.
 
 ## Recorded substeps

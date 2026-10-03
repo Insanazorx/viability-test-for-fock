@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T14:27:34.376745+00:00",
+  "updated_utc": "2026-10-03T14:47:28.473910+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -824,7 +824,7 @@
     "instruction": "Complete every mathematically well-defined MACM6 responsibility with available inputs before RTX5070; preserve GPU-dependent scientific gates.",
     "instruction_date": "2026-10-03",
     "plan": "docs/MACM6_COMPLETION_PLAN.md",
-    "status": "AVAILABLE_INPUT_WORK_COMPLETE",
+    "status": "REGISTERED_PREPARATION_COMPLETE_G0_SCOPE_PENDING",
     "completed_utc": "2026-10-03T10:48:45.581828+00:00",
     "completion_report": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md",
     "next_device": "RTX5070",
@@ -841,7 +841,8 @@
       "bytes": 2367364,
       "git_commit": "908b666a59944304f70a41a15dd39876747c4751",
       "isolated_restore_verified": true
-    }
+    },
+    "scope_review": "docs/G0_MACM6_REMAINING.md"
   },
   "roadmap": {
     "schema_version": 1,
@@ -2474,6 +2475,20 @@
       "G4A-T01": "Test fixture ayar dizini eksikti; aynı ölçütlerle düzeltme ve PASS.",
       "G4A-T02": "NumPy bool değerinin sonuç kaydı hatası; dönüşüm düzeltildi ve PASS.",
       "G0A-T04": "Eski raporlar seal öncesi biçimdeydi; özgün artifact hash denetimiyle PASS."
-    }
+    },
+    "g0_cpu_remaining": [
+      {
+        "title": "Homojen tetikleme benchmark’ı",
+        "scope": "Bölüm9 Eq.76–88; eşik/kararlılık/iş dengesi; reçeteli banyo, kapalı üretim değil",
+        "status": "TODO · plan",
+        "machine": "MACM6"
+      },
+      {
+        "title": "İndirgenmiş pertürbasyon/büyüme benchmark’ı",
+        "scope": "Bölüm11.4 Eq.114–118 / Table4; yayın örnek girdileri; tam Boltzmann değil",
+        "status": "TODO · plan",
+        "machine": "MACM6"
+      }
+    ]
   }
 }

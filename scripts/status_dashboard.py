@@ -77,7 +77,7 @@ def build_status(state,current,waiting,root):
            '| Başlık | Şu anki durum |','|---|---|',
            f"| Bilimsel sonuç | **{dashboard.get('overall_scientific_label','PARTIAL / UNRESOLVED')}** |",
            f"| Işınımsal değerlendirme | {cell(dashboard.get('radiative_assessment','Henüz değerlendirilmedi'))} |",
-           f"| MACM6 | {('Mevcut girdilerle yapılabilen bağımsız hazırlık tamamlandı; sonraki analizler yeni sonuç/girdi bekliyor.' if program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE' else 'Kayıtlı görev tablosuna bakın.')} |",
+           f"| MACM6 | {('Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu.' if dashboard.get('g0_cpu_remaining') else 'Mevcut girdilerle yapılabilen bağımsız hazırlık tamamlandı; sonraki analizler yeni sonuç/girdi bekliyor.' if program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE' else 'Kayıtlı görev tablosuna bakın.')} |",
            f"| Sıradaki tek eylem | {key or 'Görev kaydı incelenecek'} / {machine or 'N/A'}{(' — DEFERRED; çalışma başlatılmadı' if waiting else '')} |",
            f"| CLOUD | {'PAUSED' if state['cloud']['paused'] else 'APPROVED'}; onaylı gate: {state['cloud'].get('approved_gate') or 'yok'}; çalışma başına USD {state['cloud']['max_usd_per_run']} |",
            f"| Yürütme kaydı | {len(tasks)} görev: {counts['PASS']} PASS, {counts['RUNNING']} RUNNING, {counts['CLAIMED']} CLAIMED, {counts['TODO']} TODO, {counts['FAIL']} FAIL, {counts['BLOCKED']} BLOCKED, {counts['ARCHIVED']} ARCHIVED |",'',
@@ -90,6 +90,7 @@ def build_status(state,current,waiting,root):
         scheduling=state.get('machine_scheduling',{}).get(m,{})
         status=('Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok.' if m=='CLOUD' else
                 'DEFERRED — '+scheduling['reason'] if scheduling.get('deferred') else
+                'Kayıtlı hazırlık tamam; iki RTX-bağımsız G0 benchmark’ı ayrı görev/ayar/rapor bekliyor.' if m=='MACM6' and dashboard.get('g0_cpu_remaining') else
                 'Mevcut-girdi programı tamamlandı; yeni GPU/model girdileriyle analiz devam edecek.' if m=='MACM6' and program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE' else 'Kayıtlı görev sırası geçerli.')
         lines.append(f"| {m} | {sum(t['machine_done'][m] for t in tasks.values())} | {cell(status)} |")
     verified=dashboard.get('last_verified_unit_suite')
@@ -107,6 +108,8 @@ def build_status(state,current,waiting,root):
         main_status[gate['id']]=('FAIL' if 'FAIL' in required else 'BLOCKED' if 'BLOCKED' in required else
                                 'PASS' if all(v=='PASS' for v in required) else
                                 'PARTIAL' if any(v in {'PASS','PARTIAL','PREPARED'} for v in required) else 'TODO')
+    if dashboard.get('g0_cpu_remaining') and main_status.get('G0')=='PASS':
+        main_status['G0']='PARTIAL'
     lines.extend(['','## Bütün ana gate’lerin özeti','',
                   '| Gate | Amaç | Genel sonuç | Alt gate durumu |','|---|---|---|---|'])
     for gate in roadmap['main_gates']:
@@ -157,6 +160,13 @@ def build_status(state,current,waiting,root):
                   '| Girdi | Etkilenen gate’ler | Gereken |','|---|---|---|'])
     for missing in dashboard.get('missing_inputs',[]):
         lines.append('| '+' | '.join(cell(missing[k]) for k in ('input','affected','need'))+' |')
+    pending_cpu=dashboard.get('g0_cpu_remaining',[])
+    if pending_cpu:
+        lines.extend(['','## Gate 0’da RTX5070 beklemeden kalan MACM6 işleri','',
+                      'Kayıtlı referans/hazırlıkların tamamlanması Gate 0’ın genel kapsamını tüketmemiştir. Bu iki kaynak benchmark’ı henüz ayrı görev/config/rapor olarak kaydedilmedi; TODO plan kapsamıdır. Kaynak hedefleri ve sınırlar: '+link(root,'docs/G0_MACM6_REMAINING.md','G0 kapsam denetimi')+'.','',
+                      '| İş | Kaynak ve kabul kapsamı | Durum | Cihaz |','|---|---|---|---|'])
+        for item in pending_cpu:
+            lines.append('| '+' | '.join(cell(item[key]) for key in ('title','scope','status','machine'))+' |')
     lines.extend(['','## Geçmiş hatalar ve düzeltmeler','',
                   'Aktif FAIL/BLOCKED görevler yukarıdaki canlı kayıttadır. Aşağıdaki uygulama/kayıt hataları korundu ve tekrar doğrulamayla giderildi; sağlam bir fiziksel kararsızlık olarak sınıflandırılmadı.','',
                   '| Görev | Giderilen sorun | Korunan hata raporu | Son durum |','|---|---|---|---|'])

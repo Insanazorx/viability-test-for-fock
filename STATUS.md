@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T14:27:34.376745+00:00**
+Durum kaydı (UTC): **2026-10-03T14:47:28.473910+00:00**
 
 ## Genel durum
 
@@ -10,7 +10,7 @@ Durum kaydı (UTC): **2026-10-03T14:27:34.376745+00:00**
 |---|---|
 | Bilimsel sonuç | **PARTIAL / UNRESOLVED** |
 | Işınımsal değerlendirme | RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED |
-| MACM6 | Mevcut girdilerle yapılabilen bağımsız hazırlık tamamlandı; sonraki analizler yeni sonuç/girdi bekliyor. |
+| MACM6 | Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu. |
 | Sıradaki tek eylem | G0A-T02 / RTX5070 — DEFERRED; çalışma başlatılmadı |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
 | Yürütme kaydı | 21 görev: 11 PASS, 3 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
@@ -25,7 +25,7 @@ Durum kaydı (UTC): **2026-10-03T14:27:34.376745+00:00**
 
 | Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |
 |---|---|---|
-| MACM6 | 14 | Mevcut-girdi programı tamamlandı; yeni GPU/model girdileriyle analiz devam edecek. |
+| MACM6 | 14 | Kayıtlı hazırlık tamam; iki RTX-bağımsız G0 benchmark’ı ayrı görev/ayar/rapor bekliyor. |
 | RTX5070 | 0 | DEFERRED — User explicitly requested all feasible MACM6 work first, then RTX5070 (2026-10-03). |
 | CLOUD | 0 | Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok. |
 
@@ -678,6 +678,15 @@ On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.
 | Çarpışma ve üretim sonuçları | G1G, G2F, G3, G5, G6 | Kütle/boyut/βH, kesitler, bolluk, dağılım ve ölçülen closure katsayıları |
 | Korunmuş bölge, yerçekimli bounce ve prefaktör | G4D/G4E | Fiziksel vakum ömrü ve GMH/RH değerlendirmesi |
 | Gate bazlı açık CLOUD bütçesi | G1/G2 kampanyaları; G6 zincirleri | Şu an paused=true, onaylı gate yok ve USD 0; kendiliğinden açılmaz |
+
+## Gate 0’da RTX5070 beklemeden kalan MACM6 işleri
+
+Kayıtlı referans/hazırlıkların tamamlanması Gate 0’ın genel kapsamını tüketmemiştir. Bu iki kaynak benchmark’ı henüz ayrı görev/config/rapor olarak kaydedilmedi; TODO plan kapsamıdır. Kaynak hedefleri ve sınırlar: [G0 kapsam denetimi](</Users/insanazor/Desktop/viablilty test/docs/G0_MACM6_REMAINING.md>).
+
+| İş | Kaynak ve kabul kapsamı | Durum | Cihaz |
+|---|---|---|---|
+| Homojen tetikleme benchmark’ı | Bölüm9 Eq.76–88; eşik/kararlılık/iş dengesi; reçeteli banyo, kapalı üretim değil | TODO · plan | MACM6 |
+| İndirgenmiş pertürbasyon/büyüme benchmark’ı | Bölüm11.4 Eq.114–118 / Table4; yayın örnek girdileri; tam Boltzmann değil | TODO · plan | MACM6 |
 
 ## Geçmiş hatalar ve düzeltmeler
 
