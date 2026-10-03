@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task": "G4B-T01",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "potential_gradient": 3e-07,
+    "potential_hessian": 1e-07,
+    "hessian_symmetry": 5e-12,
+    "vacuum_spectrum": 5e-12,
+    "scale_derivative": 5e-10,
+    "threshold_curvature": 5e-07,
+    "scalar_derivatives": 5e-07,
+    "lower_switch_counterterm": 1e-05
+  },
+  "parameters": {
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt",
+    "allow_cloud": false,
+    "handler": "validate_radiative",
+    "contract_doc": "docs/G4B_DARK_LOOP.md",
+    "source_sections": "Eqs.20-24 and p.13 Radiative status; Martin hep-ph/0111209 Eqs.1.1-1.3,3.2",
+    "minimum_tests": 110,
+    "coefficients": {},
+    "difference_steps": [
+      0.001,
+      0.0001,
+      1e-05
+    ],
+    "renormalization_scales": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "scale_difference_step": 0.0001,
+    "curvature_difference_step": 0.0003,
+    "switch_difference_step": 0.0001,
+    "objective": "Compute and verify the available-input homogeneous dark-scalar one-loop potential, UV pole, scale response, mixing and lower switching counterterm.",
+    "method": "Analytic eight-field potential derivatives, canonically normalized mass spectrum, MSbar real-scalar determinant and independent finite differences; no visible-matter or finite-momentum matching.",
+    "acceptance": "All frozen derivative/spectrum/scale/threshold/switch checks and all tests pass; negative masses are explicitly rejected.",
+    "convergence": "Three seeds, centered derivative steps1e-3,1e-4,1e-5; analytic mass and scale identities; declared scalar/threshold finite difference3e-4 and switching1e-4.",
+    "claim_scope": "Completes only available-input homogeneous dark-sector G4B-T01. Full Gate4-B and physical viability remain PARTIAL / UNRESOLVED.",
+    "limitations": [
+      "Concrete L_m, cutoff and physical scale matching are unavailable.",
+      "Dimensionless verification fixtures do not represent a viable fitted dark-energy point.",
+      "Finite-momentum, curvature, portal/matter and higher-loop corrections remain unresolved."
+    ],
+    "changes": "Adds exact source homogeneous potential and one-loop dark-sector verification without modifying any baseline model or solver coefficient.",
+    "next_action": "Prepare conditional G4C status, flat-space source bounce regression and gravity-equation verification on MACM6."
+  }
+}

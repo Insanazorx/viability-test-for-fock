@@ -19,4 +19,4 @@ Generated from state/state.yaml.
 - [X] MACM6 — G4A-T03: Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline. (PASS)
 - [X] MACM6 — G0B-T05: MACM6 reduced solver/HVP/CPU reference engineering preparation (PASS)
 - [X] MACM6 — G1A-T04: MACM6 six-component static reference preparation (PASS)
-- [ ] MACM6 — G4B-T01: Available-input dark-scalar one-loop calculation (RUNNING)
+- [X] MACM6 — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)

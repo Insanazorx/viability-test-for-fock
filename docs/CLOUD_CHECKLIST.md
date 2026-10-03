@@ -19,4 +19,4 @@ Generated from state/state.yaml.
 - N/A CLOUD — G4A-T03: Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline. (PASS)
 - N/A CLOUD — G0B-T05: MACM6 reduced solver/HVP/CPU reference engineering preparation (PASS)
 - N/A CLOUD — G1A-T04: MACM6 six-component static reference preparation (PASS)
-- N/A CLOUD — G4B-T01: Available-input dark-scalar one-loop calculation (RUNNING)
+- N/A CLOUD — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)

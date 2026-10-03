@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T10:32:28.556416+00:00",
+  "updated_utc": "2026-10-03T10:33:35.654998+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -612,7 +612,7 @@
     },
     "G4B-T01": {
       "title": "Available-input dark-scalar one-loop calculation",
-      "status": "RUNNING",
+      "status": "PASS",
       "enabled": true,
       "prerequisites": [
         "G4A-T03"
@@ -621,11 +621,13 @@
         "MACM6"
       ],
       "machine_done": {
-        "MACM6": false,
+        "MACM6": true,
         "RTX5070": false,
         "CLOUD": false
       },
-      "machine_reports": {},
+      "machine_reports": {
+        "MACM6": "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md"
+      },
       "read": [
         "docs/G4B_DARK_LOOP.md",
         "config/gate4/g4b_t01_macm6.json.yaml",
@@ -636,7 +638,7 @@
       "required_input": "yayınlanan.pdf"
     }
   },
-  "active_task": "G4B-T01",
+  "active_task": null,
   "action_selection": {
     "task": "G4B-T01",
     "machine": "MACM6",
