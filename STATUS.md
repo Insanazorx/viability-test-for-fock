@@ -2,7 +2,7 @@
 
 Generated from state/state.yaml; do not edit by hand.
 
-Active action: none — RTX5070 deferred; next is G0A-T02
+Active action: G4C-T02
 Cloud: PAUSED; budget USD 0 per run.
 
 Only G0 tasks are registered initially. Later gates remain untested.
@@ -27,6 +27,7 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | G0B-T05 | PASS | [X] | N/A | N/A |
 | G1A-T04 | PASS | [X] | N/A | N/A |
 | G4B-T01 | PASS | [X] | N/A | N/A |
+| G4C-T02 | RUNNING | [ ] | N/A | N/A |
 
 ## Input/environment readiness
 

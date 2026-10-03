@@ -2,27 +2,23 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G0A-T02
-machine: RTX5070
+task: G4C-T02
+machine: MACM6
 status: RUNNING
-scheduling: DEFERRED
 
 ## Action
-Preserve the completed MACM6 references and review the waiting handoff. RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.
+Record evidence-derived conditional radiative status without claiming full matching or viability.
 
 ## Read
 
-- AGENTS.md#g0a
+- AGENTS.md#g4c
 - MACHINE_HANDOFF.md
-- reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
-- reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md
-- docs/MATH_CORE.md
-- docs/RTX5070_CORE_HANDOFF.md
-- config/benchmark/g0a_t02_rtx5070.json.yaml
-- config/benchmark/publication.source.yaml
+- docs/G4C_CONDITIONAL_STATUS.md
+- config/gate4/g4c_t02_macm6.json.yaml
+- reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/ctl.py status
+.venv/bin/python scripts/run.py --config config/gate4/g4c_t02_macm6.json.yaml
 ```

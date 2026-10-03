@@ -51,6 +51,16 @@
       "handler": "validate_solver_preparation",
       "sha256": "f7f8faca6ac877e357545b12a6d856d9948ffd6422e6fd493c76f3fdc1708d10"
     },
+    "G4C-T02/MACM6": {
+      "path": "config/gate4/g4c_t02_macm6.json.yaml",
+      "handler": "validate_naturalness",
+      "sha256": "dda1cf83fa69f9ab2799b75161dce9c741b1b0dcaefec01e837b95b1dce2003c"
+    },
+    "G4D-T04/MACM6": {
+      "path": "config/gate4/g4d_t04_macm6.json.yaml",
+      "handler": "validate_decay",
+      "sha256": "f64c5f3ae509e68c7d4bc516952db6199fdf45c2c3e37e2357ad0b830196fe1b"
+    },
     "G4B-T01/MACM6": {
       "path": "config/gate4/g4b_t01_macm6.json.yaml",
       "handler": "validate_radiative",

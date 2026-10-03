@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "task": "G4D-T04",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": "DOP853",
+  "tolerances": {
+    "source_action": 5e-05,
+    "source_center": 1e-06,
+    "action_convergence": 1e-05,
+    "virial": 1e-05,
+    "tail": 2e-05,
+    "gravity_constraint_derivative": 5e-12,
+    "false_vacuum_radius": 1e-09,
+    "false_vacuum_action": 5e-12
+  },
+  "parameters": {
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt",
+    "allow_cloud": false,
+    "minimum_tests": 113,
+    "source_sections": "p.7 Eqs.50-51; source Radiative status p.13",
+    "acceptance": "Every frozen exact/numeric check and all unit tests pass.",
+    "next_action": "Finish available-input MACM6 validation and prepare the deferred RTX5070 handoff.",
+    "handler": "validate_decay",
+    "contract_doc": "docs/G4D_DECAY_PREPARATION.md",
+    "objective": "Independently reproduce the flat-space source bounce and verify gravity-aware equation/constraint/false-vacuum action preparation.",
+    "method": "DOP853 overshoot/undershoot bisection with simultaneous action integrals; Einstein constraint/false-vacuum reference checks.",
+    "convergence": "Three decreasing integrator tolerances; last two action estimates and source coefficient/center checked; three gravity parameters and three seeded constraint witnesses.",
+    "claim_scope": "G4D-T04 preparation only; G4D-T01..T03 and gravitational lifetime region remain unfinished.",
+    "limitations": [
+      "Nontrivial gravitational bounce and prefactor not solved.",
+      "Physical scales/retained region and G1B precursor absent."
+    ],
+    "changes": "First independent published scalar-bounce regression plus transparent CDL equation verification.",
+    "rho0": 1e-05,
+    "rho_max": 120.0,
+    "max_step": 0.25,
+    "x_false": 0.6,
+    "shooting_bracket": [
+      0.0005,
+      0.002
+    ],
+    "max_bisections": 60,
+    "source_action": 1082.94756088,
+    "source_center": 0.00116696542914,
+    "accuracy_sequence": [
+      {
+        "rtol": 1e-09,
+        "atol": 1e-11
+      },
+      {
+        "rtol": 3e-11,
+        "atol": 3e-13
+      },
+      {
+        "rtol": 1e-12,
+        "atol": 1e-14
+      }
+    ],
+    "gravity_parameters": [
+      0.01,
+      0.1,
+      1.0
+    ]
+  }
+}
