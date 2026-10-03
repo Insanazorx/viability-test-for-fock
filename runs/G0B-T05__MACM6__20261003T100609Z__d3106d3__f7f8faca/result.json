@@ -1,0 +1,415 @@
+{
+  "run_id": "G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:06:11.428786+00:00",
+  "wall_time_seconds": 1.506192457999532,
+  "peak_ram_gb": 0.143310848,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 119,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 98,
+    "minimum_tests": 98,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "direct_energy": true,
+        "direct_charge": true,
+        "direct_directional": true,
+        "hvp_difference": true,
+        "hvp_symmetry": true,
+        "chart_gradient": true,
+        "projected_symmetry": true,
+        "charge_projection": true,
+        "retracted_hvp": true,
+        "smoke_residual": true,
+        "smoke_energy_fraction": true,
+        "unit_error": true,
+        "boundary_error": true,
+        "multiplier_update": true
+      },
+      "worst_errors": {
+        "direct_energy": 7.098436294190676e-16,
+        "direct_charge": 2.574980159653073e-19,
+        "direct_directional": 1.1480588701928696e-09,
+        "hvp_difference": 1.109666093799398e-10,
+        "hvp_symmetry": 1.1102230246251565e-15,
+        "chart_gradient": 7.497951148849324e-10,
+        "projected_symmetry": 2.0278756803940188e-15,
+        "charge_projection": 4.336808689942018e-18,
+        "retracted_hvp": 7.354042932339027e-10,
+        "smoke_residual": 2.713791471819819e-09,
+        "smoke_energy_fraction": 5.194569139944112e-14,
+        "unit_error": 0.0,
+        "boundary_error": 0.0,
+        "multiplier_update": 6.471935888975587e-59
+      },
+      "oracle_rows": [
+        {
+          "seed": 0,
+          "grid": [
+            5,
+            5,
+            5
+          ],
+          "raw_charge": 0.00010777308084296787,
+          "direct": {
+            "energy": 60.059092423631824,
+            "energy2": 54.088421162824275,
+            "energy4": 5.97067126080755,
+            "charge": 0.00010777308084296761
+          },
+          "derivative_checks": [
+            {
+              "quantity": "energy",
+              "step": 0.001,
+              "directional_error": 2.159592726869164e-09,
+              "hvp_relative": 5.213174447329948e-09
+            },
+            {
+              "quantity": "energy",
+              "step": 0.0001,
+              "directional_error": 7.562617199141641e-12,
+              "hvp_relative": 5.366592499983268e-11
+            },
+            {
+              "quantity": "energy",
+              "step": 1e-05,
+              "directional_error": 5.253444346209335e-10,
+              "hvp_relative": 1.109666093799398e-10
+            },
+            {
+              "quantity": "charge",
+              "step": 0.001,
+              "directional_error": 9.674538047847042e-11,
+              "hvp_relative": 4.323087507425924e-10
+            },
+            {
+              "quantity": "charge",
+              "step": 0.0001,
+              "directional_error": 9.680041056919775e-13,
+              "hvp_relative": 4.32903428620525e-12
+            },
+            {
+              "quantity": "charge",
+              "step": 1e-05,
+              "directional_error": 1.3063443556060594e-14,
+              "hvp_relative": 8.582388628222126e-13
+            }
+          ],
+          "charge_resolved_as_unit": false,
+          "stationary": false
+        },
+        {
+          "seed": 17,
+          "grid": [
+            5,
+            5,
+            5
+          ],
+          "raw_charge": 0.00010777308084296787,
+          "direct": {
+            "energy": 60.059092423631824,
+            "energy2": 54.088421162824275,
+            "energy4": 5.97067126080755,
+            "charge": 0.00010777308084296761
+          },
+          "derivative_checks": [
+            {
+              "quantity": "energy",
+              "step": 0.001,
+              "directional_error": 1.3285908980237658e-09,
+              "hvp_relative": 4.4484069677835e-09
+            },
+            {
+              "quantity": "energy",
+              "step": 0.0001,
+              "directional_error": 8.373680848326038e-12,
+              "hvp_relative": 4.5619731564486836e-11
+            },
+            {
+              "quantity": "energy",
+              "step": 1e-05,
+              "directional_error": 6.976084695555613e-12,
+              "hvp_relative": 1.0604566723467914e-10
+            },
+            {
+              "quantity": "charge",
+              "step": 0.001,
+              "directional_error": 6.422250123198914e-11,
+              "hvp_relative": 3.2739668530423925e-10
+            },
+            {
+              "quantity": "charge",
+              "step": 0.0001,
+              "directional_error": 6.444792616244754e-13,
+              "hvp_relative": 3.2682709140526793e-12
+            },
+            {
+              "quantity": "charge",
+              "step": 1e-05,
+              "directional_error": 3.9765499920685343e-14,
+              "hvp_relative": 1.2454573413359858e-12
+            }
+          ],
+          "charge_resolved_as_unit": false,
+          "stationary": false
+        },
+        {
+          "seed": 104729,
+          "grid": [
+            5,
+            5,
+            5
+          ],
+          "raw_charge": 0.00010777308084296787,
+          "direct": {
+            "energy": 60.059092423631824,
+            "energy2": 54.088421162824275,
+            "energy4": 5.97067126080755,
+            "charge": 0.00010777308084296761
+          },
+          "derivative_checks": [
+            {
+              "quantity": "energy",
+              "step": 0.001,
+              "directional_error": 5.617372567101597e-09,
+              "hvp_relative": 4.629337500637194e-09
+            },
+            {
+              "quantity": "energy",
+              "step": 0.0001,
+              "directional_error": 8.224465553041682e-11,
+              "hvp_relative": 4.73628378067007e-11
+            },
+            {
+              "quantity": "energy",
+              "step": 1e-05,
+              "directional_error": 1.1480588701928696e-09,
+              "hvp_relative": 9.442853443670883e-11
+            },
+            {
+              "quantity": "charge",
+              "step": 0.001,
+              "directional_error": 2.116857904244096e-12,
+              "hvp_relative": 3.8066273219871293e-10
+            },
+            {
+              "quantity": "charge",
+              "step": 0.0001,
+              "directional_error": 2.2877316360747635e-14,
+              "hvp_relative": 3.808471189854085e-12
+            },
+            {
+              "quantity": "charge",
+              "step": 1e-05,
+              "directional_error": 9.58426046859806e-14,
+              "hvp_relative": 6.88429037267643e-13
+            }
+          ],
+          "charge_resolved_as_unit": false,
+          "stationary": false
+        }
+      ],
+      "vacuum_smokes": [
+        {
+          "seed": 0,
+          "initial_energy": 0.019602675633930942,
+          "energy": 1.0182745390835206e-15,
+          "energy2": 1.0182745390835206e-15,
+          "energy4": 1.49434320857723e-33,
+          "charge": 1.9255043849675737e-48,
+          "charge_error": 1.9255043849675737e-48,
+          "charge_gradient_rank": 0,
+          "alpha": 0.0,
+          "constrained_rms": 2.713791471819819e-09,
+          "virial": 1.0,
+          "history": [
+            {
+              "outer": 0,
+              "initial_augmented": 0.01960267563393095,
+              "final_augmented": 2.257612709534279e-15,
+              "multiplier_before": 0.0,
+              "multiplier_after": 6.963795052731079e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 31,
+              "evaluations": 35,
+              "energy": 2.257612709534279e-15,
+              "energy2": 2.257612709534279e-15,
+              "energy4": 5.889508545024108e-33,
+              "charge": 3.4818975263655396e-47,
+              "charge_error": 3.4818975263655396e-47,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 6.039257956683994e-09,
+              "virial": 1.0
+            },
+            {
+              "outer": 1,
+              "initial_augmented": 2.257612709534279e-15,
+              "final_augmented": 1.0182745390835206e-15,
+              "multiplier_before": 6.963795052731079e-43,
+              "multiplier_after": 7.348895929724593e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 1,
+              "evaluations": 3,
+              "energy": 1.0182745390835206e-15,
+              "energy2": 1.0182745390835206e-15,
+              "energy4": 1.49434320857723e-33,
+              "charge": 1.9255043849675737e-48,
+              "charge_error": 1.9255043849675737e-48,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 2.713791471819819e-09,
+              "virial": 1.0
+            }
+          ],
+          "target_charge": 0.0
+        },
+        {
+          "seed": 17,
+          "initial_energy": 0.019602675633930942,
+          "energy": 1.0182745390835206e-15,
+          "energy2": 1.0182745390835206e-15,
+          "energy4": 1.49434320857723e-33,
+          "charge": 1.9255043849675737e-48,
+          "charge_error": 1.9255043849675737e-48,
+          "charge_gradient_rank": 0,
+          "alpha": 0.0,
+          "constrained_rms": 2.713791471819819e-09,
+          "virial": 1.0,
+          "history": [
+            {
+              "outer": 0,
+              "initial_augmented": 0.01960267563393095,
+              "final_augmented": 2.257612709534279e-15,
+              "multiplier_before": 0.0,
+              "multiplier_after": 6.963795052731079e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 31,
+              "evaluations": 35,
+              "energy": 2.257612709534279e-15,
+              "energy2": 2.257612709534279e-15,
+              "energy4": 5.889508545024108e-33,
+              "charge": 3.4818975263655396e-47,
+              "charge_error": 3.4818975263655396e-47,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 6.039257956683994e-09,
+              "virial": 1.0
+            },
+            {
+              "outer": 1,
+              "initial_augmented": 2.257612709534279e-15,
+              "final_augmented": 1.0182745390835206e-15,
+              "multiplier_before": 6.963795052731079e-43,
+              "multiplier_after": 7.348895929724593e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 1,
+              "evaluations": 3,
+              "energy": 1.0182745390835206e-15,
+              "energy2": 1.0182745390835206e-15,
+              "energy4": 1.49434320857723e-33,
+              "charge": 1.9255043849675737e-48,
+              "charge_error": 1.9255043849675737e-48,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 2.713791471819819e-09,
+              "virial": 1.0
+            }
+          ],
+          "target_charge": 0.0
+        },
+        {
+          "seed": 104729,
+          "initial_energy": 0.019602675633930942,
+          "energy": 1.0182745390835206e-15,
+          "energy2": 1.0182745390835206e-15,
+          "energy4": 1.49434320857723e-33,
+          "charge": 1.9255043849675737e-48,
+          "charge_error": 1.9255043849675737e-48,
+          "charge_gradient_rank": 0,
+          "alpha": 0.0,
+          "constrained_rms": 2.713791471819819e-09,
+          "virial": 1.0,
+          "history": [
+            {
+              "outer": 0,
+              "initial_augmented": 0.01960267563393095,
+              "final_augmented": 2.257612709534279e-15,
+              "multiplier_before": 0.0,
+              "multiplier_after": 6.963795052731079e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 31,
+              "evaluations": 35,
+              "energy": 2.257612709534279e-15,
+              "energy2": 2.257612709534279e-15,
+              "energy4": 5.889508545024108e-33,
+              "charge": 3.4818975263655396e-47,
+              "charge_error": 3.4818975263655396e-47,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 6.039257956683994e-09,
+              "virial": 1.0
+            },
+            {
+              "outer": 1,
+              "initial_augmented": 2.257612709534279e-15,
+              "final_augmented": 1.0182745390835206e-15,
+              "multiplier_before": 6.963795052731079e-43,
+              "multiplier_after": 7.348895929724593e-43,
+              "penalty": 20000.0,
+              "inner_success": true,
+              "inner_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+              "iterations": 1,
+              "evaluations": 3,
+              "energy": 1.0182745390835206e-15,
+              "energy2": 1.0182745390835206e-15,
+              "energy4": 1.49434320857723e-33,
+              "charge": 1.9255043849675737e-48,
+              "charge_error": 1.9255043849675737e-48,
+              "charge_gradient_rank": 0,
+              "alpha": 0.0,
+              "constrained_rms": 2.713791471819819e-09,
+              "virial": 1.0
+            }
+          ],
+          "target_charge": 0.0
+        }
+      ],
+      "cuda_executed": false,
+      "published_stationary_sequence_reproduced": false,
+      "physical_spectrum_computed": false,
+      "dense_hessian_allocated": false,
+      "source_production_defaults": {
+        "outer_updates": 4,
+        "penalty": 20000.0,
+        "maxiter": 120,
+        "maxfun": 180,
+        "gtol": 1e-10,
+        "ftol": 1e-14
+      }
+    }
+  },
+  "anomaly": null
+}
