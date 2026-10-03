@@ -1,0 +1,187 @@
+{
+  "run_id": "G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:46:42.926981+00:00",
+  "wall_time_seconds": 0.4865690419992461,
+  "peak_ram_gb": 0.145670144,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 38,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 116,
+    "minimum_tests": 115,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "G0A-T01": true,
+        "G0A-T02": true,
+        "G0A-T03": true,
+        "G0B-T01": true,
+        "G0B-T02": true,
+        "G0B-T05": true,
+        "G1A-T04": true,
+        "G4A-T01": true,
+        "G4A-T02": true,
+        "G4A-T03": true,
+        "G4B-T01": true,
+        "G4C-T02": true,
+        "G4D-T04": true,
+        "yayınlanan.pdf": true,
+        "checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5": true,
+        "gpu_flags_preserved": true,
+        "cloud_disabled": true,
+        "source_initializer_not_mislabeled": true
+      },
+      "completed_macm6_reports": [
+        {
+          "task": "G0A-T01",
+          "report": "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md",
+          "report_sha256": "e6c3693e6030acc7209a39e474ac54ef94440c48ebb6b59a670eb5345842f93f",
+          "run_id": "G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754",
+          "evidence_sha256": null,
+          "legacy_report_bound_artifact_sha256": {
+            "config.yaml": "3e5f375411f1ef9dadd3cc0be767e244548a5a957f1e8c93ca27f72fb32bdc78",
+            "metadata.json": "5130f7c3a62538e9f7442e30c1322a986ba3c45681002bcd9392525acbcea91f",
+            "result.json": "72cab53afa14efb8d97bdaefda6ef57d94b3c6e07adcef84125838b1bbf6e535",
+            "validation.log": "f64d713362269f2c86f72327f3e78706b76a33a7cc2ad4a2a2599117b97a09d5"
+          }
+        },
+        {
+          "task": "G0A-T02",
+          "report": "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md",
+          "report_sha256": "6413c7392d9de84777549570c65217e48b552e61777bc782b2b9cc197456ee1e",
+          "run_id": "G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06",
+          "evidence_sha256": null,
+          "legacy_report_bound_artifact_sha256": {
+            "config.yaml": "1f458c06a45f066aad803f3aca6d3c548573c36f9557d4c60e2842026502fe7c",
+            "metadata.json": "f4f48fcc054728db41b448ac4658c65ba559078a8ec19d485ce01b58053c8e54",
+            "result.json": "23bb38ff6c63066aa7cff8cdc4ec291750ec77a14907ada45646dc9ff08b0f88",
+            "validation.log": "9ce1c6f63f1c266f33d804b4f4ddbed727e3eab1c3b1c13a14bdee7072701825"
+          }
+        },
+        {
+          "task": "G0A-T03",
+          "report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md",
+          "report_sha256": "798c69fdabba0c27c217c8b4dee273fe48c3b006c12f482bf0178186ef2c4e8a",
+          "run_id": "G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a",
+          "evidence_sha256": "6e0d6ab6d697fa18d9093c22ea2cbbaf012cc95f309768b05145cb822cd4ab8f",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G0B-T01",
+          "report": "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md",
+          "report_sha256": "dbaf4de4bd767527a810d5ff265dbac2dfb7ed2143b2028101db8c3535341920",
+          "run_id": "G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31",
+          "evidence_sha256": "bd5dfdde6f7997fe6db1bc004e76e99c219cd0e60f2ea9a09f43c2e772d89a25",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G0B-T02",
+          "report": "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md",
+          "report_sha256": "0da4bb11d609c00302e58744606ce460321a6af8905cf698429dc7b94620173c",
+          "run_id": "G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2",
+          "evidence_sha256": "81bee331080010e06b5577e4a6a31f48ccdf1c8ce721586d91e7203797cbfee5",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G0B-T05",
+          "report": "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md",
+          "report_sha256": "4daf22f7530c5daaacdf747fedba9bfa36b24f13e729bb57d31a2ea050882412",
+          "run_id": "G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca",
+          "evidence_sha256": "7bbddb419a336adb4ec3089fda9246a70061530d120377df8ebc544bb05b18f8",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G1A-T04",
+          "report": "reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md",
+          "report_sha256": "90354c2a3ee2b245c09c0cd4f92188f927f4553ff494b1486ef48c8e358dc193",
+          "run_id": "G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7",
+          "evidence_sha256": "bc0b824ca3cbc5f2da35d0f05e58825a8b4207384ee5d3114ecdd0937be24d11",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4A-T01",
+          "report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md",
+          "report_sha256": "84718d39317b7604483c9518499070b503f1c6079c96ff10abd69258f5efaaa6",
+          "run_id": "G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4",
+          "evidence_sha256": "f5cf3f9a88919a23ca7ac287c64ac0eda51b760a94b01da3a0498e45104766ba",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4A-T02",
+          "report": "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md",
+          "report_sha256": "e7356a40d4e71d08301edb2e3ece22197ede961b85c8be6f988d9a4230c76ad7",
+          "run_id": "G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890",
+          "evidence_sha256": "fcf726bd650c1cf6d361c5790f24c64f01377c081d7cb44daa533c25123bca26",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4A-T03",
+          "report": "reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md",
+          "report_sha256": "0e2c9793dfe6077015c3ff287a0065a59e84725627d886e1c4f83eb0cb01128b",
+          "run_id": "G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb",
+          "evidence_sha256": "00af1251d5150d3c995c98a5e77cfcd5871645c1c688c21b543a54b7018140b4",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4B-T01",
+          "report": "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md",
+          "report_sha256": "6f34be2e76d1fa7308b98da8d5afea058d97691da98d0dbebf6875be09756a37",
+          "run_id": "G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767",
+          "evidence_sha256": "e78d3606825d7bc1b6aae04c9563468183a59bcadaec03379edc9776d3227a49",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4C-T02",
+          "report": "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md",
+          "report_sha256": "b33a587e90d6a7531ffea3b351dcdc7e1f06a77ffd1b7c6d021699da5ff967bf",
+          "run_id": "G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83",
+          "evidence_sha256": "c656dc88cb6dfbd75574a0bc3695d9e4bd65d260bd75d17986dd24b04bcaaf5f",
+          "legacy_report_bound_artifact_sha256": {}
+        },
+        {
+          "task": "G4D-T04",
+          "report": "reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md",
+          "report_sha256": "07f00c79fba7bca52ce9728baf9fc5d94658b58ac6d3de530c604bac0b0ba8a7",
+          "run_id": "G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a",
+          "evidence_sha256": "4290443791dcd81ca11633f4f120c2124abb0d207ab807df6f86b37ab13150e9",
+          "legacy_report_bound_artifact_sha256": {}
+        }
+      ],
+      "external_inputs": {
+        "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+        "checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5": "462ee5c0e3015d9014b669eabfd78d47b1050e2301961f4a35cb3deb99e792eb"
+      },
+      "first_rtx_task": "G0A-T02",
+      "gpu_tasks_pending": [
+        "G0A-T02",
+        "G0B-T01",
+        "G0B-T02",
+        "G0B-T03",
+        "G0B-T04",
+        "G0C-T01",
+        "G0C-T02"
+      ],
+      "package_command": ".venv/bin/python scripts/transfer.py create transfers/RTX5070__UTC__COMMIT.zip",
+      "source_checkpoint_stationary": false,
+      "remote_started": false,
+      "missing_physical_inputs": [
+        "concrete L_m",
+        "physical EFT scales/cutoff/matching",
+        "retained soliton/production region"
+      ],
+      "overall_scientific_label": "PARTIAL / UNRESOLVED"
+    }
+  },
+  "anomaly": null
+}

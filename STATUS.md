@@ -2,7 +2,7 @@
 
 Generated from state/state.yaml; do not edit by hand.
 
-Active action: G0A-T04
+Active action: none — RTX5070 deferred; next is G0A-T02
 Cloud: PAUSED; budget USD 0 per run.
 
 Only G0 tasks are registered initially. Later gates remain untested.
@@ -29,7 +29,7 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | G4B-T01 | PASS | [X] | N/A | N/A |
 | G4C-T02 | PASS | [X] | N/A | N/A |
 | G4D-T04 | PASS | [X] | N/A | N/A |
-| G0A-T04 | RUNNING | [ ] | N/A | N/A |
+| G0A-T04 | PASS | [X] | N/A | N/A |
 
 ## Input/environment readiness
 
@@ -37,4 +37,10 @@ Only G0 tasks are registered initially. Later gates remain untested.
 - Python target: 3.12. MACM6 dependency freeze: complete.
 - Remote runner setup: disabled; no Git remote configured by bootstrap.
 
+
+## MACM6 available-input program
+
+- Completed; GPU-derived postprocessing and missing physical-input calculations remain pending.
+- Completion report: reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md
+- Work summary: docs/MACM6_COMPLETION_SUMMARY.md
 - RTX5070: DEFERRED — User explicitly requested all feasible MACM6 work first, then RTX5070 (2026-10-03).

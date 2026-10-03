@@ -1,32 +1,30 @@
 # MACHINE HANDOFF
 
 from: MACM6
-to: MACM6
-task: G0A-T04
-status: TODO
+to: RTX5070
+task: G0A-T02
+status: RUNNING
+scheduling: DEFERRED — user opens RTX5070 after MACM6 preparation
 read:
   - AGENTS.md#g0a
   - docs/RTX5070_READY.md
-  - config/benchmark/g0a_t04_macm6.json.yaml
-  - reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md
+  - config/benchmark/g0a_t02_rtx5070.json.yaml
   - reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
-  - reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md
-  - reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md
-  - reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md
-  - reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md
-  - reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md
-  - reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md
-  - reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md
-  - reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md
-  - reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md
-  - reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md
-  - reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md
+  - reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md
+latest_checkpoint: checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5
+checkpoint_sha256: 462ee5c0e3015d9014b669eabfd78d47b1050e2301961f4a35cb3deb99e792eb
+checkpoint_stationary: false
+source_pdf_sha256: 09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312
 do_next:
-  - run the frozen MACM6 substep, write report, record machine completion
-  - continue docs/MACM6_COMPLETION_PLAN.md
+  - restore the offline Git bundle, exact PDF and independent checkpoint
+  - create and record the actual Python3.12/CUDA environment on RTX5070
+  - resume/focus G0A-T02 on that device, verify CUDA preflight, run its frozen config
+  - write one report and record only RTX5070 completion; follow NEXT
 do_not_repeat:
-  - passed references and sealed historical runs
+  - completed MACM6 available-input preparation: docs/MACM6_COMPLETION_SUMMARY.md
 known_issue:
-  - RTX5070 deferred until feasible MACM6 work complete
-  - concrete matter action and physical scale matching inputs unavailable
-  - CLOUD paused; zero budget; no remote runner
+  - G0B-T03/T04 production drivers/sequence/spectrum remain RTX5070 work
+  - source archived initializer absent; checkpoint is an independent nonstationary fixture
+  - full matter/portal matching and physical scales/cutoff unresolved
+  - final radiative viability and gravitational lifetime remain PARTIAL / UNRESOLVED
+  - CLOUD paused, zero budget; no remote runner or Git remote configured

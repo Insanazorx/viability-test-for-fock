@@ -2,7 +2,7 @@
 
 MACM6 available-input preparation is complete after the transfer preflight report. The repository has no Git remote; the offline ZIP contains a full-history Git bundle, the exact source PDF and the independent Hopf fixture checkpoint. Its SHA256 is recorded beside the delivered package. It contains no MACM6 environment or GPU completion claim.
 
-Extract the ZIP into a staging folder. Clone REPOSITORY.bundle into the desired project directory, then copy yayınlanan.pdf and the checkpoints folder from staging into that checkout. All tracked code/configs/reports/state arrive through the bundle; do not initialize a separate blank repository. Read AGENTS.md, NEXT.md and MACHINE_HANDOFF.md in the restored checkout. TRANSFER.json lists each payload hash and the exact commit.
+Extract the ZIP into a staging folder. Clone REPOSITORY.bundle (branch codex/macm6-completion) into the desired project directory, then copy yayınlanan.pdf and the checkpoints folder from staging into that checkout. All tracked code/configs/reports/state arrive through the bundle; do not initialize a separate blank repository. Read AGENTS.md, NEXT.md and MACHINE_HANDOFF.md in the restored checkout. TRANSFER.json lists each payload hash and the exact commit.
 
 Create a Python3.12 environment on RTX5070. Install direct tool/CPU dependencies from requirements/macm6.txt and a CUDA-enabled PyTorch build chosen for the actual OS/driver/GPU. The MACM6 macOS freeze is not a Windows/Linux CUDA lock. Record/freeze actual versions before acceptance. No particular driver/build compatibility has been attested by MACM6.
 

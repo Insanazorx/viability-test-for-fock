@@ -2,7 +2,7 @@
 
 Instruction received 2026-10-03: complete everything feasible on MACM6 first, then switch to RTX5070. Each item gets a frozen config, identified run/report and its own machine flag. This document is a work inventory; NEXT.md contains exactly one active action.
 
-## Independent work to complete now
+## Independent work completed for available inputs
 
 1. G0B-T05 engineering preparation: reduced minimizer, boundary/sphere/charge residual, exact matrix-free HVPs and small-grid independent direct-DFT reference. Does not complete G0B-T03/T04 production.
 2. G1A CPU mathematical/reference work: unrestricted six-component static functional, derivative/potential gradients and heavy-normal reduction checks. CUDA implementation/comparison stays unfinished.
@@ -25,3 +25,7 @@ Instruction received 2026-10-03: complete everything feasible on MACM6 first, th
 - G0D remote runners: still optional and disallowed before G0B PASS. CLOUD paused with zero budget.
 
 Finish all mathematically well-defined, available-input work in the first list. Keep the second list explicit rather than invent data, assume completed prerequisites, or call the whole MACM6 program scientifically closed.
+
+## Completion record
+
+All seven inventory items are complete at their stated preparation/available-input scope. See docs/MACM6_COMPLETION_SUMMARY.md and the G0A-T04 MACM6 report. The responsibilities in the unavailable-input list remain unfinished; scientific prerequisites are not waived.

@@ -30,7 +30,6 @@ def create_packet(output):
         raise ValueError('Commit code/state/reports before packaging')
     state=read_data(ROOT/'state/state.yaml')
     if state['tasks']['G0A-T04']['status']!='PASS':raise ValueError('MACM6 transfer preflight must pass first')
-    checkpoint=state['tasks']['G0B-T02']['machine_reports']['MACM6']
     data=read_data(ROOT/'runs/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2/result.json')
     files={'yayınlanan.pdf':ROOT/'yayınlanan.pdf',data['checkpoint_path']:ROOT/data['checkpoint_path']}
     output=output.resolve()
@@ -38,12 +37,14 @@ def create_packet(output):
     output.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='rtx-transfer-') as tmp:
         bundle=Path(tmp)/'REPOSITORY.bundle'
-        subprocess.run(['git','bundle','create',str(bundle),'HEAD'],cwd=ROOT,check=True,capture_output=True)
+        branch=subprocess.check_output(['git','symbolic-ref','--short','HEAD'],cwd=ROOT,text=True).strip()
+        subprocess.run(['git','bundle','create',str(bundle),branch,'HEAD'],cwd=ROOT,check=True,capture_output=True)
         subprocess.run(['git','bundle','verify',str(bundle)],cwd=ROOT,check=True,capture_output=True)
         heads=subprocess.check_output(['git','bundle','list-heads',str(bundle)],text=True)
-        if heads.strip()!=commit+' HEAD':raise ValueError('Bundle commit differs')
+        refs={ref:sha for sha,ref in (line.split() for line in heads.splitlines())}
+        if refs!={'HEAD':commit,'refs/heads/'+branch:commit}:raise ValueError('Bundle commit/branch differs')
         files['REPOSITORY.bundle']=bundle
-        manifest=dict(schema_version=1,created_utc=datetime.now(timezone.utc).isoformat(),git_commit=commit,
+        manifest=dict(schema_version=1,created_utc=datetime.now(timezone.utc).isoformat(),git_commit=commit,branch=branch,
                       files={name:sha256(path) for name,path in files.items()},
                       first_task='G0A-T02',first_machine='RTX5070',
                       instructions='Clone REPOSITORY.bundle, copy external PDF/checkpoints into checkout, read docs/RTX5070_READY.md; environment is machine-specific.',

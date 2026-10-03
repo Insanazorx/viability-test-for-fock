@@ -154,6 +154,12 @@ def render(state: dict, root: Path = ROOT) -> None:
                     "- Required publication: yayınlanan.pdf; availability is checked before G0A-T02.",
                     "- Python target: 3.12. MACM6 dependency freeze: " + ("complete." if cpu_freeze else "pending G0A-T03."),
                     "- Remote runner setup: disabled; no Git remote configured by bootstrap.", ""])
+    program=state.get('macm6_program',{})
+    if program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE':
+        summary.extend(['','## MACM6 available-input program','',
+                        '- Completed; GPU-derived postprocessing and missing physical-input calculations remain pending.',
+                        '- Completion report: '+program['completion_report'],
+                        '- Work summary: docs/MACM6_COMPLETION_SUMMARY.md'])
     for machine,scheduling in state.get('machine_scheduling',{}).items():
         if scheduling['deferred']:
             summary.append(f"- {machine}: DEFERRED — {scheduling['reason']}")

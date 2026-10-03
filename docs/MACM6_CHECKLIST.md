@@ -22,4 +22,4 @@ Generated from state/state.yaml.
 - [X] MACM6 — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)
 - [X] MACM6 — G4C-T02: Conditional radiative status preparation (PASS)
 - [X] MACM6 — G4D-T04: Flat bounce regression and gravity-equation preparation (PASS)
-- [ ] MACM6 — G0A-T04: MACM6 completion and offline RTX5070 transfer preflight (RUNNING)
+- [X] MACM6 — G0A-T04: MACM6 completion and offline RTX5070 transfer preflight (PASS)
