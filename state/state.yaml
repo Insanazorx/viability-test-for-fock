@@ -834,6 +834,13 @@
       "concrete L_m, physical scales, cutoff and matching conditions",
       "gravitational lifetime retained region and prefactor",
       "production-derived CLASS and likelihood inputs"
-    ]
+    ],
+    "transfer_packet": {
+      "path": "transfers/RTX5070__20261003T105027Z__908b666.zip",
+      "sha256": "e6e948ce2254e8d269c65527dd1395e11a302cf4759cfea0fccdf04351054cbb",
+      "bytes": 2367364,
+      "git_commit": "908b666a59944304f70a41a15dd39876747c4751",
+      "isolated_restore_verified": true
+    }
   }
 }
