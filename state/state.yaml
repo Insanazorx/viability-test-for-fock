@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T20:41:48.704644+00:00",
+  "updated_utc": "2026-10-03T21:17:55.959931+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -11,6 +11,26 @@
   "remote_control": {
     "level": 0,
     "enabled": false
+  },
+  "repository_history": {
+    "schema_version": 1,
+    "status": "VERIFIED",
+    "verified_utc": "2026-10-03T21:14:42.864434+00:00",
+    "bundle_path": "REPOSITORY.bundle",
+    "bundle_bytes": 385317,
+    "bundle_sha256": "b2b03fa07c1e8e9177316eee035af3831252829ef88e2b01438f53c87c888d3e",
+    "restored_branch": "codex/macm6-completion",
+    "tip": "9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1",
+    "commit_count": 34,
+    "current_branch": "reproduce/rtx5070-cuda",
+    "remote": "https://github.com/Insanazorx/viability-test-for-fock.git",
+    "audit_report": "reports/G0/REPOSITORY_BUNDLE__RTX5070__20261003T211442Z__REPORT.md",
+    "external_manifest_present": false,
+    "macm6_reports_byte_identical": 14,
+    "original_evidence_files_byte_identical": 128,
+    "frozen_configs_byte_identical": 24,
+    "historical_run_commits_available": 18,
+    "scope": "Engineering provenance recovery only; no scientific task or machine completion changed"
   },
   "registry_scope": "Implemented/frozen handlers and their referenced scientific prerequisites; additional MACM6 preparation IDs do not waive production gates.",
   "source": {

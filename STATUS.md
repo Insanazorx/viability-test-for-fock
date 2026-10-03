@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T20:41:48.704644+00:00**
+Durum kaydı (UTC): **2026-10-03T21:17:55.959931+00:00**
 
 ## Genel durum
 
@@ -20,6 +20,21 @@ Durum kaydı (UTC): **2026-10-03T20:41:48.704644+00:00**
 `PASS · hazırlık` ve `PASS · kısmi kapsam` özgün bilimsel gate’i kapatmaz. `TODO · plan` satırları sözleşmedeki gelecek işlerdir; yürütme kaydına veya çalıştırma kuyruğuna eklenmiş değildir. `Ön koşul bekliyor` ifadesi raporlu `BLOCKED` sonucu değildir.
 
 **Alt gate durumları:** `PASS` tanımlı kapsamın tamamlandığını, `PARTIAL` kısmi ilerlemeyi, `PREPARED` ön hazırlığın yapıldığını, `TODO` işin beklediğini, `DISABLED` isteğe bağlı işin kapalı olduğunu gösterir. Plan satırlarındaki cihaz kutuları gelecekteki sorumluluğu belirtir; CLOUD kutusu bütçe veya çalıştırma onayı değildir.
+
+## Öncelikli kalan işler
+
+Bunlar yürütme kaydındaki etkin, tamamlanmamış işlerdir. Gelecek G0–G6 kapsamı aşağıdaki gate tablolarında ayrıca gösterilir.
+
+| Görev | Kalan iş | Durum | Cihaz sırası | Ön koşullar |
+|---|---|---|---|---|
+| G0B-T03 | Augmented-Lagrangian minimizasyonu | TODO | RTX5070 → MACM6 | G0B-T02: PASS |
+| G0B-T04 | İndirgenmiş fiziksel Hessian | TODO | RTX5070 → MACM6 | G0B-T03: TODO |
+| G0C-T01 | Bağımsız CPU/CUDA karşılaştırması | TODO | MACM6 → RTX5070 | G0B-T04: TODO |
+| G0C-T02 | Hassasiyet politikası | TODO | RTX5070 → MACM6 | G0C-T01: TODO |
+
+Ayrıca MACM6 üzerinde homojen tetikleme ve azaltılmış pertürbasyon benchmark’ları **TODO · plan**. Henüz ayrı yürütme kaydı/config/rapor yok; G0 genel kapanışı bekliyor.
+
+İsteğe bağlı G0D runner işleri kapalıdır. Hazırlık raporları durağan çözüm/Hessian veya bilimsel gate kapanışı değildir.
 
 ## Cihazların durumu
 
@@ -711,4 +726,14 @@ Aktif FAIL/BLOCKED görevler yukarıdaki canlı kayıttadır. Aşağıdaki uygul
 - Doğrulanmış offline paket: [RTX5070 ZIP](<C:\Users\Death\Desktop\viability-test-for-fock-main\transfers\RTX5070__20261003T144940Z__9da2c46.zip>) (2412068 byte); kaynak Git snapshot `9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1`.
 - Paket SHA256: `b600fbb9cab9e2717754a320c4444e33aa662612de6e73137e45a46c3bc137b5`; ayrı receipt: [aktarım kaydı](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\RTX5070_TRANSFER_PACKET.md>).
 - Her ZIP kaynak Git snapshotını taşır; kendi aktarım receipt'i sonradan kaydedilir. Son paket seçimi için güncel aktarım kaydını, geri yüklemede TRANSFER.json'daki commit ve dosya hash'lerini kullanın.
-- Git remote ve uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.
+
+## Geri alınan MACM6 Git geçmişi
+
+- Denetim: **VERIFIED**; UTC `2026-10-03T21:14:42.864434+00:00`; [bundle doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\REPOSITORY_BUNDLE__RTX5070__20261003T211442Z__REPORT.md>).
+- `REPOSITORY.bundle`: 385317 byte; SHA256 `b2b03fa07c1e8e9177316eee035af3831252829ef88e2b01438f53c87c888d3e`.
+- `codex/macm6-completion`: `9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1`; **34 commit**. RTX5070 çalışma dalı `reproduce/rtx5070-cuda` korunmuştur.
+- 14 MACM6 tamamlama raporu, 128 eski kanıt dosyası ve 24 config byte-identical; 18 eski çalışma commit’i erişilebilir.
+- Git bundle bütünlüğü ve kayıtlı aktarım commit’i doğrulandı. TRANSFER.json/bağımsız bundle SHA256 manifesti bu klasörde yok; yukarıdaki SHA256 bu denetimde ölçüldü, dış manifest eşleşmesi iddia edilmez.
+- Bundle kod/geçmiş içerir; durağan yayın checkpoint’i veya arşivlenmiş üretim initializer’ı sağlamaz. Sayısal kabul ölçütleri ve cihaz tamamlanma bayrakları değişmedi.
+- Git remote: [GitHub deposu](https://github.com/Insanazorx/viability-test-for-fock.git); iki geçmiş ayrı dallarda korunur, main geçmişi yeniden yazılmaz.
+- Uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.

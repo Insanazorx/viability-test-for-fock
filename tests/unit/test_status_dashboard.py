@@ -77,6 +77,34 @@ class StatusDashboardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Registered task omitted"):
             validate_roadmap(value)
 
+    def test_remaining_overview_uses_live_tasks_without_promoting_plans(self):
+        text = build_status(self.state, next_task(self.state), None, ROOT)
+        overview = text.split('## Öncelikli kalan işler', 1)[1].split('## Cihazların durumu', 1)[0]
+        for key, task in self.state['tasks'].items():
+            expected = task['enabled'] and task['status'] not in {'PASS', 'ARCHIVED'}
+            self.assertEqual(f'| {key} |' in overview, expected)
+        self.assertIn('TODO · plan', overview)
+        self.assertIn('G0D runner işleri kapalıdır', overview)
+
+    def test_bundle_record_is_not_a_scientific_completion(self):
+        value = copy.deepcopy(self.state)
+        value['repository_history'] = {
+            'status': 'VERIFIED', 'verified_utc': '2026-10-03T21:14:42Z',
+            'audit_report': 'reports/G0/bundle.md', 'bundle_path': 'REPOSITORY.bundle',
+            'bundle_bytes': 385317, 'bundle_sha256': 'a'*64,
+            'restored_branch': 'codex/macm6-completion', 'tip': 'b'*40,
+            'commit_count': 34, 'current_branch': 'reproduce/rtx5070-cuda',
+            'macm6_reports_byte_identical': 14, 'original_evidence_files_byte_identical': 128,
+            'frozen_configs_byte_identical': 24, 'historical_run_commits_available': 18,
+            'remote': 'https://github.com/Insanazorx/viability-test-for-fock.git'}
+        before = copy.deepcopy(value)
+        text = build_status(value, next_task(value), None, ROOT)
+        self.assertIn('**34 commit**', text)
+        self.assertIn('dış manifest eşleşmesi iddia edilmez', text)
+        self.assertNotIn('Git remote ve uzak runner kurulumu yok', text)
+        self.assertIn('**PARTIAL / UNRESOLVED**', text)
+        self.assertEqual(value, before)
+
     def test_g0_general_benchmarks_prevent_premature_main_gate_pass(self):
         value = copy.deepcopy(self.state)
         for key, task in value['tasks'].items():

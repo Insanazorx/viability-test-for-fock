@@ -84,8 +84,21 @@ def build_status(state,current,waiting,root):
            '**Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.','',
            '`PASS · hazırlık` ve `PASS · kısmi kapsam` özgün bilimsel gate’i kapatmaz. `TODO · plan` satırları sözleşmedeki gelecek işlerdir; yürütme kaydına veya çalıştırma kuyruğuna eklenmiş değildir. `Ön koşul bekliyor` ifadesi raporlu `BLOCKED` sonucu değildir.','',
            '**Alt gate durumları:** `PASS` tanımlı kapsamın tamamlandığını, `PARTIAL` kısmi ilerlemeyi, `PREPARED` ön hazırlığın yapıldığını, `TODO` işin beklediğini, `DISABLED` isteğe bağlı işin kapalı olduğunu gösterir. Plan satırlarındaki cihaz kutuları gelecekteki sorumluluğu belirtir; CLOUD kutusu bütçe veya çalıştırma onayı değildir.','',
-           '## Cihazların durumu','',
-           '| Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |','|---|---|---|']
+           '## Öncelikli kalan işler','',
+           'Bunlar yürütme kaydındaki etkin, tamamlanmamış işlerdir. Gelecek G0–G6 kapsamı aşağıdaki gate tablolarında ayrıca gösterilir.','',
+           '| Görev | Kalan iş | Durum | Cihaz sırası | Ön koşullar |','|---|---|---|---|---|']
+    rows={row['id']:row for stage in (roadmap or {}).get('stages',[]) for row in stage['tasks']}
+    for task_id,t in tasks.items():
+        if t['enabled'] and t['status'] not in {'PASS','ARCHIVED'}:
+            title=rows.get(task_id,{}).get('title',t['title'])
+            deps=', '.join(f"{dep}: {tasks[dep]['status']}" for dep in t['prerequisites']) or 'Yok'
+            lines.append('| '+' | '.join(cell(v) for v in
+                         (task_id,title,t['status'],' → '.join(t['machine_order']),deps))+' |')
+    if dashboard.get('g0_cpu_remaining'):
+        lines.extend(['','Ayrıca MACM6 üzerinde homojen tetikleme ve azaltılmış pertürbasyon benchmark’ları **TODO · plan**. Henüz ayrı yürütme kaydı/config/rapor yok; G0 genel kapanışı bekliyor.'])
+    lines.extend(['','İsteğe bağlı G0D runner işleri kapalıdır. Hazırlık raporları durağan çözüm/Hessian veya bilimsel gate kapanışı değildir.','',
+                  '## Cihazların durumu','',
+                  '| Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |','|---|---|---|'])
     for m in MACHINES:
         scheduling=state.get('machine_scheduling',{}).get(m,{})
         status=('Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok.' if m=='CLOUD' else
@@ -186,5 +199,17 @@ def build_status(state,current,waiting,root):
         lines.extend(['- Doğrulanmış offline paket: '+link(root,packet['path'],'RTX5070 ZIP')+f" ({packet['bytes']} byte); kaynak Git snapshot `{packet['git_commit']}`.",
                       f"- Paket SHA256: `{packet['sha256']}`; ayrı receipt: "+link(root,'docs/RTX5070_TRANSFER_PACKET.md','aktarım kaydı')+'.',
                       '- Her ZIP kaynak Git snapshotını taşır; kendi aktarım receipt\'i sonradan kaydedilir. Son paket seçimi için güncel aktarım kaydını, geri yüklemede TRANSFER.json\'daki commit ve dosya hash\'lerini kullanın.'])
-    lines.extend(['- Git remote ve uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.',''])
+    history=state.get('repository_history')
+    if history:
+        lines.extend(['','## Geri alınan MACM6 Git geçmişi','',
+                      f"- Denetim: **{history['status']}**; UTC `{history['verified_utc']}`; "+link(root,history['audit_report'],'bundle doğrulama raporu')+'.',
+                      f"- `{history['bundle_path']}`: {history['bundle_bytes']} byte; SHA256 `{history['bundle_sha256']}`.",
+                      f"- `{history['restored_branch']}`: `{history['tip']}`; **{history['commit_count']} commit**. RTX5070 çalışma dalı `{history['current_branch']}` korunmuştur.",
+                      f"- {history['macm6_reports_byte_identical']} MACM6 tamamlama raporu, {history['original_evidence_files_byte_identical']} eski kanıt dosyası ve {history['frozen_configs_byte_identical']} config byte-identical; {history['historical_run_commits_available']} eski çalışma commit’i erişilebilir.",
+                      '- Git bundle bütünlüğü ve kayıtlı aktarım commit’i doğrulandı. TRANSFER.json/bağımsız bundle SHA256 manifesti bu klasörde yok; yukarıdaki SHA256 bu denetimde ölçüldü, dış manifest eşleşmesi iddia edilmez.',
+                      '- Bundle kod/geçmiş içerir; durağan yayın checkpoint’i veya arşivlenmiş üretim initializer’ı sağlamaz. Sayısal kabul ölçütleri ve cihaz tamamlanma bayrakları değişmedi.',
+                      '- Git remote: '+f"[GitHub deposu]({history['remote']}); iki geçmiş ayrı dallarda korunur, main geçmişi yeniden yazılmaz."])
+    else:
+        lines.append('- Git remote/geçmiş için mevcut cihaz devir notunu kullanın.')
+    lines.extend(['- Uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.',''])
     return '\n'.join(lines)

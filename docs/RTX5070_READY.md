@@ -19,9 +19,15 @@ the stationary sequence and G0B-T04 physical spectrum have not been run.
 GitHub remote: `https://github.com/Insanazorx/viability-test-for-fock.git`.
 Working branch: `reproduce/rtx5070-cuda`. The downloaded directory had no
 `.git`; metadata was restored from this remote without replacing source files.
-The remote begins with a single upload commit, not the original MACM6 history.
-Original MACM6 reports and artifact bytes are preserved. The original Git
-bundle is still needed to recover those earlier commit objects.
+The remote began with a single upload commit, not the original MACM6 history.
+The user-supplied REPOSITORY.bundle has now been verified and its 34-commit
+history restored separately as `codex/macm6-completion`, tip
+`9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1`. Current RTX5070 work stays on
+`reproduce/rtx5070-cuda`; no checkout/reset or history rewrite was performed.
+All 14 MACM6 completion reports, 128 historical evidence files and 24 configs
+match the bundle byte-for-byte. The measured bundle SHA256 and verification
+limits are in `reports/G0/REPOSITORY_BUNDLE__RTX5070__20261003T211442Z__REPORT.md`.
+The bundle is Git history, not the missing archived scientific initializer.
 
 This device uses `.venv/Scripts/python.exe`. If Git is absent from the shell,
 add `.venv/tools/mingit/cmd` to that shell's PATH. Portable Git and GitHub CLI
