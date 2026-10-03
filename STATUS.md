@@ -2,7 +2,7 @@
 
 Generated from state/state.yaml; do not edit by hand.
 
-Active action: G4A-T02
+Active action: G4A-T03
 Cloud: PAUSED; budget USD 0 per run.
 
 Only G0 tasks are registered initially. Later gates remain untested.
@@ -22,8 +22,8 @@ Only G0 tasks are registered initially. Later gates remain untested.
 | G0D-T02 | TODO (disabled) | N/A | [ ] | N/A |
 | G0D-T03 | TODO (disabled) | [ ] | [ ] | N/A |
 | G4A-T01 | PASS | [X] | N/A | N/A |
-| G4A-T02 | RUNNING | [ ] | N/A | N/A |
-| G4A-T03 | TODO | [ ] | N/A | N/A |
+| G4A-T02 | PASS | [X] | N/A | N/A |
+| G4A-T03 | RUNNING | [ ] | N/A | N/A |
 | G0B-T05 | PASS | [X] | N/A | N/A |
 | G1A-T04 | PASS | [X] | N/A | N/A |
 

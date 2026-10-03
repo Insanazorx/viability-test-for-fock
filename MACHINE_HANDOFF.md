@@ -2,13 +2,13 @@
 
 from: MACM6
 to: MACM6
-task: G4A-T02
+task: G4A-T03
 status: TODO
 read:
   - AGENTS.md#g4a
   - docs/G4A_SYMMETRY_AUDIT.md
-  - config/gate4/g4a_t02_macm6.json.yaml
-  - reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md
+  - config/gate4/g4a_t03_macm6.json.yaml
+  - reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md
 do_next:
   - run the frozen MACM6 substep, write report, record machine completion
   - continue docs/MACM6_COMPLETION_PLAN.md
