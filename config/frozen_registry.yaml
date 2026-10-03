@@ -41,6 +41,11 @@
       "handler": "validate_hopf_cuda",
       "sha256": "23ad6ac8108c8611a5025eb14e1a670a6a01ce4b3e1a306b8020db74a58d5060"
     },
+    "G0B-T03/RTX5070": {
+      "path": "config/benchmark/g0b_t03_rtx5070.json.yaml",
+      "handler": "reproduce_stationary_cuda",
+      "sha256": "9df9405b559f40888a11681483375bc59bde622ea2846eee5de3c460b3e8c761"
+    },
     "G4A-T01/MACM6": {
       "path": "config/gate4/g4a_t01_macm6.json.yaml",
       "handler": "validate_operator_basis",

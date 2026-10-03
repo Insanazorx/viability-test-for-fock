@@ -13,7 +13,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 from common import (MACHINES, REPORT_FIELDS, REPORT_SECTIONS, ROOT, git_info,
                     inside, parse_report, read_data, sha256, write_data)
-from ctl import ensure_machine_ready, flag, machine_done, next_task, render, validate
+from ctl import ensure_machine_ready, flag, machine_done, next_task, record_failure, render, validate
 from run import freeze
 
 
@@ -214,6 +214,33 @@ class ControlTests(unittest.TestCase):
             (root / "fixture.txt").write_text("changed\n")
             self.assertTrue(git_info(root)["uncommitted_diff"])
             self.assertEqual(len(git_info(root)["git_commit"]), 40)
+
+    def test_failed_evidence_does_not_mark_machine_complete(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root,value=Path(folder),state()
+            run,report=self.evidence(root,'FAIL')
+            report.write_text(report_text(status='FAIL',digest=sha256(run/'config.yaml')))
+            before=copy.deepcopy(value['tasks']['G0A-T01']['machine_done'])
+            record_failure(value,'G0A-T01','MACM6','reports/G0/test.md','optimizer',root)
+            self.assertEqual(value['tasks']['G0A-T01']['machine_done'],before)
+            self.assertEqual(value['tasks']['G0A-T01']['status'],'FAIL')
+            self.assertEqual(value['tasks']['G0A-T01']['last_outcome']['classification'],'optimizer')
+            self.assertEqual(next_task(value)[0],'G0A-T01')
+
+    def test_failed_record_cannot_hide_pass_or_broken_checkpoint(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root,value=Path(folder),state()
+            run,report=self.evidence(root)
+            with self.assertRaises(ValueError):
+                record_failure(value,'G0A-T01','MACM6','reports/G0/test.md','unknown',root)
+            checkpoint=root/'checkpoints/test.h5';checkpoint.parent.mkdir();checkpoint.write_bytes(b'state')
+            write_data(run/'result.json',{'status':'FAIL','checkpoint_artifacts':[
+                {'path':'checkpoints/test.h5','sha256':'0'*64}]})
+            report.write_text(report_text(status='FAIL',digest=sha256(run/'config.yaml')))
+            before=copy.deepcopy(value)
+            with self.assertRaisesRegex(ValueError,'checkpoint hash changed'):
+                record_failure(value,'G0A-T01','MACM6','reports/G0/test.md','unknown',root)
+            self.assertEqual(value,before)
 
 
 if __name__ == "__main__":

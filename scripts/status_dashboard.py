@@ -70,6 +70,11 @@ def build_status(state,current,waiting,root):
     action=current or waiting
     key=action[0] if action else None
     machine=next((m for m in action[1]['machine_order'] if not action[1]['machine_done'][m]),None) if action else None
+    preference=state.get('execution_preference',{}).get('machine')
+    policy_waiting=bool(waiting and preference and machine!=preference)
+    action_machine=preference if policy_waiting else machine
+    waiting_note=(f' — WAITING; {machine} bağımsız sorumluluğu bekliyor, cihaz değiştirilmeyecek' if policy_waiting else
+                  ' — DEFERRED; çalışma başlatılmadı' if waiting else '')
     lines=['# STATUS — Fock-selected dark-sector programı','',
            'Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.','',
            f"Durum kaydı (UTC): **{state.get('updated_utc','N/A')}**",'',
@@ -78,7 +83,8 @@ def build_status(state,current,waiting,root):
            f"| Bilimsel sonuç | **{dashboard.get('overall_scientific_label','PARTIAL / UNRESOLVED')}** |",
            f"| Işınımsal değerlendirme | {cell(dashboard.get('radiative_assessment','Henüz değerlendirilmedi'))} |",
            f"| MACM6 | {('Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu.' if dashboard.get('g0_cpu_remaining') else 'Mevcut girdilerle yapılabilen bağımsız hazırlık tamamlandı; sonraki analizler yeni sonuç/girdi bekliyor.' if program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE' else 'Kayıtlı görev tablosuna bakın.')} |",
-           f"| Sıradaki tek eylem | {key or 'Görev kaydı incelenecek'} / {machine or 'N/A'}{(' — DEFERRED; çalışma başlatılmadı' if waiting else '')} |",
+           f"| Çalışma cihazı tercihi | {preference or 'Sözleşmedeki cihaz sırası'}{'; kullanıcı değiştirene kadar' if preference else ''} |",
+           f"| Sıradaki tek eylem | {key or 'Görev kaydı incelenecek'} / {action_machine or 'N/A'}{waiting_note} |",
            f"| CLOUD | {'PAUSED' if state['cloud']['paused'] else 'APPROVED'}; onaylı gate: {state['cloud'].get('approved_gate') or 'yok'}; çalışma başına USD {state['cloud']['max_usd_per_run']} |",
            f"| Yürütme kaydı | {len(tasks)} görev: {counts['PASS']} PASS, {counts['RUNNING']} RUNNING, {counts['CLAIMED']} CLAIMED, {counts['TODO']} TODO, {counts['FAIL']} FAIL, {counts['BLOCKED']} BLOCKED, {counts['ARCHIVED']} ARCHIVED |",'',
            '**Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.','',

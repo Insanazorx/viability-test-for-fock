@@ -1,4 +1,4 @@
-"""Identified predeclared setup/math-core validation; no lattice solver is installed."""
+"""Identified predeclared validation and bounded reduced CUDA production."""
 from __future__ import annotations
 
 import argparse
@@ -38,13 +38,31 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
     parser.add_argument("--check", action="store_true", help="Read-only config/device preflight; creates no run")
+    parser.add_argument("--resume-checkpoint")
+    parser.add_argument("--resume-sha256")
     args = parser.parse_args()
     if sys.version_info[:2] != (3, 12):
         raise ValueError("Python 3.12 is required")
     config_path = inside(ROOT, args.config, "config")
     config, raw, digest = load_config(config_path)
+    resume_path = None
+    if args.resume_checkpoint or args.resume_sha256:
+        if not args.resume_checkpoint or not args.resume_sha256 or config['task']!='G0B-T03':
+            raise ValueError('Stationary resume requires checkpoint path and explicit SHA256')
+        resume_path=inside(ROOT,args.resume_checkpoint,'checkpoints')
+        if sha256(resume_path)!=args.resume_sha256:
+            raise ValueError('Resume checkpoint SHA256 mismatch')
     observed_hardware = hardware(config["machine"])
     if args.check:
+        if resume_path:
+            sys.path.insert(0,str(ROOT/'src'))
+            from static.solver_checkpoint import load_checkpoint
+            from analysis.validate_stationary import code_digest
+            restored=load_checkpoint(resume_path,{'task':config['task'],'config_sha256':digest,
+                                                 'code_sha256':code_digest(ROOT)})
+            index=restored['identity'].get('grid_index',-1)
+            if not 0 <= index < len(config['parameters']['sequence']):
+                raise ValueError('Resume checkpoint has no valid source grid')
         print(json.dumps({"config_sha256":digest,"hardware":observed_hardware,"preflight":"PASS"}))
         return 0
     state = read_data(ROOT / "state/state.yaml")
@@ -53,6 +71,8 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
+    if resume_path:
+        inputs[resume_path.relative_to(ROOT).as_posix()]=args.resume_sha256
     if config["machine"] == "RTX5070":
         environment = state.get("environments", {}).get("RTX5070", {})
         path = inside(ROOT, environment["full_environment_freeze"], "requirements")
@@ -125,7 +145,10 @@ def main() -> int:
                 "recovery":recovery,
                 "prerequisite_scope":prerequisites,
                 "machine_scheduling":state.get('machine_scheduling',{}),
+                "execution_preference":state.get('execution_preference'),
+                "repository_history":state.get('repository_history'),
                 "checkpoint_output":checkpoint_path.relative_to(ROOT).as_posix() if checkpoint_path else None,
+                "resume_checkpoint":resume_path.relative_to(ROOT).as_posix() if resume_path else None,
                 "precision_policy":"explicit declared dtype; no MPS acceptance or implicit mixed precision"}
     freeze(run / "metadata.json", metadata)
     metrics = {}
@@ -168,6 +191,15 @@ def main() -> int:
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_hopf import validate_hopf
             metrics['hopf']=validate_hopf(config,checkpoint_path,run_id,digest)
+        if config['task']=='G0B-T03':
+            sys.path.insert(0,str(ROOT/'src'))
+            from analysis.validate_stationary import validate_stationary
+            if returncode==0 and metrics['tests_run']>=metrics['minimum_tests']:
+                metrics['stationary']=validate_stationary(config,ROOT,run_id,digest,git['git_commit'],resume_path)
+                if metrics['stationary'].get('final_checkpoint'):
+                    checkpoint_path=inside(ROOT,metrics['stationary']['final_checkpoint'],'checkpoints')
+            else:
+                metrics['stationary']={'passed':False,'reason':'Unit suite failed; production not started'}
         if config['task']=='G4A-T01':
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_operators import validate_operators
@@ -190,6 +222,7 @@ def main() -> int:
                             and metrics.get("run_discipline", {"passed": True})["passed"]
                             and metrics.get('spectral',{'passed':True})['passed']
                             and metrics.get('hopf',{'passed':True})['passed']
+                            and metrics.get('stationary',{'passed':True})['passed']
                             and metrics.get('operator_basis',{'passed':True})['passed']
                             and metrics.get('preparation',{'passed':True})['passed']) else "FAIL"
         anomaly = None
@@ -197,10 +230,14 @@ def main() -> int:
         status, anomaly = "FAIL", f"{type(error).__name__}: {error}"
     result = {"run_id": run_id, "status": status, "finished_utc": datetime.now(timezone.utc).isoformat(),
               "wall_time_seconds": time.perf_counter() - start, **ram_monitor.finish(),
-              "peak_vram_gb": metrics.get('hopf',metrics.get("spectral",metrics.get("math_core", {}))).get("peak_vram_gb"),
+              "peak_vram_gb": metrics.get('stationary',metrics.get('hopf',metrics.get("spectral",metrics.get("math_core", {})))).get("peak_vram_gb"),
               "checkpoint_sha256":sha256(checkpoint_path) if checkpoint_path and checkpoint_path.is_file() else None,
               "checkpoint_path":checkpoint_path.relative_to(ROOT).as_posix() if checkpoint_path and checkpoint_path.is_file() else None,
               "metrics": metrics, "anomaly": anomaly}
+    if config['task']=='G0B-T03':
+        result['checkpoint_artifacts']=[{'path':path.relative_to(ROOT).as_posix(),'sha256':sha256(path),
+                                        'bytes':path.stat().st_size}
+                                       for path in sorted((ROOT/'checkpoints').glob(run_id+'__*.h5'))]
     freeze(run / "result.json", result)
     seal_run(run)
     print(json.dumps({"run_id": run_id, "status": status, "metrics": metrics}, ensure_ascii=False))

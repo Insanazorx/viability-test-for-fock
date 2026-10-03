@@ -81,6 +81,31 @@ class MachineDependencyTests(unittest.TestCase):
             with self.subTest(path=path.name):
                 compile(path.read_text(),str(path),'exec')
 
+    def test_explicit_rtx_preference_never_completes_or_selects_cpu(self):
+        value=self.fixture()
+        value['execution_preference']={'machine':'RTX5070','reason':'User requested RTX until further notice'}
+        before=copy.deepcopy(value['tasks'])
+        self.assertEqual(next_task(value)[0],'G0A-T02')
+        with self.assertRaisesRegex(ValueError,'device preference'):
+            ensure_machine_ready(value,'G0B-T01','MACM6')
+        self.assertEqual(value['tasks'],before)
+
+    def test_rtx_preference_waits_when_independent_cpu_is_required(self):
+        value=self.fixture()
+        core=value['tasks']['G0A-T02']
+        core['machine_done']['RTX5070']=True
+        core['machine_reports']['RTX5070']='cuda.md'
+        core['status']='PASS'
+        value['execution_preference']={'machine':'RTX5070','reason':'Explicit user request'}
+        self.assertIsNone(next_task(value))
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);render(value,root)
+            text=(root/'NEXT.md').read_text()
+            self.assertIn('machine: RTX5070',text)
+            self.assertIn('required_machine: MACM6',text)
+            self.assertIn('WAITING_INDEPENDENT_MACHINE',text)
+            self.assertEqual(text.count('task: '),1)
+
 
 if __name__=='__main__':
     unittest.main()

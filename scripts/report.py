@@ -18,7 +18,7 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in set(MACM6_AUDITS) | {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01','G0B-T05','G1A-T04'}:
+    if metadata["task"] not in set(MACM6_AUDITS) | {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G0B-T03','G4A-T01','G0B-T05','G1A-T04'}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
@@ -35,7 +35,14 @@ def main() -> int:
         path=inside(ROOT,result['checkpoint_path'],'checkpoints')
         if sha256(path)!=result['checkpoint_sha256']:
             raise ValueError('Checkpoint hash does not match sealed result')
-        artifacts.append(f"- `{result['checkpoint_path']}` — SHA256 `{result['checkpoint_sha256']}` (ignored HDF5 initial field; not a stationary solution)")
+        label='solver state; stationarity must satisfy the sealed row checks' if metadata['task']=='G0B-T03' else 'initial field; not a stationary solution'
+        artifacts.append(f"- `{result['checkpoint_path']}` — SHA256 `{result['checkpoint_sha256']}` (ignored HDF5 {label})")
+    for record in result.get('checkpoint_artifacts',[]):
+        path=inside(ROOT,record['path'],'checkpoints')
+        if sha256(path)!=record['sha256']:
+            raise ValueError('Solver checkpoint hash does not match sealed result')
+        if record['path']!=result.get('checkpoint_path'):
+            artifacts.append(f"- `{record['path']}` — SHA256 `{record['sha256']}` ({record['bytes']} bytes; ignored solver/restart artifact)")
     anomalies = [f"Dirty Git tree at run start: {metadata['uncommitted_diff']}.",
                  "Python 3.12.14 control environment exists; numerical dependencies are not yet installed/frozen.",
                  "No Git remote or remote runner is configured. CLOUD remains paused.",
@@ -199,6 +206,54 @@ def main() -> int:
             'next_action':p['next_action'],
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, docs/MACM6_COMPLETION_PLAN.md and '+p['contract_doc'],
         })
+    if metadata['task']=='G0B-T03':
+        config=read_data(run/'config.yaml');stationary=metrics.get('stationary',{})
+        equivalence=ROOT/f'reports/G0/G0B-T03__{args.run_id}__EQUIVALENCE.md'
+        table='| N | L | E source | E CUDA | Relative error | Q_H | Constrained RMS | Accepted |\n|---|---|---|---|---|---|---|---|\n'
+        for row in stationary.get('rows',[]):
+            final=row['final']
+            table+=f"| {row['size']} | {row['half_box']} | {row['reference']['energy']} | {final['energy']:.12g} | {row['relative_energy_error']:.6g} | {final['charge']:.12g} | {final['constrained_rms']:.6g} | {row['passed']} |\n"
+        with equivalence.open('x',encoding='utf-8',newline='\n') as stream:
+            stream.write('# G0B-T03 initializer / solver equivalence assessment\n\n'
+                         f"run_id: {args.run_id}\nconfig_sha256: {metadata['config_sha256']}\n"
+                         'assessment: UNRESOLVED - archived source initializer/optimizer unavailable\n\n'
+                         '## Matched mathematical contract\n'
+                         'Eq.65 energy, endpoint grid, full-grid FFT, fixed south-pole boundary, '
+                         'charge sign/normalization and Eq.70 AL updates are unchanged. CUDA '
+                         'analytic gradients were compared to the host NumPy oracle and Torch '
+                         'autograd. The small CUDA restart check is engineering evidence only.\n\n'
+                         '## Independent realization\n'
+                         'Each grid starts from compact_hopf(scale=1.2,radius=3.4), not the source '
+                         'archive. Torch LBFGS strong_wolfe operates in the existing normalized '
+                         'sphere chart. Actual iteration/evaluation limits and residuals are in '
+                         'sealed result.json; exhausted budgets are not convergence. No source '
+                         'energy/charge target was fitted or loosened.\n\n'
+                         '## Source comparison\n'+table+'\n'
+                         f"Not run grids: {stationary.get('not_run_grids','production did not start')}.\n"
+                         f"Source sequence complete: {stationary.get('source_sequence_complete',False)}.\n\n"
+                         '## Decision\n'
+                         'Unavailable source initialization prevents a bitwise archived reproduction '
+                         'claim. Numerical row acceptance is evaluated independently above. A '
+                         'failed optimizer/source match does not demonstrate a physical instability '
+                         'or invalidate the EFT. Diagnose initialization, optimizer stopping and '
+                         'implementation before continuing. No MACM6 flag or G0B-T04 spectrum '
+                         'is supplied by this assessment.\n')
+        values.update({
+            'objective':'Execute RTX5070 G0B-T03 reduced stationary Table 2 sequence under the unchanged source grid/box, energy/charge and optimizer settings.',
+            'inputs':'Supplied PDF p.9, Table 2, sections 7.1-7.2; docs/G0B_PRODUCTION_CONTRACT.md and passed CPU/CUDA Hopf prerequisites. Exact inputs:\n'+
+                     '\n'.join(f'- `{path}` — SHA256 `{digest}`' for path,digest in metadata['input_sha256'].items()),
+            'method':'Actual CUDA float64 FFT, normalized interior chart with fixed boundary, explicit validated energy/charge gradients, Eq.70 four AL updates and Torch strong-Wolfe LBFGS. HDF5 outer-boundary checkpoints include optimizer audit state, AL/RNG state and exact config/code/grid identities. Interrupted inner solves restart from the previous completed outer checkpoint; mid-inner replay is not claimed. A strict first-row failure stop prevents widening an unresolved solve.',
+            'tolerances':'Frozen before execution:\n```json\n'+json.dumps(config['tolerances'],indent=2)+'\n```\nSource solver settings and matched sequence:\n```json\n'+json.dumps({'solver':config['parameters']['solver'],'sequence':config['parameters']['sequence']},indent=2)+'\n```',
+            'metrics':table+'\n```json\n'+json.dumps(metrics,indent=2)+'\n```',
+            'convergence':'Independent small-grid CUDA/NumPy/autograd comparison and uninterrupted-versus-restarted AL-boundary smoke; four source grids only if each prior row passes. All outer residuals, gradients, iterations/evaluations and actual termination/budget indicators are recorded. A capped solve is not called converged. The independent initializer is not a stationary paper checkpoint.',
+            'evaluation':result['status']+' for RTX5070 source-sequence acceptance only. All four matched rows, controlled physical constrained residual, energy/charge thresholds and improved box virial are required. '+
+                         'The separately required MACM6 report/fit remains unmarked; no Hessian or full scientific viability closure follows.',
+            'anomalies':f"- Dirty Git tree: {metadata['uncommitted_diff']}.\n- Source initializer/archive absent; independent map/equivalence remains unresolved.\n- Unrun source rows: {stationary.get('not_run_grids','all; production did not start')}.\n- CLOUD paused; no automatic MACM6 switch under the user RTX5070 preference.\n"+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
+            'artifacts':'\n'.join(artifacts)+'\nSeparate equivalence assessment: `'+equivalence.relative_to(ROOT).as_posix()+'`, SHA256 `'+sha256(equivalence)+'`. All HDF5 arrays remain ignored; paths/digests are preserved in sealed result.json. A restart checkpoint is not itself a passing stationary solution.',
+            'changes':'First bounded RTX5070 production driver, exact source targets, explicit optimizer termination/AL ledger, HDF5 optimizer/RNG/field checkpoints and tested outer-boundary resume. Prior MACM6/CUDA evidence and all published tolerances are unchanged.',
+            'next_action':'Record only RTX5070 completion if all source targets pass. Preserve pending MACM6 analysis; obey the explicit RTX5070 device policy without marking another machine complete.' if result['status']=='PASS' else 'Freeze this solver branch checkpoint/config, classify source mismatch or anomaly, and perform the smallest discriminating implementation/initialization/optimizer test on RTX5070. Do not advance to G0B-T04 or widen the scan.',
+            'handoff':'NEXT.md, MACHINE_HANDOFF.md, AGENTS.md#g0b, docs/G0B_PRODUCTION_CONTRACT.md, exact config, checkpoint hashes and the separate equivalence assessment.',
+        })
     if metadata["machine"] == "RTX5070":
         if result["peak_vram_gb"] is None:
             values["peak_vram_gb"] = "unavailable: validation ended before CUDA peak collection"
@@ -223,11 +278,13 @@ def main() -> int:
         values["anomalies"] += (
             "\n- Actual RTX5070 environment/hardware (also sealed in metadata/environment JSON):\n```json\n"
             + json.dumps({"python": metadata["python"], "hardware": metadata["hardware"]}, indent=2)
-            + "\n```\n- GitHub transfer has one upload commit; original MACM6 commit history is absent from this remote. "
-            "Existing MACM6 report identities/evidence remain preserved.\n"
+            + "\n```\n- "+('Original MACM6 Git history has been recovered separately; current RTX5070 work is preserved. '
+                             if metadata.get('repository_history') else 'Original MACM6 Git history was not available at this run. ')
+            + "Existing MACM6 report identities/evidence remain preserved.\n"
             "- Windows lacks symlink creation privilege; the security regression uses a directory junction to test the same path escape.\n"
         )
-        values["changes"] = (
+        if metadata['task']!='G0B-T03':
+            values["changes"] = (
             "First actual RTX5070 float64 CUDA comparison against the preserved NumPy references. "
             "Records this Windows environment, driver, runtime, RAM/VRAM and exact input hashes. "
             "Restores missing transfer directories/ignore rules and uses machine-specific execution paths. "
@@ -240,7 +297,7 @@ def main() -> int:
                 "G0A-T02": "Record only RTX5070 completion, then follow NEXT for G0B-T01 CUDA. MACM6 G0A-T03 already passed.",
                 "G0B-T01": "Record only RTX5070 completion, then follow NEXT for the frozen G0B-T02 CUDA Hopf comparison.",
                 "G0B-T02": "Record only RTX5070 completion, then develop G0B-T03 production driver and the matched stationary sequence. G0B-T04 spectrum remains pending; this initial field is nonstationary.",
-            }[metadata["task"]]
+            }.get(metadata["task"],values['next_action'])
         else:
             values["next_action"] = "Preserve this failed run/report, classify the anomaly and perform the smallest discriminating check before an explicit recovery. Do not loosen tolerances or advance the queue."
     report = ROOT / f"reports/{metadata['task'][:2]}" / f"{metadata['task']}__{args.run_id}__REPORT.md"

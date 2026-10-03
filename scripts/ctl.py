@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from datetime import datetime, timezone
 from pathlib import Path
 import re
@@ -78,6 +79,9 @@ def validate(state: dict) -> None:
     for machine, scheduling in state.get('machine_scheduling',{}).items():
         if machine not in MACHINES or type(scheduling.get('deferred')) is not bool or not scheduling.get('reason','').strip():
             raise ValueError('Invalid machine scheduling decision')
+    preference=state.get('execution_preference')
+    if preference and (preference.get('machine') not in {'MACM6','RTX5070'} or not preference.get('reason','').strip()):
+        raise ValueError('Invalid explicit device preference')
 
 
 def ready(state: dict, task: dict, machine: str | None = None) -> bool:
@@ -102,6 +106,11 @@ def pending_machine(task: dict) -> str | None:
     return next((m for m in task['machine_order'] if not task['machine_done'][m]),None)
 
 
+def selected_machine_allowed(state: dict, machine: str | None) -> bool:
+    preferred=state.get('execution_preference',{}).get('machine')
+    return preferred is None or machine==preferred
+
+
 def deferred_task(state: dict) -> tuple[str,dict] | None:
     """Expose the first ready deferred responsibility without scheduling it."""
     for key,task in state['tasks'].items():
@@ -109,6 +118,11 @@ def deferred_task(state: dict) -> tuple[str,dict] | None:
         if (task['status'] in {'TODO','CLAIMED','RUNNING'} and ready(state,task)
                 and state.get('machine_scheduling',{}).get(machine,{}).get('deferred')):
             return key,task
+    if state.get('execution_preference'):
+        for key,task in state['tasks'].items():
+            if (task['enabled'] and task['status'] in {'TODO','CLAIMED','RUNNING'}
+                    and not selected_machine_allowed(state,pending_machine(task)) and ready(state,task)):
+                return key,task
     return None
 
 
@@ -117,15 +131,16 @@ def next_task(state: dict) -> tuple[str, dict] | None:
     if focused:
         task = state["tasks"][focused]
         machine=pending_machine(task)
-        if task["enabled"] and task["status"] not in {"PASS", "ARCHIVED"} and not state.get('machine_scheduling',{}).get(machine,{}).get('deferred'):
+        if task["enabled"] and task["status"] not in {"PASS", "ARCHIVED"} and selected_machine_allowed(state,machine) and not state.get('machine_scheduling',{}).get(machine,{}).get('deferred'):
             return focused, task
     for key, task in state["tasks"].items():
         machine=pending_machine(task)
         if (task["enabled"] and task["status"] in {"CLAIMED", "RUNNING", "FAIL", "BLOCKED"}
+                and selected_machine_allowed(state,machine)
                 and not state.get('machine_scheduling',{}).get(machine,{}).get('deferred')):
             return key, task
     for key, task in state["tasks"].items():
-        if task["status"] == "TODO" and ready(state, task, pending_machine(task)):
+        if task["status"] == "TODO" and selected_machine_allowed(state,pending_machine(task)) and ready(state, task, pending_machine(task)):
             return key, task
     return None
 
@@ -171,6 +186,18 @@ def render(state: dict, root: Path = ROOT) -> None:
             lines.extend(["Resolve the recorded outcome before launching any new run.", ""])
     elif waiting:
         key,task=waiting;machine=pending_machine(task)
+        preferred=state.get('execution_preference',{}).get('machine')
+        if preferred and machine!=preferred:
+            lines.extend([f'task: {key}',f'machine: {preferred}',f"status: {task['status']}",
+                          'scheduling: WAITING_INDEPENDENT_MACHINE',f'required_machine: {machine}','',
+                          '## Action',f'Keep execution on {preferred} as explicitly requested. '
+                          f'{key} still requires {machine} independent responsibility; do not mark it complete '
+                          'from another device or bypass scientific prerequisites. No eligible preferred-device action is ready.','',
+                          '## Read','','- MACHINE_HANDOFF.md',*['- '+p for p in task['read']],
+                          '','## One command','','```sh',
+                          state.get('environments',{}).get(preferred,{}).get('python_command','.venv/bin/python')+' scripts/ctl.py status','```',''])
+            atomic_write(root / 'NEXT.md', '\n'.join(lines))
+            return
         lines.extend([f'task: {key}',f'machine: {machine}',f"status: {task['status']}",'scheduling: DEFERRED','',
                       '## Action','Preserve the completed MACM6 references and review the waiting handoff. '
                       'RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.','',
@@ -184,6 +211,8 @@ def render(state: dict, root: Path = ROOT) -> None:
 
 def ensure_machine_ready(state: dict, key: str, machine: str) -> dict:
     task = state["tasks"][key]
+    if not selected_machine_allowed(state,machine):
+        raise ValueError('Explicit user device preference forbids automatic device switching')
     if not ready(state, task, machine):
         raise ValueError("Task disabled, machine deferred, or assigned prerequisites have not passed")
     if machine not in task["machine_order"]:
@@ -219,6 +248,10 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
         checkpoint=inside(root,result['checkpoint_path'],'checkpoints')
         if sha256(checkpoint)!=result['checkpoint_sha256']:
             raise ValueError('Referenced checkpoint hash changed')
+    for artifact in result.get('checkpoint_artifacts',[]):
+        checkpoint=inside(root,artifact['path'],'checkpoints')
+        if sha256(checkpoint)!=artifact['sha256']:
+            raise ValueError('Referenced solver checkpoint hash changed')
     task["machine_done"][machine] = True
     task["machine_reports"][machine] = path.relative_to(root.resolve()).as_posix()
     if fields["status"] != "PASS":
@@ -230,6 +263,22 @@ def machine_done(state: dict, key: str, machine: str, report: str, root: Path = 
     if state.get("active_task") == key and (task["status"] == "PASS" or
             (fields['status']=='PASS' and state.get('action_selection',{}).get('machine')==machine)):
         state["active_task"] = None
+
+
+def record_failure(state: dict, key: str, machine: str, report: str, classification: str, root: Path = ROOT) -> None:
+    """Use the same evidence validation, but never complete a failed device."""
+    path=inside(root,report,'reports')
+    fields=parse_report(path,key,machine)
+    if fields['status'] not in {'FAIL','BLOCKED'}:
+        raise ValueError('Failure recording requires FAIL or BLOCKED evidence')
+    probe=copy.deepcopy(state)
+    machine_done(probe,key,machine,report,root)
+    task=state['tasks'][key]
+    task['status']=fields['status']
+    outcome={'machine':machine,'status':fields['status'],'report':path.relative_to(root.resolve()).as_posix(),
+             'run_id':fields['run_ids'],'classification':classification}
+    task['last_outcome']=outcome
+    task.setdefault('attempt_history',[]).append(outcome)
 
 
 def focus(state: dict, key: str, machine: str, reason: str) -> None:
@@ -259,16 +308,21 @@ def main() -> int:
         scheduling=commands.add_parser(name)
         scheduling.add_argument('--machine',choices=MACHINES,required=True)
         scheduling.add_argument('--reason',required=True)
-    for name in ("start", "machine-done"):
+    preference=commands.add_parser('prefer-machine')
+    preference.add_argument('--machine',choices=('MACM6','RTX5070'),required=True)
+    preference.add_argument('--reason',required=True)
+    for name in ("start", "machine-done", "record-failure"):
         command = commands.add_parser(name)
         command.add_argument("task")
         command.add_argument("--machine", choices=MACHINES, required=True)
-        if name == "machine-done":
+        if name in {"machine-done","record-failure"}:
             command.add_argument("--report", required=True)
+        if name=='record-failure':
+            command.add_argument('--classification',choices=('implementation','discretization','precision','finite-volume','optimizer','initialization','unknown'),required=True)
     args = parser.parse_args()
     state = read_data(ROOT / "state/state.yaml")
     validate(state)
-    if args.command in {"start", "machine-done", "pause-cloud", "refresh", "focus",'defer-machine','resume-machine'}:
+    if args.command in {"start", "machine-done", "record-failure", "pause-cloud", "refresh", "focus",'defer-machine','resume-machine','prefer-machine'}:
         if args.command == "start":
             task = ensure_machine_ready(state, args.task, args.machine)
             if task["status"] not in {"TODO", "CLAIMED", "RUNNING"}:
@@ -283,10 +337,17 @@ def main() -> int:
             task["status"] = "RUNNING"
         elif args.command == "machine-done":
             machine_done(state, args.task, args.machine, args.report)
+        elif args.command=='record-failure':
+            record_failure(state,args.task,args.machine,args.report,args.classification)
         elif args.command == "pause-cloud":
             state["cloud"]["paused"] = True
         elif args.command == "focus":
             focus(state, args.task, args.machine, args.reason)
+        elif args.command=='prefer-machine':
+            if not args.reason.strip():
+                raise ValueError('An explicit user preference reason is required')
+            state['execution_preference']={'machine':args.machine,'reason':args.reason,
+                                          'until':'explicit user change','updated_utc':datetime.now(timezone.utc).isoformat()}
         elif args.command in {'defer-machine','resume-machine'}:
             if not args.reason.strip():
                 raise ValueError('Scheduling requires an explicit reason')

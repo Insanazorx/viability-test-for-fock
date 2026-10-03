@@ -4,10 +4,10 @@ Exactly one active action; generated from state/state.yaml.
 
 task: G0B-T03
 machine: RTX5070
-status: TODO
+status: RUNNING
 
 ## Action
-Develop and validate the identified RTX5070 production driver for the matched 17^3,21^3,25^3,33^3 stationary sequence, including resumable optimizer/AL/RNG checkpoints and measured residual/energy/charge acceptance. The archived source initializer is absent; the available compact field is independent and nonstationary. Document initializer/solver equivalence separately; preserve all source settings and 5e-4 energy/charge tolerances. G0B-T04 production spectrum remains pending.
+Run the frozen float64 CUDA production sequence using docs/G0B_PRODUCTION_CONTRACT.md. Preserve 17^3/21^3/25^3 at L=4 and 33^3 at L=8; stop on a failed source row, report exact residual/energy/charge diagnostics and separate initializer/solver equivalence. Resume only from a verified AL-boundary checkpoint with explicit SHA256. No MACM6 completion or G0B-T04 spectrum is implied.
 
 ## Read
 
@@ -18,9 +18,11 @@ Develop and validate the identified RTX5070 production driver for the matched 17
 - docs/G0B_SOLVER_PREPARATION.md
 - docs/G0B_HOPF.md
 - config/benchmark/publication.source.yaml
+- docs/G0B_PRODUCTION_CONTRACT.md
+- config/benchmark/g0b_t03_rtx5070.json.yaml
 
 ## One command
 
 ```sh
-.venv/Scripts/python.exe scripts/ctl.py start G0B-T03 --machine RTX5070
+.venv/Scripts/python.exe scripts/run.py --config config/benchmark/g0b_t03_rtx5070.json.yaml
 ```

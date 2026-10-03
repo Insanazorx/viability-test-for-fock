@@ -16,6 +16,7 @@ CONFIGS = {
     ("G0B-T01", "RTX5070"): ("config/benchmark/g0b_t01_rtx5070.json.yaml", "validate_spectral_cuda"),
     ("G0B-T02", "MACM6"): ("config/benchmark/g0b_t02_macm6.json.yaml", "validate_hopf_cpu"),
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
+    ("G0B-T03", "RTX5070"): ("config/benchmark/g0b_t03_rtx5070.json.yaml", "reproduce_stationary_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
     ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
     ("G0A-T04", "MACM6"): ("config/benchmark/g0a_t04_macm6.json.yaml", "validate_transfer"),
@@ -117,6 +118,24 @@ def validate_config(config, root=ROOT):
         steps=p.get('gradient_steps',[])
         if len(steps)<3 or any(type(v) not in (int,float) or v<=0 for v in steps) or sorted(set(steps),reverse=True)!=steps:
             raise ValueError('Three decreasing charge-gradient difference steps required')
+    elif config['task']=='G0B-T03':
+        if config['machine']!='RTX5070' or config['kind']!='numerical' or config['precision']!='float64':
+            raise ValueError('Stationary production requires RTX5070 float64')
+        p=config['parameters']
+        if [(row['size'],row['half_box'],row['energy']) for row in p.get('sequence',[])] != [
+                (17,4.,281.3653),(21,4.,281.2711),(25,4.,281.2625),(33,8.,274.5448)]:
+            raise ValueError('Matched source Table 2 sequence is immutable')
+        if p.get('solver') != {'penalty':20000.,'outer_updates':4,'maxiter':120,'maxfun':180,
+                              'gtol':1e-10,'ftol':1e-14,'history_size':100}:
+            raise ValueError('Source AL/optimizer settings are immutable')
+        expected={'energy_relative':5e-4,'unit_charge':5e-4,'constrained_rms':1e-5,
+                  'unit_error':2e-15,'boundary_error':1e-14,'backend':5e-11,'autograd':5e-10,'resume':5e-12}
+        if config['tolerances']!=expected or p.get('target_charge')!=-1.:
+            raise ValueError('Predeclared stationary tolerances/charge changed')
+        if config['grid']!=[33]*3 or config['box']!=[16.5]*3 or not p.get('stop_on_failed_grid'):
+            raise ValueError('Exact source nominal grid and early failure stop required')
+        if p.get('profile_scale')!=1.2 or p.get('profile_radius')!=3.4 or not p.get('contract_doc'):
+            raise ValueError('Explicit independent initializer and contract required')
     elif config['task']=='G4A-T01':
         if config['kind']!='numerical' or config['precision']!='float64':
             raise ValueError('Operator witnesses require float64 numerics with exact rational enumeration')

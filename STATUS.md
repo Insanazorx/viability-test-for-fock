@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T21:17:55.959931+00:00**
+Durum kaydı (UTC): **2026-10-03T22:05:20.085407+00:00**
 
 ## Genel durum
 
@@ -11,9 +11,10 @@ Durum kaydı (UTC): **2026-10-03T21:17:55.959931+00:00**
 | Bilimsel sonuç | **PARTIAL / UNRESOLVED** |
 | Işınımsal değerlendirme | RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED |
 | MACM6 | Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu. |
+| Çalışma cihazı tercihi | RTX5070; kullanıcı değiştirene kadar |
 | Sıradaki tek eylem | G0B-T03 / RTX5070 |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
-| Yürütme kaydı | 21 görev: 14 PASS, 0 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
+| Yürütme kaydı | 21 görev: 14 PASS, 1 RUNNING, 0 CLAIMED, 6 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
 
 **Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.
 
@@ -27,8 +28,8 @@ Bunlar yürütme kaydındaki etkin, tamamlanmamış işlerdir. Gelecek G0–G6 k
 
 | Görev | Kalan iş | Durum | Cihaz sırası | Ön koşullar |
 |---|---|---|---|---|
-| G0B-T03 | Augmented-Lagrangian minimizasyonu | TODO | RTX5070 → MACM6 | G0B-T02: PASS |
-| G0B-T04 | İndirgenmiş fiziksel Hessian | TODO | RTX5070 → MACM6 | G0B-T03: TODO |
+| G0B-T03 | Augmented-Lagrangian minimizasyonu | RUNNING | RTX5070 → MACM6 | G0B-T02: PASS |
+| G0B-T04 | İndirgenmiş fiziksel Hessian | TODO | RTX5070 → MACM6 | G0B-T03: RUNNING |
 | G0C-T01 | Bağımsız CPU/CUDA karşılaştırması | TODO | MACM6 → RTX5070 | G0B-T04: TODO |
 | G0C-T02 | Hassasiyet politikası | TODO | RTX5070 → MACM6 | G0C-T01: TODO |
 
@@ -110,7 +111,7 @@ Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.
 |---|---|---|---|---|---|---|
 | G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__RTX5070__20261003T203207Z__a12ca3e__9e664616__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
 | G0B-T02 | **Hopf yükü ve işaret** — Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md>); MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil. |
-| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
+| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | RUNNING | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
 | G0B-T04 | **İndirgenmiş fiziksel Hessian** — Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi. |
 | G0B-T05 | **MACM6 indirgenmiş çözücü/HVP/CPU oracle hazırlığı** — G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>); G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. |
 

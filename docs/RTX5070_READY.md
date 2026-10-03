@@ -41,6 +41,13 @@ stationary solver/Hessian or full scientific viability gates.
 
 ## Original MACM6 transfer instructions
 
+Current execution preference: RTX5070 until the user explicitly changes it.
+The G0B-T03 bounded CUDA driver is now implemented with source Table 2
+targets, checkpoint/RNG/optimizer audit state, AL-boundary restart and final
+host/autograd diagnostics. Follow the frozen config in NEXT. Driver/tests
+are not stationary acceptance. MACM6's independent responsibilities stay
+unmarked; a required device handoff waits instead of switching automatically.
+
 MACM6 available-input preparation is complete after the transfer preflight report. The repository has no Git remote; the offline ZIP contains a full-history Git bundle, the exact source PDF and the independent Hopf fixture checkpoint. Its SHA256 is recorded beside the delivered package. It contains no MACM6 environment or GPU completion claim.
 
 Extract the ZIP into a staging folder. Clone REPOSITORY.bundle (branch codex/macm6-completion) into the desired project directory, then copy yayınlanan.pdf and the checkpoints folder from staging into that checkout. All tracked code/configs/reports/state arrive through the bundle; do not initialize a separate blank repository. Read AGENTS.md, NEXT.md and MACHINE_HANDOFF.md in the restored checkout. TRANSFER.json lists each payload hash and the exact commit.
