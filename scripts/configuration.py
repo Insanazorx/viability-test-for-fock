@@ -17,6 +17,7 @@ CONFIGS = {
     ("G0B-T02", "MACM6"): ("config/benchmark/g0b_t02_macm6.json.yaml", "validate_hopf_cpu"),
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
+    ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -112,6 +113,19 @@ def validate_config(config, root=ROOT):
             raise ValueError('At least twenty operator witnesses per seed required')
         if set(config['tolerances'])!={'so4_normalized','chi_parity'}:
             raise ValueError('Frozen SO4/parity tolerances required')
+    elif config['task']=='G0B-T05':
+        if config['kind']!='numerical' or config['precision']!='float64' or config['machine']!='MACM6':
+            raise ValueError('Solver preparation is an identified MACM6 float64 reference')
+        p=config['parameters']
+        if p.get('oracle_grid') not in (5,7) or p.get('smoke_grid') not in (7,9):
+            raise ValueError('Solver preparation is restricted to explicitly small grids')
+        required={'direct_energy','direct_charge','direct_directional','hvp_difference','hvp_symmetry',
+                  'chart_gradient','projected_symmetry','charge_projection','retracted_hvp','smoke_residual',
+                  'smoke_energy_fraction','unit_error','boundary_error','multiplier_update'}
+        if set(config['tolerances'])!=required:
+            raise ValueError('All solver/reference tolerances must be frozen')
+        if not p.get('contract_doc') or not p.get('objective') or not p.get('acceptance'):
+            raise ValueError('Preparation scope and acceptance contract required')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

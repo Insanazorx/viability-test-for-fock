@@ -2,23 +2,24 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G4A-T02
+task: G0B-T05
 machine: MACM6
-status: TODO
+status: RUNNING
 
 ## Action
-Classify absent allowed operators, IBP/EOM redundancies and symmetry-forbidden terms using the passed operator catalog; preserve the baseline action.
+Validate minimizer/chart, physical residual, exact HVPs and independent direct-DFT reference on small CPU fixtures; leave G0B-T03/T04 science flags unfinished.
 
 ## Read
 
-- AGENTS.md#g4a
+- AGENTS.md#g0b
 - MACHINE_HANDOFF.md
-- reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md
-- docs/G4A_OPERATOR_BASIS.md
-- config/benchmark/publication.source.yaml
+- docs/MACM6_COMPLETION_PLAN.md
+- docs/G0B_SOLVER_PREPARATION.md
+- config/benchmark/g0b_t05_macm6.json.yaml
+- reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/ctl.py start G4A-T02 --machine MACM6
+.venv/bin/python scripts/run.py --config config/benchmark/g0b_t05_macm6.json.yaml
 ```

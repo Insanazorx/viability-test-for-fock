@@ -45,6 +45,11 @@
       "path": "config/gate4/g4a_t01_macm6.json.yaml",
       "handler": "validate_operator_basis",
       "sha256": "f5f125f4312a49dd43354b1a5fd348659e4be1fcf8a14c763db03b0aa8c1c0f9"
+    },
+    "G0B-T05/MACM6": {
+      "path": "config/benchmark/g0b_t05_macm6.json.yaml",
+      "handler": "validate_solver_preparation",
+      "sha256": "f7f8faca6ac877e357545b12a6d856d9948ffd6422e6fd493c76f3fdc1708d10"
     }
   },
   "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"

@@ -17,7 +17,7 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01'}:
+    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01','G0B-T05'}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
@@ -179,6 +179,24 @@ def main() -> int:
             'changes':('Recovery from the preserved implementation failure: '+metadata['recovery']['cause']+' Repair: '+metadata['recovery']['change']+' Operator definitions, source, config hash and tolerances are unchanged; the previous FAIL report is an exact hashed input.' if metadata.get('recovery') else 'First G4A-T01 report. Opens the AGENTS-authorized parallel MACM6 theory track after CPU foundations, while retaining all unfinished CUDA gates. Adds an exact chosen-order basis and machine-readable audit inputs without changing the baseline action.'),
             'next_action':'G4A-T02 on MACM6: classify absent allowed terms, IBP/EOM redundancies and genuinely symmetry-forbidden terms. Then G4A-T03 audits lower-order lambda^n C2^2 and the Xi functional coefficients before G4B loop matching.' if result['status']=='PASS' else 'Classify the failed exact count/rank or invariant witness; correct the smallest implementation/analytic issue before repeating.',
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, AGENTS.md#g4a, docs/G4A_OPERATOR_BASIS.md and this sealed catalog; GPU queue is unchanged.',
+        })
+    if metadata['task']=='G0B-T05':
+        config=read_data(run/'config.yaml');p=config['parameters']
+        values.update({
+            'objective':p['objective'],
+            'inputs':'Source PDF, section 7.1 Eqs. (70)-(73), plus the mathematical/engineering contract '+p['contract_doc']+' and the passed CPU references. Exact inputs:\n'+
+                     '\n'.join(f'- `{path}` — SHA256 `{digest}`' for path,digest in metadata['input_sha256'].items()),
+            'method':p['method'],
+            'tolerances':'Frozen before acceptance:\n```json\n'+json.dumps(config['tolerances'],indent=2)+'\n```\n'+p['acceptance'],
+            'metrics':'```json\n'+json.dumps(metrics,indent=2)+'\n```',
+            'convergence':p['convergence'],
+            'evaluation':result['status']+' for MACM6 engineering preparation only. '+p['acceptance']+' G0B-T03/T04 scientific completion flags remain unchanged; the source stationary sequence, CUDA comparison and physical eigenvalues are not evaluated here.',
+            'anomalies':f"- Dirty Git tree: {metadata['uncommitted_diff']}.\n- No CUDA execution. Source initializer/archive absent; compact fixture is independently derived.\n- Small-grid raw charge is not certified as a unit-sector topology measurement.\n- CPU SciPy chart adapter is distinct from the source archived optimizer and has its own equivalence/reference scope.\n- Vacuum smoke tests do not establish a nontrivial stationary soliton.\n- CLOUD paused; remote runner disabled.\n"+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
+            'artifacts':'\n'.join(artifacts)+'\nOnly scalar reference metrics and solver ledgers are stored; no stationary checkpoint or dense Hessian is produced.',
+            'reproduction':f"```sh\n.venv/bin/python scripts/run.py --config {metadata['config_path']}\n.venv/bin/python scripts/report.py --run-id EXACT_NEW_RUN_ID\n```\nUse isolated checkout `{metadata['git_commit']}` with the exact source PDF and requirements/macm6.freeze.txt; task must be RUNNING/unfinished.",
+            'changes':'First independent solver/HVP/CPU-DFT preparation report. No published numerical target, source acceptance tolerance, GPU completion flag or model coefficient changes.',
+            'next_action':p['next_action'],
+            'handoff':'NEXT.md, MACHINE_HANDOFF.md, docs/MACM6_COMPLETION_PLAN.md and '+p['contract_doc'],
         })
     report = ROOT / f"reports/{metadata['task'][:2]}" / f"{metadata['task']}__{args.run_id}__REPORT.md"
     output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)
