@@ -1,0 +1,33 @@
+{
+  "path": "yayınlanan.pdf",
+  "sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+  "title": "Fock-selected topological dark matter and metastable dark energy",
+  "author": "Ismail Cihan Peker",
+  "journal": "Nuclear Physics B",
+  "volume": 1031,
+  "year": 2026,
+  "article": "117639",
+  "doi": "10.1016/j.nuclphysb.2026.117639",
+  "pages": 19,
+  "bibliographic_identity_verified": true,
+  "checked_sections": [
+    "2.1-2.3",
+    "3.2",
+    "6",
+    "Appendix A"
+  ],
+  "verified_equations": [
+    "4-10",
+    "15-19",
+    "20",
+    "30-31",
+    "64-68",
+    "A.1-A.3"
+  ],
+  "visual_inspection_pages": [
+    8,
+    17,
+    18
+  ],
+  "source_access": "User-supplied local PDF; no online replacement or source modification"
+}

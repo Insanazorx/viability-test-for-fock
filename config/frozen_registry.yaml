@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "entries": {
+    "G0A-T01/MACM6": {
+      "path": "config/benchmark/g0a_t01.json.yaml",
+      "handler": "validate_repository",
+      "sha256": "3e5f375411f1ef9dadd3cc0be767e244548a5a957f1e8c93ca27f72fb32bdc78"
+    },
+    "G0A-T02/MACM6": {
+      "path": "config/benchmark/g0a_t02_macm6.json.yaml",
+      "handler": "validate_math_core",
+      "sha256": "1f458c06a45f066aad803f3aca6d3c548573c36f9557d4c60e2842026502fe7c"
+    },
+    "G0A-T02/RTX5070": {
+      "path": "config/benchmark/g0a_t02_rtx5070.json.yaml",
+      "handler": "validate_math_core_cuda",
+      "sha256": "af3d0bec7850c375e18547d6426fdcf986956956f33762585db3518cb8f42a16"
+    },
+    "G0A-T03/MACM6": {
+      "path": "config/benchmark/g0a_t03_macm6.json.yaml",
+      "handler": "validate_run_discipline",
+      "sha256": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6"
+    },
+    "G0B-T01/MACM6": {
+      "path": "config/benchmark/g0b_t01_macm6.json.yaml",
+      "handler": "validate_spectral_cpu",
+      "sha256": "8baddf31f98801810e2de6d91f41e91ba0c48abc23d4df35674364f64dd895f4"
+    },
+    "G0B-T01/RTX5070": {
+      "path": "config/benchmark/g0b_t01_rtx5070.json.yaml",
+      "handler": "validate_spectral_cuda",
+      "sha256": "9e664616393afe3efee4497375e43ffa05817c75a3e288de4c54cfe41544d749"
+    },
+    "G0B-T02/MACM6": {
+      "path": "config/benchmark/g0b_t02_macm6.json.yaml",
+      "handler": "validate_hopf_cpu",
+      "sha256": "73b620d23a4c82aa9ce26fb1ab047468307bc90a7b3c9b0c1866f8a1773fe90c"
+    },
+    "G0B-T02/RTX5070": {
+      "path": "config/benchmark/g0b_t02_rtx5070.json.yaml",
+      "handler": "validate_hopf_cuda",
+      "sha256": "23ad6ac8108c8611a5025eb14e1a670a6a01ce4b3e1a306b8020db74a58d5060"
+    },
+    "G4A-T01/MACM6": {
+      "path": "config/gate4/g4a_t01_macm6.json.yaml",
+      "handler": "validate_operator_basis",
+      "sha256": "f5f125f4312a49dd43354b1a5fd348659e4be1fcf8a14c763db03b0aa8c1c0f9"
+    },
+    "G0B-T05/MACM6": {
+      "path": "config/benchmark/g0b_t05_macm6.json.yaml",
+      "handler": "validate_solver_preparation",
+      "sha256": "f7f8faca6ac877e357545b12a6d856d9948ffd6422e6fd493c76f3fdc1708d10"
+    },
+    "G0A-T04/MACM6": {
+      "path": "config/benchmark/g0a_t04_macm6.json.yaml",
+      "handler": "validate_transfer",
+      "sha256": "32d6755039e297451a01cd97fc8253a74d0e5db23b9646f58c1e296adbd5229a"
+    },
+    "G4C-T02/MACM6": {
+      "path": "config/gate4/g4c_t02_macm6.json.yaml",
+      "handler": "validate_naturalness",
+      "sha256": "dda1cf83fa69f9ab2799b75161dce9c741b1b0dcaefec01e837b95b1dce2003c"
+    },
+    "G4D-T04/MACM6": {
+      "path": "config/gate4/g4d_t04_macm6.json.yaml",
+      "handler": "validate_decay",
+      "sha256": "f64c5f3ae509e68c7d4bc516952db6199fdf45c2c3e37e2357ad0b830196fe1b"
+    },
+    "G4B-T01/MACM6": {
+      "path": "config/gate4/g4b_t01_macm6.json.yaml",
+      "handler": "validate_radiative",
+      "sha256": "39461767705edc3843590e2134c7d975c6009e6dd92e776c97ba0ef0171e8b79"
+    },
+    "G4A-T02/MACM6": {
+      "path": "config/gate4/g4a_t02_macm6.json.yaml",
+      "handler": "validate_classification",
+      "sha256": "59ca88908b1e272b5339eda81b0254233fe60e98a85b9f5a011078b6fb119e4b"
+    },
+    "G4A-T03/MACM6": {
+      "path": "config/gate4/g4a_t03_macm6.json.yaml",
+      "handler": "validate_switching",
+      "sha256": "08b1fafb59855baceb573337e0ac741715bc3312c9bfb7002a32a19e677a677b"
+    },
+    "G1A-T04/MACM6": {
+      "path": "config/gate1/g1a_t04_macm6.json.yaml",
+      "handler": "validate_full_static_preparation",
+      "sha256": "771488e7675eb2a17ab7757c7215625ff25e1baf1a566485bebd25ce7f57be33"
+    }
+  },
+  "policy": "Exact byte hashes; changed configs require explicit freeze and commit before acceptance runs"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "task": "G0B-T01",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": [
+    17,
+    17,
+    17
+  ],
+  "box": [
+    6.283185307179586,
+    9.42477796076938,
+    12.566370614359172
+  ],
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "bandlimited_derivative": 2e-12,
+    "analytic_energy": 2e-12,
+    "parseval": 2e-12,
+    "skew_adjoint": 2e-12,
+    "vacuum_energy": 1e-20,
+    "unit_error": 2e-15,
+    "directional_gradient": 1e-07,
+    "symmetry_energy": 2e-12,
+    "smooth_derivative_final": 2e-11,
+    "centered_fd_final": 0.02,
+    "vacuum_face": 1e-07,
+    "vacuum_face_gradient": 5e-05,
+    "nyquist_derivative": 2e-12
+  },
+  "parameters": {
+    "minimum_tests": 66,
+    "allow_cloud": false,
+    "resolution_sequence": [
+      9,
+      13,
+      17,
+      25,
+      33
+    ],
+    "even_grid": [
+      16,
+      16,
+      16
+    ],
+    "gradient_steps": [
+      0.001,
+      0.0001,
+      1e-05
+    ],
+    "minimum_spectral_improvement": 10000.0,
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "handler": "validate_spectral_cpu",
+    "environment_freeze": "requirements/macm6.freeze.txt"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "task": "G0A-T01",
+  "machine": "MACM6",
+  "kind": "control",
+  "precision": "N/A",
+  "seeds": [0],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {},
+  "parameters": {"handler": "validate_repository", "allow_cloud": false, "minimum_tests": 18}
+}
