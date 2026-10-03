@@ -73,6 +73,8 @@ def validate(state: dict) -> None:
         raise ValueError("Invalid cloud guard")
     if not cloud["paused"] and (not cloud["approved_gate"] or cloud["max_usd_per_run"] <= 0):
         raise ValueError("Unpaused cloud requires gate and positive explicit budget")
+    from status_dashboard import validate_roadmap
+    validate_roadmap(state)
     for machine, scheduling in state.get('machine_scheduling',{}).items():
         if machine not in MACHINES or type(scheduling.get('deferred')) is not bool or not scheduling.get('reason','').strip():
             raise ValueError('Invalid machine scheduling decision')
@@ -138,32 +140,8 @@ def render(state: dict, root: Path = ROOT) -> None:
     validate(state)
     current = next_task(state)
     waiting=deferred_task(state) if current is None else None
-    action_label=current[0] if current else (f"none — {pending_machine(waiting[1])} deferred; next is {waiting[0]}" if waiting else 'none — review the task registry')
-    summary = ["# STATUS", "", "Generated from state/state.yaml; do not edit by hand.", "",
-               f"Active action: {action_label}",
-               f"Cloud: {'PAUSED' if state['cloud']['paused'] else 'APPROVED'}; "
-               f"budget USD {state['cloud']['max_usd_per_run']} per run.", "",
-               "Only G0 tasks are registered initially. Later gates remain untested.", "",
-               "| Task | Status | MACM6 | RTX5070 | CLOUD |",
-               "|---|---|---|---|---|"]
-    for key, task in state["tasks"].items():
-        summary.append(f"| {key} | {task['status']}{' (disabled)' if not task['enabled'] else ''} | "
-                       + " | ".join(flag(task, m) for m in MACHINES) + " |")
-    cpu_freeze = state["environments"]["MACM6"].get("numerical_dependencies_frozen", False) if state.get("environments") else False
-    summary.extend(["", "## Input/environment readiness", "",
-                    "- Required publication: yayınlanan.pdf; availability is checked before G0A-T02.",
-                    "- Python target: 3.12. MACM6 dependency freeze: " + ("complete." if cpu_freeze else "pending G0A-T03."),
-                    "- Remote runner setup: disabled; no Git remote configured by bootstrap.", ""])
-    program=state.get('macm6_program',{})
-    if program.get('status')=='AVAILABLE_INPUT_WORK_COMPLETE':
-        summary.extend(['','## MACM6 available-input program','',
-                        '- Completed; GPU-derived postprocessing and missing physical-input calculations remain pending.',
-                        '- Completion report: '+program['completion_report'],
-                        '- Work summary: docs/MACM6_COMPLETION_SUMMARY.md'])
-    for machine,scheduling in state.get('machine_scheduling',{}).items():
-        if scheduling['deferred']:
-            summary.append(f"- {machine}: DEFERRED — {scheduling['reason']}")
-    atomic_write(root / "STATUS.md", "\n".join(summary))
+    from status_dashboard import build_status
+    atomic_write(root / 'STATUS.md',build_status(state,current,waiting,root))
     for machine in MACHINES:
         lines = [f"# {machine} CHECKLIST", "", "Generated from state/state.yaml.", ""]
         for key, task in state["tasks"].items():

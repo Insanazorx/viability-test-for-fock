@@ -49,6 +49,28 @@ require an explicit diagnostic/recovery action; no automatic scan expansion.
 STATUS.md or device checklist files by hand. N/A means a machine is not required.
 Optional G0D tasks are disabled until G0B passes and remote setup is requested.
 
+## Full-program status
+
+`state/state.yaml` contains two separate records: `tasks` is the executable
+task registry with report-bound device flags; `roadmap` is the full G0–G6
+display catalog derived from AGENTS.md. A roadmap-only TODO row is a plan,
+not a scheduled or registered task. Stages without source task IDs retain
+their stage ID as a full-scope display row.
+
+```sh
+.venv/bin/python scripts/ctl.py refresh
+.venv/bin/python scripts/ctl.py validate
+```
+
+STATUS.md includes every stage, acceptance criteria, dependencies, machine
+responsibilities, report links, scoped results and missing inputs. Its
+`dashboard` metadata holds report-backed summary measurements. Preserve
+`preparation` and `scoped` row classifications: a PASS for those rows does
+not close the original full scientific stage. When new work is registered,
+update the display catalog too; validation rejects omitted registered tasks.
+Refreshing this view does not add tasks, change completion flags or enable
+deferred devices/cloud. NEXT remains exactly one executable or waiting action.
+
 When a device is unavailable, a dependency-ready independent task can become
 the single active NEXT action with an explicit recorded reason:
 
