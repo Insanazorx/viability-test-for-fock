@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T14:50:54.240371+00:00**
+Durum kaydı (UTC): **2026-10-03T20:29:58.269998+00:00**
 
 ## Genel durum
 
@@ -11,7 +11,7 @@ Durum kaydı (UTC): **2026-10-03T14:50:54.240371+00:00**
 | Bilimsel sonuç | **PARTIAL / UNRESOLVED** |
 | Işınımsal değerlendirme | RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED |
 | MACM6 | Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu. |
-| Sıradaki tek eylem | G0A-T02 / RTX5070 — DEFERRED; çalışma başlatılmadı |
+| Sıradaki tek eylem | G0A-T02 / RTX5070 |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
 | Yürütme kaydı | 21 görev: 11 PASS, 3 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
 
@@ -26,10 +26,10 @@ Durum kaydı (UTC): **2026-10-03T14:50:54.240371+00:00**
 | Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |
 |---|---|---|
 | MACM6 | 14 | Kayıtlı hazırlık tamam; iki RTX-bağımsız G0 benchmark’ı ayrı görev/ayar/rapor bekliyor. |
-| RTX5070 | 0 | DEFERRED — User explicitly requested all feasible MACM6 work first, then RTX5070 (2026-10-03). |
+| RTX5070 | 0 | Kayıtlı görev sırası geçerli. |
 | CLOUD | 0 | Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok. |
 
-Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>).
+Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>).
 
 ## Bütün ana gate’lerin özeti
 
@@ -77,10 +77,10 @@ Kod, matematik çekirdeği ve kayıt disiplinini doğrulamak.
 
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
-| G0A-T01 | **Repo iskeleti** — Dizinler, Git dışlama kuralları, bağımlılıklar, şema, durum dosyası ve rapor şablonu kayıtlı. | PASS | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md>); Repo ve kontrol dosyaları kayıtlı. |
-| G0A-T02 | **Matematik çekirdeği API** — C1/C2, Hodge ayrışımı, STF, indirgenmiş alan/enerji/Hopf tanımları; float64 kimlik, dönüşüm ve türev kontrolleri; CUDA aynası. | RUNNING · RTX5070 ertelendi | [X] | [ ] | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md>); MACM6 PASS; CUDA aynası henüz çalıştırılmadı. |
-| G0A-T03 | **Çalışma ve ayar disiplini** — Sabit ayar kimliği, UTC/Git/config çalışma kimliği, değişmez metadata ve açık kirli Git bilgisi. | PASS | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md>); MACM6 ortamı/ayar/çalışma kaydı tamamlandı. |
-| G0A-T04 | **MACM6 tamamlama ve aktarım hazırlığı** — Önceki 13 MACM6 sorumluluğunun rapor/ayar/bütünlük denetimi ve offline aktarım ön kontrolü PASS. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>); Bu hazırlıkla toplam 14 MACM6 sorumluluğu raporlu; ZIP geri yükleme doğrulaması aktarım kaydında. |
+| G0A-T01 | **Repo iskeleti** — Dizinler, Git dışlama kuralları, bağımlılıklar, şema, durum dosyası ve rapor şablonu kayıtlı. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md>); Repo ve kontrol dosyaları kayıtlı. |
+| G0A-T02 | **Matematik çekirdeği API** — C1/C2, Hodge ayrışımı, STF, indirgenmiş alan/enerji/Hopf tanımları; float64 kimlik, dönüşüm ve türev kontrolleri; CUDA aynası. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md>); MACM6 PASS; CUDA aynası henüz çalıştırılmadı. |
+| G0A-T03 | **Çalışma ve ayar disiplini** — Sabit ayar kimliği, UTC/Git/config çalışma kimliği, değişmez metadata ve açık kirli Git bilgisi. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md>); MACM6 ortamı/ayar/çalışma kaydı tamamlandı. |
+| G0A-T04 | **MACM6 tamamlama ve aktarım hazırlığı** — Önceki 13 MACM6 sorumluluğunun rapor/ayar/bütünlük denetimi ve offline aktarım ön kontrolü PASS. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>); Bu hazırlıkla toplam 14 MACM6 sorumluluğu raporlu; ZIP geri yükleme doğrulaması aktarım kaydında. |
 
 <a id="g0b"></a>
 ### G0B — Yayınlanan indirgenmiş Hopf çözücüsü
@@ -93,11 +93,11 @@ Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.
 
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
-| G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | RUNNING · RTX5070 ertelendi | [X] | [ ] | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
-| G0B-T02 | **Hopf yükü ve işaret** — Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü. | RUNNING · RTX5070 ertelendi | [X] | [ ] | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>); MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil. |
-| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | TODO · RTX5070 ertelendi | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
-| G0B-T04 | **İndirgenmiş fiziksel Hessian** — Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık. | TODO · RTX5070 ertelendi | [ ] | [ ] | N/A | Rapor yok; G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi. |
-| G0B-T05 | **MACM6 indirgenmiş çözücü/HVP/CPU oracle hazırlığı** — G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>); G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. |
+| G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
+| G0B-T02 | **Hopf yükü ve işaret** — Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>); MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil. |
+| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
+| G0B-T04 | **İndirgenmiş fiziksel Hessian** — Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi. |
+| G0B-T05 | **MACM6 indirgenmiş çözücü/HVP/CPU oracle hazırlığı** — G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>); G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. |
 
 <a id="g0c"></a>
 ### G0C — Cihazlar arası referans ve hassasiyet
@@ -113,7 +113,7 @@ CPU/CUDA farklarının ve düşük özdeğer işaretlerinin güvenilirliğini ö
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
 | G0C-T01 | **Bağımsız CPU/CUDA karşılaştırması** — Basit float64 CPU referansı ile enerji, Q, gradyan ve yönsel HVP karşılaştırması. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 doğrudan DFT CPU oracle hazır; gerçek CUDA karşılaştırması henüz yok. |
-| G0C-T02 | **Hassasiyet politikası** — RTX5070 float32/float64/seçilen karma hassasiyet profili; son gözlenebilirlerin ve sıfıra yakın özdeğerlerin yeniden doğrulanması. | TODO · RTX5070 ertelendi | [ ] | [ ] | N/A | Rapor yok; RTX hassasiyet profili olmadan MACM6 hata bütçesi tamamlanamaz. |
+| G0C-T02 | **Hassasiyet politikası** — RTX5070 float32/float64/seçilen karma hassasiyet profili; son gözlenebilirlerin ve sıfıra yakın özdeğerlerin yeniden doğrulanması. | TODO | [ ] | [ ] | N/A | Rapor yok; RTX hassasiyet profili olmadan MACM6 hata bütçesi tamamlanamaz. |
 
 <a id="g0d"></a>
 ### G0D — İsteğe bağlı uzak/telefon kontrolü
@@ -129,7 +129,7 @@ Onaylı görevlerle sınırlı denetlenebilir uzak çalıştırma.
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
 | G0D-T01 | **MACM6 self-hosted runner** — macm6 etiketi; yalnız onaylı script/ayarlar; güvenilmeyen PR üzerinden keyfi komut yok. | TODO · kapalı | [ ] | N/A | N/A | Rapor yok |
-| G0D-T02 | **RTX5070 self-hosted runner** — rtx5070 etiketi; gerçek CUDA görünürlüğü; aynı anda tek GPU işi. | TODO · kapalı · RTX5070 ertelendi | N/A | [ ] | N/A | Rapor yok |
+| G0D-T02 | **RTX5070 self-hosted runner** — rtx5070 etiketi; gerçek CUDA görünürlüğü; aynı anda tek GPU işi. | TODO · kapalı | N/A | [ ] | N/A | Rapor yok |
 | G0D-T03 | **Telefon workflow dispatch** — status/run-task/pause/cancel/collect-report; keyfi kabuk veya bulut başlatma yok. | TODO · kapalı | [ ] | [ ] | N/A | Rapor yok |
 
 
@@ -150,7 +150,7 @@ Sabit yarıçap/Pfaffian indirgemesini kaldırmak.
 | G1A-T01 | **Altı bileşenli alan ve tam enerji** — C1/C2/M±, radyal/Pfaffian potansiyelleri, tam quartic operatör; SO4, indirgenme ve sonlu fark türevleri. | TODO · plan | [ ] | [ ] | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor; G1A-T04 CPU tam alan/türev hazırlığı PASS; özgün görevin üretim/CUDA kabulü bekliyor. |
 | G1A-T02 | **Durağan Hopf alanını tam M alanına kaldırma** — Yeniden üretilmiş durağan checkpoint; C1−σ0², C2, Q±; ağır normal mod limitinde indirgenmiş enerji. | TODO · plan | [ ] | [ ] | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor; Bağımsız başlangıç alanı var; yeniden üretilmiş durağan checkpoint yok. |
 | G1A-T03 | **Sertlik devam parametreleri** — A=αζ/ZM², P=μζ/ZM²; logaritmik/adaptif adımlar ve önceki çözümle başlangıç. | TODO · plan | N/A | [ ] | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor |
-| G1A-T04 | **MACM6 tam M enerji ve türev referansı** — Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md>); Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık. |
+| G1A-T04 | **MACM6 tam M enerji ve türev referansı** — Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G1\G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md>); Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık. |
 
 <a id="g1b"></a>
 ### G1B — Dal varlığı, çözünürlük ve kutu yakınsaması
@@ -438,9 +438,9 @@ Seçilen EFT mertebesinde korunmuş ve ayarlanmış yapıları ayırmak.
 
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
-| G4A-T01 | **Seçilen mertebede operatör bazı** — Diffeomorfizm, SO4, χ-paritesi; seçilen mertebede envanter ve kapsam kaydı. | PASS | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md>) |
-| G4A-T02 | **Eksik operatör ve redundant terimler** — Simetri, ek baseline yansıma ve koşullu field/EOM değişimi ile ayar farkları. | PASS | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md>) |
-| G4A-T03 | **μ ve Xi fonksiyon denetimi** — λⁿC2² alt terimleri ve Xi parite/doyum biçimi; matching koşulları açık. | PASS | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md>) |
+| G4A-T01 | **Seçilen mertebede operatör bazı** — Diffeomorfizm, SO4, χ-paritesi; seçilen mertebede envanter ve kapsam kaydı. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md>) |
+| G4A-T02 | **Eksik operatör ve redundant terimler** — Simetri, ek baseline yansıma ve koşullu field/EOM değişimi ile ayar farkları. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md>) |
+| G4A-T03 | **μ ve Xi fonksiyon denetimi** — λⁿC2² alt terimleri ve Xi parite/doyum biçimi; matching koşulları açık. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md>) |
 
 <a id="g4b"></a>
 ### G4B — Tek döngü EFT düzeltmeleri ve eşleşme
@@ -456,7 +456,7 @@ Skaler kütle/vakum enerjisi/switching/mixing/portal düzeltmelerini eşlemek.
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
 | G4B | **Tam gate kapsamı** — Karanlık sektörün yanında somut madde/portal, kinetik/eğrilik, renormalizasyon, fiziksel tuning ve cutoff eşleşmesi tamamlanmış. | TODO · plan | [ ] | N/A | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor |
-| G4B-T01 | **Homojen karanlık-skaler tek döngü hesabı** — Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık. | PASS · kısmi kapsam | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md>); Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık. |
+| G4B-T01 | **Homojen karanlık-skaler tek döngü hesabı** — Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık. | PASS · kısmi kapsam | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md>); Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık. |
 
 <a id="g4c"></a>
 ### G4C — Tam doğalılık karar dalı
@@ -472,7 +472,7 @@ Dört seçenekten birini tam hesabın kapsamıyla seçmek.
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
 | G4C | **Tam gate kapsamı** — Teknik doğal / uygun ama ayarlı / ek koruma gerekir / kontrolsüz ayrımı tam girdilerle yapılmış; ek koruma seçilirse yeni teori dalı. | TODO · plan | [ ] | N/A | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor |
-| G4C-T02 | **Koşullu doğalılık değerlendirmesi** — Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md>); Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi. |
+| G4C-T02 | **Koşullu doğalılık değerlendirmesi** — Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md>); Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi. |
 
 <a id="g4d"></a>
 ### G4D — Yerçekimli vakum bozunumu
@@ -492,7 +492,7 @@ CDL geri tepkisi ve prefaktörle kozmolojik ömür bölgesini bulmak.
 | G4D-T01 | **Düz uzay bounce tekrar üretimi** — Yayınlanan Bhat4 katsayısı, başlangıç, virial ve truncation/yakınsama denetimi. | TODO · plan | [ ] | N/A | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor; G4D-T04 içinde katsayı tekrar üretildi; bu özgün görev yeniden açılmadı/aktarılmadı ve G1B ön koşulu duruyor. |
 | G4D-T02 | **Yerçekimli CDL çözümü** — O4 bounce ve Einstein geri tepkisi; iki düzenli kutup, kısıt ve false-vacuum eylem çıkarımı. | TODO · plan | [ ] | N/A | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor; G4D-T04 kısıt ve sabit vakum testleri geçti; nontrivial yerçekimli bounce çözülmedi. |
 | G4D-T03 | **Fiziksel ömür bölgesi** — Ölçekler ve prefaktörün EFT kontrolü; korunmuş bölgede kozmolojik ömür. | TODO · plan | [ ] | N/A | N/A | Yürütme kaydı/rapor yok; ön koşul veya girdi bekliyor; Fiziksel ölçek, korunmuş bölge, CDL çözümü ve prefaktör bekliyor. |
-| G4D-T04 | **Düz uzay bounce ve CDL denklem hazırlığı** — Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md>); Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil. |
+| G4D-T04 | **Düz uzay bounce ve CDL denklem hazırlığı** — Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md>); Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil. |
 
 <a id="g4e"></a>
 ### G4E — Solitonda kütleçekim önem testi
@@ -661,12 +661,12 @@ On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.
 
 | Sonuç | Ölçüm ve kapsam | Kanıt |
 |---|---|---|
-| Hopf yükü | Q=−1.000000004972 (49³ bağımsız başlangıç alanı; durağan çözüm değil) | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>) |
-| İndirgenmiş vakum smoke artığı | 2.71e−9; birim sektör durağan soliton iddiası yok | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>) |
-| Tam M ağır-limit enerji farkı | 1.00e−15; CPU referans hazırlığı | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md>) |
-| Operatör bazı | 32 d≤4 karanlık/metrik operatör; IBP kapsamı | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md>) |
-| Tek döngü switching | Daha düşük ikinci-derece λ²C2² karşı terimi doğrulandı; baseline değiştirilmedi | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md>) |
-| Düz uzay bounce | Bhat4=1082.94755553; kaynakla bağıl fark 4.94e−9; fiziksel ömür değil | [MACM6 raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md>) |
+| Hopf yükü | Q=−1.000000004972 (49³ bağımsız başlangıç alanı; durağan çözüm değil) | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>) |
+| İndirgenmiş vakum smoke artığı | 2.71e−9; birim sektör durağan soliton iddiası yok | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>) |
+| Tam M ağır-limit enerji farkı | 1.00e−15; CPU referans hazırlığı | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G1\G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md>) |
+| Operatör bazı | 32 d≤4 karanlık/metrik operatör; IBP kapsamı | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md>) |
+| Tek döngü switching | Daha düşük ikinci-derece λ²C2² karşı terimi doğrulandı; baseline değiştirilmedi | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md>) |
+| Düz uzay bounce | Bhat4=1082.94755553; kaynakla bağıl fark 4.94e−9; fiziksel ömür değil | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md>) |
 
 ## Eksik girdiler ve bekleme nedenleri
 
@@ -681,7 +681,7 @@ On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.
 
 ## Gate 0’da RTX5070 beklemeden kalan MACM6 işleri
 
-Kayıtlı referans/hazırlıkların tamamlanması Gate 0’ın genel kapsamını tüketmemiştir. Bu iki kaynak benchmark’ı henüz ayrı görev/config/rapor olarak kaydedilmedi; TODO plan kapsamıdır. Kaynak hedefleri ve sınırlar: [G0 kapsam denetimi](</Users/insanazor/Desktop/viablilty test/docs/G0_MACM6_REMAINING.md>).
+Kayıtlı referans/hazırlıkların tamamlanması Gate 0’ın genel kapsamını tüketmemiştir. Bu iki kaynak benchmark’ı henüz ayrı görev/config/rapor olarak kaydedilmedi; TODO plan kapsamıdır. Kaynak hedefleri ve sınırlar: [G0 kapsam denetimi](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\G0_MACM6_REMAINING.md>).
 
 | İş | Kaynak ve kabul kapsamı | Durum | Cihaz |
 |---|---|---|---|
@@ -694,19 +694,19 @@ Aktif FAIL/BLOCKED görevler yukarıdaki canlı kayıttadır. Aşağıdaki uygul
 
 | Görev | Giderilen sorun | Korunan hata raporu | Son durum |
 |---|---|---|---|
-| G0A-T03 | İlk SciPy/macOS yükleyici hatası; düzeltilmiş ortamla PASS. | [FAIL raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md>) | PASS |
-| G4A-T01 | Test fixture ayar dizini eksikti; aynı ölçütlerle düzeltme ve PASS. | [FAIL raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md>) | PASS |
-| G4A-T02 | NumPy bool değerinin sonuç kaydı hatası; dönüşüm düzeltildi ve PASS. | [FAIL raporu](</Users/insanazor/Desktop/viablilty test/reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890__REPORT.md>) | PASS |
-| G0A-T04 | Eski raporlar seal öncesi biçimdeydi; özgün artifact hash denetimiyle PASS. | [FAIL raporu](</Users/insanazor/Desktop/viablilty test/reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550__REPORT.md>) | PASS |
+| G0A-T03 | İlk SciPy/macOS yükleyici hatası; düzeltilmiş ortamla PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md>) | PASS |
+| G4A-T01 | Test fixture ayar dizini eksikti; aynı ölçütlerle düzeltme ve PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md>) | PASS |
+| G4A-T02 | NumPy bool değerinin sonuç kaydı hatası; dönüşüm düzeltildi ve PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T02__G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890__REPORT.md>) | PASS |
+| G0A-T04 | Eski raporlar seal öncesi biçimdeydi; özgün artifact hash denetimiyle PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550__REPORT.md>) | PASS |
 
 ## Ortam, aktarım ve bir sonraki cihaz
 
-- Python hedefi 3.12; MACM6 bağımlılıkları [sabitlenmiş ortam](</Users/insanazor/Desktop/viablilty test/requirements/macm6.freeze.txt>).
-- Kaynak PDF ve checkpoint kimlikleri [kaynak manifesti](</Users/insanazor/Desktop/viablilty test/config/benchmark/publication.source.yaml>) ve [cihaz devir notu](</Users/insanazor/Desktop/viablilty test/MACHINE_HANDOFF.md>) içinde.
-- MACM6 hazırlık kapsamı: [tamamlama özeti](</Users/insanazor/Desktop/viablilty test/docs/MACM6_COMPLETION_SUMMARY.md>).
-- Sıradaki tek eylem: [NEXT](</Users/insanazor/Desktop/viablilty test/NEXT.md>); cihaz kurulum/devam adımları: [RTX5070 hazırlık notu](</Users/insanazor/Desktop/viablilty test/docs/RTX5070_READY.md>).
-- Cihazlar arası proje devamı ve mevcut checkpoint kapsamı: [pratik geçiş rehberi](</Users/insanazor/Desktop/viablilty test/docs/DEVICE_CONTINUATION.md>).
-- Doğrulanmış offline paket: [RTX5070 ZIP](</Users/insanazor/Desktop/viablilty test/transfers/RTX5070__20261003T144940Z__9da2c46.zip>) (2412068 byte); kaynak Git snapshot `9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1`.
-- Paket SHA256: `b600fbb9cab9e2717754a320c4444e33aa662612de6e73137e45a46c3bc137b5`; ayrı receipt: [aktarım kaydı](</Users/insanazor/Desktop/viablilty test/docs/RTX5070_TRANSFER_PACKET.md>).
+- Python hedefi 3.12; MACM6 bağımlılıkları [sabitlenmiş ortam](<C:\Users\Death\Desktop\viability-test-for-fock-main\requirements\macm6.freeze.txt>).
+- Kaynak PDF ve checkpoint kimlikleri [kaynak manifesti](<C:\Users\Death\Desktop\viability-test-for-fock-main\config\benchmark\publication.source.yaml>) ve [cihaz devir notu](<C:\Users\Death\Desktop\viability-test-for-fock-main\MACHINE_HANDOFF.md>) içinde.
+- MACM6 hazırlık kapsamı: [tamamlama özeti](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\MACM6_COMPLETION_SUMMARY.md>).
+- Sıradaki tek eylem: [NEXT](<C:\Users\Death\Desktop\viability-test-for-fock-main\NEXT.md>); cihaz kurulum/devam adımları: [RTX5070 hazırlık notu](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\RTX5070_READY.md>).
+- Cihazlar arası proje devamı ve mevcut checkpoint kapsamı: [pratik geçiş rehberi](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\DEVICE_CONTINUATION.md>).
+- Doğrulanmış offline paket: [RTX5070 ZIP](<C:\Users\Death\Desktop\viability-test-for-fock-main\transfers\RTX5070__20261003T144940Z__9da2c46.zip>) (2412068 byte); kaynak Git snapshot `9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1`.
+- Paket SHA256: `b600fbb9cab9e2717754a320c4444e33aa662612de6e73137e45a46c3bc137b5`; ayrı receipt: [aktarım kaydı](<C:\Users\Death\Desktop\viability-test-for-fock-main\docs\RTX5070_TRANSFER_PACKET.md>).
 - Her ZIP kaynak Git snapshotını taşır; kendi aktarım receipt'i sonradan kaydedilir. Son paket seçimi için güncel aktarım kaydını, geri yüklemede TRANSFER.json'daki commit ve dosya hash'lerini kullanın.
 - Git remote ve uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.

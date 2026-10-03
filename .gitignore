@@ -1,0 +1,14 @@
+.venv/
+.rtx5070-git-*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+checkpoints/*
+!checkpoints/.gitkeep
+*.pdf
+*.h5
+*.hdf5
+*.npy
+*.npz
+transfers/

@@ -1,0 +1,2 @@
+# Evidence and frozen configs must keep identical bytes on every machine.
+* -text

@@ -53,6 +53,13 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
+    if config["machine"] == "RTX5070":
+        environment = state.get("environments", {}).get("RTX5070", {})
+        path = inside(ROOT, environment["full_environment_freeze"], "requirements")
+        check_environment_freeze(path)
+        inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
+        record = inside(ROOT, environment["hardware_record"], "docs")
+        inputs[record.relative_to(ROOT).as_posix()] = sha256(record)
     if config['parameters'].get('source_manifest'):
         manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
         manifest = read_data(manifest_path)
@@ -108,7 +115,7 @@ def main() -> int:
                 "architecture": platform.machine(), "python": platform.python_version(),
                 "python_executable": sys.executable,
                 "pytorch": version("torch"), "cuda": observed_hardware.get("cuda_runtime"),
-                "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+                "cuda_note": "Actual CUDA float64 execution" if config["machine"] == "RTX5070" else "No CUDA execution on MACM6",
                 "numpy": version("numpy"), "input_sha256": inputs,
                 "precision": config["precision"], "seeds": config["seeds"],
                 **{k: config[k] for k in ("grid", "box", "time_step", "optimizer", "integrator", "tolerances")},

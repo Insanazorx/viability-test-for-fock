@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -99,10 +100,31 @@ class ControlTests(unittest.TestCase):
     def test_external_and_symlink_paths_rejected(self):
         with tempfile.TemporaryDirectory() as folder, tempfile.TemporaryDirectory() as outside:
             root = Path(folder)
-            (root / "link").symlink_to(outside, target_is_directory=True)
+            try:
+                (root / "link").symlink_to(outside, target_is_directory=True)
+            except OSError as error:
+                if sys.platform != "win32" or error.winerror != 1314:
+                    raise
+                # Junctions test the same resolved-path escape without symlink privileges.
+                subprocess.run(["powershell.exe", "-NoProfile", "-Command",
+                                "New-Item -ItemType Junction -Path $env:FOCK_TEST_JUNCTION "
+                                "-Target $env:FOCK_TEST_TARGET -ErrorAction Stop | Out-Null"],
+                               env=dict(os.environ, FOCK_TEST_JUNCTION=str(root / "link"),
+                                        FOCK_TEST_TARGET=outside), check=True)
             for name in ("../report.md", "link/report.md"):
                 with self.assertRaises(ValueError):
                     inside(root, name)
+
+    def test_next_uses_assigned_machine_python(self):
+        value = state()
+        value["tasks"]["G0A-T01"] = task(("RTX5070",))
+        value["tasks"]["G0A-T01"]["command"] = ".venv/bin/python scripts/ctl.py validate"
+        value["environments"] = {"RTX5070": {"python_command": ".venv/Scripts/python.exe"}}
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            render(value, root)
+            self.assertIn(".venv/Scripts/python.exe scripts/ctl.py validate",
+                          (root / "NEXT.md").read_text())
 
     def test_wrong_task_and_empty_report_rejected(self):
         with tempfile.TemporaryDirectory() as folder:

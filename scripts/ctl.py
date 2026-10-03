@@ -136,6 +136,14 @@ def flag(task: dict, machine: str) -> str:
     return "[X]" if task["machine_done"][machine] else "[ ]"
 
 
+def machine_command(state: dict, task: dict, machine: str) -> str:
+    command = task.get("machine_commands", {}).get(machine, task["command"])
+    python = state.get("environments", {}).get(machine, {}).get("python_command")
+    if python and command.startswith(".venv/bin/python "):
+        command = python + command[len(".venv/bin/python"):]
+    return command
+
+
 def render(state: dict, root: Path = ROOT) -> None:
     validate(state)
     current = next_task(state)
@@ -158,7 +166,7 @@ def render(state: dict, root: Path = ROOT) -> None:
                       "## Action", task.get("machine_actions", {}).get(machine, task["next_action"]), "", "## Read", "",
                       f"- AGENTS.md#{key[:3].lower()}", "- MACHINE_HANDOFF.md"])
         lines.extend(f"- {p}" for p in task["read"])
-        lines.extend(["", "## One command", "", "```sh", task.get("machine_commands", {}).get(machine, task["command"]), "```", ""])
+        lines.extend(["", "## One command", "", "```sh", machine_command(state, task, machine), "```", ""])
         if task["status"] in {"FAIL", "BLOCKED"}:
             lines.extend(["Resolve the recorded outcome before launching any new run.", ""])
     elif waiting:

@@ -199,6 +199,41 @@ def main() -> int:
             'next_action':p['next_action'],
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, docs/MACM6_COMPLETION_PLAN.md and '+p['contract_doc'],
         })
+    if metadata["machine"] == "RTX5070":
+        python = ".venv/Scripts/python.exe" if metadata["os"].startswith("Windows") else ".venv/bin/python"
+        values["reproduction"] = (
+            f"```sh\n{python} -m pip install torch=={metadata['pytorch']} --index-url https://download.pytorch.org/whl/cu128\n"
+            f"{python} -m pip install -r requirements/rtx5070.freeze.txt\n"
+            f"{python} scripts/run.py --check --config {metadata['config_path']}\n"
+            f"{python} scripts/run.py --config {metadata['config_path']}\n"
+            f"{python} scripts/report.py --run-id EXACT_NEW_RUN_ID\n```\n"
+            f"Use isolated checkout `{metadata['git_commit']}` with the matching PDF and frozen environment. "
+            "The assigned responsibility must be RUNNING/unfinished and its preceding CUDA reports must pass."
+        )
+        values["inputs"] = values["inputs"].replace(
+            "The user explicitly deferred RTX5070 while requesting MACM6 preparation. ",
+            "The user resumed RTX5070 for the actual CUDA comparison. ")
+        values["anomalies"] += (
+            "\n- Actual RTX5070 environment/hardware (also sealed in metadata/environment JSON):\n```json\n"
+            + json.dumps({"python": metadata["python"], "hardware": metadata["hardware"]}, indent=2)
+            + "\n```\n- GitHub transfer has one upload commit; original MACM6 commit history is absent from this remote. "
+            "Existing MACM6 report identities/evidence remain preserved.\n"
+            "- Windows lacks symlink creation privilege; the security regression uses a directory junction to test the same path escape.\n"
+        )
+        values["changes"] = (
+            "First actual RTX5070 float64 CUDA comparison against the preserved NumPy references. "
+            "Records this Windows environment, driver, runtime, RAM/VRAM and exact input hashes. "
+            "Restores missing transfer directories/ignore rules and uses machine-specific execution paths. "
+            "Published tolerances and MACM6 completion records are unchanged."
+        )
+        if result["status"] == "PASS":
+            values["next_action"] = {
+                "G0A-T02": "Record only RTX5070 completion, then follow NEXT for G0B-T01 CUDA. MACM6 G0A-T03 already passed.",
+                "G0B-T01": "Record only RTX5070 completion, then follow NEXT for the frozen G0B-T02 CUDA Hopf comparison.",
+                "G0B-T02": "Record only RTX5070 completion, then develop G0B-T03 production driver and the matched stationary sequence. G0B-T04 spectrum remains pending; this initial field is nonstationary.",
+            }[metadata["task"]]
+        else:
+            values["next_action"] = "Preserve this failed run/report, classify the anomaly and perform the smallest discriminating check before an explicit recovery. Do not loosen tolerances or advance the queue."
     report = ROOT / f"reports/{metadata['task'][:2]}" / f"{metadata['task']}__{args.run_id}__REPORT.md"
     output=(ROOT / "reports/SUBSTEP_REPORT_TEMPLATE.md").read_text(encoding="utf-8").format(**values)
     if seal_hash:

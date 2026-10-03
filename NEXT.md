@@ -5,10 +5,9 @@ Exactly one active action; generated from state/state.yaml.
 task: G0A-T02
 machine: RTX5070
 status: RUNNING
-scheduling: DEFERRED
 
 ## Action
-Preserve the completed MACM6 references and review the waiting handoff. RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.
+Follow docs/RTX5070_CORE_HANDOFF.md, prepare the real CUDA environment and run the frozen float64 mirror comparison. Record only RTX5070 completion; no cloud or lattice solve.
 
 ## Read
 
@@ -24,5 +23,5 @@ Preserve the completed MACM6 references and review the waiting handoff. RTX5070 
 ## One command
 
 ```sh
-.venv/bin/python scripts/ctl.py status
+.venv/Scripts/python.exe scripts/run.py --config config/benchmark/g0a_t02_rtx5070.json.yaml
 ```
