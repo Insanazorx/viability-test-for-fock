@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "task": "G4C-T02",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "integrity": 1e-15
+  },
+  "parameters": {
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt",
+    "allow_cloud": false,
+    "minimum_tests": 113,
+    "source_sections": "p.7 Eqs.50-51; source Radiative status p.13",
+    "acceptance": "Every frozen exact/numeric check and all unit tests pass.",
+    "next_action": "Finish available-input MACM6 validation and prepare the deferred RTX5070 handoff.",
+    "handler": "validate_naturalness",
+    "contract_doc": "docs/G4C_CONDITIONAL_STATUS.md",
+    "loop_run": "runs/G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767",
+    "loop_seal_sha256": "e78d3606825d7bc1b6aae04c9563468183a59bcadaec03379edc9776d3227a49",
+    "objective": "Record evidence-derived conditional radiative status without claiming full matching or viability.",
+    "method": "Verify sealed one-loop evidence and report protected/unprotected conditions and missing inputs.",
+    "convergence": "Exact evidence integrity and recorded one-loop acceptance; no new physical scan.",
+    "claim_scope": "Conditional engineering packet only; full Gate4C and model viability remain unresolved.",
+    "limitations": [
+      "Physical scales/cutoff and concrete matter action absent.",
+      "No new protection mechanism or baseline modification."
+    ],
+    "changes": "First explicit conditional radiative status from computed evidence."
+  }
+}

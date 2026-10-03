@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T10:38:18.583670+00:00",
+  "updated_utc": "2026-10-03T10:38:50.067566+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -639,10 +639,37 @@
     },
     "G4C-T02": {
       "title": "Conditional radiative status preparation",
-      "status": "RUNNING",
+      "status": "PASS",
       "enabled": true,
       "prerequisites": [
         "G4B-T01"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md"
+      },
+      "read": [
+        "docs/G4C_CONDITIONAL_STATUS.md",
+        "config/gate4/g4c_t02_macm6.json.yaml",
+        "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md"
+      ],
+      "next_action": "Record evidence-derived conditional radiative status without claiming full matching or viability.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4c_t02_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G4D-T04": {
+      "title": "Flat bounce regression and gravity-equation preparation",
+      "status": "RUNNING",
+      "enabled": true,
+      "prerequisites": [
+        "G4C-T02"
       ],
       "machine_order": [
         "MACM6"
@@ -654,21 +681,21 @@
       },
       "machine_reports": {},
       "read": [
-        "docs/G4C_CONDITIONAL_STATUS.md",
-        "config/gate4/g4c_t02_macm6.json.yaml",
-        "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md"
+        "docs/G4D_DECAY_PREPARATION.md",
+        "config/gate4/g4d_t04_macm6.json.yaml",
+        "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md"
       ],
-      "next_action": "Record evidence-derived conditional radiative status without claiming full matching or viability.",
-      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4c_t02_macm6.json.yaml",
+      "next_action": "Independently reproduce the flat-space source bounce and verify gravity-aware equation/constraint/false-vacuum action preparation.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4d_t04_macm6.json.yaml",
       "required_input": "yayınlanan.pdf"
     }
   },
-  "active_task": "G4C-T02",
+  "active_task": "G4D-T04",
   "action_selection": {
-    "task": "G4C-T02",
+    "task": "G4D-T04",
     "machine": "MACM6",
-    "reason": "Prepare conditional radiative status without claiming completed missing physics",
-    "selected_utc": "2026-10-03T10:38:18.557200+00:00"
+    "reason": "Complete independent source regression and gravity preparation before GPU; lifetime gate is retained",
+    "selected_utc": "2026-10-03T10:38:50.040782+00:00"
   },
   "machine_scheduling": {
     "RTX5070": {

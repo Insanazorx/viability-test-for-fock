@@ -2,13 +2,13 @@
 
 from: MACM6
 to: MACM6
-task: G4C-T02
+task: G4D-T04
 status: TODO
 read:
-  - AGENTS.md#g4c
-  - docs/G4C_CONDITIONAL_STATUS.md
-  - config/gate4/g4c_t02_macm6.json.yaml
-  - reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md
+  - AGENTS.md#g4d
+  - docs/G4D_DECAY_PREPARATION.md
+  - config/gate4/g4d_t04_macm6.json.yaml
+  - reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md
 do_next:
   - run the frozen MACM6 substep, write report, record machine completion
   - continue docs/MACM6_COMPLETION_PLAN.md

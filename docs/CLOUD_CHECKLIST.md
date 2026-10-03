@@ -20,4 +20,5 @@ Generated from state/state.yaml.
 - N/A CLOUD — G0B-T05: MACM6 reduced solver/HVP/CPU reference engineering preparation (PASS)
 - N/A CLOUD — G1A-T04: MACM6 six-component static reference preparation (PASS)
 - N/A CLOUD — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)
-- N/A CLOUD — G4C-T02: Conditional radiative status preparation (RUNNING)
+- N/A CLOUD — G4C-T02: Conditional radiative status preparation (PASS)
+- N/A CLOUD — G4D-T04: Flat bounce regression and gravity-equation preparation (RUNNING)

@@ -2,23 +2,23 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G4C-T02
+task: G4D-T04
 machine: MACM6
 status: RUNNING
 
 ## Action
-Record evidence-derived conditional radiative status without claiming full matching or viability.
+Independently reproduce the flat-space source bounce and verify gravity-aware equation/constraint/false-vacuum action preparation.
 
 ## Read
 
-- AGENTS.md#g4c
+- AGENTS.md#g4d
 - MACHINE_HANDOFF.md
-- docs/G4C_CONDITIONAL_STATUS.md
-- config/gate4/g4c_t02_macm6.json.yaml
-- reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md
+- docs/G4D_DECAY_PREPARATION.md
+- config/gate4/g4d_t04_macm6.json.yaml
+- reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/run.py --config config/gate4/g4c_t02_macm6.json.yaml
+.venv/bin/python scripts/run.py --config config/gate4/g4d_t04_macm6.json.yaml
 ```
