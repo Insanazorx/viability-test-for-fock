@@ -1,0 +1,187 @@
+{
+  "run_id": "G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:32:47.770879+00:00",
+  "wall_time_seconds": 0.6346935420006048,
+  "peak_ram_gb": 0.14401536,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 47,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 110,
+    "minimum_tests": 110,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "potential_gradient": true,
+        "potential_hessian": true,
+        "hessian_symmetry": true,
+        "vacuum_spectrum": true,
+        "scale_derivative": true,
+        "threshold_curvature": true,
+        "scalar_derivatives": true,
+        "lower_switch_counterterm": true,
+        "negative_mass_rejected": true,
+        "four_tangent_zeros": true,
+        "stable_test_vacuum": true,
+        "chi_linear_mixing_absent": true
+      },
+      "worst_errors": {
+        "potential_gradient": 2.520239572589844e-11,
+        "potential_hessian": 9.958625453331762e-11,
+        "hessian_symmetry": 0.0,
+        "vacuum_spectrum": 0.0,
+        "scale_derivative": 2.0171364578658313e-14,
+        "threshold_curvature": 4.817219539932083e-11,
+        "scalar_derivatives": 5.547550344445207e-09,
+        "lower_switch_counterterm": 4.6823447680872164e-07
+      },
+      "derivative_rows": [
+        {
+          "seed": 0,
+          "derivative_sequence": [
+            {
+              "step": 0.001,
+              "gradient": 7.105302479715192e-08,
+              "hessian": 7.338194591591348e-07
+            },
+            {
+              "step": 0.0001,
+              "gradient": 7.109870470145552e-10,
+              "hessian": 7.338267285526999e-09
+            },
+            {
+              "step": 1e-05,
+              "gradient": 1.0991429988393975e-11,
+              "hessian": 7.210497118618296e-11
+            }
+          ]
+        },
+        {
+          "seed": 17,
+          "derivative_sequence": [
+            {
+              "step": 0.001,
+              "gradient": 1.841269962610248e-07,
+              "hessian": 1.0083580079237642e-06
+            },
+            {
+              "step": 0.0001,
+              "gradient": 1.8411293045694777e-09,
+              "hessian": 1.0083610883155014e-08
+            },
+            {
+              "step": 1e-05,
+              "gradient": 1.8420653891126904e-11,
+              "hessian": 9.958625453331762e-11
+            }
+          ]
+        },
+        {
+          "seed": 104729,
+          "derivative_sequence": [
+            {
+              "step": 0.001,
+              "gradient": 2.557096759892019e-07,
+              "hessian": 7.44978517191113e-07
+            },
+            {
+              "step": 0.0001,
+              "gradient": 2.557066003383568e-09,
+              "hessian": 7.450050096766799e-09
+            },
+            {
+              "step": 1e-05,
+              "gradient": 2.520239572589844e-11,
+              "hessian": 7.566315730368788e-11
+            }
+          ]
+        }
+      ],
+      "canonical_vacuum_mass2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1200000000000001,
+        1.7485353408111446,
+        1.964,
+        2.0
+      ],
+      "vacuum_energy": 0.003599999999999992,
+      "scale_rows": [
+        {
+          "scale": 0.5,
+          "value": 0.009200225832691138,
+          "counterterm_pole_coefficient": 0.01730228898038971,
+          "d_dlog_scale": -0.03460457796077942,
+          "zero_modes": 4,
+          "chi_threshold_delta_lambda_mass2": -0.0013671286834463856,
+          "scalar_tadpole": -0.0010541268553107244,
+          "scalar_delta_lambda_mass2": -0.009902305753504505,
+          "illustrative_vacuum_cancellation_ratio": 2.555618286858655,
+          "physical_tuning_measure": false
+        },
+        {
+          "scale": 1.0,
+          "value": -0.014785839815289933,
+          "counterterm_pole_coefficient": 0.01730228898038971,
+          "d_dlog_scale": -0.03460457796077942,
+          "zero_modes": 4,
+          "chi_threshold_delta_lambda_mass2": 0.00038863363587068623,
+          "scalar_tadpole": -0.00189689276858292,
+          "scalar_delta_lambda_mass2": -0.024299556771904506,
+          "illustrative_vacuum_cancellation_ratio": 4.107177726469435,
+          "physical_tuning_measure": false
+        },
+        {
+          "scale": 2.0,
+          "value": -0.03877190546327101,
+          "counterterm_pole_coefficient": 0.01730228898038971,
+          "d_dlog_scale": -0.03460457796077942,
+          "zero_modes": 4,
+          "chi_threshold_delta_lambda_mass2": 0.002144395955187758,
+          "scalar_tadpole": -0.0027396586818551156,
+          "scalar_delta_lambda_mass2": -0.03869680779030451,
+          "illustrative_vacuum_cancellation_ratio": 10.769973739797525,
+          "physical_tuning_measure": false
+        }
+      ],
+      "lower_switch_uv_pole": {
+        "trace_mass4_lambda2_C2_squared": 92.16004315248938,
+        "analytic": 92.16,
+        "backgrounds": "equal C1; different C2; off-shell pole only, no unstable finite real potential"
+      },
+      "renormalization_conditions": [
+        "V_eff(lambda_v)=specified vacuum density",
+        "V_eff_prime(lambda_v)=0",
+        "V_eff_second(lambda_v)=specified curvature",
+        "mu_eff^(n)(0)=specified matching for n=0..3",
+        "Xi higher coefficients and kinetic/curvature/portal coefficients matched separately"
+      ],
+      "switching_one_loop_result": "A lambda determinant expanded at small lambda contains 12*mu4*lambda^2*C2^2 times m_lambda^2*(log(m_lambda^2/Q^2)-1)/(32*pi^2). Lower quadratic onset is generally present; constant/linear terms are not asserted from this diagram.",
+      "wilsonian_sensitivity": "Delta lambda mass2 from chi tadpole = -kappa*[Lambda_cut^2-m_chi^2*log(1+Lambda_cut^2/m_chi^2)]/(16*pi^2); cutoff/matching are unknown physical inputs, distinct from MSbar.",
+      "missing_inputs": [
+        "concrete L_m",
+        "physical f,Lambda_U,sigma0,m_chi,portal Lambda",
+        "UV cutoff/matching coefficients",
+        "retained soliton/production parameter region"
+      ],
+      "matter_portal_matching_complete": false,
+      "curvature_derivative_matching_complete": false,
+      "parameters_are_illustrative": true,
+      "physical_viability": "PARTIAL / UNRESOLVED"
+    }
+  },
+  "anomaly": null
+}

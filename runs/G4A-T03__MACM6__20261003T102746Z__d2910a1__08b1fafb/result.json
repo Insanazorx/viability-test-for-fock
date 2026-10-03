@@ -1,0 +1,129 @@
+{
+  "run_id": "G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:27:47.075204+00:00",
+  "wall_time_seconds": 0.48993458400036616,
+  "peak_ram_gb": 0.144048128,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 38,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 106,
+    "minimum_tests": 105,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "lower_switch_allowed": true,
+        "quartic_onset_exact": true,
+        "exponential_coefficients": true,
+        "xi_parity": true,
+        "xi_saturation_relations": true,
+        "mu_series": true,
+        "xi_series": true
+      },
+      "worst_errors": {
+        "mu_series": 8.738669510233166e-17,
+        "xi_series": 1.5753846144272998e-10
+      },
+      "mu_dimensionless_series": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "-1/2",
+        "0",
+        "0",
+        "0",
+        "1/6",
+        "0",
+        "0",
+        "0",
+        "-1/24"
+      ],
+      "xi_dimensionless_series": [
+        "0",
+        "0",
+        "1",
+        "0",
+        "-1",
+        "0",
+        "1",
+        "0",
+        "-1",
+        "0",
+        "1",
+        "0",
+        "-1"
+      ],
+      "lower_switch_terms": [
+        {
+          "n": 0,
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "stated_symmetry_allowed": true,
+          "accidental_internal_reflection_even": true,
+          "baseline_coefficient": "zero matching condition",
+          "protection": false
+        },
+        {
+          "n": 1,
+          "dimension": 5,
+          "coefficient_dimension": -1,
+          "stated_symmetry_allowed": true,
+          "accidental_internal_reflection_even": true,
+          "baseline_coefficient": "zero matching condition",
+          "protection": false
+        },
+        {
+          "n": 2,
+          "dimension": 6,
+          "coefficient_dimension": -2,
+          "stated_symmetry_allowed": true,
+          "accidental_internal_reflection_even": true,
+          "baseline_coefficient": "zero matching condition",
+          "protection": false
+        },
+        {
+          "n": 3,
+          "dimension": 7,
+          "coefficient_dimension": -3,
+          "stated_symmetry_allowed": true,
+          "accidental_internal_reflection_even": true,
+          "baseline_coefficient": "zero matching condition",
+          "protection": false
+        },
+        {
+          "n": 4,
+          "dimension": 8,
+          "coefficient_dimension": -4,
+          "stated_symmetry_allowed": true,
+          "accidental_internal_reflection_even": true,
+          "baseline_coefficient": "mu_v/(f^4*x_mu^4)",
+          "protection": false
+        }
+      ],
+      "xi_taylor_domain": "|chi| < chi_s; full rational function retained outside this domain",
+      "renormalization_conditions": [
+        "mu_eff^(n)(0)=0 for n=0,1,2,3 imposed at chosen matching scale",
+        "higher Xi coefficients matched independently unless UV relations supplied"
+      ],
+      "loop_generation_order": "not computed by a symmetry audit; allowed does not mean generated at every loop order",
+      "no_added_fields": true
+    }
+  },
+  "anomaly": null
+}

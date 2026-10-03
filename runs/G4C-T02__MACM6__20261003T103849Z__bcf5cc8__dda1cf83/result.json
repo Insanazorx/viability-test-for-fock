@@ -1,0 +1,64 @@
+{
+  "run_id": "G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:38:49.854320+00:00",
+  "wall_time_seconds": 0.6159560829992188,
+  "peak_ram_gb": 0.146522112,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 45,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 113,
+    "minimum_tests": 113,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "loop_substep_passed": true,
+        "switching_correction_measured": true,
+        "physical_inputs_not_invented": true,
+        "incomplete_matching_retained": true
+      },
+      "assessment": "RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED",
+      "technically_natural_in_stated_symmetries": false,
+      "conditional_branch": "Option 2 tuning qualifier only; viable qualifier requires outstanding gates and full matching",
+      "full_G4C_decision_complete": false,
+      "overall_label": "PARTIAL / UNRESOLVED",
+      "requires_user_selected_new_theory": false,
+      "baseline_changed": false,
+      "protected": [
+        "chi parity",
+        "SO4 invariant structure",
+        "accidental internal reflection if imposed in matching"
+      ],
+      "unprotected": [
+        "absolute vacuum energy",
+        "ultralight lambda curvature",
+        "quartic mu onset",
+        "Xi coefficient relations"
+      ],
+      "missing_inputs": [
+        "concrete L_m",
+        "physical f,Lambda_U,sigma0,m_chi,portal Lambda",
+        "UV cutoff/matching coefficients",
+        "retained soliton/production parameter region"
+      ],
+      "future_acceptance": [
+        "concrete matter/portal matching and derivative/curvature EFT-control audit",
+        "physical target density/mass and cutoff for tuning measures",
+        "retained parameter region after soliton and production gates"
+      ],
+      "loop_evidence_sha256": "e78d3606825d7bc1b6aae04c9563468183a59bcadaec03379edc9776d3227a49"
+    }
+  },
+  "anomaly": null
+}
