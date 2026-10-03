@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T14:11:21.394698+00:00**
+Durum kaydı (UTC): **2026-10-03T14:27:34.376745+00:00**
 
 ## Genel durum
 
@@ -696,7 +696,8 @@ Aktif FAIL/BLOCKED görevler yukarıdaki canlı kayıttadır. Aşağıdaki uygul
 - Kaynak PDF ve checkpoint kimlikleri [kaynak manifesti](</Users/insanazor/Desktop/viablilty test/config/benchmark/publication.source.yaml>) ve [cihaz devir notu](</Users/insanazor/Desktop/viablilty test/MACHINE_HANDOFF.md>) içinde.
 - MACM6 hazırlık kapsamı: [tamamlama özeti](</Users/insanazor/Desktop/viablilty test/docs/MACM6_COMPLETION_SUMMARY.md>).
 - Sıradaki tek eylem: [NEXT](</Users/insanazor/Desktop/viablilty test/NEXT.md>); cihaz kurulum/devam adımları: [RTX5070 hazırlık notu](</Users/insanazor/Desktop/viablilty test/docs/RTX5070_READY.md>).
+- Cihazlar arası proje devamı ve mevcut checkpoint kapsamı: [pratik geçiş rehberi](</Users/insanazor/Desktop/viablilty test/docs/DEVICE_CONTINUATION.md>).
 - Doğrulanmış offline paket: [RTX5070 ZIP](</Users/insanazor/Desktop/viablilty test/transfers/RTX5070__20261003T105027Z__908b666.zip>) (2367364 byte); kaynak Git snapshot `908b666a59944304f70a41a15dd39876747c4751`.
 - Paket SHA256: `e6e948ce2254e8d269c65527dd1395e11a302cf4759cfea0fccdf04351054cbb`; ayrı receipt: [aktarım kaydı](</Users/insanazor/Desktop/viablilty test/docs/RTX5070_TRANSFER_PACKET.md>).
-- Paket önceki doğrulanmış snapshotı içerir. Bu genişletilmiş STATUS daha sonra üretildiği için eski ZIP içinde bulunmaz; RTX5070 geçişinden önce yeni snapshot paketlenmelidir.
+- Her ZIP kaynak Git snapshotını taşır; kendi aktarım receipt'i sonradan kaydedilir. Son paket seçimi için güncel aktarım kaydını, geri yüklemede TRANSFER.json'daki commit ve dosya hash'lerini kullanın.
 - Git remote ve uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.

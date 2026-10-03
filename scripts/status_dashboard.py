@@ -170,10 +170,11 @@ def build_status(state,current,waiting,root):
                   '- Kaynak PDF ve checkpoint kimlikleri '+link(root,'config/benchmark/publication.source.yaml','kaynak manifesti')+' ve '+link(root,'MACHINE_HANDOFF.md','cihaz devir notu')+' içinde.',
                   '- MACM6 hazırlık kapsamı: '+link(root,'docs/MACM6_COMPLETION_SUMMARY.md','tamamlama özeti')+'.',
                   '- Sıradaki tek eylem: '+link(root,'NEXT.md','NEXT')+'; cihaz kurulum/devam adımları: '+link(root,'docs/RTX5070_READY.md','RTX5070 hazırlık notu')+'.'])
+    lines.append('- Cihazlar arası proje devamı ve mevcut checkpoint kapsamı: '+link(root,'docs/DEVICE_CONTINUATION.md','pratik geçiş rehberi')+'.')
     packet=program.get('transfer_packet')
     if packet:
         lines.extend(['- Doğrulanmış offline paket: '+link(root,packet['path'],'RTX5070 ZIP')+f" ({packet['bytes']} byte); kaynak Git snapshot `{packet['git_commit']}`.",
                       f"- Paket SHA256: `{packet['sha256']}`; ayrı receipt: "+link(root,'docs/RTX5070_TRANSFER_PACKET.md','aktarım kaydı')+'.',
-                      '- Paket önceki doğrulanmış snapshotı içerir. Bu genişletilmiş STATUS daha sonra üretildiği için eski ZIP içinde bulunmaz; RTX5070 geçişinden önce yeni snapshot paketlenmelidir.'])
+                      '- Her ZIP kaynak Git snapshotını taşır; kendi aktarım receipt\'i sonradan kaydedilir. Son paket seçimi için güncel aktarım kaydını, geri yüklemede TRANSFER.json\'daki commit ve dosya hash\'lerini kullanın.'])
     lines.extend(['- Git remote ve uzak runner kurulumu yok; G0D opsiyonel ve kapalı. CLOUD otomatik açılmaz.',''])
     return '\n'.join(lines)

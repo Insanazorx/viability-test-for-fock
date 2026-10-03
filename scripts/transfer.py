@@ -31,7 +31,8 @@ def create_packet(output):
     state=read_data(ROOT/'state/state.yaml')
     if state['tasks']['G0A-T04']['status']!='PASS':raise ValueError('MACM6 transfer preflight must pass first')
     data=read_data(ROOT/'runs/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2/result.json')
-    files={'yayınlanan.pdf':ROOT/'yayınlanan.pdf',data['checkpoint_path']:ROOT/data['checkpoint_path']}
+    files={'yayınlanan.pdf':ROOT/'yayınlanan.pdf',data['checkpoint_path']:ROOT/data['checkpoint_path'],
+           'BASLANGIC.md':ROOT/'docs/DEVICE_CONTINUATION.md'}
     output=output.resolve()
     if not output.is_relative_to((ROOT/'transfers').resolve()):raise ValueError('Packet must stay under transfers/')
     output.parent.mkdir(parents=True,exist_ok=True)

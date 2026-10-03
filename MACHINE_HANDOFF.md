@@ -7,6 +7,7 @@ status: RUNNING
 scheduling: DEFERRED — user opens RTX5070 after MACM6 preparation
 read:
   - AGENTS.md#g0a
+  - docs/DEVICE_CONTINUATION.md
   - docs/RTX5070_READY.md
   - config/benchmark/g0a_t02_rtx5070.json.yaml
   - reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
