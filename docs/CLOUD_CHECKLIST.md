@@ -5,7 +5,7 @@ Generated from state/state.yaml.
 - N/A CLOUD — G0A-T01: Repository/control-plane foundation (PASS)
 - N/A CLOUD — G0A-T02: Mathematical core API and invariants (PASS)
 - N/A CLOUD — G0A-T03: Full numerical run/config and environment discipline (PASS)
-- N/A CLOUD — G0B-T01: Reduced energy and spectral derivatives (RUNNING)
+- N/A CLOUD — G0B-T01: Reduced energy and spectral derivatives (PASS)
 - N/A CLOUD — G0B-T02: Hopf invariant and sign convention (RUNNING)
 - N/A CLOUD — G0B-T03: Published reduced stationary sequence (TODO)
 - N/A CLOUD — G0B-T04: Published reduced physical Hessian (TODO)

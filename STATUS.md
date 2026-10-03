@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T20:31:20.418344+00:00**
+Durum kaydı (UTC): **2026-10-03T20:33:02.391343+00:00**
 
 ## Genel durum
 
@@ -11,9 +11,9 @@ Durum kaydı (UTC): **2026-10-03T20:31:20.418344+00:00**
 | Bilimsel sonuç | **PARTIAL / UNRESOLVED** |
 | Işınımsal değerlendirme | RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED |
 | MACM6 | Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu. |
-| Sıradaki tek eylem | G0B-T01 / RTX5070 |
+| Sıradaki tek eylem | G0B-T02 / RTX5070 |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
-| Yürütme kaydı | 21 görev: 12 PASS, 2 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
+| Yürütme kaydı | 21 görev: 13 PASS, 1 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
 
 **Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.
 
@@ -26,7 +26,7 @@ Durum kaydı (UTC): **2026-10-03T20:31:20.418344+00:00**
 | Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |
 |---|---|---|
 | MACM6 | 14 | Kayıtlı hazırlık tamam; iki RTX-bağımsız G0 benchmark’ı ayrı görev/ayar/rapor bekliyor. |
-| RTX5070 | 1 | Kayıtlı görev sırası geçerli. |
+| RTX5070 | 2 | Kayıtlı görev sırası geçerli. |
 | CLOUD | 0 | Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok. |
 
 Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>).
@@ -93,7 +93,7 @@ Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.
 
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
-| G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
+| G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__RTX5070__20261003T203207Z__a12ca3e__9e664616__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
 | G0B-T02 | **Hopf yükü ve işaret** — Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>); MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil. |
 | G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
 | G0B-T04 | **İndirgenmiş fiziksel Hessian** — Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi. |
