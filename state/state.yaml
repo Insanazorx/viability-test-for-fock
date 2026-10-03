@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T10:14:33.173731+00:00",
+  "updated_utc": "2026-10-03T10:21:16.464123+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -573,7 +573,7 @@
     },
     "G1A-T04": {
       "title": "MACM6 six-component static reference preparation",
-      "status": "RUNNING",
+      "status": "PASS",
       "enabled": true,
       "prerequisites": [
         "G0B-T05"
@@ -582,11 +582,13 @@
         "MACM6"
       ],
       "machine_done": {
-        "MACM6": false,
+        "MACM6": true,
         "RTX5070": false,
         "CLOUD": false
       },
-      "machine_reports": {},
+      "machine_reports": {
+        "MACM6": "reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md"
+      },
       "read": [
         "docs/MACM6_COMPLETION_PLAN.md",
         "docs/G1A_FULL_STATIC_PREPARATION.md",
@@ -598,7 +600,7 @@
       "required_input": "yayınlanan.pdf"
     }
   },
-  "active_task": "G1A-T04",
+  "active_task": null,
   "action_selection": {
     "task": "G1A-T04",
     "machine": "MACM6",

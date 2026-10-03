@@ -18,4 +18,4 @@ Generated from state/state.yaml.
 - N/A CLOUD — G4A-T02: Absent-operator and redundancy classification (TODO)
 - N/A CLOUD — G4A-T03: Switching and Xi functional symmetry audit (TODO)
 - N/A CLOUD — G0B-T05: MACM6 reduced solver/HVP/CPU reference engineering preparation (PASS)
-- N/A CLOUD — G1A-T04: MACM6 six-component static reference preparation (RUNNING)
+- N/A CLOUD — G1A-T04: MACM6 six-component static reference preparation (PASS)
