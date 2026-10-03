@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "files": {
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5": "462ee5c0e3015d9014b669eabfd78d47b1050e2301961f4a35cb3deb99e792eb"
+  },
+  "checkpoint_stationary": false,
+  "instructions": "After cloning the GitHub repo, extract these files into that checkout keeping paths. Do not upload this ZIP as source code."
+}
