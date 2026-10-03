@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task": "G0A-T04",
+  "machine": "MACM6",
+  "kind": "control",
+  "precision": "N/A",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "integrity": 1e-15
+  },
+  "parameters": {
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt",
+    "allow_cloud": false,
+    "handler": "validate_transfer",
+    "minimum_tests": 115,
+    "contract_doc": "docs/RTX5070_READY.md",
+    "required_macm6_tasks": [
+      "G0A-T01",
+      "G0A-T02",
+      "G0A-T03",
+      "G0B-T01",
+      "G0B-T02",
+      "G0B-T05",
+      "G1A-T04",
+      "G4A-T01",
+      "G4A-T02",
+      "G4A-T03",
+      "G4B-T01",
+      "G4C-T02",
+      "G4D-T04"
+    ],
+    "external_inputs": {
+      "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+      "checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5": "462ee5c0e3015d9014b669eabfd78d47b1050e2301961f4a35cb3deb99e792eb"
+    },
+    "source_sections": "All referenced MACM6 gate reports and verified external PDF/checkpoint",
+    "objective": "Complete MACM6 available-input evidence and offline RTX5070 transfer readiness checks.",
+    "method": "Verify every assigned MACM6 PASS report/sealed run, exact external hashes, unchanged GPU flags and disabled cloud; prepare offline bundle/ZIP commands.",
+    "acceptance": "Every evidence/hash/flag check and all tests pass; no GPU completion or physical viability is inferred.",
+    "convergence": "Exact SHA256 and task-ledger checks; this is packaging/control verification, not a continuum calculation.",
+    "claim_scope": "Available-input MACM6 program readiness only. Remaining GPU-derived analyses and missing physical matching/lifetime inputs stay unresolved.",
+    "limitations": [
+      "No CUDA/remote job is started.",
+      "Independent Hopf fixture is nonstationary.",
+      "Full matter/portal matching and physical retained region still absent."
+    ],
+    "changes": "Adds auditable offline transfer packaging/verification and a single deferred first RTX5070 action.",
+    "next_action": "Create and verify offline package from final committed state; RTX5070 first task is G0A-T02 after the user opens that machine."
+  }
+}

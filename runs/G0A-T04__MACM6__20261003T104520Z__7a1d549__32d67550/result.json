@@ -1,0 +1,25 @@
+{
+  "run_id": "G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550",
+  "status": "FAIL",
+  "finished_utc": "2026-10-03T10:45:21.093193+00:00",
+  "wall_time_seconds": 0.6358052909999969,
+  "peak_ram_gb": 0.145752064,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 47,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 115,
+    "minimum_tests": 115,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true
+  },
+  "anomaly": "FileNotFoundError: [Errno 2] No such file or directory: '/Users/insanazor/Desktop/viablilty test/runs/G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754/integrity.json'"
+}

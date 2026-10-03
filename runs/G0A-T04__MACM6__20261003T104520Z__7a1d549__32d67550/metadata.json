@@ -1,0 +1,138 @@
+{
+  "run_id": "G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550",
+  "task": "G0A-T04",
+  "machine": "MACM6",
+  "git_commit": "7a1d549ec77e2c25aec7f8fa0968e593db454a06",
+  "uncommitted_diff": false,
+  "config_sha256": "32d6755039e297451a01cd97fc8253a74d0e5db23b9646f58c1e296adbd5229a",
+  "config_path": "config/benchmark/g0a_t04_macm6.json.yaml",
+  "started_utc": "2026-10-03T10:45:20.457336+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "dd8befa7eed15dc83deb1e7f41c305feff0aafe3099efdd323f3babd9e8d5bfa",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "config/benchmark/publication.source.yaml": "143da835837a98f64ba0246e983e02205e63b56bb2cfc6b092bf5c80db2194aa",
+    "docs/MATH_CORE.md": "b6953b026f2a14be2376f4ed7b2143108fcdfcdbf11d24fa8b2e3e24c20c459e",
+    "docs/RTX5070_READY.md": "ef4740ad246d837404b0b8f66c886494a3a04c6363eebcc3bb0684cede73878c",
+    "requirements/macm6.freeze.txt": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323",
+    "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md": "e6c3693e6030acc7209a39e474ac54ef94440c48ebb6b59a670eb5345842f93f",
+    "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md": "6413c7392d9de84777549570c65217e48b552e61777bc782b2b9cc197456ee1e",
+    "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md": "798c69fdabba0c27c217c8b4dee273fe48c3b006c12f482bf0178186ef2c4e8a",
+    "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md": "dbaf4de4bd767527a810d5ff265dbac2dfb7ed2143b2028101db8c3535341920",
+    "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md": "0da4bb11d609c00302e58744606ce460321a6af8905cf698429dc7b94620173c",
+    "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md": "4daf22f7530c5daaacdf747fedba9bfa36b24f13e729bb57d31a2ea050882412",
+    "reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md": "90354c2a3ee2b245c09c0cd4f92188f927f4553ff494b1486ef48c8e358dc193",
+    "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md": "84718d39317b7604483c9518499070b503f1c6079c96ff10abd69258f5efaaa6",
+    "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md": "e7356a40d4e71d08301edb2e3ece22197ede961b85c8be6f988d9a4230c76ad7",
+    "reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md": "0e2c9793dfe6077015c3ff287a0065a59e84725627d886e1c4f83eb0cb01128b",
+    "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md": "6f34be2e76d1fa7308b98da8d5afea058d97691da98d0dbebf6875be09756a37",
+    "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md": "b33a587e90d6a7531ffea3b351dcdc7e1f06a77ffd1b7c6d021699da5ff967bf",
+    "reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md": "07f00c79fba7bca52ce9728baf9fc5d94658b58ac6d3de530c604bac0b0ba8a7",
+    "environment.json": "e4b271229fa5b07cf392ea84ee98f3bfc1b6f612fae9ec9961dcde19a5df3fad"
+  },
+  "precision": "N/A",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "integrity": 1e-15
+  },
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6",
+  "hardware": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpu_count": 12,
+    "ram_capacity_gb": 17.179869184,
+    "ram_capacity_note": null,
+    "role": "MACM6",
+    "hardware_model": "role label; exact model not attested"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": false,
+    "cross_device_bitwise_identity_required": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": null,
+  "prerequisite_scope": [
+    {
+      "task": "G0A-T01",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0A-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0A-T03",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0B-T01",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0B-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0B-T05",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G1A-T04",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4A-T01",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4A-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4A-T03",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4B-T01",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4C-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G4D-T04",
+      "machine": "MACM6"
+    }
+  ],
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": true,
+      "reason": "User explicitly requested all feasible MACM6 work first, then RTX5070 (2026-10-03).",
+      "updated_utc": "2026-10-01T18:34:33.954452+00:00"
+    }
+  },
+  "checkpoint_output": null,
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}
