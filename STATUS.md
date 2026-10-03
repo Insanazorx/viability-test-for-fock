@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T20:29:58.269998+00:00**
+Durum kaydı (UTC): **2026-10-03T20:31:20.418344+00:00**
 
 ## Genel durum
 
@@ -11,9 +11,9 @@ Durum kaydı (UTC): **2026-10-03T20:29:58.269998+00:00**
 | Bilimsel sonuç | **PARTIAL / UNRESOLVED** |
 | Işınımsal değerlendirme | RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED |
 | MACM6 | Kayıtlı CPU referans/hazırlıkları tamam; G0 kapsam denetiminde iki RTX-bağımsız yayın benchmark’ı henüz yapılmamış bulundu. |
-| Sıradaki tek eylem | G0A-T02 / RTX5070 |
+| Sıradaki tek eylem | G0B-T01 / RTX5070 |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
-| Yürütme kaydı | 21 görev: 11 PASS, 3 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
+| Yürütme kaydı | 21 görev: 12 PASS, 2 RUNNING, 0 CLAIMED, 7 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
 
 **Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.
 
@@ -26,7 +26,7 @@ Durum kaydı (UTC): **2026-10-03T20:29:58.269998+00:00**
 | Cihaz | Raporlu tamamlanan sorumluluk | Operasyon durumu |
 |---|---|---|
 | MACM6 | 14 | Kayıtlı hazırlık tamam; iki RTX-bağımsız G0 benchmark’ı ayrı görev/ayar/rapor bekliyor. |
-| RTX5070 | 0 | Kayıtlı görev sırası geçerli. |
+| RTX5070 | 1 | Kayıtlı görev sırası geçerli. |
 | CLOUD | 0 | Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok. |
 
 Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>).
@@ -35,7 +35,7 @@ Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](<
 
 | Gate | Amaç | Genel sonuç | Alt gate durumu |
 |---|---|---|---|
-| [G0](#g0) | Tekrar üretim temeli | **PARTIAL** | [G0A](#g0a) PARTIAL, [G0B](#g0b) PARTIAL, [G0C](#g0c) TODO, [G0D](#g0d) DISABLED |
+| [G0](#g0) | Tekrar üretim temeli | **PARTIAL** | [G0A](#g0a) PASS, [G0B](#g0b) PARTIAL, [G0C](#g0c) TODO, [G0D](#g0d) DISABLED |
 | [G1](#g1) | Sonlu sertlikte tam soliton sektörü | **PARTIAL** | [G1A](#g1a) PREPARED, [G1B](#g1b) TODO, [G1C](#g1c) TODO, [G1D](#g1d) TODO, [G1E](#g1e) TODO, [G1F](#g1f) TODO, [G1G](#g1g) TODO |
 | [G2](#g2) | Üretim ve relic abundance | **TODO** | [G2A](#g2a) TODO, [G2B](#g2b) TODO, [G2C](#g2c) TODO, [G2D](#g2d) TODO, [G2E](#g2e) TODO, [G2F](#g2f) TODO |
 | [G3](#g3) | Astrofiziksel karanlık | **TODO** | [G3A](#g3a) TODO, [G3B](#g3b) TODO, [G3C](#g3c) TODO, [G3D](#g3d) TODO |
@@ -43,7 +43,7 @@ Son raporla belgelenmiş tam test paketi: **116 PASS** — [doğrulama raporu](<
 | [G5](#g5) | Tam Boltzmann kozmolojisi | **TODO** | [G5A](#g5a) TODO, [G5B](#g5b) TODO, [G5C](#g5c) TODO, [G5D](#g5d) TODO, [G5E](#g5e) TODO |
 | [G6](#g6) | Likelihood düzeyinde uygulanabilirlik | **TODO** | [G6A](#g6a) TODO, [G6B](#g6b) TODO, [G6C](#g6c) TODO, [G6D](#g6d) TODO, [G6E](#g6e) TODO |
 
-Ana gate kapanışı: **0/7**. Tam kapsamı tamamlanan zorunlu alt gate: **1/35**; ayrıca isteğe bağlı G0D kapalı. Görev sayıları veya hazırlıklar bilimsel ilerleme yüzdesi olarak kullanılmaz.
+Ana gate kapanışı: **0/7**. Tam kapsamı tamamlanan zorunlu alt gate: **2/35**; ayrıca isteğe bağlı G0D kapalı. Görev sayıları veya hazırlıklar bilimsel ilerleme yüzdesi olarak kullanılmaz.
 
 Kapsam: **36 alt gate**, AGENTS.md’de açıkça numaralandırılmış **68 görev**, ayrıca raporlu hazırlık/kısmi kapsam kayıtları. T-ID tanımlanmayan gate’ler tam kapsam satırıyla görünür; yeni görev ID’si uydurulmaz.
 
@@ -69,7 +69,7 @@ G4 teori hattı erken ve paralel ilerleyebilir. Hazırlık görevleri bu bilimse
 <a id="g0a"></a>
 ### G0A — Repo, ortam ve kontrol düzlemi
 
-**Durum:** PARTIAL · **Ön koşul:** Başlangıç · **Cihaz sırası:** MACM6 → RTX5070 çekirdek doğrulaması
+**Durum:** PASS · **Ön koşul:** Başlangıç · **Cihaz sırası:** MACM6 → RTX5070 çekirdek doğrulaması
 
 Kod, matematik çekirdeği ve kayıt disiplinini doğrulamak.
 
@@ -78,7 +78,7 @@ Kod, matematik çekirdeği ve kayıt disiplinini doğrulamak.
 | Görev | İş / kabul ölçütü | Durum | MACM6 | RTX5070 | CLOUD | Kanıt / kalan iş |
 |---|---|---|---|---|---|---|
 | G0A-T01 | **Repo iskeleti** — Dizinler, Git dışlama kuralları, bağımlılıklar, şema, durum dosyası ve rapor şablonu kayıtlı. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md>); Repo ve kontrol dosyaları kayıtlı. |
-| G0A-T02 | **Matematik çekirdeği API** — C1/C2, Hodge ayrışımı, STF, indirgenmiş alan/enerji/Hopf tanımları; float64 kimlik, dönüşüm ve türev kontrolleri; CUDA aynası. | RUNNING | [X] | [ ] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md>); MACM6 PASS; CUDA aynası henüz çalıştırılmadı. |
+| G0A-T02 | **Matematik çekirdeği API** — C1/C2, Hodge ayrışımı, STF, indirgenmiş alan/enerji/Hopf tanımları; float64 kimlik, dönüşüm ve türev kontrolleri; CUDA aynası. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T02__G0A-T02__RTX5070__20261003T203001Z__c8536f6__af3d0bec__REPORT.md>); MACM6 PASS; CUDA aynası henüz çalıştırılmadı. |
 | G0A-T03 | **Çalışma ve ayar disiplini** — Sabit ayar kimliği, UTC/Git/config çalışma kimliği, değişmez metadata ve açık kirli Git bilgisi. | PASS | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md>); MACM6 ortamı/ayar/çalışma kaydı tamamlandı. |
 | G0A-T04 | **MACM6 tamamlama ve aktarım hazırlığı** — Önceki 13 MACM6 sorumluluğunun rapor/ayar/bütünlük denetimi ve offline aktarım ön kontrolü PASS. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md>); Bu hazırlıkla toplam 14 MACM6 sorumluluğu raporlu; ZIP geri yükleme doğrulaması aktarım kaydında. |
 

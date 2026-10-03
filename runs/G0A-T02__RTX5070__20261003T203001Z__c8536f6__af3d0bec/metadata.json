@@ -1,0 +1,90 @@
+{
+  "run_id": "G0A-T02__RTX5070__20261003T203001Z__c8536f6__af3d0bec",
+  "task": "G0A-T02",
+  "machine": "RTX5070",
+  "git_commit": "c8536f6aad737fd35047f08df6eda9ab2c109c0f",
+  "uncommitted_diff": false,
+  "config_sha256": "af3d0bec7850c375e18547d6426fdcf986956956f33762585db3518cb8f42a16",
+  "config_path": "config/benchmark/g0a_t02_rtx5070.json.yaml",
+  "started_utc": "2026-10-03T20:30:01.548310+00:00",
+  "os": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.14",
+  "python_executable": "C:\\Users\\Death\\Desktop\\viability-test-for-fock-main\\.venv\\Scripts\\python.exe",
+  "pytorch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "cuda_note": "Actual CUDA float64 execution",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "dd8befa7eed15dc83deb1e7f41c305feff0aafe3099efdd323f3babd9e8d5bfa",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "requirements/rtx5070.freeze.txt": "746504088a949b21963f0cf7795d4fe0f8d836cd4a9dabadd178c2ded92ed9de",
+    "docs/RTX5070_ENVIRONMENT.json": "91db63eeb4ffe9319b663719fc86d14b20b20d0abd949a8050a6540154cdd3bc",
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "config/benchmark/publication.source.yaml": "143da835837a98f64ba0246e983e02205e63b56bb2cfc6b092bf5c80db2194aa",
+    "docs/MATH_CORE.md": "b6953b026f2a14be2376f4ed7b2143108fcdfcdbf11d24fa8b2e3e24c20c459e",
+    "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md": "e6c3693e6030acc7209a39e474ac54ef94440c48ebb6b59a670eb5345842f93f",
+    "environment.json": "95e1eec68a9222b4596bf9f28ffc3aad1818af5b8a6c2fb1bb4df77b4635668e"
+  },
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "backend_normalized": 5e-12,
+    "autograd_normalized": 1e-10
+  },
+  "checkpoint_sha256": null,
+  "hardware_role": "RTX5070",
+  "hardware": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "architecture": "AMD64",
+    "logical_cpu_count": 10,
+    "ram_capacity_gb": 16.782508032,
+    "ram_capacity_note": null,
+    "role": "RTX5070",
+    "hardware_model": "role label; exact model not attested",
+    "cuda_runtime": "12.8",
+    "pytorch": "2.11.0+cu128",
+    "cuda_device": "NVIDIA GeForce RTX 5070",
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "vram_capacity_gb": 12.792037376,
+    "nvidia_smi": "NVIDIA GeForce RTX 5070, 616.92, 12227"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": true,
+    "cross_device_bitwise_identity_required": false,
+    "torch_deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "tf32": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": null,
+  "prerequisite_scope": [
+    {
+      "task": "G0A-T01"
+    }
+  ],
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": false,
+      "reason": "User opened RTX5070 and explicitly requested continuation on 2026-10-03",
+      "updated_utc": "2026-10-03T20:23:21.123061+00:00"
+    }
+  },
+  "checkpoint_output": null,
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}

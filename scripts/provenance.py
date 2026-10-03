@@ -19,7 +19,7 @@ from common import inside, read_data, sha256
 
 def freeze(path, value):
     encoded = json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
-    with path.open("x", encoding="utf-8") as stream:
+    with path.open("x", encoding="utf-8", newline="\n") as stream:
         stream.write(encoded)
         stream.flush()
         os.fsync(stream.fileno())

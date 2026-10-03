@@ -37,6 +37,13 @@ def report_text(key="G0A-T01", machine="MACM6", status="PASS", digest="a" * 64):
 
 
 class ControlTests(unittest.TestCase):
+    def test_control_json_keeps_lf_bytes_across_devices(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "state.yaml"
+            write_data(path, {"machine": "RTX5070"})
+            self.assertNotIn(b"\r", path.read_bytes())
+            self.assertEqual(path.read_bytes(), b'{\n  "machine": "RTX5070"\n}\n')
+
     def test_canonical_state_is_valid(self):
         validate(read_data(ROOT / "state/state.yaml"))
 

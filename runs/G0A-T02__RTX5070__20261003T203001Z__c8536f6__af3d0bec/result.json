@@ -1,0 +1,41 @@
+{
+  "run_id": "G0A-T02__RTX5070__20261003T203001Z__c8536f6__af3d0bec",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T20:30:21.279279+00:00",
+  "wall_time_seconds": 19.731643999926746,
+  "peak_ram_gb": 1.243738112,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 1159,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": 0.034320384,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 124,
+    "minimum_tests": 31,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "math_core": {
+      "passed": true,
+      "worst_errors": {
+        "backend_normalized": 1.7763568394002505e-15,
+        "autograd_normalized": 3.835090373750396e-16
+      },
+      "samples_checked": 1536,
+      "numpy_version": "2.2.6",
+      "pytorch_version": "2.11.0+cu128",
+      "cuda_runtime": "12.8",
+      "cuda_device_name": "NVIDIA GeForce RTX 5070",
+      "peak_vram_gb": 0.034320384,
+      "cuda_verified": true,
+      "hopf_unit_charge_reproduced": false,
+      "dtype": "float64"
+    }
+  },
+  "anomaly": null
+}

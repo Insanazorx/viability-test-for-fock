@@ -239,7 +239,7 @@ def main() -> int:
     if seal_hash:
         output=output.replace(f"precision: {metadata['precision']}\n",f"precision: {metadata['precision']}\nevidence_sha256: {seal_hash}\n",1)
     output=output.replace('## Objective',f"report_generator_sha256: {sha256(ROOT/'scripts/report.py')}\n\n## Objective",1)
-    with report.open("x", encoding="utf-8") as stream:
+    with report.open("x", encoding="utf-8", newline="\n") as stream:
         stream.write(output)
     print(report.relative_to(ROOT).as_posix())
     return 0

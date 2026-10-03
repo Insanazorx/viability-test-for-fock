@@ -1,2 +1,2 @@
 # Evidence and frozen configs must keep identical bytes on every machine.
-* -text
+* -text whitespace=trailing-space,space-before-tab,cr-at-eol
