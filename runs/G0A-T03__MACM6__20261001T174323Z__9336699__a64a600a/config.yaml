@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "task": "G0A-T03",
+  "machine": "MACM6",
+  "kind": "control",
+  "precision": "N/A",
+  "seeds": [0, 17, 104729],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {},
+  "parameters": {
+    "handler": "validate_run_discipline", "minimum_tests": 49,
+    "environment_freeze": "requirements/macm6.freeze.txt", "allow_cloud": false
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a",
+  "status": "PASS",
+  "finished_utc": "2026-10-01T17:43:36.168778+00:00",
+  "wall_time_seconds": 12.181955624999318,
+  "peak_ram_gb": 0.135512064,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 715,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 49,
+    "minimum_tests": 49,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "run_discipline": {
+      "passed": true,
+      "checks": {
+        "all_frozen_configs_match": true,
+        "full_environment_matches": true,
+        "same_seeds_reproduce": true,
+        "different_seeds_differ": true,
+        "metadata_overwrite_rejected": true,
+        "tampered_result_rejected": true,
+        "run_identity_has_required_parts": true,
+        "cpu_native_libraries_work": true,
+        "pip_dependencies_coherent": true
+      },
+      "configs_checked": 4,
+      "resolved_distributions": 25,
+      "seed_fingerprints": {
+        "0": "b5f379775cb54059ca399ed0578d545bb46ed50eaa33d81972ed305dffdb0507",
+        "17": "6ca356ff3b307bb6a74f678931cb821eb3d66ab9c93da5207ef955c8cf3a2fdb",
+        "104729": "05537820ec0eb8250c2dc07dc89f2c292fe34e454857ec0e9b6186ef86a9a6c8"
+      },
+      "cpu_environment_smoke": {
+        "hdf5_float64_roundtrip": true,
+        "scipy_exponential_ode_abs_error": 7.765454945740657e-12,
+        "matplotlib_agg_png_rendered": true,
+        "pip_check_exit_code": 0,
+        "pip_check_output": "No broken requirements found."
+      },
+      "temporary_integrity_fixture_seal": "3a54e7279d86f3a9c5fe31116e386a948dafd0325cc0c970f2e8ad5687a6cbe3",
+      "physics_gate_evaluated": false,
+      "cuda_verified": false
+    }
+  },
+  "anomaly": null
+}

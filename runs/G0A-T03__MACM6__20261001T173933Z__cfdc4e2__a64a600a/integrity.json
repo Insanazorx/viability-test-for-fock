@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "artifact_sha256": {
+    "config.yaml": "a64a600a380945a29c61b67b6746403e3ec09b45e834f60f90253bba28a924d6",
+    "metadata.json": "eaddb968399bf0f60688923de01792cfe48f56e3107d9bf9f97c69153816bd52",
+    "environment.json": "e03d22ff4b58f88b7d20e341d5ecd7575cb5d68a80830e04d82d14c2d208a361",
+    "result.json": "c0f077e6c55266a5b5e0ed2158ed485bc81c832eea7439f4f767f576577f4396",
+    "validation.log": "c0cc57abe160522581f37c250bc884367544ad77e562a6cff83c2b8dacf83500"
+  }
+}

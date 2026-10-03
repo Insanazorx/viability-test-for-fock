@@ -1,0 +1,593 @@
+{
+  "run_id": "G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:27:19.832966+00:00",
+  "wall_time_seconds": 0.6612348329999804,
+  "peak_ram_gb": 0.144457728,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 50,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 106,
+    "minimum_tests": 105,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "coverage": true,
+        "baseline_potential_count": true,
+        "no_forbidden_operator_in_allowed_basis": true,
+        "accidental_baseline_reflection": true,
+        "stated_so4_does_not_forbid_pfaffian": true,
+        "no_lambda_parity": true,
+        "chi_odd_forbidden": true,
+        "no_untracked_eom_deletion": true
+      },
+      "catalog": [
+        {
+          "id": "V-01",
+          "expression": "1",
+          "dimension": 0,
+          "coefficient_dimension": 4,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-02",
+          "expression": "lambda",
+          "dimension": 1,
+          "coefficient_dimension": 3,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "lambda-origin shift trades one condition for changes to all lambda-dependent coefficients; no removal of the physical hierarchy",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-03",
+          "expression": "C2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "V-04",
+          "expression": "C1",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-05",
+          "expression": "chi^2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-06",
+          "expression": "lambda^2",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-07",
+          "expression": "lambda*C2",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "V-08",
+          "expression": "lambda*C1",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-09",
+          "expression": "lambda*chi^2",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            1,
+            2,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-10",
+          "expression": "lambda^3",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "potential",
+          "powers": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-11",
+          "expression": "C2^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            0,
+            2
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-12",
+          "expression": "C1*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "V-13",
+          "expression": "C1^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            0,
+            2,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-14",
+          "expression": "chi^2*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            0,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "V-15",
+          "expression": "chi^2*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            2,
+            1,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-16",
+          "expression": "chi^4",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            0,
+            4,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-17",
+          "expression": "lambda^2*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            0,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "V-18",
+          "expression": "lambda^2*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            0,
+            1,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-19",
+          "expression": "lambda^2*chi^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            2,
+            2,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "V-20",
+          "expression": "lambda^4",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "potential",
+          "powers": [
+            4,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "independent IBP representative; no EOM elimination claimed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "R-01",
+          "expression": "R",
+          "dimension": 2,
+          "coefficient_dimension": 2,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "R-02",
+          "expression": "R*lambda",
+          "dimension": 3,
+          "coefficient_dimension": 1,
+          "sector": "linear_curvature",
+          "powers": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "R-03",
+          "expression": "R*C2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "R-04",
+          "expression": "R*C1",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            0,
+            1,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "R-05",
+          "expression": "R*chi^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "R-06",
+          "expression": "R*lambda^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "linear_curvature",
+          "powers": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "Jordan/Einstein-frame redistribution possible where F>0; induced potential, kinetic and matter terms must be retained",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "K-01",
+          "expression": "(nabla lambda)^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic",
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "constant kinetic normalizations can be fixed by invertible field rescaling; all couplings must be transformed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "K-02",
+          "expression": "(nabla chi)^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic",
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "constant kinetic normalizations can be fixed by invertible field rescaling; all couplings must be transformed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "K-03",
+          "expression": "1/2 nabla M_ab nabla M_ab",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic",
+          "stated_symmetry_allowed": true,
+          "baseline_present": true,
+          "field_choice": "constant kinetic normalizations can be fixed by invertible field rescaling; all couplings must be transformed",
+          "absence_class": "present in displayed baseline",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "K-04",
+          "expression": "1/2 nabla M_ab nabla (*M)_ab",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "kinetic",
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "unequal Hodge-sector rescaling trades the kinetic coefficient for potential/portal coefficients",
+          "absence_class": "protected by accidental internal reflection of displayed baseline; allowed UV matching under only stated SO4",
+          "accidental_reflection_odd": true
+        },
+        {
+          "id": "G-01",
+          "expression": "R^2",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "curvature_squared",
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "metric EOM redefinition can trade curvature terms for stress/other operators at EFT order; no deletion in coupled scalar gravity",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        },
+        {
+          "id": "G-02",
+          "expression": "R_munu R^munu",
+          "dimension": 4,
+          "coefficient_dimension": 0,
+          "sector": "curvature_squared",
+          "stated_symmetry_allowed": true,
+          "baseline_present": false,
+          "field_choice": "metric EOM redefinition can trade curvature terms for stress/other operators at EFT order; no deletion in coupled scalar gravity",
+          "absence_class": "allowed matching coefficient set to zero in displayed frame; no stated-symmetry protection",
+          "accidental_reflection_odd": false
+        }
+      ],
+      "worst_errors": {
+        "reflection": 3.364600680387584e-16
+      },
+      "forbidden_examples": [
+        "chi",
+        "lambda*chi",
+        "chi*C1",
+        "chi*C2",
+        "nabla lambda . nabla chi"
+      ],
+      "quotient": "IBP basis retained; conditional field/EOM equivalences documented with induced operators",
+      "portal_reflection": "M Hilbert stress is invariant because its kinetic, potential and sum of quartic Hodge sectors are invariant; matter fields inert",
+      "loop_coefficients_computed": false
+    }
+  },
+  "anomaly": null
+}

@@ -1,0 +1,101 @@
+{
+  "run_id": "G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31",
+  "task": "G0B-T01",
+  "machine": "MACM6",
+  "git_commit": "5e9474ea6bf4bec5e90b4847ab3dbbef7ec68895",
+  "uncommitted_diff": false,
+  "config_sha256": "8baddf31f98801810e2de6d91f41e91ba0c48abc23d4df35674364f64dd895f4",
+  "config_path": "config/benchmark/g0b_t01_macm6.json.yaml",
+  "started_utc": "2026-10-01T18:37:41.359767+00:00",
+  "os": "macOS-27.0-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.14",
+  "python_executable": "/Users/insanazor/Desktop/viablilty test/.venv/bin/python",
+  "pytorch": null,
+  "cuda": null,
+  "cuda_note": "No CUDA execution on MACM6; measured inside RTX5070 handler",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "a798aa786d9e6d91f56be7b11f437d396fb075c745f736ed4c9bb2a98a9e08d4",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "config/benchmark/publication.source.yaml": "143da835837a98f64ba0246e983e02205e63b56bb2cfc6b092bf5c80db2194aa",
+    "docs/MATH_CORE.md": "b6953b026f2a14be2376f4ed7b2143108fcdfcdbf11d24fa8b2e3e24c20c459e",
+    "docs/G0B_SPECTRAL.md": "0098dc6159b2ab9b618dea06808c4d90a06e1d437292def9df5c784dbced2c21",
+    "requirements/macm6.freeze.txt": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323",
+    "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md": "6413c7392d9de84777549570c65217e48b552e61777bc782b2b9cc197456ee1e",
+    "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md": "798c69fdabba0c27c217c8b4dee273fe48c3b006c12f482bf0178186ef2c4e8a",
+    "environment.json": "e4b271229fa5b07cf392ea84ee98f3bfc1b6f612fae9ec9961dcde19a5df3fad"
+  },
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": [
+    17,
+    17,
+    17
+  ],
+  "box": [
+    6.283185307179586,
+    9.42477796076938,
+    12.566370614359172
+  ],
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "bandlimited_derivative": 2e-12,
+    "analytic_energy": 2e-12,
+    "parseval": 2e-12,
+    "skew_adjoint": 2e-12,
+    "vacuum_energy": 1e-20,
+    "unit_error": 2e-15,
+    "directional_gradient": 1e-07,
+    "symmetry_energy": 2e-12,
+    "smooth_derivative_final": 2e-11,
+    "centered_fd_final": 0.02,
+    "vacuum_face": 1e-07,
+    "vacuum_face_gradient": 5e-05,
+    "nyquist_derivative": 2e-12
+  },
+  "checkpoint_sha256": null,
+  "hardware_role": "MACM6",
+  "hardware": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpu_count": 12,
+    "ram_capacity_gb": 17.179869184,
+    "ram_capacity_note": null,
+    "role": "MACM6",
+    "hardware_model": "role label; exact model not attested"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": false,
+    "cross_device_bitwise_identity_required": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": null,
+  "prerequisite_scope": [
+    {
+      "task": "G0A-T02",
+      "machine": "MACM6"
+    },
+    {
+      "task": "G0A-T03"
+    }
+  ],
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": true,
+      "reason": "User requested RTX5070 later and continued MACM6 next-gate preparation on 2026-10-01.",
+      "updated_utc": "2026-10-01T18:34:33.954452+00:00"
+    }
+  },
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}

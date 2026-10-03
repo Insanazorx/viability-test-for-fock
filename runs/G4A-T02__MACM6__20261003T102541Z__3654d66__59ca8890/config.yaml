@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task": "G4A-T02",
+  "machine": "MACM6",
+  "kind": "numerical",
+  "precision": "float64",
+  "seeds": [
+    0,
+    17,
+    104729
+  ],
+  "grid": null,
+  "box": null,
+  "time_step": null,
+  "optimizer": null,
+  "integrator": null,
+  "tolerances": {
+    "reflection": 5e-12
+  },
+  "parameters": {
+    "source_manifest": "config/benchmark/publication.source.yaml",
+    "source_sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze": "requirements/macm6.freeze.txt",
+    "allow_cloud": false,
+    "contract_doc": "docs/G4A_SYMMETRY_AUDIT.md",
+    "source_sections": "Eqs.20-24,30 and p.13 Radiative status",
+    "minimum_tests": 105,
+    "samples_per_seed": 32,
+    "limitations": [
+      "L_m unspecified; no concrete matter matching is inferred.",
+      "This symmetry audit does not assign the loop order of every allowed coefficient."
+    ],
+    "changes": "Extends the passed allowed basis with source-action symmetry and field-choice classification; baseline unchanged.",
+    "handler": "validate_classification",
+    "objective": "Classify all 32 chosen-order operators and distinguish stated symmetries, accidental reflection and conditional field/EOM choices.",
+    "method": "Exact catalog coverage and seeded source-potential/kinetic/quartic reflection witnesses; explicit field-choice obligations.",
+    "convergence": "Three seeds, 32 random samples each; exact catalog counts; no EFT-order scope change.",
+    "acceptance": "All predeclared exact and numeric audit checks and all unit tests pass.",
+    "claim_scope": "Completes this analytic G4A substep at the chosen order; no naturalness or cosmological viability acceptance.",
+    "next_action": "Continue the independent MACM6 radiative and bounce work.",
+    "series_points": [
+      0.05,
+      0.1,
+      0.2
+    ]
+  }
+}

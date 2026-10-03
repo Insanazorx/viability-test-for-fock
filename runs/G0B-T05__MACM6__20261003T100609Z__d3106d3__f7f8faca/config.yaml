@@ -1,0 +1,22 @@
+{
+  "schema_version": 1, "task": "G0B-T05", "machine": "MACM6", "kind": "numerical", "precision": "float64",
+  "seeds": [0,17,104729], "grid": [9,9,9], "box": [9,9,9], "time_step": null,
+  "optimizer": "SciPy L-BFGS-B sphere chart CPU reference", "integrator": null,
+  "tolerances": {"direct_energy":5e-12,"direct_charge":5e-12,"direct_directional":3e-7,
+    "hvp_difference":1e-7,"hvp_symmetry":5e-12,"chart_gradient":3e-7,"projected_symmetry":5e-12,
+    "charge_projection":5e-12,"retracted_hvp":2e-6,"smoke_residual":2e-6,"smoke_energy_fraction":1e-7,
+    "unit_error":2e-15,"boundary_error":1e-14,"multiplier_update":1e-12},
+  "parameters": {"handler":"validate_solver_preparation","minimum_tests":98,"allow_cloud":false,
+    "oracle_grid":5,"smoke_grid":9,"half_box":4.0,"smoke_amplitude":0.03,
+    "difference_steps":[0.001,0.0001,0.00001],"penalty":20000.0,"outer_updates":2,
+    "maxiter":80,"maxfun":140,"gtol":1e-9,"ftol":1e-14,
+    "source_manifest":"config/benchmark/publication.source.yaml",
+    "source_sha256":"09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "environment_freeze":"requirements/macm6.freeze.txt","contract_doc":"docs/G0B_SOLVER_PREPARATION.md",
+    "objective":"Complete the user-authorized MACM6 preparation of G0B-T03/T04 and the independent CPU oracle, while retaining all GPU/scientific completion flags.",
+    "method":"Explicit normalized interior chart and fixed boundary, Eq.70 augmented objective/multiplier ledger, NumPy/SciPy small-grid minimizer, exact analytic ambient/retracted HVPs, and independent full direct-DFT energy/helicity reference.",
+    "acceptance":"Every predeclared reference, derivative, HVP symmetry/projection and vacuum-smoke metric must pass; all unit tests pass. No unit-Hopf stationary energy or physical eigenvalue target is evaluated here.",
+    "convergence":"Three seeds; centered steps 1e-3,1e-4,1e-5; final step checked. Direct 5^3 DFT oracle and 9^3 contractible-vacuum smoke. Physical residual divides node gradients by h^3. Source production settings are separately recorded, unchanged.",
+    "next_action":"Continue the ready MACM6 program in docs/MACM6_COMPLETION_PLAN.md. Prepare six-component reference/G4 audits and frozen RTX production handoff; keep source stationary runs deferred."
+  }
+}
