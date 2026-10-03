@@ -1,0 +1,298 @@
+{
+  "run_id": "G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T20:37:28.907009+00:00",
+  "wall_time_seconds": 43.08249910001177,
+  "peak_ram_gb": 1.297330176,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 2679,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": 0.064007168,
+  "checkpoint_sha256": "4e462a0f240fb28f8a21033f07594aa94a73bb51d21eabeb37e0a8015c89d1bb",
+  "checkpoint_path": "checkpoints/G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__initial.h5",
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 126,
+    "minimum_tests": 79,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "hopf": {
+      "passed": true,
+      "checks": {
+        "unit_error": true,
+        "boundary_error": true,
+        "gauge_relative": true,
+        "fourier_difference": true,
+        "analytic_density_identity": true,
+        "helical_inverse": true,
+        "reflection_sign": true,
+        "antipodal_invariance": true,
+        "trivial_charge": true,
+        "gradient_directional": true,
+        "continuum_degree_error": true,
+        "unit_charge": true,
+        "charge_refinement": true,
+        "analytic_charge": true,
+        "smooth_deformation": true,
+        "deformation_drift": true,
+        "curl_relative": true,
+        "divergence_relative": true,
+        "harmonic_fraction": true,
+        "backend": true,
+        "autograd": true,
+        "charge_refines": true,
+        "coordinate_map_orientation": true,
+        "continuum_quadrature_controlled": true
+      },
+      "worst_errors": {
+        "unit_error": 1.2212453270876722e-15,
+        "boundary_error": 0.0,
+        "gauge_relative": 3.3818019951010297e-15,
+        "fourier_difference": 2.220446049250313e-16,
+        "analytic_density_identity": 1.6653345369377348e-16,
+        "helical_inverse": 5.020438787637582e-16,
+        "reflection_sign": 0.0,
+        "antipodal_invariance": 0.0,
+        "trivial_charge": 0.0,
+        "gradient_directional": 4.195038413867813e-14,
+        "continuum_degree_error": 2.220446049250313e-16,
+        "backend": 4.884981308350689e-15,
+        "autograd": 4.0826988057657276e-19,
+        "unit_charge": 4.9720896289073835e-09,
+        "charge_refinement": 1.2522907255618776e-06,
+        "analytic_charge": 8.793474837176518e-10,
+        "smooth_deformation": 5.579419593004786e-09,
+        "deformation_drift": 5.97095473064968e-09,
+        "curl_relative": 0.00014665546062933444,
+        "divergence_relative": 0.0038042727073074427,
+        "harmonic_fraction": 3.1652227097249964e-10
+      },
+      "resolution_sequence": [
+        {
+          "grid": [
+            17,
+            17,
+            17
+          ],
+          "half_box": 4.0,
+          "spacing": 0.5,
+          "fft_period": 8.5,
+          "charge": -0.9905412289970628,
+          "charge_error": 0.009458771002937238,
+          "analytic_berry_charge": -1.000003177131436,
+          "analytic_s3_degree": -1.0000031771314362,
+          "diagnostics": {
+            "curl_relative": 0.01434897684852469,
+            "divergence_relative": 0.10964437153661186,
+            "gauge_relative": 1.1001774147775843e-15,
+            "harmonic_fraction": 0.0004475111976123557,
+            "fourier_charge_difference": 0.0
+          }
+        },
+        {
+          "grid": [
+            25,
+            25,
+            25
+          ],
+          "half_box": 4.0,
+          "spacing": 0.33333333333333326,
+          "fft_period": 8.333333333333332,
+          "charge": -1.0000830594162438,
+          "charge_error": 8.305941624375812e-05,
+          "analytic_berry_charge": -0.999999860614927,
+          "analytic_s3_degree": -0.999999860614927,
+          "diagnostics": {
+            "curl_relative": 0.0018573287323054022,
+            "divergence_relative": 0.024222213175996914,
+            "gauge_relative": 1.6166911045418198e-15,
+            "harmonic_fraction": 3.4305627412631965e-06,
+            "fourier_charge_difference": 2.220446049250313e-16
+          }
+        },
+        {
+          "grid": [
+            33,
+            33,
+            33
+          ],
+          "half_box": 4.0,
+          "spacing": 0.25,
+          "fft_period": 8.25,
+          "charge": -0.9999987526813641,
+          "charge_error": 1.2473186359329702e-06,
+          "analytic_berry_charge": -1.0000000167049676,
+          "analytic_s3_degree": -1.0000000167049679,
+          "diagnostics": {
+            "curl_relative": 0.0007456715688393468,
+            "divergence_relative": 0.012729334394877088,
+            "gauge_relative": 2.1164550401624637e-15,
+            "harmonic_fraction": 6.381963192532491e-08,
+            "fourier_charge_difference": 2.220446049250313e-16
+          }
+        },
+        {
+          "grid": [
+            49,
+            49,
+            49
+          ],
+          "half_box": 4.0,
+          "spacing": 0.16666666666666666,
+          "fft_period": 8.166666666666666,
+          "charge": -1.0000000049720896,
+          "charge_error": 4.9720896289073835e-09,
+          "analytic_berry_charge": -1.0000000008793475,
+          "analytic_s3_degree": -1.0000000008793477,
+          "diagnostics": {
+            "curl_relative": 0.0001437430162625224,
+            "divergence_relative": 0.003722250952257676,
+            "gauge_relative": 3.3818019951010297e-15,
+            "harmonic_fraction": 2.6148412031552687e-10,
+            "fourier_charge_difference": 0.0
+          }
+        }
+      ],
+      "deformations": [
+        {
+          "seed": 0,
+          "charge": -1.0000000050446631,
+          "difference_from_baseline": 7.257350276290708e-11,
+          "max_tangent_step": 0.054479442123326574,
+          "diagnostics": {
+            "curl_relative": 0.00014274332785612552,
+            "divergence_relative": 0.0036940185034124466,
+            "gauge_relative": 3.4030827102070665e-15,
+            "harmonic_fraction": 2.5907998732865496e-10,
+            "fourier_charge_difference": 0.0
+          }
+        },
+        {
+          "seed": 17,
+          "charge": -1.0000000039780754,
+          "difference_from_baseline": 9.94014204280802e-10,
+          "max_tangent_step": 0.07568061985265205,
+          "diagnostics": {
+            "curl_relative": 0.0001392677950858827,
+            "divergence_relative": 0.003596111399537839,
+            "gauge_relative": 3.4123046633635706e-15,
+            "harmonic_fraction": 1.8233655200327224e-10,
+            "fourier_charge_difference": 0.0
+          }
+        },
+        {
+          "seed": 104729,
+          "charge": -1.0000000055794196,
+          "difference_from_baseline": 6.073299640974028e-10,
+          "max_tangent_step": 0.06621166096855036,
+          "diagnostics": {
+            "curl_relative": 0.00014665546062933444,
+            "divergence_relative": 0.0038042727073074427,
+            "gauge_relative": 3.4220468918735603e-15,
+            "harmonic_fraction": 3.1652227097249964e-10,
+            "fourier_charge_difference": 0.0
+          }
+        },
+        {
+          "kind": "orientation-preserving coordinate deformation",
+          "charge": -0.9999999990011349,
+          "difference_from_baseline": 5.97095473064968e-09,
+          "diagnostics": {
+            "curl_relative": 0.00014565590551515522,
+            "divergence_relative": 0.0037956792667548935,
+            "gauge_relative": 3.408865349991163e-15,
+            "harmonic_fraction": 1.7879967391681853e-10,
+            "fourier_charge_difference": 2.220446049250313e-16
+          }
+        }
+      ],
+      "reflected_charge": 1.0000000049720896,
+      "antipodal_charge": -1.0000000049720896,
+      "continuum_reference": {
+        "degree": -1.0000000000000002,
+        "quadrature_error_estimate": 1.9343580914794633e-13
+      },
+      "charge_improvement": 1902373.390042006,
+      "gradient_checks": [
+        {
+          "seed": 0,
+          "steps": [
+            {
+              "step": 0.001,
+              "analytic": -0.00012711855182684714,
+              "central_difference": -0.0001271185627424085,
+              "normalized_error": 1.0915561369281152e-11
+            },
+            {
+              "step": 0.0001,
+              "analytic": -0.00012711855182684714,
+              "central_difference": -0.00012711855193598927,
+              "normalized_error": 1.0914213326509992e-13
+            },
+            {
+              "step": 1e-05,
+              "analytic": -0.00012711855182684714,
+              "central_difference": -0.000127118551813881,
+              "normalized_error": 1.296613641108002e-14
+            }
+          ]
+        },
+        {
+          "seed": 17,
+          "steps": [
+            {
+              "step": 0.001,
+              "analytic": -6.634316647078893e-05,
+              "central_difference": -6.634316413811972e-05,
+              "normalized_error": 2.3326692140390737e-12
+            },
+            {
+              "step": 0.0001,
+              "analytic": -6.634316647078893e-05,
+              "central_difference": -6.634316644877139e-05,
+              "normalized_error": 2.201754403796663e-14
+            },
+            {
+              "step": 1e-05,
+              "analytic": -6.634316647078893e-05,
+              "central_difference": -6.634316651273932e-05,
+              "normalized_error": 4.195038413867813e-14
+            }
+          ]
+        },
+        {
+          "seed": 104729,
+          "steps": [
+            {
+              "step": 0.001,
+              "analytic": -0.00026401721249176395,
+              "central_difference": -0.00026401719629794347,
+              "normalized_error": 1.6193820481617827e-11
+            },
+            {
+              "step": 0.0001,
+              "analytic": -0.00026401721249176395,
+              "central_difference": -0.0002640172123321281,
+              "normalized_error": 1.5963586789263795e-13
+            },
+            {
+              "step": 1e-05,
+              "analytic": -0.00026401721249176395,
+              "central_difference": -0.0002640172124652139,
+              "normalized_error": 2.655005122004228e-14
+            }
+          ]
+        }
+      ],
+      "initializer": "independently derived compact unit-Hopf map; no archived paper initializer available",
+      "cuda_verified": true,
+      "stationary_solution_evaluated": false,
+      "peak_vram_gb": 0.064007168
+    }
+  },
+  "anomaly": null
+}

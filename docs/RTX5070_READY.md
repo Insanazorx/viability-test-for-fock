@@ -8,6 +8,14 @@ and frozen in `requirements/rtx5070.freeze.txt`. PyTorch 2.11.0+cu128 executes
 float64 tensors/FFT on NVIDIA GeForce RTX 5070 (sm_120), driver 616.92.
 Both external input hashes match. The checkpoint remains nonstationary.
 
+The first three actual CUDA responsibilities now passed: G0A-T02, G0B-T01,
+G0B-T02. Their reports are recorded by machine in `state/state.yaml`.
+G0B-T02 first hit a validator host-array conversion error; its FAIL evidence
+is preserved, the smallest implementation repair was regression-tested,
+and the identical frozen config subsequently passed. At 49^3,
+Q_H=-1.0000000049720896. NEXT is G0B-T03 production-driver development;
+the stationary sequence and G0B-T04 physical spectrum have not been run.
+
 GitHub remote: `https://github.com/Insanazorx/viability-test-for-fock.git`.
 Working branch: `reproduce/rtx5070-cuda`. The downloaded directory had no
 `.git`; metadata was restored from this remote without replacing source files.

@@ -2,25 +2,25 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G0B-T02
+task: G0B-T03
 machine: RTX5070
-status: RUNNING
+status: TODO
 
 ## Action
-After the user resumes RTX5070 and prior CUDA gates pass, compare Hopf FFT/gradient results with the CPU reference.
+Develop and validate the identified RTX5070 production driver for the matched 17^3,21^3,25^3,33^3 stationary sequence, including resumable optimizer/AL/RNG checkpoints and measured residual/energy/charge acceptance. The archived source initializer is absent; the available compact field is independent and nonstationary. Document initializer/solver equivalence separately; preserve all source settings and 5e-4 energy/charge tolerances. G0B-T04 production spectrum remains pending.
 
 ## Read
 
 - AGENTS.md#g0b
 - MACHINE_HANDOFF.md
-- reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md
+- reports/G0/G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md
+- reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md
+- docs/G0B_SOLVER_PREPARATION.md
 - docs/G0B_HOPF.md
-- docs/G0B_SPECTRAL.md
-- config/benchmark/g0b_t02_macm6.json.yaml
 - config/benchmark/publication.source.yaml
 
 ## One command
 
 ```sh
-.venv/Scripts/python.exe scripts/run.py --config config/benchmark/g0b_t02_rtx5070.json.yaml
+.venv/Scripts/python.exe scripts/ctl.py start G0B-T03 --machine RTX5070
 ```

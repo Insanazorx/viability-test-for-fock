@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T20:36:37.507120+00:00",
+  "updated_utc": "2026-10-03T20:41:48.704644+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -242,7 +242,7 @@
     },
     "G0B-T02": {
       "title": "Hopf invariant and sign convention",
-      "status": "RUNNING",
+      "status": "PASS",
       "enabled": true,
       "prerequisites": [
         "G0B-T01"
@@ -253,11 +253,12 @@
       ],
       "machine_done": {
         "MACM6": true,
-        "RTX5070": false,
+        "RTX5070": true,
         "CLOUD": false
       },
       "machine_reports": {
-        "MACM6": "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md"
+        "MACM6": "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md",
+        "RTX5070": "reports/G0/G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md"
       },
       "read": [
         "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md",
@@ -306,7 +307,15 @@
         "cause": "CUDA validator called detach() on already-converted NumPy arrays and host scalar comparisons, before returning topology metrics.",
         "classification": "implementation",
         "change": "Only call detach/cpu on Torch tensors; accept NumPy arrays and host scalars directly. Added an actual CUDA small-grid mixed-type regression.",
-        "decision": "User-authorized continuation permits the smallest implementation repair and repeat with the identical frozen config, source, precision and tolerances. No physical instability or gate closure is inferred. Failed evidence remains preserved; RTX5070 completion is still false."
+        "decision": "User-authorized continuation permits the smallest implementation repair and repeat with the identical frozen config, source, precision and tolerances. No physical instability or gate closure is inferred. Failed evidence remains preserved; completion stayed false until the subsequent PASS report."
+      },
+      "machine_checkpoints": {
+        "RTX5070": {
+          "path": "checkpoints/G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__initial.h5",
+          "sha256": "4e462a0f240fb28f8a21033f07594aa94a73bb51d21eabeb37e0a8015c89d1bb",
+          "kind": "independent compact unit-Hopf initial field",
+          "stationary": false
+        }
       }
     },
     "G0B-T03": {
@@ -326,8 +335,14 @@
         "CLOUD": false
       },
       "machine_reports": {},
-      "read": [],
-      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "read": [
+        "reports/G0/G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md",
+        "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md",
+        "docs/G0B_SOLVER_PREPARATION.md",
+        "docs/G0B_HOPF.md",
+        "config/benchmark/publication.source.yaml"
+      ],
+      "next_action": "Develop and validate the identified RTX5070 production driver for the matched 17^3,21^3,25^3,33^3 stationary sequence, including resumable optimizer/AL/RNG checkpoints and measured residual/energy/charge acceptance. The archived source initializer is absent; the available compact field is independent and nonstationary. Document initializer/solver equivalence separately; preserve all source settings and 5e-4 energy/charge tolerances. G0B-T04 production spectrum remains pending.",
       "command": ".venv/bin/python scripts/ctl.py start G0B-T03 --machine RTX5070"
     },
     "G0B-T04": {
@@ -841,7 +856,7 @@
       }
     }
   },
-  "active_task": "G0B-T02",
+  "active_task": null,
   "action_selection": {
     "task": "G0B-T02",
     "machine": "RTX5070",
@@ -2438,9 +2453,9 @@
     "overall_scientific_label": "PARTIAL / UNRESOLVED",
     "radiative_assessment": "RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED",
     "last_verified_unit_suite": {
-      "tests": 116,
-      "report": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md",
-      "verified_utc": "2026-10-03T10:46:42.926981+00:00"
+      "tests": 126,
+      "report": "reports/G0/G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md",
+      "verified_utc": "2026-10-03T20:37:28.907009+00:00"
     },
     "key_results": [
       {
@@ -2472,13 +2487,18 @@
         "label": "Düz uzay bounce",
         "value": "Bhat4=1082.94755553; kaynakla bağıl fark 4.94e−9; fiziksel ömür değil",
         "task": "G4D-T04"
+      },
+      {
+        "label": "RTX5070 gerçek CUDA aynaları",
+        "value": "G0A-T02/G0B-T01/G0B-T02 PASS; float64, PyTorch 2.11.0+cu128, driver 616.92; durağan çözücü/fiziksel spektrum değil",
+        "task": "G0B-T02"
       }
     ],
     "missing_inputs": [
       {
-        "input": "RTX5070 CUDA ortamı ve ölçümleri",
-        "affected": "G0A/B/C; ardından G1/G2",
-        "need": "Gerçek cihaz float64 aynaları, sürümler, bellek/süre ve hassasiyet profili"
+        "input": "RTX5070 üretim ve hassasiyet ölçümleri",
+        "affected": "G0B-T03/T04, G0C; ardından G1/G2",
+        "need": "İlk üç CUDA aynası ve gerçek ortam doğrulandı. Durağan üretim sürücüsü, fiziksel spektrum, büyük grid bellek/süre ve hassasiyet profili hâlâ bekliyor."
       },
       {
         "input": "Yeniden üretilmiş durağan alan/spektrum",
