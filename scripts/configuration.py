@@ -18,6 +18,7 @@ CONFIGS = {
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
     ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
+    ("G1A-T04", "MACM6"): ("config/gate1/g1a_t04_macm6.json.yaml", "validate_full_static_preparation"),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -126,6 +127,13 @@ def validate_config(config, root=ROOT):
             raise ValueError('All solver/reference tolerances must be frozen')
         if not p.get('contract_doc') or not p.get('objective') or not p.get('acceptance'):
             raise ValueError('Preparation scope and acceptance contract required')
+    elif config['task']=='G1A-T04':
+        if config['machine']!='MACM6' or config['kind']!='numerical' or config['precision']!='float64' or config['grid']!=[5,5,5]:
+            raise ValueError('Full-M preparation is a restricted 5^3 MACM6 reference')
+        if set(config['tolerances'])!={'gradient','hvp_difference','hvp_symmetry','so4_energy','heavy_reduction','fock_potential','normal_masses'}:
+            raise ValueError('Full-M preparation tolerances must be explicit')
+        if set(config['parameters'].get('coefficients',{}))!={'z_m','alpha','mu','sigma0','zeta'}:
+            raise ValueError('Only stated baseline static coefficients allowed')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

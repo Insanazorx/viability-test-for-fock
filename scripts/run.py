@@ -52,7 +52,7 @@ def main() -> int:
     if task["status"] not in {"CLAIMED", "RUNNING"}:
         raise ValueError("Start the task before launching a run")
     inputs = {REGISTRY:sha256(ROOT/REGISTRY),"config/schema.yaml":sha256(ROOT/"config/schema.yaml")}
-    if config["task"] in {"G0A-T02","G0B-T01","G0B-T02","G4A-T01","G0B-T05"}:
+    if config['parameters'].get('source_manifest'):
         manifest_path = inside(ROOT, config["parameters"]["source_manifest"], "config")
         manifest = read_data(manifest_path)
         publication = inside(ROOT, manifest["path"])
@@ -74,7 +74,7 @@ def main() -> int:
     if config["parameters"].get("environment_freeze"):
         path = inside(ROOT, config["parameters"]["environment_freeze"], "requirements")
         # The historical G0A-T02 NumPy-only freeze remains an immutable input, not the new full environment lock.
-        if config["task"] == "G0A-T03" or (config['task'] in {'G0B-T01','G0B-T02','G4A-T01','G0B-T05'} and config['machine']=='MACM6'):
+        if config["task"] == "G0A-T03" or (config['task']!='G0A-T02' and config['machine']=='MACM6'):
             check_environment_freeze(path)
         inputs[path.relative_to(ROOT).as_posix()] = sha256(path)
     recovery = task.get("recovery")
@@ -168,6 +168,10 @@ def main() -> int:
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_solver import validate_solver
             metrics['preparation']=validate_solver(config)
+        if config['task']=='G1A-T04':
+            sys.path.insert(0,str(ROOT/'src'))
+            from analysis.validate_full_static import validate_full_static
+            metrics['preparation']=validate_full_static(config)
         status = "PASS" if (not missing and returncode == 0 and state["cloud"]["paused"]
                             and metrics["tests_run"] >= metrics["minimum_tests"]
                             and metrics.get("math_core", {"passed": True})["passed"]
