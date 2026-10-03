@@ -21,4 +21,4 @@ Generated from state/state.yaml.
 - [X] MACM6 — G1A-T04: MACM6 six-component static reference preparation (PASS)
 - [X] MACM6 — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)
 - [X] MACM6 — G4C-T02: Conditional radiative status preparation (PASS)
-- [ ] MACM6 — G4D-T04: Flat bounce regression and gravity-equation preparation (RUNNING)
+- [X] MACM6 — G4D-T04: Flat bounce regression and gravity-equation preparation (PASS)

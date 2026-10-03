@@ -1,0 +1,134 @@
+{
+  "run_id": "G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a",
+  "status": "PASS",
+  "finished_utc": "2026-10-03T10:38:55.927774+00:00",
+  "wall_time_seconds": 1.8408436669997172,
+  "peak_ram_gb": 0.145391616,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 137,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 113,
+    "minimum_tests": 113,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "preparation": {
+      "passed": true,
+      "checks": {
+        "source_action": true,
+        "source_center": true,
+        "action_convergence": true,
+        "virial": true,
+        "tail": true,
+        "gravity_constraint_derivative": true,
+        "false_vacuum_radius": true,
+        "false_vacuum_action": true,
+        "integrations_finite": true,
+        "shooting_bracket_resolved": true
+      },
+      "worst_errors": {
+        "source_action": 4.942401155005882e-09,
+        "source_center": 1.007416372544867e-12,
+        "action_convergence": 3.944933268940076e-10,
+        "virial": 5.209061933744527e-13,
+        "tail": 2.597280680029267e-10,
+        "gravity_constraint_derivative": 2.168404344971009e-19,
+        "false_vacuum_radius": 1.6491327998425443e-15,
+        "false_vacuum_action": 4.440892098500626e-16
+      },
+      "flat_rows": [
+        {
+          "x0": 0.0011669654291339034,
+          "action": 1082.9475555280694,
+          "kinetic": 2165.895111056401,
+          "potential": -1082.9475555283318,
+          "virial": 1.2114585795130188e-13,
+          "tail_field_error": 0.0,
+          "tail_derivative": 2.065860131920649e-10,
+          "event": "overshoot",
+          "rho_end": 76.68641397361432,
+          "integration_nodes": 310,
+          "evaluations": 56,
+          "bracket_width": 2.168404344971009e-19,
+          "accuracy": {
+            "rtol": 1e-09,
+            "atol": 1e-11
+          }
+        },
+        {
+          "x0": 0.0011669654291389469,
+          "action": 1082.9475555280333,
+          "kinetic": 2165.8951110563903,
+          "potential": -1082.947555528357,
+          "virial": 1.4949020946503455e-13,
+          "tail_field_error": 0.0,
+          "tail_derivative": 1.8828537151370524e-10,
+          "event": "overshoot",
+          "rho_end": 76.93976236254143,
+          "integration_nodes": 312,
+          "evaluations": 56,
+          "bracket_width": 2.168404344971009e-19,
+          "accuracy": {
+            "rtol": 3e-11,
+            "atol": 3e-13
+          }
+        },
+        {
+          "x0": 0.0011669654291411756,
+          "action": 1082.9475555276388,
+          "kinetic": 2165.8951110564058,
+          "potential": -1082.947555528767,
+          "virial": 5.209061933744527e-13,
+          "tail_field_error": 0.0,
+          "tail_derivative": 2.597280680029267e-10,
+          "event": "overshoot",
+          "rho_end": 76.06136985767081,
+          "integration_nodes": 310,
+          "evaluations": 56,
+          "bracket_width": 2.168404344971009e-19,
+          "accuracy": {
+            "rtol": 1e-12,
+            "atol": 1e-14
+          }
+        }
+      ],
+      "gravity_rows": [
+        {
+          "epsilon": 0.01,
+          "scaled_radius_error": 1.6491327998425443e-15,
+          "false_vacuum_action": -657973626.7392906,
+          "numerical_action": -657973626.7392904
+        },
+        {
+          "epsilon": 0.1,
+          "scaled_radius_error": 9.729507111180987e-16,
+          "false_vacuum_action": -6579736.267392906,
+          "numerical_action": -6579736.267392906
+        },
+        {
+          "epsilon": 1.0,
+          "scaled_radius_error": 1.4153005371783028e-15,
+          "false_vacuum_action": -65797.36267392908,
+          "numerical_action": -65797.36267392905
+        }
+      ],
+      "physical_action_scaling": "B4=(f/Lambda_U)^4 * Bhat4",
+      "gravity_parameter": "epsilon=f^2/M_Pl^2",
+      "source_regression": true,
+      "cdl_equations_verified": true,
+      "nontrivial_gravitational_bounce_solved": false,
+      "prefactor_computed": false,
+      "cosmological_lifetime_established": false,
+      "scientific_G4D_pass": false
+    }
+  },
+  "anomaly": null
+}
