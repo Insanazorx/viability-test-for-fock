@@ -18,7 +18,13 @@ CONFIGS = {
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
     ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
+    ("G4A-T02", "MACM6"): ("config/gate4/g4a_t02_macm6.json.yaml", "validate_classification"),
+    ("G4A-T03", "MACM6"): ("config/gate4/g4a_t03_macm6.json.yaml", "validate_switching"),
     ("G1A-T04", "MACM6"): ("config/gate1/g1a_t04_macm6.json.yaml", "validate_full_static_preparation"),
+}
+MACM6_AUDITS = {
+    'G4A-T02': ('analysis.symmetry_audit', 'validate_classification', {'reflection'}),
+    'G4A-T03': ('analysis.symmetry_audit', 'validate_switching', {'mu_series','xi_series'}),
 }
 REGISTRY = "config/frozen_registry.yaml"
 
@@ -134,6 +140,13 @@ def validate_config(config, root=ROOT):
             raise ValueError('Full-M preparation tolerances must be explicit')
         if set(config['parameters'].get('coefficients',{}))!={'z_m','alpha','mu','sigma0','zeta'}:
             raise ValueError('Only stated baseline static coefficients allowed')
+    elif config['task'] in MACM6_AUDITS:
+        if config['machine']!='MACM6' or config['kind']!='numerical' or config['precision']!='float64' or config['grid'] is not None:
+            raise ValueError('Analytic MACM6 audit requires explicit float64 and no lattice')
+        if set(config['tolerances'])!=MACM6_AUDITS[config['task']][2]:
+            raise ValueError('All audit tolerances must be frozen')
+        if not all(config['parameters'].get(k) for k in ('contract_doc','objective','method','acceptance','convergence','claim_scope','next_action')):
+            raise ValueError('Audit scope and report contract required')
     elif config["kind"] != "control" or config["precision"] != "N/A":
         raise ValueError("Infrastructure handlers require control/N/A")
     return record

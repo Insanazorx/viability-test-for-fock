@@ -13,7 +13,8 @@ import time
 
 from common import ROOT, git_info, inside, read_data, sha256
 from ctl import ensure_machine_ready, validate
-from configuration import load_config, REGISTRY
+from configuration import load_config, REGISTRY, MACM6_AUDITS
+import importlib
 from provenance import (RamMonitor, check_environment_freeze, freeze, hardware,
                         packages, run_identity, seal_run, seed_policy)
 
@@ -172,6 +173,10 @@ def main() -> int:
             sys.path.insert(0,str(ROOT/'src'))
             from analysis.validate_full_static import validate_full_static
             metrics['preparation']=validate_full_static(config)
+        if config['task'] in MACM6_AUDITS:
+            sys.path.insert(0,str(ROOT/'src'))
+            module,function,_=MACM6_AUDITS[config['task']]
+            metrics['preparation']=getattr(importlib.import_module(module),function)(config)
         status = "PASS" if (not missing and returncode == 0 and state["cloud"]["paused"]
                             and metrics["tests_run"] >= metrics["minimum_tests"]
                             and metrics.get("math_core", {"passed": True})["passed"]

@@ -7,6 +7,7 @@ import sys
 
 from common import ROOT, inside, read_data, sha256
 from provenance import verify_run
+from configuration import MACM6_AUDITS
 
 
 def main() -> int:
@@ -17,7 +18,7 @@ def main() -> int:
     metadata, result = read_data(run / "metadata.json"), read_data(run / "result.json")
     if metadata["run_id"] != args.run_id or result["run_id"] != args.run_id:
         raise ValueError("Run ID does not match evidence")
-    if metadata["task"] not in {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01','G0B-T05','G1A-T04'}:
+    if metadata["task"] not in set(MACM6_AUDITS) | {"G0A-T01", "G0A-T02", "G0A-T03",'G0B-T01','G0B-T02','G4A-T01','G0B-T05','G1A-T04'}:
         raise ValueError("Automatic report prose is implemented only for the setup/core tasks")
     if sha256(run / "config.yaml") != metadata["config_sha256"]:
         raise ValueError("Config snapshot was changed")
@@ -180,7 +181,7 @@ def main() -> int:
             'next_action':'G4A-T02 on MACM6: classify absent allowed terms, IBP/EOM redundancies and genuinely symmetry-forbidden terms. Then G4A-T03 audits lower-order lambda^n C2^2 and the Xi functional coefficients before G4B loop matching.' if result['status']=='PASS' else 'Classify the failed exact count/rank or invariant witness; correct the smallest implementation/analytic issue before repeating.',
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, AGENTS.md#g4a, docs/G4A_OPERATOR_BASIS.md and this sealed catalog; GPU queue is unchanged.',
         })
-    if metadata['task'] in {'G0B-T05','G1A-T04'}:
+    if metadata['task'] in set(MACM6_AUDITS) | {'G0B-T05','G1A-T04'}:
         config=read_data(run/'config.yaml');p=config['parameters']
         values.update({
             'objective':p['objective'],
@@ -192,7 +193,7 @@ def main() -> int:
             'convergence':p['convergence'],
             'evaluation':result['status']+' for the declared MACM6 substep only. '+p['acceptance']+' '+p.get('claim_scope','G0B-T03/T04 scientific completion flags remain unchanged; the source stationary sequence, CUDA comparison and physical eigenvalues are not evaluated here.'),
             'anomalies':f"- Dirty Git tree: {metadata['uncommitted_diff']}.\n- No CUDA execution; CLOUD paused; remote runner disabled.\n"+'\n'.join('- '+line for line in p.get('limitations',['Source initializer/archive absent; compact fixture independently derived.','Small-grid raw charge is not certified as unit topology.','CPU SciPy chart adapter has separate equivalence scope.','Vacuum smoke tests do not establish a nontrivial stationary soliton.']))+'\n'+(f"- {result['anomaly']}\n" if result.get('anomaly') else ''),
-            'artifacts':'\n'.join(artifacts)+'\nOnly scalar reference metrics and solver ledgers are stored; no stationary checkpoint or dense Hessian is produced.',
+            'artifacts':'\n'.join(artifacts)+'\nSmall verification metrics/catalogs are sealed in result.json; no stationary checkpoint or dense lattice Hessian is produced.',
             'reproduction':f"```sh\n.venv/bin/python scripts/run.py --config {metadata['config_path']}\n.venv/bin/python scripts/report.py --run-id EXACT_NEW_RUN_ID\n```\nUse isolated checkout `{metadata['git_commit']}` with the exact source PDF and requirements/macm6.freeze.txt; task must be RUNNING/unfinished.",
             'changes':p.get('changes','First independent solver/HVP/CPU-DFT preparation report. No published numerical target, source acceptance tolerance, GPU completion flag or model coefficient changes.'),
             'next_action':p['next_action'],
