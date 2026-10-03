@@ -26,3 +26,6 @@ runs/**/arrays/
 # Preserve the publication as an external, hashed input.
 /yayınlanan.pdf
 /tmp/
+
+# Offline transfer bundles/ZIPs are hashed external deliverables.
+/transfers/

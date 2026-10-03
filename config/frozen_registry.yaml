@@ -51,6 +51,11 @@
       "handler": "validate_solver_preparation",
       "sha256": "f7f8faca6ac877e357545b12a6d856d9948ffd6422e6fd493c76f3fdc1708d10"
     },
+    "G0A-T04/MACM6": {
+      "path": "config/benchmark/g0a_t04_macm6.json.yaml",
+      "handler": "validate_transfer",
+      "sha256": "32d6755039e297451a01cd97fc8253a74d0e5db23b9646f58c1e296adbd5229a"
+    },
     "G4C-T02/MACM6": {
       "path": "config/gate4/g4c_t02_macm6.json.yaml",
       "handler": "validate_naturalness",

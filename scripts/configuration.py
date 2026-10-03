@@ -18,6 +18,7 @@ CONFIGS = {
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
     ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
+    ("G0A-T04", "MACM6"): ("config/benchmark/g0a_t04_macm6.json.yaml", "validate_transfer"),
     ("G4C-T02", "MACM6"): ("config/gate4/g4c_t02_macm6.json.yaml", "validate_naturalness"),
     ("G4D-T04", "MACM6"): ("config/gate4/g4d_t04_macm6.json.yaml", "validate_decay"),
     ("G4B-T01", "MACM6"): ("config/gate4/g4b_t01_macm6.json.yaml", "validate_radiative"),
@@ -26,6 +27,7 @@ CONFIGS = {
     ("G1A-T04", "MACM6"): ("config/gate1/g1a_t04_macm6.json.yaml", "validate_full_static_preparation"),
 }
 MACM6_AUDITS = {
+    'G0A-T04': ('analysis.validate_transfer','validate_transfer',{'integrity'}),
     'G4C-T02': ('analysis.naturalness_status','validate_naturalness',{'integrity'}),
     'G4D-T04': ('cosmology.vacuum_decay','validate_decay',{'source_action','source_center','action_convergence','virial','tail','gravity_constraint_derivative','false_vacuum_radius','false_vacuum_action'}),
     'G4B-T01': ('analysis.radiative','validate_radiative',{'potential_gradient','potential_hessian','hessian_symmetry','vacuum_spectrum','scale_derivative','threshold_curvature','scalar_derivatives','lower_switch_counterterm'}),
@@ -147,7 +149,8 @@ def validate_config(config, root=ROOT):
         if set(config['parameters'].get('coefficients',{}))!={'z_m','alpha','mu','sigma0','zeta'}:
             raise ValueError('Only stated baseline static coefficients allowed')
     elif config['task'] in MACM6_AUDITS:
-        if config['machine']!='MACM6' or config['kind']!='numerical' or config['precision']!='float64' or config['grid'] is not None:
+        expected_kind,expected_precision=('control','N/A') if config['task']=='G0A-T04' else ('numerical','float64')
+        if config['machine']!='MACM6' or config['kind']!=expected_kind or config['precision']!=expected_precision or config['grid'] is not None:
             raise ValueError('Analytic MACM6 audit requires explicit float64 and no lattice')
         if set(config['tolerances'])!=MACM6_AUDITS[config['task']][2]:
             raise ValueError('All audit tolerances must be frozen')

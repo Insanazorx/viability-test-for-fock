@@ -22,3 +22,4 @@ Generated from state/state.yaml.
 - N/A RTX5070 — G4B-T01: Available-input dark-scalar one-loop calculation (PASS)
 - N/A RTX5070 — G4C-T02: Conditional radiative status preparation (PASS)
 - N/A RTX5070 — G4D-T04: Flat bounce regression and gravity-equation preparation (PASS)
+- N/A RTX5070 — G0A-T04: MACM6 completion and offline RTX5070 transfer preflight (RUNNING)

@@ -66,8 +66,7 @@ machine's flag. Completing that task returns NEXT to the waiting device task.
 .venv/bin/python scripts/report.py --run-id EXACT_RUN_ID
 ```
 
-Installed handlers cover G0A-T01, G0A-T02 MACM6/CUDA and G0A-T03 discipline
-checks. They do not implement a lattice physics solver. Runs capture source/
+Installed handlers cover repository/config discipline, MACM6/CUDA core/spectral/Hopf references, MACM6 solver/full-M preparation, G4 symmetry/dark-loop/conditional-status/bounce preparation and offline transfer preflight. The matched stationary sequence and physical eigenspectrum production drivers remain RTX5070 development work. Runs capture source/
 config hashes, full installed versions, dirty Git state, UTC identity, explicit
 seeds/precision and measured hardware. Numerical handlers use their declared
 per-seed generators; Python/NumPy global seeds are also initialized explicitly.
