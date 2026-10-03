@@ -1,0 +1,475 @@
+{
+  "run_id": "G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b",
+  "status": "FAIL",
+  "finished_utc": "2026-10-03T22:09:16.846762+00:00",
+  "wall_time_seconds": 79.63590880006086,
+  "peak_ram_gb": 1.544953856,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 5000,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": 0.10832896,
+  "checkpoint_sha256": "2d44f98c2ce75f9a48aaef529aba7b8eabac87d98a29d419ff8bef10ecb18fc9",
+  "checkpoint_path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer4.h5",
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 144,
+    "minimum_tests": 140,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true,
+    "stationary": {
+      "passed": false,
+      "engineering": {
+        "passed": true,
+        "errors": {
+          "backend": 9.209056505930522e-16,
+          "autograd": 1.841811301186103e-16,
+          "resume": 0.0
+        },
+        "checks": {
+          "backend": true,
+          "autograd": true,
+          "resume": true
+        },
+        "vacuum_initial_energy": 0.0021724586614040387,
+        "vacuum_final": {
+          "energy": 9.187756726564682e-09,
+          "energy2": 9.187756726464153e-09,
+          "energy4": 1.005292989105204e-19,
+          "charge": -2.1173774042701444e-38,
+          "charge_error": -2.1173774042701444e-38,
+          "charge_gradient_rank": 0,
+          "alpha": 0.0,
+          "constrained_rms": 5.4363420195905785e-06,
+          "virial": 0.9999999999781167
+        },
+        "restart_checkpoint": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__smoke_outer1.h5",
+        "scope": "small CUDA derivative/host-reference and AL-boundary restart test; not a soliton"
+      },
+      "rows": [
+        {
+          "size": 17,
+          "half_box": 4.0,
+          "spacing": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "fft_period": [
+            8.5,
+            8.5,
+            8.5
+          ],
+          "initial": {
+            "energy": 298.40310458521134,
+            "energy2": 136.4816243817832,
+            "energy4": 161.92148020342813,
+            "charge": -0.9905412289970628,
+            "charge_error": 0.009458771002937238,
+            "charge_gradient_rank": 1,
+            "alpha": -146.77714853395742,
+            "constrained_rms": 0.4522748184067937,
+            "virial": -0.08525332153298819
+          },
+          "reference": {
+            "size": 17,
+            "half_box": 4.0,
+            "energy": 281.3653,
+            "charge": -0.999987,
+            "virial": -0.082,
+            "residual": 1.06e-07
+          },
+          "final": {
+            "energy": 281.36752824249265,
+            "energy2": 129.15315631681213,
+            "energy4": 152.2143719256805,
+            "charge": -0.999998794041726,
+            "charge_error": 1.2059582740198138e-06,
+            "charge_gradient_rank": 1,
+            "alpha": -184.00450213084474,
+            "constrained_rms": 1.0528404464608178e-06,
+            "virial": -0.08196118348451845
+          },
+          "relative_energy_error": 7.91939337460219e-06,
+          "unit_error": 4.440892098500626e-16,
+          "boundary_error": 0.0,
+          "history": [
+            {
+              "outer": 0,
+              "initial_augmented": 299.2977880740714,
+              "final_augmented": 280.5508147873603,
+              "multiplier_before": 0.0,
+              "multiplier_after": 179.57331021300814,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 131,
+              "max_chart_gradient": 0.011888258386224567,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.5445112000452355,
+              "energy": 279.74465044383885,
+              "energy2": 127.89899495412917,
+              "energy4": 151.8456554897097,
+              "charge": -0.9910213344893496,
+              "charge_error": 0.008978665510650408,
+              "charge_gradient_rank": 1,
+              "alpha": -180.1935985500145,
+              "constrained_rms": 0.006623214760042681,
+              "virial": -0.08560185332440538
+            },
+            {
+              "outer": 1,
+              "initial_augmented": 282.16314347440306,
+              "final_augmented": 281.3672964453363,
+              "multiplier_before": 179.57331021300814,
+              "multiplier_after": 183.67089691623482,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 124,
+              "max_chart_gradient": 6.2665652475646424e-06,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.233802400063723,
+              "energy": 281.33008582950737,
+              "energy2": 129.12624398848357,
+              "energy4": 152.2038418410238,
+              "charge": -0.9997951206648387,
+              "charge_error": 0.00020487933516133428,
+              "charge_gradient_rank": 1,
+              "alpha": -183.67136829924064,
+              "constrained_rms": 3.4615076896035326e-06,
+              "virial": -0.0820303231504568
+            },
+            {
+              "outer": 2,
+              "initial_augmented": 281.3681359561759,
+              "final_augmented": 281.36774755129727,
+              "multiplier_before": 183.67089691623482,
+              "multiplier_after": 183.98038293635287,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 145,
+              "max_chart_gradient": 5.048046572771789e-07,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.69700990000274,
+              "energy": 281.3649029780124,
+              "energy2": 129.15127131533956,
+              "energy4": 152.21363166267287,
+              "charge": -0.9999845256989941,
+              "charge_error": 1.547430100590219e-05,
+              "charge_gradient_rank": 1,
+              "alpha": -183.98038302651346,
+              "constrained_rms": 3.6278618025826823e-07,
+              "virial": -0.08196601673925033
+            },
+            {
+              "outer": 3,
+              "initial_augmented": 281.3677523403772,
+              "final_augmented": 281.36775012970105,
+              "multiplier_before": 183.98038293635287,
+              "multiplier_after": 184.00450210183325,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 133,
+              "max_chart_gradient": 2.636050904517814e-06,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.247854000073858,
+              "energy": 281.36752824249265,
+              "energy2": 129.15315631681216,
+              "energy4": 152.2143719256805,
+              "charge": -0.999998794041726,
+              "charge_error": 1.2059582740198138e-06,
+              "charge_gradient_rank": 1,
+              "alpha": -184.00450213084474,
+              "constrained_rms": 1.0528404464979218e-06,
+              "virial": -0.08196118348451835
+            }
+          ],
+          "checks": {
+            "finite": true,
+            "energy_relative": true,
+            "unit_charge": true,
+            "charge_sign": true,
+            "constrained_rms": true,
+            "unit_error": true,
+            "boundary_error": true,
+            "iteration_budget": true,
+            "evaluation_budget": true,
+            "outer_updates": true,
+            "backend_final": true,
+            "autograd_final": true
+          },
+          "passed": true,
+          "final_oracle_diagnostics": {
+            "backend": 2.3311907959566724e-13,
+            "autograd": 4.812122922359663e-15,
+            "cpu_metrics": {
+              "energy": 281.3675282424923,
+              "energy2": 129.15315631681204,
+              "energy4": 152.21437192568027,
+              "charge": -0.9999987940417238,
+              "charge_error": 1.2059582762402599e-06,
+              "charge_gradient_rank": 1,
+              "alpha": -184.0045021308448,
+              "constrained_rms": 1.052840446695923e-06,
+              "virial": -0.08196118348451804
+            }
+          },
+          "checkpoint_path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__accepted.h5"
+        },
+        {
+          "size": 21,
+          "half_box": 4.0,
+          "spacing": [
+            0.4,
+            0.4,
+            0.4
+          ],
+          "fft_period": [
+            8.4,
+            8.4,
+            8.4
+          ],
+          "initial": {
+            "energy": 300.00793284074894,
+            "energy2": 136.52486631555456,
+            "energy4": 163.48306652519437,
+            "charge": -1.000343022723246,
+            "charge_error": -0.00034302272324593375,
+            "charge_gradient_rank": 1,
+            "alpha": -191.73476793779884,
+            "constrained_rms": 0.42775451669106085,
+            "virial": -0.08985829126041757
+          },
+          "reference": {
+            "size": 21,
+            "half_box": 4.0,
+            "energy": 281.2711,
+            "charge": -0.999727,
+            "virial": -0.0762,
+            "residual": 9.41e-06
+          },
+          "final": {
+            "energy": 281.27560828718975,
+            "energy2": 129.91999549812252,
+            "energy4": 151.35561278906724,
+            "charge": -0.9997539906411831,
+            "charge_error": 0.0002460093588169121,
+            "charge_gradient_rank": 1,
+            "alpha": -166.19964155188194,
+            "constrained_rms": 3.430415758356348e-05,
+            "virial": -0.07620858922490853
+          },
+          "relative_energy_error": 1.602826308769303e-05,
+          "unit_error": 4.440892098500626e-16,
+          "boundary_error": 0.0,
+          "history": [
+            {
+              "outer": 0,
+              "initial_augmented": 300.0091094866356,
+              "final_augmented": 280.7657907019675,
+              "multiplier_before": 0.0,
+              "multiplier_after": 148.3585770517415,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 130,
+              "max_chart_gradient": 0.0021418626074386497,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.352326099993661,
+              "energy": 280.21553401734707,
+              "energy2": 129.33163561969172,
+              "energy4": 150.88389839765532,
+              "charge": -0.9925820711474129,
+              "charge_error": 0.007417928852587075,
+              "charge_gradient_rank": 1,
+              "alpha": -148.46977866392496,
+              "constrained_rms": 0.0022201353950367583,
+              "virial": -0.07691316205413999
+            },
+            {
+              "outer": 1,
+              "initial_augmented": 281.8663040712082,
+              "final_augmented": 281.312064086065,
+              "multiplier_before": 148.3585770517415,
+              "multiplier_after": 155.53803822429435,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 127,
+              "max_chart_gradient": 0.00013497093073585857,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.273162400000729,
+              "energy": 281.2575187373189,
+              "energy2": 129.89874474547142,
+              "energy4": 151.35877399184747,
+              "charge": -0.9996410269413724,
+              "charge_error": 0.00035897305862764295,
+              "charge_gradient_rank": 1,
+              "alpha": -155.53696575999436,
+              "constrained_rms": 7.642678465427984e-05,
+              "virial": -0.07630028645178619
+            },
+            {
+              "outer": 2,
+              "initial_augmented": 281.31464131920137,
+              "final_augmented": 281.3143661370204,
+              "multiplier_before": 155.53803822429435,
+              "multiplier_after": 161.27961416515512,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 125,
+              "max_chart_gradient": 9.20058991904012e-06,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.339898000005633,
+              "energy": 281.2688903217554,
+              "energy2": 129.9119507361068,
+              "energy4": 151.35693958564858,
+              "charge": -0.999712921202957,
+              "charge_error": 0.00028707879704303885,
+              "charge_gradient_rank": 1,
+              "alpha": -161.27962113586085,
+              "constrained_rms": 9.82440573764106e-06,
+              "virial": -0.07624372828793807
+            },
+            {
+              "outer": 3,
+              "initial_augmented": 281.3160144217346,
+              "final_augmented": 281.31588978770696,
+              "multiplier_before": 161.27961416515512,
+              "multiplier_after": 166.19980134149557,
+              "penalty": 20000.0,
+              "iterations": 120,
+              "evaluations": 126,
+              "max_chart_gradient": 2.8534079709797873e-05,
+              "evaluation_budget_exceeded": false,
+              "inner_converged_by_gradient": false,
+              "wall_time_seconds": 4.340382099966519,
+              "energy": 281.2756082871897,
+              "energy2": 129.9199954981225,
+              "energy4": 151.3556127890672,
+              "charge": -0.999753990641183,
+              "charge_error": 0.00024600935881702313,
+              "charge_gradient_rank": 1,
+              "alpha": -166.1996415518819,
+              "constrained_rms": 3.430415758358937e-05,
+              "virial": -0.07620858922490854
+            }
+          ],
+          "checks": {
+            "finite": true,
+            "energy_relative": true,
+            "unit_charge": true,
+            "charge_sign": true,
+            "constrained_rms": false,
+            "unit_error": true,
+            "boundary_error": true,
+            "iteration_budget": true,
+            "evaluation_budget": true,
+            "outer_updates": true,
+            "backend_final": true,
+            "autograd_final": true
+          },
+          "passed": false,
+          "final_oracle_diagnostics": {
+            "backend": 1.987993103469421e-14,
+            "autograd": 1.970645868709653e-15,
+            "cpu_metrics": {
+              "energy": 281.2756082871898,
+              "energy2": 129.91999549812252,
+              "energy4": 151.35561278906732,
+              "charge": -0.9997539906411836,
+              "charge_error": 0.000246009358816357,
+              "charge_gradient_rank": 1,
+              "alpha": -166.19964155188217,
+              "constrained_rms": 3.4304157583518184e-05,
+              "virial": -0.07620858922490881
+            }
+          },
+          "checkpoint_path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer4.h5"
+        }
+      ],
+      "source_sequence_complete": false,
+      "virial_box_trend": false,
+      "final_checkpoint": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer4.h5",
+      "not_run_grids": [
+        25,
+        33
+      ],
+      "source_initializer_available": false,
+      "initializer_equivalence": "UNRESOLVED - independent map",
+      "hessian_computed": false,
+      "resume_boundary": "completed AL outer update",
+      "peak_vram_gb": 0.10832896
+    }
+  },
+  "anomaly": null,
+  "checkpoint_artifacts": [
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__accepted.h5",
+      "sha256": "165388f307dfa8eac761c316d930890e92566bc5d80cedf583dd70ed9656eff7",
+      "bytes": 12739208
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__outer0.h5",
+      "sha256": "016f8a1aa9698a6134845f3949c67a3bb755da7e3a328105ecf9146cc9058928",
+      "bytes": 944592
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__outer1.h5",
+      "sha256": "6461d9a8df356a8567fe508163afdc3a17416a55985420bac86bc5331aa66aaa",
+      "bytes": 18008344
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__outer2.h5",
+      "sha256": "9d9951f67203d3c8ca48cedee49242413988290cbe3f635802e9b8a3705d975f",
+      "bytes": 18034608
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__outer3.h5",
+      "sha256": "2dfb3ad3e853b9694e350f9017f01878e034b26500dde143c884bcb16d356736",
+      "bytes": 16218288
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N17__outer4.h5",
+      "sha256": "a5daeba28c9c5fc0944f68c59bb95d6762d0aa5c6663b3c54d062a3a676249ce",
+      "bytes": 12726272
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer0.h5",
+      "sha256": "6e49dd0e0ea2f821f9dedc22d0bab0717e041381271314466352523da3b3b644",
+      "bytes": 1309512
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer1.h5",
+      "sha256": "ac9481e6ac2d0ff0f0b12b9f25805aeb67dfbde81f0d494179dbfae6fe088cce",
+      "bytes": 35259648
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer2.h5",
+      "sha256": "2d32bd995d30c99141334f8ce77de219d3f6daaf2fc09ff98b304239826c50ed",
+      "bytes": 35286152
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer3.h5",
+      "sha256": "02a30ef5d0e9928d7a23e56b28e5e58adbc2832301840cc8a09d95b978c119d7",
+      "bytes": 35308440
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__N21__outer4.h5",
+      "sha256": "2d44f98c2ce75f9a48aaef529aba7b8eabac87d98a29d419ff8bef10ecb18fc9",
+      "bytes": 35335016
+    },
+    {
+      "path": "checkpoints/G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__smoke_outer1.h5",
+      "sha256": "02a9860768a6eedf532b5d54a609d9ae0e1775d477585699ce6c36f124da651b",
+      "bytes": 856608
+    }
+  ]
+}

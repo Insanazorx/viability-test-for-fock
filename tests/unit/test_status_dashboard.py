@@ -9,7 +9,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 from common import ROOT, read_data
 from ctl import deferred_task, next_task, render
-from status_dashboard import build_status, stage_status, task_flags, validate_roadmap
+from status_dashboard import build_status, evidence, stage_status, task_flags, validate_roadmap
 
 
 class StatusDashboardTests(unittest.TestCase):
@@ -104,6 +104,15 @@ class StatusDashboardTests(unittest.TestCase):
         self.assertNotIn('Git remote ve uzak runner kurulumu yok', text)
         self.assertIn('**PARTIAL / UNRESOLVED**', text)
         self.assertEqual(value, before)
+
+    def test_active_failure_is_linked_without_a_completion_flag(self):
+        value=copy.deepcopy(self.state['tasks']['G0B-T03'])
+        value['machine_reports']={}
+        value['last_outcome']={'machine':'RTX5070','status':'FAIL','report':'reports/G0/failure.md'}
+        before=copy.deepcopy(value)
+        self.assertIn('RTX5070 FAIL raporu',evidence(ROOT,value))
+        self.assertIn('failure.md',evidence(ROOT,value))
+        self.assertEqual(value,before)
 
     def test_g0_general_benchmarks_prevent_premature_main_gate_pass(self):
         value = copy.deepcopy(self.state)

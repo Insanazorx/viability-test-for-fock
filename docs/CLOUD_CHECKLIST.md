@@ -7,7 +7,7 @@ Generated from state/state.yaml.
 - N/A CLOUD — G0A-T03: Full numerical run/config and environment discipline (PASS)
 - N/A CLOUD — G0B-T01: Reduced energy and spectral derivatives (PASS)
 - N/A CLOUD — G0B-T02: Hopf invariant and sign convention (PASS)
-- N/A CLOUD — G0B-T03: Published reduced stationary sequence (RUNNING)
+- N/A CLOUD — G0B-T03: Published reduced stationary sequence (FAIL)
 - N/A CLOUD — G0B-T04: Published reduced physical Hessian (TODO)
 - N/A CLOUD — G0C-T01: Independent CPU/CUDA reference comparison (TODO)
 - N/A CLOUD — G0C-T02: Precision policy and measured error budget (TODO)

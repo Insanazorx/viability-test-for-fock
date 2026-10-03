@@ -1,0 +1,131 @@
+{
+  "run_id": "G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b",
+  "task": "G0B-T03",
+  "machine": "RTX5070",
+  "git_commit": "68eddf634542310f40ddfb107c3e755d5784eadf",
+  "uncommitted_diff": false,
+  "config_sha256": "9df9405b559f40888a11681483375bc59bde622ea2846eee5de3c460b3e8c761",
+  "config_path": "config/benchmark/g0b_t03_rtx5070.json.yaml",
+  "started_utc": "2026-10-03T22:07:57.211302+00:00",
+  "os": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.14",
+  "python_executable": "C:\\Users\\Death\\Desktop\\viability-test-for-fock-main\\.venv\\Scripts\\python.exe",
+  "pytorch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "cuda_note": "Actual CUDA float64 execution",
+  "numpy": "2.2.6",
+  "input_sha256": {
+    "config/frozen_registry.yaml": "1fb753b0f8e5e95d32344da5a6257462c12b64b66cc0da73459b037872c68376",
+    "config/schema.yaml": "727763ae5bf8c510f2b8a933d1ce6b605e4d15d6547b2890d57b4b3c0b5b2acb",
+    "requirements/rtx5070.freeze.txt": "746504088a949b21963f0cf7795d4fe0f8d836cd4a9dabadd178c2ded92ed9de",
+    "docs/RTX5070_ENVIRONMENT.json": "91db63eeb4ffe9319b663719fc86d14b20b20d0abd949a8050a6540154cdd3bc",
+    "yayınlanan.pdf": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "config/benchmark/publication.source.yaml": "143da835837a98f64ba0246e983e02205e63b56bb2cfc6b092bf5c80db2194aa",
+    "docs/MATH_CORE.md": "b6953b026f2a14be2376f4ed7b2143108fcdfcdbf11d24fa8b2e3e24c20c459e",
+    "docs/G0B_PRODUCTION_CONTRACT.md": "5d7aa1f405df6b339710ab84a6e970a9008833ecd835cab9a7b285fb113c97ff",
+    "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md": "0da4bb11d609c00302e58744606ce460321a6af8905cf698429dc7b94620173c",
+    "reports/G0/G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md": "dd2a9a28fc5782286ee03dfe5461b3b802b5542d44cf2c35f1196e1e4fa2333d",
+    "environment.json": "a8bec4bf87f0c72110347b8ce4b6f7a0d0f8fdec942ace6e5c0188fd819c9a56"
+  },
+  "precision": "float64",
+  "seeds": [
+    0
+  ],
+  "grid": [
+    33,
+    33,
+    33
+  ],
+  "box": [
+    16.5,
+    16.5,
+    16.5
+  ],
+  "time_step": null,
+  "optimizer": "Torch LBFGS strong_wolfe normalized interior sphere chart",
+  "integrator": null,
+  "tolerances": {
+    "energy_relative": 0.0005,
+    "unit_charge": 0.0005,
+    "constrained_rms": 1e-05,
+    "unit_error": 2e-15,
+    "boundary_error": 1e-14,
+    "backend": 5e-11,
+    "autograd": 5e-10,
+    "resume": 5e-12
+  },
+  "checkpoint_sha256": null,
+  "hardware_role": "RTX5070",
+  "hardware": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "architecture": "AMD64",
+    "logical_cpu_count": 10,
+    "ram_capacity_gb": 16.782508032,
+    "ram_capacity_note": null,
+    "role": "RTX5070",
+    "hardware_model": "role label; exact model not attested",
+    "cuda_runtime": "12.8",
+    "pytorch": "2.11.0+cu128",
+    "cuda_device": "NVIDIA GeForce RTX 5070",
+    "cuda_capability": [
+      12,
+      0
+    ],
+    "vram_capacity_gb": 12.792037376,
+    "nvidia_smi": "NVIDIA GeForce RTX 5070, 616.92, 12227"
+  },
+  "seed_policy": {
+    "python_random_seed": 0,
+    "numpy_legacy_seed": 0,
+    "numpy_generator": "explicit default_rng(PCG64) per declared seed",
+    "torch_seeded": true,
+    "cross_device_bitwise_identity_required": false,
+    "torch_deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "tf32": false
+  },
+  "integrity_schema_version": 1,
+  "recovery": null,
+  "prerequisite_scope": [
+    {
+      "task": "G0B-T02"
+    }
+  ],
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": false,
+      "reason": "User opened RTX5070 and explicitly requested continuation on 2026-10-03",
+      "updated_utc": "2026-10-03T20:23:21.123061+00:00"
+    }
+  },
+  "execution_preference": {
+    "machine": "RTX5070",
+    "reason": "User explicitly requested RTX5070 for all new execution until they say otherwise; independent MACM6 responsibilities are preserved",
+    "until": "explicit user change",
+    "updated_utc": "2026-10-03T21:59:21.404968+00:00"
+  },
+  "repository_history": {
+    "schema_version": 1,
+    "status": "VERIFIED",
+    "verified_utc": "2026-10-03T21:14:42.864434+00:00",
+    "bundle_path": "REPOSITORY.bundle",
+    "bundle_bytes": 385317,
+    "bundle_sha256": "b2b03fa07c1e8e9177316eee035af3831252829ef88e2b01438f53c87c888d3e",
+    "restored_branch": "codex/macm6-completion",
+    "tip": "9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1",
+    "commit_count": 34,
+    "current_branch": "reproduce/rtx5070-cuda",
+    "remote": "https://github.com/Insanazorx/viability-test-for-fock.git",
+    "audit_report": "reports/G0/REPOSITORY_BUNDLE__RTX5070__20261003T211442Z__REPORT.md",
+    "external_manifest_present": false,
+    "macm6_reports_byte_identical": 14,
+    "original_evidence_files_byte_identical": 128,
+    "frozen_configs_byte_identical": 24,
+    "historical_run_commits_available": 18,
+    "scope": "Engineering provenance recovery only; no scientific task or machine completion changed"
+  },
+  "checkpoint_output": null,
+  "resume_checkpoint": null,
+  "precision_policy": "explicit declared dtype; no MPS acceptance or implicit mixed precision"
+}

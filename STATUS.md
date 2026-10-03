@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T22:05:20.085407+00:00**
+Durum kaydı (UTC): **2026-10-03T22:17:51.120908+00:00**
 
 ## Genel durum
 
@@ -14,7 +14,7 @@ Durum kaydı (UTC): **2026-10-03T22:05:20.085407+00:00**
 | Çalışma cihazı tercihi | RTX5070; kullanıcı değiştirene kadar |
 | Sıradaki tek eylem | G0B-T03 / RTX5070 |
 | CLOUD | PAUSED; onaylı gate: yok; çalışma başına USD 0 |
-| Yürütme kaydı | 21 görev: 14 PASS, 1 RUNNING, 0 CLAIMED, 6 TODO, 0 FAIL, 0 BLOCKED, 0 ARCHIVED |
+| Yürütme kaydı | 21 görev: 14 PASS, 0 RUNNING, 0 CLAIMED, 6 TODO, 1 FAIL, 0 BLOCKED, 0 ARCHIVED |
 
 **Okuma anahtarı:** `[X]` yalnız ilgili cihazın raporlu sorumluluğunun tamamlandığını, `[ ]` beklediğini, `N/A` o cihazın atanmadığını gösterir. `RUNNING` görev yaşam-durumudur; ertelenmiş bir görevin hesabı şu anda çalışıyor anlamına gelmez.
 
@@ -28,8 +28,8 @@ Bunlar yürütme kaydındaki etkin, tamamlanmamış işlerdir. Gelecek G0–G6 k
 
 | Görev | Kalan iş | Durum | Cihaz sırası | Ön koşullar |
 |---|---|---|---|---|
-| G0B-T03 | Augmented-Lagrangian minimizasyonu | RUNNING | RTX5070 → MACM6 | G0B-T02: PASS |
-| G0B-T04 | İndirgenmiş fiziksel Hessian | TODO | RTX5070 → MACM6 | G0B-T03: RUNNING |
+| G0B-T03 | Augmented-Lagrangian minimizasyonu | FAIL | RTX5070 → MACM6 | G0B-T02: PASS |
+| G0B-T04 | İndirgenmiş fiziksel Hessian | TODO | RTX5070 → MACM6 | G0B-T03: FAIL |
 | G0C-T01 | Bağımsız CPU/CUDA karşılaştırması | TODO | MACM6 → RTX5070 | G0B-T04: TODO |
 | G0C-T02 | Hassasiyet politikası | TODO | RTX5070 → MACM6 | G0C-T01: TODO |
 
@@ -45,13 +45,13 @@ Ayrıca MACM6 üzerinde homojen tetikleme ve azaltılmış pertürbasyon benchma
 | RTX5070 | 3 | Kayıtlı görev sırası geçerli. |
 | CLOUD | 0 | Kapalı; açık bütçe ve ölçülen kaynak gereği olmadan iş yok. |
 
-Son raporla belgelenmiş tam test paketi: **126 PASS** — [doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md>).
+Son raporla belgelenmiş tam test paketi: **144 PASS** — [doğrulama raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T03__G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__REPORT.md>).
 
 ## Bütün ana gate’lerin özeti
 
 | Gate | Amaç | Genel sonuç | Alt gate durumu |
 |---|---|---|---|
-| [G0](#g0) | Tekrar üretim temeli | **PARTIAL** | [G0A](#g0a) PASS, [G0B](#g0b) PARTIAL, [G0C](#g0c) TODO, [G0D](#g0d) DISABLED |
+| [G0](#g0) | Tekrar üretim temeli | **FAIL** | [G0A](#g0a) PASS, [G0B](#g0b) FAIL, [G0C](#g0c) TODO, [G0D](#g0d) DISABLED |
 | [G1](#g1) | Sonlu sertlikte tam soliton sektörü | **PARTIAL** | [G1A](#g1a) PREPARED, [G1B](#g1b) TODO, [G1C](#g1c) TODO, [G1D](#g1d) TODO, [G1E](#g1e) TODO, [G1F](#g1f) TODO, [G1G](#g1g) TODO |
 | [G2](#g2) | Üretim ve relic abundance | **TODO** | [G2A](#g2a) TODO, [G2B](#g2b) TODO, [G2C](#g2c) TODO, [G2D](#g2d) TODO, [G2E](#g2e) TODO, [G2F](#g2f) TODO |
 | [G3](#g3) | Astrofiziksel karanlık | **TODO** | [G3A](#g3a) TODO, [G3B](#g3b) TODO, [G3C](#g3c) TODO, [G3D](#g3d) TODO |
@@ -101,7 +101,7 @@ Kod, matematik çekirdeği ve kayıt disiplinini doğrulamak.
 <a id="g0b"></a>
 ### G0B — Yayınlanan indirgenmiş Hopf çözücüsü
 
-**Durum:** PARTIAL · **Ön koşul:** G0A · **Cihaz sırası:** MACM6 referans → RTX5070 üretim → MACM6 analiz
+**Durum:** FAIL · **Ön koşul:** G0A · **Cihaz sırası:** MACM6 referans → RTX5070 üretim → MACM6 analiz
 
 Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.
 
@@ -111,7 +111,7 @@ Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.
 |---|---|---|---|---|---|---|
 | G0B-T01 | **Statik enerji ve spektral türevler** — Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T01__G0B-T01__RTX5070__20261003T203207Z__a12ca3e__9e664616__REPORT.md>); MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor. |
 | G0B-T02 | **Hopf yükü ve işaret** — Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü. | PASS | [X] | [X] | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md>); MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil. |
-| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | RUNNING | [ ] | [ ] | N/A | Rapor yok; G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
+| G0B-T03 | **Augmented-Lagrangian minimizasyonu** — 17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, \|\|Q\|−1\|≤5e−4; virial eğilimi. | FAIL | [ ] | [ ] | N/A | [RTX5070 FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T03__G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__REPORT.md>); G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı. |
 | G0B-T04 | **İndirgenmiş fiziksel Hessian** — Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık. | TODO | [ ] | [ ] | N/A | Rapor yok; G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi. |
 | G0B-T05 | **MACM6 indirgenmiş çözücü/HVP/CPU oracle hazırlığı** — G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. | PASS · hazırlık | [X] | N/A | N/A | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>); G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil. |
 
@@ -677,6 +677,7 @@ On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.
 
 | Sonuç | Ölçüm ve kapsam | Kanıt |
 |---|---|---|
+| İlk RTX5070 durağan dizi denemesi: FAIL | 17³ kabul: E=281.36752824, Q=-0.999998794, RMS=1.05284e-6. 21³ enerji/yük kabul, son RMS=3.43042e-5 > 1e-5; 25³/33³ NOT_RUN. CUDA/CPU/autograd ve yeniden başlatma kontrolleri geçer; görev/cihaz tamamlanmadı, fiziksel kararsızlık sonucu yok. | [RTX5070 FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T03__G0B-T03__RTX5070__20261003T220757Z__68eddf6__9df9405b__REPORT.md>) |
 | Hopf yükü | Q=−1.000000004972 (49³ bağımsız başlangıç alanı; durağan çözüm değil) | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md>), [RTX5070 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__RTX5070__20261003T203645Z__1cb2c8a__23ad6ac8__REPORT.md>) |
 | İndirgenmiş vakum smoke artığı | 2.71e−9; birim sektör durağan soliton iddiası yok | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md>) |
 | Tam M ağır-limit enerji farkı | 1.00e−15; CPU referans hazırlığı | [MACM6 raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G1\G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md>) |
@@ -689,8 +690,8 @@ On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.
 
 | Girdi | Etkilenen gate’ler | Gereken |
 |---|---|---|
-| RTX5070 üretim ve hassasiyet ölçümleri | G0B-T03/T04, G0C; ardından G1/G2 | İlk üç CUDA aynası ve gerçek ortam doğrulandı. Durağan üretim sürücüsü, fiziksel spektrum, büyük grid bellek/süre ve hassasiyet profili hâlâ bekliyor. |
-| Yeniden üretilmiş durağan alan/spektrum | G0B-T03/T04; G1A/B/C/D | Durağan checkpoint ve fiziksel özçiftler; mevcut kompakt checkpoint nonstationary |
+| RTX5070 üretim ve hassasiyet ölçümleri | G0B-T03/T04, G0C; ardından G1/G2 | İlk üç CUDA aynası ve üretim sürücüsü doğrulandı. G0B-T03 17³ satırı kabul edildi, 21³ son artık 3.4304e-5 > 1e-5 nedeniyle FAIL; 25³/33³ çalışmadı. 21³ yakınsama/eşdeğerlik teşhisi, G0B-T04 sürücüsü/spektrum ve sonraki hassasiyet profili bekliyor. |
+| Yeniden üretilmiş durağan alan/spektrum | G0B-T03/T04; G1A/B/C/D | 17³ kısmi kabul checkpoint’i var; bütün kaynak dizisi PASS değil. 21³ son aday nonstationary; 25³/33³ ve fiziksel özçiftler yok. Eski kompakt fixture checkpoint’leri nonstationary. |
 | Somut L_m, fiziksel ölçek ve UV matching | Tam G4B/G4C; G3 portal sınırları | f/Lambda_U/sigma0/m_chi/portal Lambda; kesim ve eşleşme koşulları |
 | Çarpışma ve üretim sonuçları | G1G, G2F, G3, G5, G6 | Kütle/boyut/βH, kesitler, bolluk, dağılım ve ölçülen closure katsayıları |
 | Korunmuş bölge, yerçekimli bounce ve prefaktör | G4D/G4E | Fiziksel vakum ömrü ve GMH/RH değerlendirmesi |

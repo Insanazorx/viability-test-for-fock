@@ -1,0 +1,22 @@
+{
+  "schema_version": 1, "task": "G0B-T03", "machine": "RTX5070", "kind": "numerical", "precision": "float64",
+  "seeds": [0], "grid": [33,33,33], "box": [16.5,16.5,16.5], "time_step": null,
+  "optimizer": "Torch LBFGS strong_wolfe normalized interior sphere chart", "integrator": null,
+  "tolerances": {"energy_relative":0.0005,"unit_charge":0.0005,"constrained_rms":0.00001,
+    "unit_error":2e-15,"boundary_error":1e-14,"backend":5e-11,"autograd":5e-10,"resume":5e-12},
+  "parameters": {"handler":"reproduce_stationary_cuda","minimum_tests":140,"allow_cloud":false,
+    "sequence":[
+      {"size":17,"half_box":4.0,"energy":281.3653,"charge":-0.999987,"virial":-0.0820,"residual":1.06e-7},
+      {"size":21,"half_box":4.0,"energy":281.2711,"charge":-0.999727,"virial":-0.0762,"residual":9.41e-6},
+      {"size":25,"half_box":4.0,"energy":281.2625,"charge":-0.999973,"virial":-0.0758,"residual":4.48e-6},
+      {"size":33,"half_box":8.0,"energy":274.5448,"charge":-0.999931,"virial":-0.0134,"residual":5.08e-6}
+    ],
+    "profile_scale":1.2,"profile_radius":3.4,"target_charge":-1.0,
+    "stop_on_failed_grid":true,"initialization":"independent compact map on each matched grid",
+    "solver":{"penalty":20000.0,"outer_updates":4,"maxiter":120,"maxfun":180,
+      "gtol":1e-10,"ftol":1e-14,"history_size":100},
+    "source_manifest":"config/benchmark/publication.source.yaml",
+    "source_sha256":"09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "contract_doc":"docs/G0B_PRODUCTION_CONTRACT.md"
+  }
+}

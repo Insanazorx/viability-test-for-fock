@@ -42,11 +42,14 @@ stationary solver/Hessian or full scientific viability gates.
 ## Original MACM6 transfer instructions
 
 Current execution preference: RTX5070 until the user explicitly changes it.
-The G0B-T03 bounded CUDA driver is now implemented with source Table 2
-targets, checkpoint/RNG/optimizer audit state, AL-boundary restart and final
-host/autograd diagnostics. Follow the frozen config in NEXT. Driver/tests
-are not stationary acceptance. MACM6's independent responsibilities stay
-unmarked; a required device handoff waits instead of switching automatically.
+The G0B-T03 bounded CUDA driver is implemented and its first identified
+attempt is now FAIL: 17^3 passed row acceptance, but 21^3 final physical RMS
+3.43042e-5 exceeds 1e-5 despite passing energy/charge and host/autograd
+checks. 25^3/33^3 were not run. See docs/G0B_CONVERGENCE_DIAGNOSIS.md and
+the current report/equivalence assessment in NEXT. Do not restart a failed
+task or advance to G0B-T04 without explicit classified recovery. All source
+tolerances and previous completion flags are preserved. Driver/tests are not
+full stationary acceptance; MACM6's independent responsibilities stay unmarked.
 
 MACM6 available-input preparation is complete after the transfer preflight report. The repository has no Git remote; the offline ZIP contains a full-history Git bundle, the exact source PDF and the independent Hopf fixture checkpoint. Its SHA256 is recorded beside the delivered package. It contains no MACM6 environment or GPU completion claim.
 

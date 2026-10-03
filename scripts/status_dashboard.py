@@ -52,8 +52,12 @@ def link(root,path,label):
 
 
 def evidence(root,task):
-    return ', '.join(link(root,task['machine_reports'][m],m+' raporu')
-                     for m in MACHINES if task.get('machine_reports',{}).get(m)) or 'Rapor yok'
+    reports=[link(root,task['machine_reports'][m],m+' raporu')
+             for m in MACHINES if task.get('machine_reports',{}).get(m)]
+    outcome=task.get('last_outcome',{})
+    if outcome.get('report') and outcome.get('status') in {'FAIL','BLOCKED'}:
+        reports.append(link(root,outcome['report'],outcome['machine']+' '+outcome['status']+' raporu'))
+    return ', '.join(reports) or 'Rapor yok'
 
 
 def task_flags(row,state):
