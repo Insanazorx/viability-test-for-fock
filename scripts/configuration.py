@@ -18,11 +18,13 @@ CONFIGS = {
     ("G0B-T02", "RTX5070"): ("config/benchmark/g0b_t02_rtx5070.json.yaml", "validate_hopf_cuda"),
     ("G4A-T01", "MACM6"): ("config/gate4/g4a_t01_macm6.json.yaml", "validate_operator_basis"),
     ("G0B-T05", "MACM6"): ("config/benchmark/g0b_t05_macm6.json.yaml", "validate_solver_preparation"),
+    ("G4B-T01", "MACM6"): ("config/gate4/g4b_t01_macm6.json.yaml", "validate_radiative"),
     ("G4A-T02", "MACM6"): ("config/gate4/g4a_t02_macm6.json.yaml", "validate_classification"),
     ("G4A-T03", "MACM6"): ("config/gate4/g4a_t03_macm6.json.yaml", "validate_switching"),
     ("G1A-T04", "MACM6"): ("config/gate1/g1a_t04_macm6.json.yaml", "validate_full_static_preparation"),
 }
 MACM6_AUDITS = {
+    'G4B-T01': ('analysis.radiative','validate_radiative',{'potential_gradient','potential_hessian','hessian_symmetry','vacuum_spectrum','scale_derivative','threshold_curvature','scalar_derivatives','lower_switch_counterterm'}),
     'G4A-T02': ('analysis.symmetry_audit', 'validate_classification', {'reflection'}),
     'G4A-T03': ('analysis.symmetry_audit', 'validate_switching', {'mu_series','xi_series'}),
 }
