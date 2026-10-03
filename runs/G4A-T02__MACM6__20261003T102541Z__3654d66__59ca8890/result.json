@@ -1,0 +1,17 @@
+{
+  "run_id": "G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890",
+  "status": "FAIL",
+  "finished_utc": "2026-10-03T10:26:43.638262+00:00",
+  "wall_time_seconds": null,
+  "peak_ram_gb": null,
+  "peak_ram_method": "unavailable: launcher exited during result serialization",
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "tests_run": 105,
+    "tests_exit_code": 0,
+    "publication_present": true
+  },
+  "anomaly": "TypeError: NumPy bool scalar in audit checks is not JSON serializable; launcher terminated before a result was written. No numerical audit acceptance recorded."
+}

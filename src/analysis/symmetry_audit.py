@@ -65,6 +65,7 @@ def validate_classification(config):
                 no_lambda_parity=cubic_witness>1e-3,
                 chi_odd_forbidden=all(p[1]%2 for p in monomials(4,chi_parity=1)),
                 no_untracked_eom_deletion=all(r['field_choice'] for r in rows))
+    checks={k:bool(v) for k,v in checks.items()}
     return dict(passed=all(checks.values()),checks=checks,catalog=rows,worst_errors={'reflection':worst},
                 forbidden_examples=['chi','lambda*chi','chi*C1','chi*C2','nabla lambda . nabla chi'],
                 quotient='IBP basis retained; conditional field/EOM equivalences documented with induced operators',
@@ -86,6 +87,7 @@ def validate_switching(config):
                 xi_saturation_relations=xi[2]==1 and xi[4]==-1 and xi[6]==1,
                 mu_series=worst_mu<=config['tolerances']['mu_series'],
                 xi_series=worst_xi<=config['tolerances']['xi_series'])
+    checks={k:bool(v) for k,v in checks.items()}
     return dict(passed=all(checks.values()),checks=checks,worst_errors={'mu_series':float(worst_mu),'xi_series':float(worst_xi)},
                 mu_dimensionless_series=[str(v) for v in mu],xi_dimensionless_series=[str(v) for v in xi],
                 lower_switch_terms=[dict(n=n,dimension=4+n,coefficient_dimension=-n,stated_symmetry_allowed=True,accidental_internal_reflection_even=True,baseline_coefficient='mu_v/(f^4*x_mu^4)' if n==4 else 'zero matching condition',protection=False) for n in range(5)],

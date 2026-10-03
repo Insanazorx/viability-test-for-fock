@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Fock-selected dark-sector full-viability program",
   "created_utc": "2026-10-01T04:18:53.571914+00:00",
-  "updated_utc": "2026-10-03T10:25:35.674873+00:00",
+  "updated_utc": "2026-10-03T10:27:14.976570+00:00",
   "cloud": {
     "paused": true,
     "approved_gate": null,
@@ -503,7 +503,13 @@
       ],
       "next_action": "Classify all 32 chosen-order operators and distinguish stated symmetries, accidental reflection and conditional field/EOM choices.",
       "required_input": "yayınlanan.pdf",
-      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t02_macm6.json.yaml"
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t02_macm6.json.yaml",
+      "recovery": {
+        "previous_failure_report": "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.freeze.txt",
+        "classification": "implementation",
+        "reason": "Convert NumPy boolean witness comparisons to Python bool; actual-result JSON regression added. Config/tolerances unchanged."
+      }
     },
     "G4A-T03": {
       "title": "Switching and Xi functional symmetry audit",

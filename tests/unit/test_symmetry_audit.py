@@ -3,7 +3,8 @@ from pathlib import Path
 import unittest
 from fractions import Fraction
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'src'))
-from analysis.symmetry_audit import classified_catalog,mu_series,xi_series
+import json
+from analysis.symmetry_audit import validate_classification,validate_switching, classified_catalog,mu_series,xi_series
 
 
 class SymmetryAuditTests(unittest.TestCase):
@@ -22,3 +23,8 @@ class SymmetryAuditTests(unittest.TestCase):
         self.assertEqual(mu_series(8)[:4],[Fraction(0)]*4)
         self.assertEqual(mu_series(8)[8],Fraction(-1,2))
         self.assertEqual(xi_series(8)[8],Fraction(-1))
+
+    def test_actual_audit_results_can_be_sealed_as_json(self):
+        for task,function in [('g4a_t02',validate_classification),('g4a_t03',validate_switching)]:
+            config=json.loads(Path('config/gate4/'+task+'_macm6.json.yaml').read_text())
+            json.dumps(function(config),allow_nan=False)
