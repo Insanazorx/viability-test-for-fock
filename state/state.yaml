@@ -1,0 +1,2495 @@
+{
+  "schema_version": 1,
+  "project": "Fock-selected dark-sector full-viability program",
+  "created_utc": "2026-10-01T04:18:53.571914+00:00",
+  "updated_utc": "2026-10-03T14:50:54.240371+00:00",
+  "cloud": {
+    "paused": true,
+    "approved_gate": null,
+    "max_usd_per_run": 0
+  },
+  "remote_control": {
+    "level": 0,
+    "enabled": false
+  },
+  "registry_scope": "Implemented/frozen handlers and their referenced scientific prerequisites; additional MACM6 preparation IDs do not waive production gates.",
+  "source": {
+    "path": "yayınlanan.pdf",
+    "sha256": "09111940dc2575283d8db69ee65785d2b85beb3864e416e63c7538e91c70c312",
+    "title": "Fock-selected topological dark matter and metastable dark energy",
+    "author": "Ismail Cihan Peker",
+    "journal": "Nuclear Physics B",
+    "volume": 1031,
+    "year": 2026,
+    "article": "117639",
+    "doi": "10.1016/j.nuclphysb.2026.117639",
+    "pages": 19,
+    "bibliographic_identity_verified": true,
+    "checked_sections": [
+      "2.1-2.3",
+      "3.2",
+      "6",
+      "Appendix A"
+    ],
+    "verified_equations": [
+      "4-10",
+      "15-19",
+      "20",
+      "30-31",
+      "64-68",
+      "A.1-A.3"
+    ],
+    "visual_inspection_pages": [
+      8,
+      17,
+      18
+    ],
+    "source_access": "User-supplied local PDF; no online replacement or source modification"
+  },
+  "environments": {
+    "MACM6": {
+      "python_target": "3.12",
+      "python_observed": "3.12.14",
+      "control_environment": ".venv",
+      "numerical_dependencies_frozen": true,
+      "numpy_observed": "2.2.6",
+      "core_environment_freeze": "requirements/macm6-core.freeze.txt",
+      "full_environment_freeze": "requirements/macm6.freeze.txt",
+      "full_environment_sha256": "f1dfb6de3a4a043bf4dd83598264cbf7e77844a89e342c049c435b291d0ca323",
+      "validation_report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md",
+      "scipy_observed": "1.16.3"
+    },
+    "RTX5070": {
+      "verified": false
+    },
+    "CLOUD": {
+      "verified": false
+    }
+  },
+  "tasks": {
+    "G0A-T01": {
+      "title": "Repository/control-plane foundation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md"
+      },
+      "read": [
+        "config/benchmark/g0a_t01.json.yaml"
+      ],
+      "next_action": "Validate and commit the repository/control-plane foundation; create its identified substep report.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t01.json.yaml"
+    },
+    "G0A-T02": {
+      "title": "Mathematical core API and invariants",
+      "status": "RUNNING",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T01"
+      ],
+      "machine_order": [
+        "MACM6",
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md"
+      },
+      "read": [
+        "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md",
+        "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md",
+        "docs/MATH_CORE.md",
+        "docs/RTX5070_CORE_HANDOFF.md",
+        "config/benchmark/g0a_t02_rtx5070.json.yaml",
+        "config/benchmark/publication.source.yaml"
+      ],
+      "next_action": "Follow docs/RTX5070_CORE_HANDOFF.md, prepare the real CUDA environment and run the frozen float64 mirror comparison. Record only RTX5070 completion; no cloud or lattice solve.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t02_rtx5070.json.yaml",
+      "required_input": "yayınlanan.pdf",
+      "machine_actions": {
+        "MACM6": "Validate the source-derived math core in float64 with the frozen CPU config and create its substep report.",
+        "RTX5070": "Follow docs/RTX5070_CORE_HANDOFF.md, prepare the real CUDA environment and run the frozen float64 mirror comparison. Record only RTX5070 completion; no cloud or lattice solve."
+      },
+      "machine_commands": {
+        "MACM6": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t02_macm6.json.yaml",
+        "RTX5070": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t02_rtx5070.json.yaml"
+      }
+    },
+    "G0A-T03": {
+      "title": "Full numerical run/config and environment discipline",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T01"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md"
+      },
+      "read": [
+        "docs/RUNBOOK.md",
+        "config/benchmark/g0a_t03_macm6.json.yaml",
+        "config/frozen_registry.yaml",
+        "requirements/macm6.freeze.txt"
+      ],
+      "next_action": "Validate the frozen MACM6 CPU environment and identified run/config/seed discipline. Preserve the unfinished RTX5070 responsibility.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t03_macm6.json.yaml",
+      "attempt_history": [
+        {
+          "status": "FAIL",
+          "machine": "MACM6",
+          "report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md",
+          "recorded_utc": "2026-10-01T17:41:04.890864+00:00"
+        }
+      ],
+      "recovery": {
+        "previous_failure_report": "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.scipy-1.15.3.failed.freeze.txt",
+        "cause": "SciPy 1.15.3 PROPACK binary rejected by macOS loader (__thread_bss nonzero zero-fill offset).",
+        "change": "Only SciPy upgraded from 1.15.3 to 1.16.3; compatible native imports verified. Full environment re-frozen.",
+        "decision": "Repeat infrastructure acceptance after resolving an implementation/package compatibility failure; no scientific gate or tolerance changed.",
+        "decided_utc": "2026-10-01T17:42:46.798002+00:00"
+      }
+    },
+    "G0B-T01": {
+      "title": "Reduced energy and spectral derivatives",
+      "status": "RUNNING",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T02",
+        "G0A-T03"
+      ],
+      "machine_order": [
+        "MACM6",
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md"
+      },
+      "read": [
+        "docs/G0B_SPECTRAL.md",
+        "config/benchmark/g0b_t01_macm6.json.yaml",
+        "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md",
+        "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md"
+      ],
+      "next_action": "Validate the small-grid NumPy reduced Eq.65 energy, spectral derivatives and analytic discrete gradient; only MACM6 responsibility may be completed.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t01_macm6.json.yaml",
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0A-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0A-T03"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "User explicitly deferred RTX5070 and requested the next gate MACM6 infrastructure. CPU preparation depends on the passing CPU core; whole/GPU gate dependencies remain intact.",
+      "machine_commands": {
+        "MACM6": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t01_macm6.json.yaml",
+        "RTX5070": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t01_rtx5070.json.yaml"
+      },
+      "machine_actions": {
+        "MACM6": "Validate small-grid reduced spectral energy and derivatives; report MACM6 only. CUDA is explicitly deferred.",
+        "RTX5070": "After G0A-T02 CUDA passes and the user resumes this machine, validate spectral CUDA/autograd against the CPU reference."
+      },
+      "required_input": "yayınlanan.pdf"
+    },
+    "G0B-T02": {
+      "title": "Hopf invariant and sign convention",
+      "status": "RUNNING",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T01"
+      ],
+      "machine_order": [
+        "MACM6",
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md"
+      },
+      "read": [
+        "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md",
+        "docs/G0B_HOPF.md",
+        "docs/G0B_SPECTRAL.md",
+        "config/benchmark/g0b_t02_macm6.json.yaml",
+        "config/benchmark/publication.source.yaml"
+      ],
+      "next_action": "Implement the small-grid MACM6 Coulomb-gauge Hopf inversion and source initial-map/sign checks. Use the passed CPU spectral reference; do not start a stationary minimization.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t02_macm6.json.yaml",
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0B-T01",
+            "machine": "MACM6"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "User requested continued MACM6 gate preparation while explicitly deferring RTX5070. Whole/GPU prerequisites remain unchanged.",
+      "machine_commands": {
+        "MACM6": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t02_macm6.json.yaml",
+        "RTX5070": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t02_rtx5070.json.yaml"
+      },
+      "required_input": "yayınlanan.pdf",
+      "machine_actions": {
+        "MACM6": "Validate the CPU Coulomb-gauge Hopf invariant, compact unit-map sign, closure and smooth deformations; record MACM6 only.",
+        "RTX5070": "After the user resumes RTX5070 and prior CUDA gates pass, compare Hopf FFT/gradient results with the CPU reference."
+      },
+      "checkpoint": {
+        "path": "checkpoints/G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__initial.h5",
+        "sha256": "462ee5c0e3015d9014b669eabfd78d47b1050e2301961f4a35cb3deb99e792eb",
+        "kind": "independent compact unit-Hopf initial field",
+        "stationary": false
+      }
+    },
+    "G0B-T03": {
+      "title": "Published reduced stationary sequence",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T02"
+      ],
+      "machine_order": [
+        "RTX5070",
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0B-T03 --machine RTX5070"
+    },
+    "G0B-T04": {
+      "title": "Published reduced physical Hessian",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T03"
+      ],
+      "machine_order": [
+        "RTX5070",
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0B-T04 --machine RTX5070"
+    },
+    "G0C-T01": {
+      "title": "Independent CPU/CUDA reference comparison",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T04"
+      ],
+      "machine_order": [
+        "MACM6",
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0C-T01 --machine MACM6"
+    },
+    "G0C-T02": {
+      "title": "Precision policy and measured error budget",
+      "status": "TODO",
+      "enabled": true,
+      "prerequisites": [
+        "G0C-T01"
+      ],
+      "machine_order": [
+        "RTX5070",
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0C-T02 --machine RTX5070"
+    },
+    "G0D-T01": {
+      "title": "Optional MACM6 self-hosted runner",
+      "status": "TODO",
+      "enabled": false,
+      "prerequisites": [
+        "G0B-T04",
+        "G0C-T02"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0D-T01 --machine MACM6"
+    },
+    "G0D-T02": {
+      "title": "Optional RTX5070 self-hosted runner",
+      "status": "TODO",
+      "enabled": false,
+      "prerequisites": [
+        "G0D-T01"
+      ],
+      "machine_order": [
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0D-T02 --machine RTX5070"
+    },
+    "G0D-T03": {
+      "title": "Optional phone workflow dispatch",
+      "status": "TODO",
+      "enabled": false,
+      "prerequisites": [
+        "G0D-T02"
+      ],
+      "machine_order": [
+        "MACM6",
+        "RTX5070"
+      ],
+      "machine_done": {
+        "MACM6": false,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {},
+      "read": [],
+      "next_action": "Implement and validate the contract-defined substep before recording machine completion.",
+      "command": ".venv/bin/python scripts/ctl.py start G0D-T03 --machine MACM6"
+    },
+    "G4A-T01": {
+      "title": "Chosen-order dark/metric operator basis",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T01",
+        "G0A-T02",
+        "G0A-T03"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md"
+      },
+      "read": [
+        "docs/G4A_OPERATOR_BASIS.md",
+        "config/benchmark/publication.source.yaml",
+        "config/gate4/g4a_t01_macm6.json.yaml"
+      ],
+      "next_action": "Enumerate and validate the d<=4 analytic dark/metric bulk basis and record higher-order source exceptions plus unspecified-matter interface.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t01_macm6.json.yaml",
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0A-T01"
+          },
+          {
+            "task": "G0A-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0A-T03"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "AGENTS.md #g4 permits an early parallel MACM6 theory track. User requested continued MACM6 work while deferring RTX5070. This analytic inventory needs the passed CPU foundations, not an executed CUDA mirror; every original prerequisite remains represented.",
+      "attempt_history": [
+        {
+          "status": "FAIL",
+          "machine": "MACM6",
+          "report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md",
+          "recorded_utc": "2026-10-01T19:33:42.261812+00:00"
+        }
+      ],
+      "recovery": {
+        "previous_failure_report": "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.freeze.txt",
+        "cause": "Two config-integrity unit tests failed because the temporary fixture created only config/benchmark, not the newly used config/gate4 directory.",
+        "change": "Create the parent directory for each frozen config before copying it in the temporary test fixture. Environment and mathematical operator code are unchanged.",
+        "decision": "Repeat the unchanged frozen acceptance config after the smallest implementation repair; 18 discipline tests now pass. No scientific gate or tolerance changed.",
+        "decided_utc": "2026-10-01T19:33:42.261812+00:00"
+      }
+    },
+    "G4A-T02": {
+      "title": "Classify all 32 chosen-order operators and distinguish stated symmetries, accidental reflection and conditional field/EOM choices.",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G4A-T01"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md"
+      },
+      "read": [
+        "docs/G4A_SYMMETRY_AUDIT.md",
+        "config/gate4/g4a_t02_macm6.json.yaml",
+        "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md"
+      ],
+      "next_action": "Classify all 32 chosen-order operators and distinguish stated symmetries, accidental reflection and conditional field/EOM choices.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t02_macm6.json.yaml",
+      "recovery": {
+        "previous_failure_report": "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.freeze.txt",
+        "classification": "implementation",
+        "reason": "Convert NumPy boolean witness comparisons to Python bool; actual-result JSON regression added. Config/tolerances unchanged."
+      }
+    },
+    "G4A-T03": {
+      "title": "Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline.",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G4A-T02"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md"
+      },
+      "read": [
+        "docs/G4A_SYMMETRY_AUDIT.md",
+        "config/gate4/g4a_t03_macm6.json.yaml",
+        "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md"
+      ],
+      "next_action": "Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline.",
+      "required_input": "yayınlanan.pdf",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4a_t03_macm6.json.yaml"
+    },
+    "G0B-T05": {
+      "title": "MACM6 reduced solver/HVP/CPU reference engineering preparation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T01",
+        "G0B-T02"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md"
+      },
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0B-T01",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0B-T02",
+            "machine": "MACM6"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "User explicitly requested every feasible MACM6 responsibility before RTX5070. This engineering-only task uses passed CPU energy/Hopf inputs and does not complete source stationary/Hessian gates.",
+      "read": [
+        "docs/MACM6_COMPLETION_PLAN.md",
+        "docs/G0B_SOLVER_PREPARATION.md",
+        "config/benchmark/g0b_t05_macm6.json.yaml",
+        "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md"
+      ],
+      "next_action": "Validate minimizer/chart, physical residual, exact HVPs and independent direct-DFT reference on small CPU fixtures; leave G0B-T03/T04 science flags unfinished.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0b_t05_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G1A-T04": {
+      "title": "MACM6 six-component static reference preparation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G0B-T05"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md"
+      },
+      "read": [
+        "docs/MACM6_COMPLETION_PLAN.md",
+        "docs/G1A_FULL_STATIC_PREPARATION.md",
+        "config/gate1/g1a_t04_macm6.json.yaml",
+        "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md"
+      ],
+      "next_action": "Validate the unrestricted six-component static NumPy reference and exact matrix-free derivatives on MACM6 before GPU branch work.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate1/g1a_t04_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G4B-T01": {
+      "title": "Available-input dark-scalar one-loop calculation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G4A-T03"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md"
+      },
+      "read": [
+        "docs/G4B_DARK_LOOP.md",
+        "config/gate4/g4b_t01_macm6.json.yaml",
+        "reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md"
+      ],
+      "next_action": "Compute and verify the available-input homogeneous dark-scalar one-loop potential, UV pole, scale response, mixing and lower switching counterterm.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4b_t01_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G4C-T02": {
+      "title": "Conditional radiative status preparation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G4B-T01"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md"
+      },
+      "read": [
+        "docs/G4C_CONDITIONAL_STATUS.md",
+        "config/gate4/g4c_t02_macm6.json.yaml",
+        "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md"
+      ],
+      "next_action": "Record evidence-derived conditional radiative status without claiming full matching or viability.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4c_t02_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G4D-T04": {
+      "title": "Flat bounce regression and gravity-equation preparation",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G4C-T02"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md"
+      },
+      "read": [
+        "docs/G4D_DECAY_PREPARATION.md",
+        "config/gate4/g4d_t04_macm6.json.yaml",
+        "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md"
+      ],
+      "next_action": "Independently reproduce the flat-space source bounce and verify gravity-aware equation/constraint/false-vacuum action preparation.",
+      "command": ".venv/bin/python scripts/run.py --config config/gate4/g4d_t04_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf"
+    },
+    "G0A-T04": {
+      "title": "MACM6 completion and offline RTX5070 transfer preflight",
+      "status": "PASS",
+      "enabled": true,
+      "prerequisites": [
+        "G0A-T01",
+        "G0A-T02",
+        "G0A-T03",
+        "G0B-T01",
+        "G0B-T02",
+        "G0B-T05",
+        "G1A-T04",
+        "G4A-T01",
+        "G4A-T02",
+        "G4A-T03",
+        "G4B-T01",
+        "G4C-T02",
+        "G4D-T04"
+      ],
+      "machine_order": [
+        "MACM6"
+      ],
+      "machine_done": {
+        "MACM6": true,
+        "RTX5070": false,
+        "CLOUD": false
+      },
+      "machine_reports": {
+        "MACM6": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md"
+      },
+      "read": [
+        "docs/RTX5070_READY.md",
+        "config/benchmark/g0a_t04_macm6.json.yaml",
+        "reports/G0/G0A-T01__G0A-T01__MACM6__20261001T042108Z__c131218__3e5f3754__REPORT.md",
+        "reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md",
+        "reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md",
+        "reports/G0/G0B-T01__G0B-T01__MACM6__20261001T183741Z__5e9474e__8baddf31__REPORT.md",
+        "reports/G0/G0B-T02__G0B-T02__MACM6__20261001T190551Z__1d2b32d__73b620d2__REPORT.md",
+        "reports/G0/G0B-T05__G0B-T05__MACM6__20261003T100609Z__d3106d3__f7f8faca__REPORT.md",
+        "reports/G1/G1A-T04__G1A-T04__MACM6__20261003T102101Z__5f01a82__771488e7__REPORT.md",
+        "reports/G4/G4A-T01__G4A-T01__MACM6__20261001T193427Z__8e637b1__f5f125f4__REPORT.md",
+        "reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md",
+        "reports/G4/G4A-T03__G4A-T03__MACM6__20261003T102746Z__d2910a1__08b1fafb__REPORT.md",
+        "reports/G4/G4B-T01__G4B-T01__MACM6__20261003T103247Z__d64b18b__39461767__REPORT.md",
+        "reports/G4/G4C-T02__G4C-T02__MACM6__20261003T103849Z__bcf5cc8__dda1cf83__REPORT.md",
+        "reports/G4/G4D-T04__G4D-T04__MACM6__20261003T103854Z__ffaee76__f64c5f3a__REPORT.md"
+      ],
+      "next_action": "Complete MACM6 available-input evidence and offline RTX5070 transfer readiness checks.",
+      "command": ".venv/bin/python scripts/run.py --config config/benchmark/g0a_t04_macm6.json.yaml",
+      "required_input": "yayınlanan.pdf",
+      "machine_prerequisites": {
+        "MACM6": [
+          {
+            "task": "G0A-T01",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0A-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0A-T03",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0B-T01",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0B-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G0B-T05",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G1A-T04",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4A-T01",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4A-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4A-T03",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4B-T01",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4C-T02",
+            "machine": "MACM6"
+          },
+          {
+            "task": "G4D-T04",
+            "machine": "MACM6"
+          }
+        ]
+      },
+      "machine_prerequisite_reason": "User requests MACM6-only completion/transfer first. This verifies passed MACM6 responsibilities, retaining every unfinished CUDA scientific prerequisite.",
+      "recovery": {
+        "previous_failure_report": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550__REPORT.md",
+        "previous_environment_freeze": "requirements/macm6.freeze.txt",
+        "classification": "implementation",
+        "reason": "Initial reports predate integrity seals. Verify their four exact report-bound artifact hashes; require real seals for all later schema-versioned runs. No report history modified or synthetic seal invented."
+      }
+    }
+  },
+  "active_task": null,
+  "action_selection": {
+    "task": "G0A-T04",
+    "machine": "MACM6",
+    "reason": "Final available-input MACM6 evidence and transfer preflight before deferred GPU handoff",
+    "selected_utc": "2026-10-03T10:45:16.116740+00:00"
+  },
+  "machine_scheduling": {
+    "RTX5070": {
+      "deferred": true,
+      "reason": "User explicitly requested all feasible MACM6 work first, then RTX5070 (2026-10-03).",
+      "updated_utc": "2026-10-01T18:34:33.954452+00:00"
+    }
+  },
+  "macm6_program": {
+    "instruction": "Complete every mathematically well-defined MACM6 responsibility with available inputs before RTX5070; preserve GPU-dependent scientific gates.",
+    "instruction_date": "2026-10-03",
+    "plan": "docs/MACM6_COMPLETION_PLAN.md",
+    "status": "REGISTERED_PREPARATION_COMPLETE_G0_SCOPE_PENDING",
+    "completed_utc": "2026-10-03T10:48:45.581828+00:00",
+    "completion_report": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md",
+    "next_device": "RTX5070",
+    "remaining_dependencies": [
+      "G0B-T03/T04 CUDA stationary sequence and physical spectrum, then MACM6 analysis",
+      "full finite-stiffness soliton/collision/production data",
+      "concrete L_m, physical scales, cutoff and matching conditions",
+      "gravitational lifetime retained region and prefactor",
+      "production-derived CLASS and likelihood inputs"
+    ],
+    "transfer_packet": {
+      "path": "transfers/RTX5070__20261003T144940Z__9da2c46.zip",
+      "sha256": "b600fbb9cab9e2717754a320c4444e33aa662612de6e73137e45a46c3bc137b5",
+      "bytes": 2412068,
+      "git_commit": "9da2c4641a8fa21394a2e7e1bbb29d571dfc7cb1",
+      "isolated_restore_verified": true,
+      "verified_tracked_files": 249
+    },
+    "scope_review": "docs/G0_MACM6_REMAINING.md"
+  },
+  "roadmap": {
+    "schema_version": 1,
+    "source": "AGENTS.md",
+    "policy": "Full contract display catalog; unregistered rows are TODO plan entries, never runnable tasks or completion evidence.",
+    "main_gates": [
+      {
+        "id": "G0",
+        "title": "Tekrar üretim temeli"
+      },
+      {
+        "id": "G1",
+        "title": "Sonlu sertlikte tam soliton sektörü"
+      },
+      {
+        "id": "G2",
+        "title": "Üretim ve relic abundance"
+      },
+      {
+        "id": "G3",
+        "title": "Astrofiziksel karanlık"
+      },
+      {
+        "id": "G4",
+        "title": "Doğallık, vakum bozunumu ve kütleçekim"
+      },
+      {
+        "id": "G5",
+        "title": "Tam Boltzmann kozmolojisi"
+      },
+      {
+        "id": "G6",
+        "title": "Likelihood düzeyinde uygulanabilirlik"
+      }
+    ],
+    "stages": [
+      {
+        "id": "G0A",
+        "title": "Repo, ortam ve kontrol düzlemi",
+        "goal": "Kod, matematik çekirdeği ve kayıt disiplinini doğrulamak.",
+        "prerequisites": [],
+        "route": "MACM6 → RTX5070 çekirdek doğrulaması",
+        "acceptance": "Gerekli çekirdek cihazları ve kayıt altyapısı kendi raporlarıyla PASS.",
+        "tasks": [
+          {
+            "id": "G0A-T01",
+            "title": "Repo iskeleti",
+            "acceptance": "Dizinler, Git dışlama kuralları, bağımlılıklar, şema, durum dosyası ve rapor şablonu kayıtlı.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Repo ve kontrol dosyaları kayıtlı."
+          },
+          {
+            "id": "G0A-T02",
+            "title": "Matematik çekirdeği API",
+            "acceptance": "C1/C2, Hodge ayrışımı, STF, indirgenmiş alan/enerji/Hopf tanımları; float64 kimlik, dönüşüm ve türev kontrolleri; CUDA aynası.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": "MACM6 PASS; CUDA aynası henüz çalıştırılmadı."
+          },
+          {
+            "id": "G0A-T03",
+            "title": "Çalışma ve ayar disiplini",
+            "acceptance": "Sabit ayar kimliği, UTC/Git/config çalışma kimliği, değişmez metadata ve açık kirli Git bilgisi.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "MACM6 ortamı/ayar/çalışma kaydı tamamlandı."
+          },
+          {
+            "id": "G0A-T04",
+            "title": "MACM6 tamamlama ve aktarım hazırlığı",
+            "acceptance": "Önceki 13 MACM6 sorumluluğunun rapor/ayar/bütünlük denetimi ve offline aktarım ön kontrolü PASS.",
+            "kind": "preparation",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Bu hazırlıkla toplam 14 MACM6 sorumluluğu raporlu; ZIP geri yükleme doğrulaması aktarım kaydında."
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G0B",
+        "title": "Yayınlanan indirgenmiş Hopf çözücüsü",
+        "goal": "Makaledeki durağan alan ve fiziksel Hessian sonuçlarını yeniden üretmek.",
+        "prerequisites": [
+          "G0A"
+        ],
+        "route": "MACM6 referans → RTX5070 üretim → MACM6 analiz",
+        "acceptance": "Durağan 17³/21³/25³/33³ dizisi, yük ve fiziksel spektrum yayınlanan hedefleri sağlamalı.",
+        "tasks": [
+          {
+            "id": "G0B-T01",
+            "title": "Statik enerji ve spektral türevler",
+            "acceptance": "Eq.65 enerjisi; analitik periyodik alan türev yakınsaması, Parseval ve vakum sınırı kontrolleri.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": "MACM6 enerji ve türev referansı PASS; CUDA karşılaştırması bekliyor."
+          },
+          {
+            "id": "G0B-T02",
+            "title": "Hopf yükü ve işaret",
+            "acceptance": "Coulomb-gauge FFT ters çözümü; birim alan Q≈−1, düzgün deformasyon ve trivial alan kontrolü.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": "MACM6 yük/işaret/deformasyon kontrolü PASS; CUDA bekliyor. Checkpoint durağan değil."
+          },
+          {
+            "id": "G0B-T03",
+            "title": "Augmented-Lagrangian minimizasyonu",
+            "acceptance": "17³/21³/25³/33³; artık toleransı, sonlu değerler; bağıl enerji farkı≤5e−4, ||Q|−1|≤5e−4; virial eğilimi.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": "G0B-T05 hazırlığı PASS; yayınlanan durağan GPU dizisi ve MACM6 fit raporu yapılmadı."
+          },
+          {
+            "id": "G0B-T04",
+            "title": "İndirgenmiş fiziksel Hessian",
+            "acceptance": "Teğet/yük izdüşümü, matris kurmadan HVP, kolektif modlar; HVP/simetri/özçift artığı ve pozitif ilk fiziksel aralık.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": "G0B-T05 HVP hazırlığı PASS; kolektif katalog/eigensolver ve fiziksel spektrum üretilmedi."
+          },
+          {
+            "id": "G0B-T05",
+            "title": "MACM6 indirgenmiş çözücü/HVP/CPU oracle hazırlığı",
+            "acceptance": "G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil.",
+            "kind": "preparation",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "G0B-T03/T04 ve G0C girdileri için hazırlık; durağan soliton/fiziksel spektrum kabulü değil."
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G0C",
+        "title": "Cihazlar arası referans ve hassasiyet",
+        "goal": "CPU/CUDA farklarının ve düşük özdeğer işaretlerinin güvenilirliğini ölçmek.",
+        "prerequisites": [
+          "G0B"
+        ],
+        "route": "MACM6 ↔ RTX5070",
+        "acceptance": "Enerji, yük, gradyan ve HVP farkları açıklanmalı; belirsiz özdeğer PASS olmaz.",
+        "tasks": [
+          {
+            "id": "G0C-T01",
+            "title": "Bağımsız CPU/CUDA karşılaştırması",
+            "acceptance": "Basit float64 CPU referansı ile enerji, Q, gradyan ve yönsel HVP karşılaştırması.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": "G0B-T05 doğrudan DFT CPU oracle hazır; gerçek CUDA karşılaştırması henüz yok."
+          },
+          {
+            "id": "G0C-T02",
+            "title": "Hassasiyet politikası",
+            "acceptance": "RTX5070 float32/float64/seçilen karma hassasiyet profili; son gözlenebilirlerin ve sıfıra yakın özdeğerlerin yeniden doğrulanması.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": "RTX hassasiyet profili olmadan MACM6 hata bütçesi tamamlanamaz."
+          }
+        ],
+        "conditional": "Yalnız ölçülen hassasiyet yetersizliği varsa ve onayla CLOUD FP64.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G0D",
+        "title": "İsteğe bağlı uzak/telefon kontrolü",
+        "goal": "Onaylı görevlerle sınırlı denetlenebilir uzak çalıştırma.",
+        "prerequisites": [
+          "G0B",
+          "G0C"
+        ],
+        "route": "MACM6 → RTX5070",
+        "acceptance": "G0B PASS öncesinde etkinleştirilmez; bulut sağlama yok.",
+        "tasks": [
+          {
+            "id": "G0D-T01",
+            "title": "MACM6 self-hosted runner",
+            "acceptance": "macm6 etiketi; yalnız onaylı script/ayarlar; güvenilmeyen PR üzerinden keyfi komut yok.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G0D-T02",
+            "title": "RTX5070 self-hosted runner",
+            "acceptance": "rtx5070 etiketi; gerçek CUDA görünürlüğü; aynı anda tek GPU işi.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G0D-T03",
+            "title": "Telefon workflow dispatch",
+            "acceptance": "status/run-task/pause/cancel/collect-report; keyfi kabuk veya bulut başlatma yok.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "Opsiyonel; mevcut görevlerin enabled=false durumu korunuyor.",
+        "optional": true
+      },
+      {
+        "id": "G1A",
+        "title": "Altı bileşenli tam statik teori",
+        "goal": "Sabit yarıçap/Pfaffian indirgemesini kaldırmak.",
+        "prerequisites": [
+          "G0B"
+        ],
+        "route": "MACM6 matematik/referans → RTX5070 uygulama",
+        "acceptance": "Tam M enerjisi ve türevleri, ağır normal mod limiti ve gerçek checkpoint kaldırma doğrulanmalı.",
+        "tasks": [
+          {
+            "id": "G1A-T01",
+            "title": "Altı bileşenli alan ve tam enerji",
+            "acceptance": "C1/C2/M±, radyal/Pfaffian potansiyelleri, tam quartic operatör; SO4, indirgenme ve sonlu fark türevleri.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": "G1A-T04 CPU tam alan/türev hazırlığı PASS; özgün görevin üretim/CUDA kabulü bekliyor."
+          },
+          {
+            "id": "G1A-T02",
+            "title": "Durağan Hopf alanını tam M alanına kaldırma",
+            "acceptance": "Yeniden üretilmiş durağan checkpoint; C1−σ0², C2, Q±; ağır normal mod limitinde indirgenmiş enerji.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": "Bağımsız başlangıç alanı var; yeniden üretilmiş durağan checkpoint yok."
+          },
+          {
+            "id": "G1A-T03",
+            "title": "Sertlik devam parametreleri",
+            "acceptance": "A=αζ/ZM², P=μζ/ZM²; logaritmik/adaptif adımlar ve önceki çözümle başlangıç.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1A-T04",
+            "title": "MACM6 tam M enerji ve türev referansı",
+            "acceptance": "Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık.",
+            "kind": "preparation",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Tam gradyan/HVP/SO4/ağır limit kontrolü; özgün G1A üretim görevleri açık."
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G1B",
+        "title": "Dal varlığı, çözünürlük ve kutu yakınsaması",
+        "goal": "Sonlu sertlikte çözülmüş, lokalize ve devam edebilir bir soliton dalı bulmak.",
+        "prerequisites": [
+          "G1A"
+        ],
+        "route": "RTX5070 → MACM6 yakınsama analizi",
+        "acceptance": "Son iki güvenilir çözünürlükte E/RH farkı<%1; yük, artık ve hacim etkileri yakınsamış.",
+        "tasks": [
+          {
+            "id": "G1B-T01",
+            "title": "İlk tam M durağan noktası",
+            "acceptance": "Önce 33³; E/RH/Q±, artıklar, radyal ve C2 deformasyonu, minimum sektör normu; çözülmüş lokalize çekirdek.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1B-T02",
+            "title": "Sertlik devam haritası",
+            "acceptance": "A/P dal takibi; bifurkasyonda adım azaltma; dal kaybı veya çözülmeyen çekirdekte durma.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1B-T03",
+            "title": "Çözünürlük dizisi",
+            "acceptance": "33³/49³/65³, gerekirse97³; önce ölçülen VRAM; E/RH ve topoloji/artık yakınsaması.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1B-T04",
+            "title": "Kutu boyutu dizisi",
+            "acceptance": "Sabit çözülmüş aralıkta kutu büyütme; E/RH/virial/şekil değişimi önemsiz olmalı.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1B-T05",
+            "title": "Buluta yükseltme kararı",
+            "acceptance": "T01–T04 PASS, açık bir kalan soru ve RTX bellek/süre profili; onaylı sınırlı doğrulama.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "T05 sonrası belirli yüksek çözünürlük/FP64 doğrulaması için CLOUD; şu anda onay yok.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G1C",
+        "title": "Tam fiziksel Hessian",
+        "goal": "Sonlu sertlikte gerçek negatif fiziksel mod bulunup bulunmadığını belirlemek.",
+        "prerequisites": [
+          "G1B"
+        ],
+        "route": "RTX5070 pilot → MACM6 mod kataloğu/analiz",
+        "acceptance": "Yakınsamış tam teoride sağlam negatif fiziksel mod olmamalı; hassasiyete duyarlı işaret açık kalır.",
+        "tasks": [
+          {
+            "id": "G1C-T01",
+            "title": "Tam matris kurmadan HVP",
+            "acceptance": "Yönsel sonlu fark ve çift doğrusal simetri kontrolü; yoğun kafes Hessianı yok.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070"
+            ],
+            "note": "G1A-T04 CPU analitik HVP hazırlığı var; durağan tam teori CUDA HVP görevi yapılmadı."
+          },
+          {
+            "id": "G1C-T02",
+            "title": "Kolektif mod kataloğu",
+            "acceptance": "Yalnız gerekçeli öteleme/dönme/iç dönme/projektör sıfırlarını ayır; şüpheli küçük modları keyfi silme.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1C-T03",
+            "title": "En düşük fiziksel spektrum",
+            "acceptance": "Birden fazla çözünürlükte özçiftler; işaret ve artık kontrolü; negatif mod bilimsel durdurma gerekçesi.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1C-T04",
+            "title": "λ yanıtı ve skaler yük",
+            "acceptance": "Yakın λ çözümlerinden βH=MPl∂λlnMH; hatalı sabit örnek değer kullanma.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "T03 işareti/boyutu gerektirirse onaylı CLOUD FP64.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G1D",
+        "title": "En düşük enerjili çözülme eyeri",
+        "goal": "Hopfiondan vakuma çözülme bariyerini bulmak.",
+        "prerequisites": [
+          "G1C"
+        ],
+        "route": "RTX5070 NEB pilot → MACM6 yol denetimi",
+        "acceptance": "ΔEunwind>0 ve çözünürlük kararlı; statik bariyer tek başına kozmolojik ömür değildir.",
+        "tasks": [
+          {
+            "id": "G1D-T01",
+            "title": "Başlangıç yolunun kurulması",
+            "acceptance": "Sonlu sertlik Hopfion/vakum uçları; radyal ve Pfaffian yönlerinden geçişe izin ver.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1D-T02",
+            "title": "NEB/string yöntemi",
+            "acceptance": "Önce az sayıda görüntü; dik kuvvet, görüntü aralığı, enerji ve topoloji boyunca tanılama.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1D-T03",
+            "title": "Eyer inceltme",
+            "acceptance": "En yüksek enerji görüntüsünü eyer aramasıyla iyileştir; ΔEunwind(A,P) ve yakınsama.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Yalnız nihai yüksek çözünürlüklü eyer inceltmesi için CLOUD.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G1E",
+        "title": "Gerçek zaman kararlılığı ve hiperboliklik",
+        "goal": "Evrimin güçlü gradyanlarda da geçerli PDE bölgesinde kaldığını ölçmek.",
+        "prerequisites": [
+          "G1B"
+        ],
+        "route": "MACM6 türetim → RTX5070 dinamik → MACM6 denetim",
+        "acceptance": "Enerji/yük sapmaları kontrollü; prensipal sembolde kinetik/gradyan işaret kaybı veya karmaşık hız yok.",
+        "tasks": [
+          {
+            "id": "G1E-T01",
+            "title": "Tam PDE formülasyonu",
+            "acceptance": "EFT kaynaklı method-of-lines denklemleri; prensipal katsayıların bağımsız MACM6 kontrolü.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1E-T02",
+            "title": "Şeffaf zaman integratörü",
+            "acceptance": "Önce RK4/CFL; serbest dalga, Hessian frekansları ve kapalı kutu enerji sapması kontrolleri.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1E-T03",
+            "title": "Pertürbe soliton ömrü",
+            "acceptance": "Rastgele ve moda hizalı bozunum; enerji/yük/çekirdek, radyasyon ve C1/C2 kaydı.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1E-T04",
+            "title": "Hiperboliklik izleyicisi",
+            "acceptance": "Kaydedilen her zamanda prensipal sembol; minimum kinetik/gradyan özdeğerleri ve karakteristik hızlar.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G1F",
+        "title": "Çarpışma pilotları",
+        "goal": "Doğrulanmış başlangıç ve sınır koşullarıyla temsilî kanalları çözmek.",
+        "prerequisites": [
+          "G1E"
+        ],
+        "route": "RTX5070 pilot → MACM6 analiz",
+        "acceptance": "Sınır yansıması ve enerji/yük tanıları kontrollü; çarpışma boyunca hiperboliklik korunmuş.",
+        "tasks": [
+          {
+            "id": "G1F-T01",
+            "title": "Boost edilmiş iki soliton",
+            "acceptance": "Hız, etki parametresi, yük eşleşmesi ve iç yönelim açıkça tanımlı/doğrulanmış.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1F-T02",
+            "title": "Sınır koşulları",
+            "acceptance": "Yeterli kutu ve test edilmiş sünger/absorban alan; serbest dalgayla yansıma ölçümü.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1F-T03",
+            "title": "Temsilî kanallar",
+            "acceptance": "Aynı/zıt yük ve karışık sektör; birden fazla iç yönelim.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1F-T04",
+            "title": "Çarpışma tanıları",
+            "acceptance": "Q±(t), çekirdek sayısı, çıkan hız/açı, dalga enerjisi, yakalama/yok olma/yük aktarımı ve hiperboliklik.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "Pilotlar kararlı olmadan CLOUD yok.",
+        "optional": false
+      },
+      {
+        "id": "G1G",
+        "title": "Çarpışma kampanyası ve kesitler",
+        "goal": "Mikroskopik etkileşim çekirdeklerini belirsizlikleriyle üretmek.",
+        "prerequisites": [
+          "G1F"
+        ],
+        "route": "RTX5070 küçük kampanya → MACM6 tasarım → CLOUD topluluk → MACM6 indirgeme",
+        "acceptance": "Kesit/kanal tabloları, seçilmiş sürekli limit kontrolleri ve üretim aktarımı mevcut.",
+        "tasks": [
+          {
+            "id": "G1G-T01",
+            "title": "Adaptif örnekleme tasarımı",
+            "acceptance": "Hız/etki/yönelim/sertlik; yalnız kanal sınırları ve rezonanslarda sıklaştırma.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1G-T02",
+            "title": "Mikroskopik kesitler",
+            "acceptance": "Transfer, yok olma, yakalama, yük değişimi ve radyasyon payı belirsizlikleri.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1G-T03",
+            "title": "Çarpışma yakınsaması",
+            "acceptance": "Temsilî sınıfları daha yüksek çözünürlükte yeniden doğrula.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G1G-T04",
+            "title": "Üretim aktarımı",
+            "acceptance": "Gate2/3 için sürümlenmiş çarpışma çekirdek tabloları ve belirsizlikleri.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "CLOUD topluluk işi ancak pilot PASS, kaynak profili ve açık bütçeyle.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G2A",
+        "title": "Kapalı FLRW ve enerji muhasebesi",
+        "goal": "Elle verilmiş bath yerine EFT toplam korunumunu uygulamak.",
+        "prerequisites": [
+          "G1B",
+          "G1E"
+        ],
+        "route": "MACM6 türetim/referans → RTX5070 smoke",
+        "acceptance": "Kapalı ODE, Friedmann kısıtı ve sektörler arası enerji alışveriş artığı kontrollü.",
+        "tasks": [
+          {
+            "id": "G2A-T01",
+            "title": "Kapalı enerji alışverişi",
+            "acceptance": "Madde/karanlık sektör, M/χ/λ gerilmeleri ve ölçek faktörünü birlikte muhasebeleştir.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2A-T02",
+            "title": "Kapalı homojen benchmark",
+            "acceptance": "3B öncesinde ODE tetikleme, toplam Friedmann ve alışveriş artık kontrolü.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2A-T03",
+            "title": "Komoving alan denklemleri",
+            "acceptance": "Sertliği azaltan açık değişken seçimi ve bağımsız formül kontrolü.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G2B",
+        "title": "Genişleyen kafes pilotu",
+        "goal": "M/χ/λ için doğrulanmış komoving 3B üretim kodunu ölçmek.",
+        "prerequisites": [
+          "G2A"
+        ],
+        "route": "MACM6 ayar kontrolü → RTX5070",
+        "acceptance": "64³ PASS sonra96³/128³; enerji/Friedmann artığı, topoloji, VRAM ve hız ölçülmüş.",
+        "tasks": [
+          {
+            "id": "G2B-T01",
+            "title": "3B komoving çözücü",
+            "acceptance": "Altı M, χ, λ; viability koşusu G2A kapalı enerji muhasebesini kullanır.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2B-T02",
+            "title": "Başlangıç dalgalanmaları",
+            "acceptance": "Dağılım, genlik, UV kesimi, seed ve normalizasyon sabit/verilmiş.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2B-T03",
+            "title": "64³ pilot",
+            "acceptance": "Kararlılık, korunum artığı, topoloji oluşumu, VRAM ve throughput.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2B-T04",
+            "title": "96³/128³ pilot",
+            "acceptance": "Yalnız64³ PASS ve ölçülen bellek bütçesinden sonra.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "Bu aşamada CLOUD yasak.",
+        "optional": false
+      },
+      {
+        "id": "G2C",
+        "title": "Soliton bulucu ve izleyici",
+        "goal": "Dalga/noise içinde gerçek nesneleri tespit ve takip etmek.",
+        "prerequisites": [
+          "G2B"
+        ],
+        "route": "MACM6 prototip → RTX5070 gerçek snapshot",
+        "acceptance": "Yalıtılmış/boost/iki-soliton/noise doğrulamasında yanlış pozitif/negatif oranları raporlu.",
+        "tasks": [
+          {
+            "id": "G2C-T01",
+            "title": "Aday çekirdek tespiti",
+            "acceptance": "Enerji ve çekirdek tanılarından aday lokal nesneleri öner.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2C-T02",
+            "title": "Topolojik yük doğrulaması",
+            "acceptance": "Dalga arka planına dayanıklı yerel/global topoloji tanıları.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2C-T03",
+            "title": "Zaman boyunca takip",
+            "acceptance": "Konum, hız, yük, birleşme/yok olma geçmişi.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2C-T04",
+            "title": "Sentetik doğrulama",
+            "acceptance": "Yalıtılmış, boost edilmiş, iki-soliton ve saf dalga/noise; hata oranları.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G2D",
+        "title": "Kaba üretim parametre haritası",
+        "goal": "Verimli taramayla umut veren açık bölgeleri seçmek.",
+        "prerequisites": [
+          "G2C"
+        ],
+        "route": "MACM6 tasarım → RTX5070 tarama → MACM6 sınıflandırma",
+        "acceptance": "Birden fazla seed ve otomatik erken red; rastgele tek başarılı nokta yeterli değil.",
+        "tasks": [
+          {
+            "id": "G2D-T01",
+            "title": "Boyutsuz parametre indirgeme",
+            "acceptance": "Taramadan önce gereksiz ölçekleri kaldır.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2D-T02",
+            "title": "Verimli kaba tasarım",
+            "acceptance": "Sobol/Latin-hypercube veya eşdeğeri; kör yoğun çok boyutlu ızgara yok.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2D-T03",
+            "title": "Çok seed pilotu",
+            "acceptance": "Umut veren her nokta birkaç seed ile doğrulanmış.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2D-T04",
+            "title": "Erken red",
+            "acceptance": "Soliton yokluğu, hiperboliklik kaybı, aşırı dalga, enerji bütçesi veya yanlış bolluk eğilimi reddedilir.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G2E",
+        "title": "Üretim yakınsaması, hacim ve topluluk",
+        "goal": "Açık parametre bölgesinde gerçek relic abundance üretimini doğrulamak.",
+        "prerequisites": [
+          "G2D"
+        ],
+        "route": "RTX5070 doğrulama → MACM6 bulut paketi → CLOUD → MACM6",
+        "acceptance": "Bolluk ve tam enerji redshift muhasebesi açık bir bölgede kabul edilebilir; seed/hacim/çözünürlük belirsizliği kontrolü.",
+        "tasks": [
+          {
+            "id": "G2E-T01",
+            "title": "Umut veren açık bölgeler",
+            "acceptance": "Buluta yalnız çok-seed pilotta sağlam bölgeler; tek şanslı nokta yok.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2E-T02",
+            "title": "Çözünürlük ölçekleme",
+            "acceptance": "Doğrulanmış RTX grid →256³;384³/512³ ancak yakınsama gerektirirse.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2E-T03",
+            "title": "Hacim ölçekleme",
+            "acceptance": "Kafes aralığı ve sonlu hacim istatistiğini ayır.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2E-T04",
+            "title": "Seed topluluğu",
+            "acceptance": "Sayı yoğunluğu, yük dağılımı, korelasyon uzunluğu ve dalga payı varyansı.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G2E-T05",
+            "title": "Relic abundance",
+            "acceptance": "Tam enerji bütçesini tutarlı redshift ile bugüne taşı; elle tek nokta normalizasyonu yok.",
+            "kind": "contract",
+            "machine_order": [
+              "RTX5070",
+              "MACM6",
+              "CLOUD"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "CLOUD için sabit ayar, ölçülen kaynak gereği, tahmin ve açık bütçe şart.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G2F",
+        "title": "Üretimden kinetik ve kapanış verileri",
+        "goal": "Örnek closure katsayılarını ölçülen dağılımlarla değiştirmek.",
+        "prerequisites": [
+          "G2E",
+          "G1C"
+        ],
+        "route": "MACM6 analiz + seçilmiş RTX5070 işleme",
+        "acceptance": "nH(a), kütle/hız dağılımı, dalga/shot-noise/isocurvature, ses hızı, boyut/anisotropic stress ve βH belirsizlikli tabloları.",
+        "tasks": [
+          {
+            "id": "G2F",
+            "title": "Tam gate kapsamı",
+            "acceptance": "nH(a), kütle/hız dağılımı, dalga/shot-noise/isocurvature, ses hızı, boyut/anisotropic stress ve βH belirsizlikli tabloları.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6",
+              "RTX5070"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Yalnız büyük ham verinin bulunduğu bulut depolama yakınlığı gerektirirse CLOUD indirgeme.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G3A",
+        "title": "Öz etkileşim ve sayı değiştiren oranlar",
+        "goal": "Ölçülen çarpışmaları fiziksel birimlere çevirmek.",
+        "prerequisites": [
+          "G1G",
+          "G2F"
+        ],
+        "route": "MACM6; yalnız eksik çarpışma noktaları için RTX5070",
+        "acceptance": "σT(v)/MH ve üretilen hız dağılımında yok olma/yakalama/yük değişimi oranları belirsizlikli.",
+        "tasks": [
+          {
+            "id": "G3A-T01",
+            "title": "Fiziksel birimlere dönüşüm",
+            "acceptance": "G1G boyutsuz kesitleri korunmuş her fiziksel ölçek seçimine dönüştür.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G3A-T02",
+            "title": "Transfer kesiti",
+            "acceptance": "σT(v)/MH tablosu ve interpolasyon belirsizliği.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G3A-T03",
+            "title": "Sayı değiştiren oranlar",
+            "acceptance": "Üretilen hız dağılımından yok olma/yakalama/yük değişimi.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G3B",
+        "title": "Skaler ve uzun menzilli kuvvetler",
+        "goal": "Ölçülen skaler yükün astrofiziksel etkisini sınamak.",
+        "prerequisites": [
+          "G3A",
+          "G1C"
+        ],
+        "route": "MACM6",
+        "acceptance": "Ölçülen βH ile menzil/çevre, beşinci kuvvet ve artık teğet mod etkileri; örnek βH=0.02 yerine gerçek veri.",
+        "tasks": [
+          {
+            "id": "G3B",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Ölçülen βH ile menzil/çevre, beşinci kuvvet ve artık teğet mod etkileri; örnek βH=0.02 yerine gerçek veri.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G3C",
+        "title": "Görünür sektör ve yıldız sınırları",
+        "goal": "Portalın gözlem ve yıldız fiziğiyle uyumunu denetlemek.",
+        "prerequisites": [
+          "G3B"
+        ],
+        "route": "MACM6",
+        "acceptance": "Veri sürümleri/kaynakları sabit; saçılma, eşdeğerlik/beşinci kuvvet, soğuma, yakalama/ısıtma ve yapı sınırları.",
+        "tasks": [
+          {
+            "id": "G3C",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Veri sürümleri/kaynakları sabit; saçılma, eşdeğerlik/beşinci kuvvet, soğuma, yakalama/ısıtma ve yapı sınırları.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Yalnız ölçülen entegrasyon maliyeti gerektirirse CLOUD CPU.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G3D",
+        "title": "Astrofiziksel izinli bölge",
+        "goal": "Gate1/2/3 koşullarının ortak açık bölgesini bulmak.",
+        "prerequisites": [
+          "G3C"
+        ],
+        "route": "MACM6",
+        "acceptance": "Belirsizliklerden sonra sonlu/açık izinli bölge ve makine tarafından okunabilir tablo mevcut.",
+        "tasks": [
+          {
+            "id": "G3D",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Belirsizliklerden sonra sonlu/açık izinli bölge ve makine tarafından okunabilir tablo mevcut.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G4A",
+        "title": "Operatör ve simetri denetimi",
+        "goal": "Seçilen EFT mertebesinde korunmuş ve ayarlanmış yapıları ayırmak.",
+        "prerequisites": [
+          "G0A"
+        ],
+        "route": "MACM6",
+        "acceptance": "Seçilen d≤4/IBP karanlık+metrik kapsamındaki üç denetim PASS; belirtilmeyen madde modeli kapsam dışında.",
+        "tasks": [
+          {
+            "id": "G4A-T01",
+            "title": "Seçilen mertebede operatör bazı",
+            "acceptance": "Diffeomorfizm, SO4, χ-paritesi; seçilen mertebede envanter ve kapsam kaydı.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G4A-T02",
+            "title": "Eksik operatör ve redundant terimler",
+            "acceptance": "Simetri, ek baseline yansıma ve koşullu field/EOM değişimi ile ayar farkları.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G4A-T03",
+            "title": "μ ve Xi fonksiyon denetimi",
+            "acceptance": "λⁿC2² alt terimleri ve Xi parite/doyum biçimi; matching koşulları açık.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "PASS yalnız seçilen operatör kapsamı için; bütün G4 veya doğalılık kararı kapanmış değildir.",
+        "optional": false
+      },
+      {
+        "id": "G4B",
+        "title": "Tek döngü EFT düzeltmeleri ve eşleşme",
+        "goal": "Skaler kütle/vakum enerjisi/switching/mixing/portal düzeltmelerini eşlemek.",
+        "prerequisites": [
+          "G4A"
+        ],
+        "route": "MACM6",
+        "acceptance": "Karanlık sektörün yanında somut madde/portal, kinetik/eğrilik, renormalizasyon, fiziksel tuning ve cutoff eşleşmesi tamamlanmış.",
+        "tasks": [
+          {
+            "id": "G4B",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Karanlık sektörün yanında somut madde/portal, kinetik/eğrilik, renormalizasyon, fiziksel tuning ve cutoff eşleşmesi tamamlanmış.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G4B-T01",
+            "title": "Homojen karanlık-skaler tek döngü hesabı",
+            "acceptance": "Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık.",
+            "kind": "scoped",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Homojen karanlık sektör determinantı/UV pole/ölçek/mixing kontrolü; portal ve tam matching açık."
+          }
+        ],
+        "conditional": "",
+        "note": "G4B-T01 yalnız homojen karanlık-skaler hesabının PASS raporudur; tam G4B kapsamı henüz açık.",
+        "optional": false
+      },
+      {
+        "id": "G4C",
+        "title": "Tam doğalılık karar dalı",
+        "goal": "Dört seçenekten birini tam hesabın kapsamıyla seçmek.",
+        "prerequisites": [
+          "G4B"
+        ],
+        "route": "MACM6",
+        "acceptance": "Teknik doğal / uygun ama ayarlı / ek koruma gerekir / kontrolsüz ayrımı tam girdilerle yapılmış; ek koruma seçilirse yeni teori dalı.",
+        "tasks": [
+          {
+            "id": "G4C",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Teknik doğal / uygun ama ayarlı / ek koruma gerekir / kontrolsüz ayrımı tam girdilerle yapılmış; ek koruma seçilirse yeni teori dalı.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          },
+          {
+            "id": "G4C-T02",
+            "title": "Koşullu doğalılık değerlendirmesi",
+            "acceptance": "Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi.",
+            "kind": "preparation",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Işınımsal ayar gereği kaydedildi; tam bilimsel uygunluk kararı verilmedi."
+          }
+        ],
+        "conditional": "",
+        "note": "G4C-T02 koşullu hazırlık: RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED. Uygunluk nitelemesi henüz verilmedi.",
+        "optional": false
+      },
+      {
+        "id": "G4D",
+        "title": "Yerçekimli vakum bozunumu",
+        "goal": "CDL geri tepkisi ve prefaktörle kozmolojik ömür bölgesini bulmak.",
+        "prerequisites": [
+          "G1B"
+        ],
+        "route": "MACM6",
+        "acceptance": "Korunmuş parametre bölgesinde yerçekimli eylem ve haklı düzeyde prefaktör; gereken kozmolojik süreden uzun ömür.",
+        "tasks": [
+          {
+            "id": "G4D-T01",
+            "title": "Düz uzay bounce tekrar üretimi",
+            "acceptance": "Yayınlanan Bhat4 katsayısı, başlangıç, virial ve truncation/yakınsama denetimi.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "G4D-T04 içinde katsayı tekrar üretildi; bu özgün görev yeniden açılmadı/aktarılmadı ve G1B ön koşulu duruyor."
+          },
+          {
+            "id": "G4D-T02",
+            "title": "Yerçekimli CDL çözümü",
+            "acceptance": "O4 bounce ve Einstein geri tepkisi; iki düzenli kutup, kısıt ve false-vacuum eylem çıkarımı.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "G4D-T04 kısıt ve sabit vakum testleri geçti; nontrivial yerçekimli bounce çözülmedi."
+          },
+          {
+            "id": "G4D-T03",
+            "title": "Fiziksel ömür bölgesi",
+            "acceptance": "Ölçekler ve prefaktörün EFT kontrolü; korunmuş bölgede kozmolojik ömür.",
+            "kind": "contract",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Fiziksel ölçek, korunmuş bölge, CDL çözümü ve prefaktör bekliyor."
+          },
+          {
+            "id": "G4D-T04",
+            "title": "Düz uzay bounce ve CDL denklem hazırlığı",
+            "acceptance": "Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil.",
+            "kind": "preparation",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": "Kaynak bounce tekrar üretimi/kısıt/sabit vakum kontrolü; fiziksel CDL ömrü değil."
+          }
+        ],
+        "conditional": "Yalnız geniş ve ölçülmüş maliyetli tarama için CLOUD CPU.",
+        "note": "G4D-T04 düz uzay regresyonunu ve denklem/vakum geometri hazırlığını geçti. G4D-T01..T03 özgün görev kutuları/ön koşulları kapanmadı.",
+        "optional": false
+      },
+      {
+        "id": "G4E",
+        "title": "Solitonda kütleçekim önem testi",
+        "goal": "Önce kompaktlıkla daha pahalı GR hesabının gereğini belirlemek.",
+        "prerequisites": [
+          "G4C",
+          "G1B"
+        ],
+        "route": "MACM6 tahmin; yalnız gerekirse RTX5070/CLOUD",
+        "acceptance": "GMH/RH≪1 ise sayısal ihmal kanıtı; değilse birleşik gravitating çözüm ve ilgili kararlılık tekrarı.",
+        "tasks": [
+          {
+            "id": "G4E",
+            "title": "Tam gate kapsamı",
+            "acceptance": "GMH/RH≪1 ise sayısal ihmal kanıtı; değilse birleşik gravitating çözüm ve ilgili kararlılık tekrarı.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Ölçülen kompaktlık gerektirirse RTX5070/CLOUD; otomatik GR kampanyası yok.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G5A",
+        "title": "Tür modeli ve başlangıç koşulları",
+        "goal": "Üretim verilerine dayalı tam lineer sistemi kurmak.",
+        "prerequisites": [
+          "G2F",
+          "G3D",
+          "G4C",
+          "G4D"
+        ],
+        "route": "MACM6",
+        "acceptance": "Hopf yoğunluk/hız/ses/gerilme, dalgalar, χ/λ, noise/isocurvature, radyasyon/nötrino/metrik ve süper-horizon başlangıcı.",
+        "tasks": [
+          {
+            "id": "G5A",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Hopf yoğunluk/hız/ses/gerilme, dalgalar, χ/λ, noise/isocurvature, radyasyon/nötrino/metrik ve süper-horizon başlangıcı.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G5B",
+        "title": "CLASS uygulaması",
+        "goal": "Minimum müdahaleyle doğrulanabilir Boltzmann uzantısı.",
+        "prerequisites": [
+          "G5A"
+        ],
+        "route": "MACM6",
+        "acceptance": "Temiz ayrışma limiti; açık parametreler; sabit üretim değerleri yok; sürümlü G2F tablosu girişi.",
+        "tasks": [
+          {
+            "id": "G5B",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Temiz ayrışma limiti; açık parametreler; sabit üretim değerleri yok; sürümlü G2F tablosu girişi.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G5C",
+        "title": "Kozmolojik kararlılık ve regresyon",
+        "goal": "Tam sistemin ayrışma ve korunum limitlerini denetlemek.",
+        "prerequisites": [
+          "G5B"
+        ],
+        "route": "MACM6",
+        "acceptance": "βH→0, dalga→0, soğuk limit, gauge/regresyon, ghost/gradyan yokluğu, süper-horizon ve korunum kontrolleri.",
+        "tasks": [
+          {
+            "id": "G5C",
+            "title": "Tam gate kapsamı",
+            "acceptance": "βH→0, dalga→0, soğuk limit, gauge/regresyon, ghost/gradyan yokluğu, süper-horizon ve korunum kontrolleri.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G5D",
+        "title": "Spektrum üretimi",
+        "goal": "Denetlenmiş modelden kozmolojik gözlenebilirleri çıkarmak.",
+        "prerequisites": [
+          "G5C"
+        ],
+        "route": "MACM6 geliştirme",
+        "acceptance": "CMB TT/TE/EE, lensing, P(k), büyüme, transfer/isocurvature; ucuz erken hata tanıları.",
+        "tasks": [
+          {
+            "id": "G5D",
+            "title": "Tam gate kapsamı",
+            "acceptance": "CMB TT/TE/EE, lensing, P(k), büyüme, transfer/isocurvature; ucuz erken hata tanıları.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Topluluk üretimi için gerekçeli/onaylı CLOUD CPU.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G5E",
+        "title": "Emülatör gereklilik kararı",
+        "goal": "Likelihood darboğazı ölçülmeden surrogate geliştirmemek.",
+        "prerequisites": [
+          "G5D"
+        ],
+        "route": "MACM6 karar",
+        "acceptance": "Profil CLASS süresini darboğaz gösterirse held-out doğrulamalı sınırlı alan emülatörü; aksi halde gerek yok raporu.",
+        "tasks": [
+          {
+            "id": "G5E",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Profil CLASS süresini darboğaz gösterirse held-out doğrulamalı sınırlı alan emülatörü; aksi halde gerek yok raporu.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Profil ve bütçeyle CLOUD CPU/GPU; emülatör isteğe bağlı.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G6A",
+        "title": "Likelihood altyapısı ve veri dondurma",
+        "goal": "Tek inference çatısı ve aşamalı veri sözleşmesi seçmek.",
+        "prerequisites": [
+          "G5E"
+        ],
+        "route": "MACM6",
+        "acceptance": "Cobaya veya MontePython seçimi; veri/nuisance/prior/covariance/likelihood sürümleri sabit.",
+        "tasks": [
+          {
+            "id": "G6A",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Cobaya veya MontePython seçimi; veri/nuisance/prior/covariance/likelihood sürümleri sabit.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G6B",
+        "title": "Önsel öngörü ve profil taramaları",
+        "goal": "Zincir öncesinde kararsız bölgeleri ve dejenere parametreleri elemek.",
+        "prerequisites": [
+          "G6A"
+        ],
+        "route": "MACM6",
+        "acceptance": "Spektrum ve fizik ön filtreleri, duyarlı birleşimler ve degeneracy kontrolleri.",
+        "tasks": [
+          {
+            "id": "G6B",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Spektrum ve fizik ön filtreleri, duyarlı birleşimler ve degeneracy kontrolleri.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Ölçülen ihtiyaç ve bütçeyle küçük CLOUD CPU.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G6C",
+        "title": "Tam çıkarım",
+        "goal": "Yalnız fiziksel ön filtreden geçmiş bölgede posterior örneklemek.",
+        "prerequisites": [
+          "G6B"
+        ],
+        "route": "CLOUD CPU → MACM6 tanılar",
+        "acceptance": "Yakınsama, effective sample size, bağımsız restart ve nuisance kararlılığı; tekrarlanabilir likelihood.",
+        "tasks": [
+          {
+            "id": "G6C",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Yakınsama, effective sample size, bağımsız restart ve nuisance kararlılığı; tekrarlanabilir likelihood.",
+            "kind": "full_scope",
+            "machine_order": [
+              "CLOUD",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "CLOUD hâlen kapalı; göreve özel açık bütçe olmadan çalıştırılamaz.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G6D",
+        "title": "Sağlamlık",
+        "goal": "Sonucu veri/önsel/tolerans/üretim belirsizliklerine karşı yeniden sınamak.",
+        "prerequisites": [
+          "G6C"
+        ],
+        "route": "CLOUD CPU → MACM6",
+        "acceptance": "Önsel varyasyonu, seçilmiş veri çıkarma, tolerans sıkılaştırma ve üretim katsayılarının belirsizlik yayılımı.",
+        "tasks": [
+          {
+            "id": "G6D",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Önsel varyasyonu, seçilmiş veri çıkarma, tolerans sıkılaştırma ve üretim katsayılarının belirsizlik yayılımı.",
+            "kind": "full_scope",
+            "machine_order": [
+              "CLOUD",
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "Yalnız onaylı CLOUD CPU kampanyası.",
+        "note": "",
+        "optional": false
+      },
+      {
+        "id": "G6E",
+        "title": "Nihai uygulanabilirlik dosyası",
+        "goal": "On bilimsel soruyu kanıtlarıyla cevaplayıp nihai etiketi atamak.",
+        "prerequisites": [
+          "G6D"
+        ],
+        "route": "MACM6",
+        "acceptance": "Varlık, kararlılık, çözülme/çarpışma/üretim, dalga/isocurvature, DE ömrü, tuning, Boltzmann ve posterior; dört resmi final etiketi.",
+        "tasks": [
+          {
+            "id": "G6E",
+            "title": "Tam gate kapsamı",
+            "acceptance": "Varlık, kararlılık, çözülme/çarpışma/üretim, dalga/isocurvature, DE ömrü, tuning, Boltzmann ve posterior; dört resmi final etiketi.",
+            "kind": "full_scope",
+            "machine_order": [
+              "MACM6"
+            ],
+            "note": ""
+          }
+        ],
+        "conditional": "",
+        "note": "",
+        "optional": false
+      }
+    ]
+  },
+  "dashboard": {
+    "overall_scientific_label": "PARTIAL / UNRESOLVED",
+    "radiative_assessment": "RADIATIVELY_TUNED_EFT; VIABILITY_UNRESOLVED",
+    "last_verified_unit_suite": {
+      "tests": 116,
+      "report": "reports/G0/G0A-T04__G0A-T04__MACM6__20261003T104642Z__ff719b7__32d67550__REPORT.md",
+      "verified_utc": "2026-10-03T10:46:42.926981+00:00"
+    },
+    "key_results": [
+      {
+        "label": "Hopf yükü",
+        "value": "Q=−1.000000004972 (49³ bağımsız başlangıç alanı; durağan çözüm değil)",
+        "task": "G0B-T02"
+      },
+      {
+        "label": "İndirgenmiş vakum smoke artığı",
+        "value": "2.71e−9; birim sektör durağan soliton iddiası yok",
+        "task": "G0B-T05"
+      },
+      {
+        "label": "Tam M ağır-limit enerji farkı",
+        "value": "1.00e−15; CPU referans hazırlığı",
+        "task": "G1A-T04"
+      },
+      {
+        "label": "Operatör bazı",
+        "value": "32 d≤4 karanlık/metrik operatör; IBP kapsamı",
+        "task": "G4A-T01"
+      },
+      {
+        "label": "Tek döngü switching",
+        "value": "Daha düşük ikinci-derece λ²C2² karşı terimi doğrulandı; baseline değiştirilmedi",
+        "task": "G4B-T01"
+      },
+      {
+        "label": "Düz uzay bounce",
+        "value": "Bhat4=1082.94755553; kaynakla bağıl fark 4.94e−9; fiziksel ömür değil",
+        "task": "G4D-T04"
+      }
+    ],
+    "missing_inputs": [
+      {
+        "input": "RTX5070 CUDA ortamı ve ölçümleri",
+        "affected": "G0A/B/C; ardından G1/G2",
+        "need": "Gerçek cihaz float64 aynaları, sürümler, bellek/süre ve hassasiyet profili"
+      },
+      {
+        "input": "Yeniden üretilmiş durağan alan/spektrum",
+        "affected": "G0B-T03/T04; G1A/B/C/D",
+        "need": "Durağan checkpoint ve fiziksel özçiftler; mevcut kompakt checkpoint nonstationary"
+      },
+      {
+        "input": "Somut L_m, fiziksel ölçek ve UV matching",
+        "affected": "Tam G4B/G4C; G3 portal sınırları",
+        "need": "f/Lambda_U/sigma0/m_chi/portal Lambda; kesim ve eşleşme koşulları"
+      },
+      {
+        "input": "Çarpışma ve üretim sonuçları",
+        "affected": "G1G, G2F, G3, G5, G6",
+        "need": "Kütle/boyut/βH, kesitler, bolluk, dağılım ve ölçülen closure katsayıları"
+      },
+      {
+        "input": "Korunmuş bölge, yerçekimli bounce ve prefaktör",
+        "affected": "G4D/G4E",
+        "need": "Fiziksel vakum ömrü ve GMH/RH değerlendirmesi"
+      },
+      {
+        "input": "Gate bazlı açık CLOUD bütçesi",
+        "affected": "G1/G2 kampanyaları; G6 zincirleri",
+        "need": "Şu an paused=true, onaylı gate yok ve USD 0; kendiliğinden açılmaz"
+      }
+    ],
+    "history_notes": {
+      "G0A-T03": "İlk SciPy/macOS yükleyici hatası; düzeltilmiş ortamla PASS.",
+      "G4A-T01": "Test fixture ayar dizini eksikti; aynı ölçütlerle düzeltme ve PASS.",
+      "G4A-T02": "NumPy bool değerinin sonuç kaydı hatası; dönüşüm düzeltildi ve PASS.",
+      "G0A-T04": "Eski raporlar seal öncesi biçimdeydi; özgün artifact hash denetimiyle PASS."
+    },
+    "g0_cpu_remaining": [
+      {
+        "title": "Homojen tetikleme benchmark’ı",
+        "scope": "Bölüm9 Eq.76–88; eşik/kararlılık/iş dengesi; reçeteli banyo, kapalı üretim değil",
+        "status": "TODO · plan",
+        "machine": "MACM6"
+      },
+      {
+        "title": "İndirgenmiş pertürbasyon/büyüme benchmark’ı",
+        "scope": "Bölüm11.4 Eq.114–118 / Table4; yayın örnek girdileri; tam Boltzmann değil",
+        "status": "TODO · plan",
+        "machine": "MACM6"
+      }
+    ]
+  }
+}
