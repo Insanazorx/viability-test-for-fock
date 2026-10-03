@@ -16,6 +16,6 @@ Generated from state/state.yaml.
 - [ ] RTX5070 — G0D-T03: Optional phone workflow dispatch (TODO, disabled)
 - N/A RTX5070 — G4A-T01: Chosen-order dark/metric operator basis (PASS)
 - N/A RTX5070 — G4A-T02: Classify all 32 chosen-order operators and distinguish stated symmetries, accidental reflection and conditional field/EOM choices. (PASS)
-- N/A RTX5070 — G4A-T03: Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline. (RUNNING)
+- N/A RTX5070 — G4A-T03: Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline. (PASS)
 - N/A RTX5070 — G0B-T05: MACM6 reduced solver/HVP/CPU reference engineering preparation (PASS)
 - N/A RTX5070 — G1A-T04: MACM6 six-component static reference preparation (PASS)

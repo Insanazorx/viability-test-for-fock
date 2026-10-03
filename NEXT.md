@@ -2,23 +2,27 @@
 
 Exactly one active action; generated from state/state.yaml.
 
-task: G4A-T03
-machine: MACM6
+task: G0A-T02
+machine: RTX5070
 status: RUNNING
+scheduling: DEFERRED
 
 ## Action
-Audit lower-order lambda^n C2^2 matching and Xi parity/saturation without altering the baseline.
+Preserve the completed MACM6 references and review the waiting handoff. RTX5070 remains deferred at the user request; resume execution only on a new explicit user instruction.
 
 ## Read
 
-- AGENTS.md#g4a
+- AGENTS.md#g0a
 - MACHINE_HANDOFF.md
-- docs/G4A_SYMMETRY_AUDIT.md
-- config/gate4/g4a_t03_macm6.json.yaml
-- reports/G4/G4A-T02__G4A-T02__MACM6__20261003T102719Z__48b2e46__59ca8890__REPORT.md
+- reports/G0/G0A-T02__G0A-T02__MACM6__20261001T060259Z__ec15d04__1f458c06__REPORT.md
+- reports/G0/G0A-T03__G0A-T03__MACM6__20261001T174323Z__9336699__a64a600a__REPORT.md
+- docs/MATH_CORE.md
+- docs/RTX5070_CORE_HANDOFF.md
+- config/benchmark/g0a_t02_rtx5070.json.yaml
+- config/benchmark/publication.source.yaml
 
 ## One command
 
 ```sh
-.venv/bin/python scripts/run.py --config config/gate4/g4a_t03_macm6.json.yaml
+.venv/bin/python scripts/ctl.py status
 ```
