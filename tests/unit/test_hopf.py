@@ -1,5 +1,6 @@
 """Independent sign, harmonic-flux, curvature and discrete-variation checks."""
 import math
+import json
 from pathlib import Path
 import sys
 import unittest
@@ -13,6 +14,22 @@ from static.hopf_initial import compact_hopf,continuum_degree
 
 
 class HopfTests(unittest.TestCase):
+    def test_cuda_validator_compares_tensors_host_arrays_and_scalars(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("CUDA PyTorch is not installed on this reference machine")
+        if not torch.cuda.is_available():
+            self.skipTest("Actual CUDA is required for this regression")
+        from analysis.validate_hopf import validate_hopf
+        root = Path(__file__).resolve().parents[2]
+        config = json.loads((root / "config/benchmark/g0b_t02_rtx5070.json.yaml").read_text())
+        config["parameters"]["resolution_sequence"] = [9, 13, 17]
+        result = validate_hopf(config)
+        self.assertTrue(result["cuda_verified"])
+        self.assertLess(result["worst_errors"]["backend"], config["tolerances"]["backend"])
+        self.assertLess(result["worst_errors"]["autograd"], config["tolerances"]["autograd"])
+
     def engine(self,size=17):
         return SpectralEnergy(PeriodicGrid.paper(size,4.))
 

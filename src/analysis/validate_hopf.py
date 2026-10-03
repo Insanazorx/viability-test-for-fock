@@ -25,7 +25,7 @@ def validate_hopf(config,checkpoint_path=None,run_id=None,config_sha256=None):
         return torch.as_tensor(value,dtype=torch.float64,device='cuda') if cuda else value
 
     def array(value):
-        return value.detach().cpu().numpy() if cuda else np.asarray(value)
+        return value.detach().cpu().numpy() if cuda and torch.is_tensor(value) else np.asarray(value)
 
     def scalar(value):
         return float(array(value))

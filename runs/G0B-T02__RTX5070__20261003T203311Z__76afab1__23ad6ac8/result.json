@@ -1,0 +1,25 @@
+{
+  "run_id": "G0B-T02__RTX5070__20261003T203311Z__76afab1__23ad6ac8",
+  "status": "FAIL",
+  "finished_utc": "2026-10-03T20:33:31.726558+00:00",
+  "wall_time_seconds": 20.046918399981223,
+  "peak_ram_gb": 1.19371776,
+  "peak_ram_method": "sampled parent+registered-child RSS sum at 0.01 s; observed peak",
+  "ram_samples": 1205,
+  "child_ram_sample_errors": 0,
+  "peak_vram_gb": null,
+  "checkpoint_sha256": null,
+  "checkpoint_path": null,
+  "metrics": {
+    "layout_complete": true,
+    "missing_paths": [],
+    "tests_exit_code": 0,
+    "tests_run": 125,
+    "minimum_tests": 79,
+    "state_valid": true,
+    "cloud_paused": true,
+    "cloud_budget_usd": 0,
+    "publication_present": true
+  },
+  "anomaly": "AttributeError: 'numpy.ndarray' object has no attribute 'detach'"
+}

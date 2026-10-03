@@ -200,6 +200,8 @@ def main() -> int:
             'handoff':'NEXT.md, MACHINE_HANDOFF.md, docs/MACM6_COMPLETION_PLAN.md and '+p['contract_doc'],
         })
     if metadata["machine"] == "RTX5070":
+        if result["peak_vram_gb"] is None:
+            values["peak_vram_gb"] = "unavailable: validation ended before CUDA peak collection"
         python = ".venv/Scripts/python.exe" if metadata["os"].startswith("Windows") else ".venv/bin/python"
         values["reproduction"] = (
             f"```sh\n{python} -m pip install torch=={metadata['pytorch']} --index-url https://download.pytorch.org/whl/cu128\n"
@@ -213,6 +215,11 @@ def main() -> int:
         values["inputs"] = values["inputs"].replace(
             "The user explicitly deferred RTX5070 while requesting MACM6 preparation. ",
             "The user resumed RTX5070 for the actual CUDA comparison. ")
+        values["anomalies"] = values["anomalies"].replace(
+            "- RTX5070 remains explicitly deferred; CLOUD is paused with zero budget.",
+            "- RTX5070 is resumed; CLOUD is paused with zero budget.").replace(
+            "- The 49^3 MACM6 calculation is a small reference evaluation of a known map, not a production minimization campaign.",
+            "- The 49^3 field is a known-map reference fixture; no stationary minimization is performed.")
         values["anomalies"] += (
             "\n- Actual RTX5070 environment/hardware (also sealed in metadata/environment JSON):\n```json\n"
             + json.dumps({"python": metadata["python"], "hardware": metadata["hardware"]}, indent=2)
@@ -226,6 +233,8 @@ def main() -> int:
             "Restores missing transfer directories/ignore rules and uses machine-specific execution paths. "
             "Published tolerances and MACM6 completion records are unchanged."
         )
+        if metadata.get("recovery"):
+            values["changes"] += "\n\nPreserved implementation failure and explicit recovery:\n```json\n" + json.dumps(metadata["recovery"], indent=2) + "\n```"
         if result["status"] == "PASS":
             values["next_action"] = {
                 "G0A-T02": "Record only RTX5070 completion, then follow NEXT for G0B-T01 CUDA. MACM6 G0A-T03 already passed.",

@@ -2,7 +2,7 @@
 
 Bu görünüm `state/state.yaml` dosyasından üretilir. Güncellemek için `scripts/ctl.py refresh`; elle değiştirilmez.
 
-Durum kaydı (UTC): **2026-10-03T20:33:02.391343+00:00**
+Durum kaydı (UTC): **2026-10-03T20:36:37.507120+00:00**
 
 ## Genel durum
 
@@ -695,6 +695,7 @@ Aktif FAIL/BLOCKED görevler yukarıdaki canlı kayıttadır. Aşağıdaki uygul
 | Görev | Giderilen sorun | Korunan hata raporu | Son durum |
 |---|---|---|---|
 | G0A-T03 | İlk SciPy/macOS yükleyici hatası; düzeltilmiş ortamla PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T03__G0A-T03__MACM6__20261001T173933Z__cfdc4e2__a64a600a__REPORT.md>) | PASS |
+| G0B-T02 | CUDA validator called detach() on already-converted NumPy arrays and host scalar comparisons, before returning topology metrics. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0B-T02__G0B-T02__RTX5070__20261003T203311Z__76afab1__23ad6ac8__REPORT.md>) | RUNNING |
 | G4A-T01 | Test fixture ayar dizini eksikti; aynı ölçütlerle düzeltme ve PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T01__G4A-T01__MACM6__20261001T193144Z__ad63bfb__f5f125f4__REPORT.md>) | PASS |
 | G4A-T02 | NumPy bool değerinin sonuç kaydı hatası; dönüşüm düzeltildi ve PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G4\G4A-T02__G4A-T02__MACM6__20261003T102541Z__3654d66__59ca8890__REPORT.md>) | PASS |
 | G0A-T04 | Eski raporlar seal öncesi biçimdeydi; özgün artifact hash denetimiyle PASS. | [FAIL raporu](<C:\Users\Death\Desktop\viability-test-for-fock-main\reports\G0\G0A-T04__G0A-T04__MACM6__20261003T104520Z__7a1d549__32d67550__REPORT.md>) | PASS |
